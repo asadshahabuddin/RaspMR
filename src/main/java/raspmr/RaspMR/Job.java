@@ -56,6 +56,14 @@ public interface Job
      */
     void setReducer(Class<? extends Reducer<?, ?, ?, ?>> reducerClass);
 
+
+    /**
+     * Set the {@link Partitioner}for this Job
+     *
+     * @param partitioner
+     */
+    void setPartitioner(Partitioner partitioner);
+
     /**
      * @return true if the job is a standalone job
      */

@@ -70,7 +70,7 @@ public abstract class InputFormat
 
     /**
      * Create a record reader for a given split. The framework will call
-     * {@link RecordReader#initialize(InputSplit, TaskAttemptContext)} before
+     * {@link RecordReader#initialize(InputSplit, Context)} before
      * the split is used.
      * 
      * @param split

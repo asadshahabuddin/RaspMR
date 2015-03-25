@@ -20,7 +20,7 @@ public interface Partitioner<KEY, VALUE>
     * number of partitions i.e. number of reduce-tasks for the job.
     * @param key the key to be partitioned.
     * @param value the entry value.
-    * @param numPartitions the total number of partitions.
+    * @param totalPartitions the total number of partitions.
     * @return the partition number for the key.
     */
     public abstract int getPartition(KEY key, VALUE value, int totalPartitions);
