@@ -109,10 +109,11 @@ public class InputFormat
             */
             for(InputSplit split : splits)
             {
-                long flen = f.length();                        /* Length of file */
-                int bytesRead = 0;                             /* Total bytes read for the current split */
-                byte[] b = new byte[(int) split.getLength()];  /* Bytes read from the current split */
+                long flen = f.length();       /* Length of file */
+                int bytesRead = 0;            /* Total bytes read for the current split */
+                byte[] b = null;              /* Contiguous bytes read for a part of the current split */
                 f.seek(split.getOffset());
+                fout = new FileOutputStream("split" + idx++ + ".txt", true);
                 
                 while(bytesRead < split.getLength()
                       && totalBytesRead < flen)
@@ -126,29 +127,26 @@ public class InputFormat
                         if((totalBytesRead + size) >= flen)
                         {
                             /*
-                            (1) Self-adjust number of bytes to be read to compensate
-                                for fraction related approximations while calculating
-                                an integer block size.
-                            (2) Resize byte array to avoid writing '0' valued bytes.
+                            Self-adjust number of bytes to be read to compensate
+                            for fraction related approximations while calculating
+                            an integer block size.
                             */
-                            size = (int) (f.length() - totalBytesRead);
-                            b = new byte[size];
+                            size = (int) (flen - totalBytesRead);
                         }
                     }
                     
                     /*
-                    (1) Read a block from the input file at a specific offset
-                    (2) Update bytes read for the current split
-                    (3) Update bytes read for the current file
-                    */ 
-                    f.read(b, bytesRead, size);
+                    (1) Read a block from the input file at a specific offset.
+                    (2) Append block to the current input split.
+                    (3) Update bytes read for the current split.
+                    (4) Update bytes read for the current file.
+                    */
+                    b = new byte[size];
+                    f.read(b, 0, size);
+                    fout.write(b);
                     bytesRead += size;
-                    totalBytesRead += bytesRead;
+                    totalBytesRead += size;
                 }
-                
-                /* Write the current split to file system */ 
-                fout = new FileOutputStream("split" + idx++ + ".txt");
-                fout.write(b);
                 fout.close();
             }
             f.close();
@@ -164,14 +162,12 @@ public class InputFormat
     }
     
     /* Main method for unit testing */
-    /*
     public static void main(String[] args)
     {
         InputFormat inFormat = new InputFormat();
-        inFormat.setInputFile("input/data.txt");
+        inFormat.setInputFile("input/data.csv");
         inFormat.setWorkerCount(10);
         inFormat.split();
     }
-    */  
 }
 /* End of InputFormat.java */
