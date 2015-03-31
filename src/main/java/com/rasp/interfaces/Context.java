@@ -6,7 +6,7 @@
  * Edited : Mar 24, 2015
  */
 
-package raspmr.RaspMR;
+package com.rasp.interfaces;
 
 /**
  * Context is a an object used by a {@link Mapper} or {@link Reducer}

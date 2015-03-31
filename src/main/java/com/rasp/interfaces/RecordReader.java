@@ -6,7 +6,7 @@
  * Edited : Mar 25, 2015.
  */
 
-package raspmr.RaspMR;
+package com.rasp.interfaces;
 
 /* Import list */
 import java.io.Closeable;

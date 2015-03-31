@@ -6,7 +6,7 @@
  * Edited : Mar 24, 2015
  */
 
-package raspmr.RaspMR;
+package com.rasp.interfaces;
 
 /**
  * Task represents a {@link Mapper} or {@link Reducer}

@@ -6,8 +6,9 @@
  * Edited : Mar 25, 2015
  */
 
-package raspmr.RaspMR;
+package com.rasp.interfaces;
 
+/* Import list */
 import java.io.IOException;
 
 /**
@@ -23,9 +24,19 @@ import java.io.IOException;
 public interface InputSplit
 {
     /**
+     * Get the offset of the split.
+     * @return
+     *            Starting offset of the split.
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    public abstract long getOffset()
+        throws IOException, InterruptedException;
+    
+    /**
      * Get the size of the split, so that the input splits can be sorted by size.
      * @return
-     *            the number of bytes in the split
+     *            The number of bytes in the split.
      * @throws IOException
      * @throws InterruptedException
      */
@@ -33,13 +44,13 @@ public interface InputSplit
         throws IOException, InterruptedException;
     
     /**
-     * Get the list of nodes by name where the data for the split would be local. 
+     * Get the node by name where the data for the split would be local. 
      * The locations do not need to be serialized.
      * @return
      *            a new array of the node nodes
      * @throws IOException
      * @throws InterruptedException
      */
-    public abstract String[] getLocations()
+    public abstract String getLocation()
         throws IOException, InterruptedException;
 }

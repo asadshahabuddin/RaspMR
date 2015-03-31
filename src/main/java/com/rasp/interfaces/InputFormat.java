@@ -6,7 +6,7 @@
  * Edited : Mar 24, 2015.
  */
 
-package raspmr.RaspMR;
+package com.rasp.interfaces;
 
 /* Import list */
 import java.util.List;
@@ -42,11 +42,24 @@ import java.io.IOException;
 
 public abstract class InputFormat
 {
-    String inputFile;
+    private String inputFile;
 
+    /**
+     * Set input file
+     * @param inputFile
+     */
     public void setInputFile(String inputFile)
     {
         this.inputFile = inputFile;
+    }
+    
+    /**
+     * Get input file
+     * @return
+     */
+    public String getInputFile()
+    {
+        return inputFile;
     }
 
     /**
