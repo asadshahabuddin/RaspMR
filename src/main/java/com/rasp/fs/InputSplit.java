@@ -35,12 +35,32 @@ public class InputSplit
     }
     
     /**
+     * Set the offset.
+     * @param offset
+     *            Starting offset of the split.
+     */
+    public void setOffset(long offset)
+    {
+        this.offset = offset;
+    }
+    
+    /**
      * Get the offset.
      */
     public long getOffset()
         throws IOException, InterruptedException
     {
         return offset;
+    }
+    
+    /**
+     * Set the length
+     * @param length
+     *            Block size of the split.
+     */
+    public void setLength(long length)
+    {
+        this.length = length;
     }
     
     /**
