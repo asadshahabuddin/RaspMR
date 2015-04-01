@@ -73,6 +73,16 @@ public class InputSplit
     }
 
     /**
+     * Set the location.
+     * @param location
+     *            Location of the split.
+     */
+    public void setLocation(String location)
+    {
+        this.location = location;
+    }
+    
+    /**
      * Get the location.
      */
     public String getLocation()
