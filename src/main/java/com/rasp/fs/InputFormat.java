@@ -101,6 +101,7 @@ public class InputFormat
             RandomAccessFile f = new RandomAccessFile(getInputFile(), "r");  /* Random access file object */
             FileOutputStream fout = null;                                    /* File output stream */
             int totalBytesRead = 0;                                          /* Total number of bytes read */
+            int shift = 0;
             
             /*
             (1) Process each split one after the other.
@@ -109,10 +110,18 @@ public class InputFormat
             */
             for(InputSplit split : splits)
             {
-                long flen = f.length();       /* Length of file */
-                int bytesRead = 0;            /* Total bytes read for the current split */
-                byte[] b = null;              /* Contiguous bytes read for a part of the current split */
-                f.seek(split.getOffset());
+                long flen = f.length();                  /* Length of file */
+                /* Avoid creation of unnecessary empty splits */
+                if(totalBytesRead == flen)
+                {
+                    break;
+                }
+                
+                int bytesRead = 0;                       /* Total bytes read for the current split */
+                byte[] b = null;                         /* Contiguous bytes read for a part of the current split */
+                long offset = split.getOffset() + shift; /* Self adjust the current split's starting offset */
+                ((com.rasp.fs.InputSplit) split).setOffset(split.getOffset() + shift);
+                ((com.rasp.fs.InputSplit) split).setLocation("split" + idx + ".txt");
                 fout = new FileOutputStream("split" + idx++ + ".txt", true);
                 
                 while(bytesRead < split.getLength()
@@ -141,12 +150,31 @@ public class InputFormat
                     (3) Update bytes read for the current split.
                     (4) Update bytes read for the current file.
                     */
+                    f.seek(offset + bytesRead);
                     b = new byte[size];
                     f.read(b, 0, size);
                     fout.write(b);
                     bytesRead += size;
                     totalBytesRead += size;
                 }
+                
+                /*
+                (1) Ensure that the current record contains the last record in its 
+                    entirety.
+                (2) Update the current split's block size.
+                (3) Close file system object. 
+                */ 
+                b = new byte[1];
+                f.seek(totalBytesRead - 1);
+                f.read(b, 0, 1);
+                while(totalBytesRead < flen && b[0] != 012)
+                {
+                    f.seek(totalBytesRead++);
+                    f.read(b, 0, 1);
+                    fout.write(b);
+                    shift++;
+                }
+                ((com.rasp.fs.InputSplit) split).setLength(split.getLength() + shift);
                 fout.close();
             }
             f.close();
@@ -165,8 +193,8 @@ public class InputFormat
     public static void main(String[] args)
     {
         InputFormat inFormat = new InputFormat();
-        inFormat.setInputFile("input/data.csv");
-        inFormat.setWorkerCount(10);
+        inFormat.setInputFile("input/data.txt");
+        inFormat.setWorkerCount(20);
         inFormat.split();
     }
 }
