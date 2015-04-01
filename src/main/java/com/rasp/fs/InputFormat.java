@@ -121,7 +121,7 @@ public class InputFormat
                 byte[] b = null;                         /* Contiguous bytes read for a part of the current split */
                 long offset = split.getOffset() + shift; /* Self adjust the current split's starting offset */
                 ((com.rasp.fs.InputSplit) split).setOffset(split.getOffset() + shift);
-                ((com.rasp.fs.InputSplit) split).setLocation("split" + idx++ + ".txt" + shift);
+                ((com.rasp.fs.InputSplit) split).setLocation("split" + idx + ".txt");
                 fout = new FileOutputStream("split" + idx++ + ".txt", true);
                 
                 while(bytesRead < split.getLength()
