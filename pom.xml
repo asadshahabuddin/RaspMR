@@ -52,6 +52,21 @@
       <artifactId>guava</artifactId>
       <version>18.0</version>
     </dependency>
+
+
+    <dependency>
+      <groupId>com.hazelcast</groupId>
+      <artifactId>hazelcast</artifactId>
+      <version>3.2.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.googlecode.protobuf-rpc-pro</groupId>
+      <artifactId>protobuf-rpc-pro-duplex</artifactId>
+      <version>3.3</version>
+      <type>jar</type>
+    </dependency>
+
   </dependencies>
   
   <build>

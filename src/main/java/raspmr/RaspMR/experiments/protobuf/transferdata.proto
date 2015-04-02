@@ -1,0 +1,20 @@
+package raspmr.RaspMR.experiments.protobuf;
+
+option java_package = "raspmr.RaspMR.experiments.protobuf";
+option java_outer_classname = "TransferDataProtos";
+option java_generic_services = true;
+
+
+message TransferData{
+    required string data = 1;
+}
+
+message TransferResponse{
+    optional string status = 1;
+}
+
+
+service TransferService {
+    rpc ping(TransferData) returns (TransferResponse);
+}
+
