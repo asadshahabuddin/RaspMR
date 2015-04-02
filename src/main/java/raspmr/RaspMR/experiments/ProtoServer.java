@@ -16,7 +16,6 @@ import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.concurrent.Executors;
-
 /**
  * Author : rahulmadhavan
  * File   :
@@ -25,15 +24,12 @@ import java.util.concurrent.Executors;
  * Edited :
  */
 public class ProtoServer {
-
-
     public static void main(String[] args) {
 
-        PeerInfo serverInfo = new PeerInfo("10.103.33.242", 9292);
+        PeerInfo serverInfo = new PeerInfo("192.168.1.192", 9292);
         RpcServerCallExecutor executor = new ThreadPoolCallExecutor(3, 20);
         DuplexTcpServerPipelineFactory serverFactory = new DuplexTcpServerPipelineFactory(serverInfo);
         serverFactory.setRpcServerCallExecutor(executor);
-
 
         ServerBootstrap bootstrap = new ServerBootstrap();
 
@@ -55,12 +51,9 @@ public class ProtoServer {
         serverFactory.getRpcServiceRegistry().registerService(false, bPingService);
 
         try {
-            bootstrap.bind(InetAddress.getByName("10.103.33.242"),9292);
+            bootstrap.bind(InetAddress.getByName("192.168.1.192"),9292);
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
-
-
     }
-
 }

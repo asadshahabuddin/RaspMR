@@ -12,9 +12,14 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import raspmr.RaspMR.experiments.protobuf.TransferDataProtos;
 
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Author : rahulmadhavan
@@ -27,7 +32,7 @@ public class ProtoClient {
 
     public static void main(String[] args) {
         PeerInfo client = new PeerInfo("clientHostname", 1234);
-        PeerInfo server = new PeerInfo("10.103.33.242", 9292);
+        PeerInfo server = new PeerInfo("192.168.1.192", 9292);
 
         DuplexTcpClientPipelineFactory clientFactory = new DuplexTcpClientPipelineFactory();
         //clientFactory.setClientInfo(client);
@@ -42,13 +47,18 @@ public class ProtoClient {
         bootstrap.option(ChannelOption.SO_RCVBUF, 1048576);
 
         RpcClientChannel channel = null;
+
+        final String FILE_NAME = "/Users/Pulkit/Desktop/Project/input.txt";
+
         try {
 
-            channel = clientFactory.peerWith(new InetSocketAddress(InetAddress.getByName("10.103.33.242"),9292),bootstrap);
+            String text = new String(Files.readAllBytes(Paths.get(FILE_NAME)), StandardCharsets.UTF_8);
+
+            channel = clientFactory.peerWith(new InetSocketAddress(InetAddress.getByName("192.168.1.192"),9292),bootstrap);
             TransferDataProtos.TransferService.BlockingInterface transferService = TransferDataProtos.TransferService.newBlockingStub(channel);
             RpcController controller = channel.newRpcController();
 
-            TransferDataProtos.TransferData request = TransferDataProtos.TransferData.newBuilder().setData("Yoooo!!!").build();
+            TransferDataProtos.TransferData request = TransferDataProtos.TransferData.newBuilder().setData(text).build();
             TransferDataProtos.TransferResponse response = transferService.ping(controller, request);
             System.out.println(response.getStatus());
 
