@@ -1,20 +1,24 @@
-package raspmr.RaspMR.experiments;
+package raspmr.RaspMR.experiments.protobuf;
 
 
+import com.google.protobuf.BlockingRpcChannel;
+import com.google.protobuf.RpcChannel;
 import com.google.protobuf.RpcController;
 import com.google.protobuf.ServiceException;
-import com.googlecode.protobuf.pro.duplex.PeerInfo;
 import com.googlecode.protobuf.pro.duplex.RpcClientChannel;
 import com.googlecode.protobuf.pro.duplex.client.DuplexTcpClientPipelineFactory;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import raspmr.RaspMR.experiments.protobuf.TransferDataProtos;
 
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
 
 /**
  * Author : rahulmadhavan
@@ -25,14 +29,13 @@ import java.net.InetSocketAddress;
  */
 public class ProtoClient {
 
-    public static void main(String[] args) {
-        PeerInfo client = new PeerInfo("clientHostname", 1234);
-        PeerInfo server = new PeerInfo("10.103.33.242", 9292);
+    private DuplexTcpClientPipelineFactory clientFactory;
+    private Bootstrap bootstrap;
+    private HashMap<String,RpcClientChannel> channelMap;
 
-        DuplexTcpClientPipelineFactory clientFactory = new DuplexTcpClientPipelineFactory();
-        //clientFactory.setClientInfo(client);
-
-        Bootstrap bootstrap = new Bootstrap();
+    public ProtoClient(){
+        clientFactory = new DuplexTcpClientPipelineFactory();
+        bootstrap = new Bootstrap();
         bootstrap.group(new NioEventLoopGroup());
         bootstrap.handler(clientFactory);
         bootstrap.channel(NioSocketChannel.class);
@@ -40,20 +43,37 @@ public class ProtoClient {
         bootstrap.option(ChannelOption.CONNECT_TIMEOUT_MILLIS,10000);
         bootstrap.option(ChannelOption.SO_SNDBUF, 1048576);
         bootstrap.option(ChannelOption.SO_RCVBUF, 1048576);
+        channelMap = new HashMap<>();
+    }
+
+    private RpcClientChannel getConnection(String ip, int port){
+        String key = ip+":"+port;
+        if(!channelMap.containsKey(key)){
+            try {
+                RpcClientChannel channel = clientFactory.peerWith(
+                        new InetSocketAddress(InetAddress.getByName(ip),port),
+                        bootstrap);
+                channelMap.put(key,channel);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return channelMap.get(key);
+    }
+
+
+
+
+    public void send(String ip, int port, String message){
 
         RpcClientChannel channel = null;
         try {
-
-            channel = clientFactory.peerWith(new InetSocketAddress(InetAddress.getByName("10.103.33.242"),9292),bootstrap);
+            channel = getConnection(ip,port);
             TransferDataProtos.TransferService.BlockingInterface transferService = TransferDataProtos.TransferService.newBlockingStub(channel);
             RpcController controller = channel.newRpcController();
-
-            TransferDataProtos.TransferData request = TransferDataProtos.TransferData.newBuilder().setData("Yoooo!!!").build();
+            TransferDataProtos.TransferData request = TransferDataProtos.TransferData.newBuilder().setData(message).build();
             TransferDataProtos.TransferResponse response = transferService.ping(controller, request);
-            System.out.println(response.getStatus());
 
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (ServiceException e) {
             e.printStackTrace();
         } finally{
@@ -65,3 +85,5 @@ public class ProtoClient {
     }
 
 }
+
+
