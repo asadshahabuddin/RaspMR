@@ -9,7 +9,6 @@
 package com.rasp.interfaces;
 
 /* Import list */
-import java.util.List;
 import java.io.IOException;
 
 /**
@@ -75,10 +74,8 @@ public abstract class InputFormat
      * input files are not physically split into chunks. For e.g. a split could
      * be <i>&lt;input-file-path, start, offset&gt;</i> tuple. The InputFormat
      * also creates the {@link RecordReader} to read the {@link InputSplit}.
-     * 
-     * @return an array of {@link InputSplit}s for the job.
      */
-    public abstract List<InputSplit> getSplits()
+    public abstract void getSplits()
         throws IOException, InterruptedException;
 
     /**
