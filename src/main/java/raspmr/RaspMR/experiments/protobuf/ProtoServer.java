@@ -1,4 +1,4 @@
-package raspmr.RaspMR.experiments;
+package raspmr.RaspMR.experiments.protobuf;
 
 import com.google.protobuf.BlockingService;
 import com.googlecode.protobuf.pro.duplex.PeerInfo;
@@ -10,10 +10,9 @@ import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import raspmr.RaspMR.experiments.protobuf.TransferDataProtos;
 
-import java.net.Inet4Address;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 import java.util.concurrent.Executors;
 /**
@@ -24,10 +23,11 @@ import java.util.concurrent.Executors;
  * Edited :
  */
 public class ProtoServer {
-    public static void main(String[] args) {
 
-        PeerInfo serverInfo = new PeerInfo("192.168.1.192", 9292);
-        RpcServerCallExecutor executor = new ThreadPoolCallExecutor(3, 20);
+    public static void initializeServer(InetAddress inetAddress, int port){
+        InetSocketAddress inetSocketAddress = new InetSocketAddress(inetAddress,port);
+        PeerInfo serverInfo = new PeerInfo(inetSocketAddress);
+        RpcServerCallExecutor executor = new ThreadPoolCallExecutor(3, 10);
         DuplexTcpServerPipelineFactory serverFactory = new DuplexTcpServerPipelineFactory(serverInfo);
         serverFactory.setRpcServerCallExecutor(executor);
 
@@ -51,9 +51,11 @@ public class ProtoServer {
         serverFactory.getRpcServiceRegistry().registerService(false, bPingService);
 
         try {
-            bootstrap.bind(InetAddress.getByName("192.168.1.192"),9292);
-        } catch (UnknownHostException e) {
+            bootstrap.bind(inetSocketAddress);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
 }

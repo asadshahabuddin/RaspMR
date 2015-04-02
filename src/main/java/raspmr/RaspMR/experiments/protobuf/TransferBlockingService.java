@@ -1,4 +1,4 @@
-package raspmr.RaspMR.experiments;
+package raspmr.RaspMR.experiments.protobuf;
 
 import com.google.protobuf.RpcController;
 import com.google.protobuf.ServiceException;
@@ -20,7 +20,7 @@ public class TransferBlockingService implements TransferDataProtos.TransferServi
 
     @Override
     public TransferDataProtos.TransferResponse ping(RpcController controller, TransferDataProtos.TransferData request) throws ServiceException {
-        File file = new File("/Users/Pulkit/Desktop/Project/output.txt");
+        File file = new File("/Users/rahulmadhavan/Documents/developer/ms/parallel/projects/RaspMR/output.txt");
 
         // if file doesnt exists, then create it
         try {
