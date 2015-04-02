@@ -32,7 +32,7 @@ public class TransferDriver {
 
             switch (words[0]){
                 case "discover": printServicesOnNetwork() ;break;
-                case "send <ip> <message>":
+                case "send":
                     if(isSendInputValid(words)){
                         send(words[1],words[2]);
                     }else{
