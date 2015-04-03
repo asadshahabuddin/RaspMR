@@ -14,6 +14,7 @@ import java.io.IOException;
 public class InputSplit
     implements com.rasp.interfaces.InputSplit
 {
+    private int idx;
     private long offset;
     private long length;
     private String location;
@@ -27,11 +28,32 @@ public class InputSplit
      * @param location
      *            Node name where the split would be local. 
      */
-    public InputSplit(long offset, long length, String location)
+    public InputSplit(int idx, long offset, long length, String location)
     {
+        this.idx      = idx;
         this.offset   = offset;
         this.length   = length;
         this.location = location;
+    }
+    
+    /**
+     * Set the index.
+     * @param idx
+     *            Index of the split.
+     */
+    public void setIdx(int idx)
+    {
+        this.idx = idx;
+    }
+    
+    /**
+     * Get the index.
+     * @return
+     *            Index of the split.
+     */
+    public int getIdx()
+    {
+        return idx;
     }
     
     /**
