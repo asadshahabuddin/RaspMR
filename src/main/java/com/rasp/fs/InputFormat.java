@@ -3,7 +3,7 @@
  * File   : InputFormat.java
  * Email  : asad808@ccs.neu.edu
  * Created: Mar 30, 2015.
- * Edited : Apr 2, 2015.
+ * Edited : Mar 30, 2015.
  */
 
 package com.rasp.fs;
@@ -102,7 +102,7 @@ public class InputFormat
         long l = blockSize(workerCount);
         for(int i = 0; i < workerCount; i++)
         {
-            splits.add(new com.rasp.fs.InputSplit(offset(l, i), l, ""));
+            splits.add(new com.rasp.fs.InputSplit(i, offset(l, i), l, ""));
         }
     }
 
@@ -120,7 +120,7 @@ public class InputFormat
      *            The location to write the split at.
      * @return
      */
-    public boolean split(String location)
+    public boolean split(int idx, String location)
     {
         if(splitIdx >= workerCount)
         {
@@ -199,10 +199,11 @@ public class InputFormat
             }
             
             /*
-            (1) Update the current split's length and location.
+            (1) Update the current split's index, length and location.
             (2) Update the next split's starting offset.
             (3) Close file system objects.
             */
+            ((com.rasp.fs.InputSplit) split).setIdx(idx);
             ((com.rasp.fs.InputSplit) split).setLength(split.getLength() + shift);
             ((com.rasp.fs.InputSplit) split).setLocation(location);
             if(splitIdx < workerCount)
