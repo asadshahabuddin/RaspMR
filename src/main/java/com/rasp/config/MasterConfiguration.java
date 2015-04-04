@@ -6,6 +6,7 @@ import com.rasp.fs.protobuf.ProtoClient;
 import raspmr.RaspMR.utils.autodiscovery.Service;
 import raspmr.RaspMR.utils.autodiscovery.ServiceType;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -22,6 +23,8 @@ public class MasterConfiguration extends Configuration {
 
     public MasterConfiguration(int portNo, ServiceType serviceType){
         super(portNo,serviceType);
+        protoClient = new ProtoClient();
+        dataNodeMap = new HashMap<>();
     }
 
     public DataNode getDataNode(Service service){

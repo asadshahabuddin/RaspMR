@@ -27,5 +27,6 @@ public class SlaveDriver {
                = new DataTransferBlockingService(configuration.getDataNode());
         BlockingService bs = SInputSplitProtos.DataTransferService.newReflectiveBlockingService(dataTransferService);
         ProtoServer.startServer(configuration.getService(),bs);
+
     }
 }
