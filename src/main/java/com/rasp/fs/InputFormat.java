@@ -17,6 +17,7 @@ import java.io.RandomAccessFile;
 import java.io.FileOutputStream;
 import com.rasp.interfaces.InputSplit;
 import com.rasp.interfaces.RecordReader;
+import raspmr.RaspMR.utils.autodiscovery.Service;
 
 public class InputFormat
     extends com.rasp.interfaces.InputFormat
@@ -116,16 +117,20 @@ public class InputFormat
 
     /**
      * Write an input split to the specified location.
-     * @param location
+     * @param dataNode
      *            The location to write the split at.
      * @return
      */
-    public boolean split(int idx, String location)
+    public boolean split(int idx, DataNode dataNode)
+        throws InterruptedException, IOException
     {
         if(splitIdx >= workerCount)
         {
             return false;
         }
+
+        /* Send input split to the worker node */
+        dataNode.storeInputSplit((com.rasp.fs.InputSplit) splits.get(splitIdx));
         
         RandomAccessFile fin = null;
         FileOutputStream fout = null;
@@ -145,7 +150,7 @@ public class InputFormat
                 return false;
             }
                 
-            fout = new FileOutputStream(location, true);  /* File output stream */
+            //fout = new FileOutputStream(location, true);  /* File output stream */
             int bytesRead = 0;                            /* Total bytes read for the current split */
             byte[] b = null;                              /* Contiguous bytes read for a part of the current split */
                 
@@ -178,7 +183,9 @@ public class InputFormat
                 fin.seek(split.getOffset() + bytesRead);
                 b = new byte[size];
                 fin.read(b, 0, size);
-                fout.write(b);
+                //
+                //fout.write(b);
+                dataNode.storeChunk(b);
                 bytesRead += size;
                 totalBytesRead += size;
             }
@@ -194,7 +201,8 @@ public class InputFormat
             {
                 fin.seek(totalBytesRead++);
                 fin.read(b, 0, 1);
-                fout.write(b);
+                //fout.write(b);
+                dataNode.storeChunk(b);
                 shift++;
             }
             
@@ -205,7 +213,7 @@ public class InputFormat
             */
             ((com.rasp.fs.InputSplit) split).setIdx(idx);
             ((com.rasp.fs.InputSplit) split).setLength(split.getLength() + shift);
-            ((com.rasp.fs.InputSplit) split).setLocation(location);
+            ((com.rasp.fs.InputSplit) split).setLocation(dataNode.getService().getIp());
             if(splitIdx < workerCount)
             {
                 InputSplit nextSplit = splits.get(splitIdx);

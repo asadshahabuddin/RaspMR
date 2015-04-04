@@ -1,4 +1,4 @@
-package raspmr.RaspMR.experiments.protobuf;
+package com.rasp.fs.protobuf;
 
 
 import com.google.protobuf.BlockingRpcChannel;
@@ -7,6 +7,7 @@ import com.google.protobuf.RpcController;
 import com.google.protobuf.ServiceException;
 import com.googlecode.protobuf.pro.duplex.RpcClientChannel;
 import com.googlecode.protobuf.pro.duplex.client.DuplexTcpClientPipelineFactory;
+import com.rasp.fs.SInputSplitProtos;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -46,7 +47,7 @@ public class ProtoClient {
         channelMap = new HashMap<>();
     }
 
-    private RpcClientChannel getConnection(String ip, int port){
+    public RpcClientChannel getConnection(String ip, int port){
         String key = ip+":"+port;
         if(!channelMap.containsKey(key)){
             try {
@@ -64,25 +65,27 @@ public class ProtoClient {
 
 
 
-    public void send(String ip, int port, String message){
 
-        RpcClientChannel channel = null;
-        try {
-            channel = getConnection(ip,port);
-            TransferDataProtos.TransferService.BlockingInterface transferService = TransferDataProtos.TransferService.newBlockingStub(channel);
-            RpcController controller = channel.newRpcController();
-            TransferDataProtos.TransferData request = TransferDataProtos.TransferData.newBuilder().setData(message).build();
-            TransferDataProtos.TransferResponse response = transferService.ping(controller, request);
-
-        } catch (ServiceException e) {
-            channelMap.remove(ip);
-        } finally{
-            if(null != channel)
-                channel.close();
-
-        }
-
-    }
+//
+//    public void send(String ip, int port, String message){
+//
+//        RpcClientChannel channel = null;
+//        try {
+//            channel = getConnection(ip,port);
+//            SInputSplitProtos.DataTransferService.BlockingInterface transferService = SInputSplitProtos.DataTransferService.newBlockingStub(channel);
+//            RpcController controller = channel.newRpcController();
+//            SInputSplitProtos.TransferData request = SInputSplitProtos.TransferData.newBuilder().setData(message).build();
+//            SInputSplitProtos.TransferResponse response = transferService.ping(controller, request);
+//
+//        } catch (ServiceException e) {
+//            channelMap.remove(ip);
+//        } finally{
+//            if(null != channel)
+//                channel.close();
+//
+//        }
+//
+//    }
 
 }
 
