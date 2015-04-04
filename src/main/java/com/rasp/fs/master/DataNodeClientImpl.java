@@ -30,10 +30,6 @@ public class DataNodeClientImpl implements DataNode {
     public DataNodeClientImpl(ProtoClient protoClient, Service service){
         this.protoClient = protoClient;
         this.service = service;
-        initalizeServiceAndController();
-    }
-
-    private void initalizeServiceAndController(){
         RpcClientChannel channel = protoClient.getConnection(service.getIp(),service.getPort());
         transferService = SInputSplitProtos.DataTransferService.newBlockingStub(channel);
         controller = channel.newRpcController();
@@ -46,6 +42,7 @@ public class DataNodeClientImpl implements DataNode {
                 .setIdx(inputSplit.getIdx())
                 .setLength(inputSplit.getLength())
                 .setLocation(inputSplit.getLocation())
+                .setOffset(inputSplit.getOffset())
                 .setLength(inputSplit.getLength())
                 .build();
         try {

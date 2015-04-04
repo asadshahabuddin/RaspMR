@@ -4,6 +4,8 @@ import com.rasp.fs.DataNode;
 import com.rasp.fs.InputSplit;
 import raspmr.RaspMR.utils.autodiscovery.Service;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * Author : rahulmadhavan
  * File   :
@@ -21,12 +23,16 @@ public class DataNodeServerImpl implements DataNode {
 
     @Override
     public void storeInputSplit(InputSplit inputSplit) {
-
+        System.out.println("received input split " + inputSplit.getIdx());
     }
 
     @Override
     public void storeChunk(byte[] b) {
-
+        try {
+            System.out.println("received chunk "  + new String(b, "UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.rasp.config.MasterConfiguration;
 import raspmr.RaspMR.utils.autodiscovery.ServiceType;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Author : rahulmadhavan
@@ -19,14 +20,31 @@ public class MasterDriver {
         MasterConfiguration configuration = new MasterConfiguration(9292, ServiceType.JOB_TRACKER);
         DataMaster dataMaster = new DataMaster(configuration);
 
-        try {
-            dataMaster.splitAndSend("");
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        while(true){
+
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.nextLine();
+
+            if(input.equalsIgnoreCase("send")){
+                try {
+                    dataMaster.splitAndSend("/Users/rahulmadhavan/Documents/developer/ms/parallel/assignments/a3/a3data/test");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }else if(input.equalsIgnoreCase("exit")){
+                System.exit(0);
+            }else{
+                if(!input.trim().equalsIgnoreCase("\n"))
+                    System.out.println("meh...");
+            }
+
         }
 
+
+
+        //System.out.println("done");
     }
 
 
