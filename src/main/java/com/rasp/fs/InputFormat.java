@@ -3,7 +3,7 @@
  * File   : InputFormat.java
  * Email  : asad808@ccs.neu.edu
  * Created: Mar 30, 2015.
- * Edited : Mar 30, 2015.
+ * Edited : Apr 4, 2015.
  */
 
 package com.rasp.fs;
@@ -14,10 +14,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.io.FileOutputStream;
 import com.rasp.interfaces.InputSplit;
 import com.rasp.interfaces.RecordReader;
-import raspmr.RaspMR.utils.autodiscovery.Service;
 
 public class InputFormat
     extends com.rasp.interfaces.InputFormat
@@ -128,12 +126,10 @@ public class InputFormat
         {
             return false;
         }
-
+        
         /* Send input split to the worker node */
         dataNode.storeInputSplit((com.rasp.fs.InputSplit) splits.get(splitIdx));
-        
-        RandomAccessFile fin = null;
-        FileOutputStream fout = null;
+        RandomAccessFile f = null;
         
         try
         {
@@ -141,19 +137,18 @@ public class InputFormat
             (1) Read from the split in chunks of bytes.
             (2) Write the split to the file system.
             */
-            fin = new RandomAccessFile(getInputFile(), "r");  /* Random access file object */
+            f = new RandomAccessFile(getInputFile(), "r");  /* Random access file object */
             InputSplit split = splits.get(splitIdx++);        /* The current input split */
-            long flen = fin.length();                         /* Length of file */
+            long flen = f.length();                         /* Length of file */
             /* Avoid creation of unnecessary empty splits */
             if(totalBytesRead == flen)
             {
                 return false;
             }
-                
-            //fout = new FileOutputStream(location, true);  /* File output stream */
+
             int bytesRead = 0;                            /* Total bytes read for the current split */
             byte[] b = null;                              /* Contiguous bytes read for a part of the current split */
-                
+            
             while(bytesRead < split.getLength()
                   && totalBytesRead < flen)
             {
@@ -180,11 +175,9 @@ public class InputFormat
                 (3) Update bytes read for the current split.
                 (4) Update bytes read for the current file.
                 */
-                fin.seek(split.getOffset() + bytesRead);
+                f.seek(split.getOffset() + bytesRead);
                 b = new byte[size];
-                fin.read(b, 0, size);
-                //
-                //fout.write(b);
+                f.read(b, 0, size);
                 dataNode.storeChunk(b);
                 bytesRead += size;
                 totalBytesRead += size;
@@ -195,13 +188,12 @@ public class InputFormat
             entirety.
             */ 
             b = new byte[1];
-            fin.seek(totalBytesRead - 1);
-            fin.read(b, 0, 1);
+            f.seek(totalBytesRead - 1);
+            f.read(b, 0, 1);
             while(totalBytesRead < flen && b[0] != 012)
             {
-                fin.seek(totalBytesRead++);
-                fin.read(b, 0, 1);
-                //fout.write(b);
+                f.seek(totalBytesRead++);
+                f.read(b, 0, 1);
                 dataNode.storeChunk(b);
                 shift++;
             }
@@ -230,22 +222,11 @@ public class InputFormat
         }
         finally
         {
-            if(fout != null)
+            if(f != null)
             {
                 try
                 {
-                    fout.close();
-                }
-                catch(IOException ioe)
-                {
-                    ioe.printStackTrace();
-                }
-            }
-            if(fin != null)
-            {
-                try
-                {
-                    fin.close();
+                    f.close();
                 }
                 catch(IOException ioe)
                 {

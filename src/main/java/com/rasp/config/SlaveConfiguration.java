@@ -1,20 +1,22 @@
+/**
+ * Author : Rahul Madhavan
+ * File   : SlaveConfiguration.java
+ * Email  : rahulk@ccs.neu.edu
+ * Created: Apr 3, 2015
+ * Edited : Apr 4, 2015
+ */
+
 package com.rasp.config;
 
+/* Import list */
 import com.rasp.fs.DataNode;
 import java.io.FileNotFoundException;
 import com.rasp.fs.slave.DataNodeServerImpl;
 import raspmr.RaspMR.utils.autodiscovery.ServiceType;
 
-/**
- * Author : rahulmadhavan
- * File   :
- * Email  : rahulk@ccs.neu.edu
- * Created: 4/3/15
- * Edited :
- */
-public class SlaveConfiguration extends Configuration {
-
-    private DataNode dataNode;
+public class SlaveConfiguration extends Configuration
+{
+	private DataNode dataNode;
 
     public SlaveConfiguration(int portNo, ServiceType serviceType)
         throws FileNotFoundException
@@ -23,7 +25,9 @@ public class SlaveConfiguration extends Configuration {
         dataNode = new DataNodeServerImpl("split.txt", getService());
     }
 
-    public DataNode getDataNode(){
+    public DataNode getDataNode()
+    {
         return dataNode;
     }
 }
+/* End of SlaveConfiguration.java */
