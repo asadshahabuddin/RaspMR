@@ -1,48 +1,43 @@
 /**
- * Author : Pulkit Jain
+ * Author : Pulkit Jain / Asad Shahabuddin
  * File   : TaskTracker.java
- * Email  : 
- * Created: 
- * Edited : 
+ * Email  : asad808@ccs.neu.edu
+ * Created: Apr 4, 2015
+ * Edited : Apr 5, 2015
  */
 
 package com.rasp.task;
 
-import com.rasp.interfaces.Task;
-
-import java.util.PriorityQueue;
+/* Import list */
 import java.util.Queue;
+import com.rasp.interfaces.Task;
+import java.util.concurrent.LinkedBlockingQueue;
 
-public class TaskTracker implements com.rasp.interfaces.TaskTracker{
-    private static Queue<Task> taskList = new PriorityQueue<Task>();
+public class TaskTracker
+	implements com.rasp.interfaces.TaskTracker
+{
+    private Queue<Task> taskList = new LinkedBlockingQueue<>();
 
-    public static Queue<Task> getTaskList()
+    /**
+     * Get the task list.
+     * @return
+     *            The task list.
+     */
+    public Queue<Task> getTaskList()
     {
         return taskList;
     }
 
     @Override
-    public void submit(Task task) {
-        // adding a task in the queue
+    public void submit(Task task)
+    {
         taskList.add(task);
     }
 
     @Override
-    public Task nextTask() {
-        return null;
+    public Task nextTask()
+    {
+        return taskList.poll();
     }
-
-    @Override
-    public boolean start() {
-        return false;
-    }
-
-    @Override
-    public boolean stop() {
-        return false;
-    }
-
-    // TODO
-
 }
 /* End of TaskTracker.java */

@@ -17,6 +17,7 @@ import com.rasp.interfaces.Job;
 import com.rasp.fs.RecordReader;
 import com.rasp.interfaces.Mapper;
 import com.rasp.interfaces.InputSplit;
+
 import raspmr.RaspMR.utils.autodiscovery.Service;
 import raspmr.RaspMR.utils.autodiscovery.ServiceFactory;
 import raspmr.RaspMR.utils.autodiscovery.ServiceType;
@@ -24,17 +25,26 @@ import raspmr.RaspMR.utils.autodiscovery.ServiceType;
 public class MapperTask
     implements com.rasp.interfaces.MapperTask
 {
+	@SuppressWarnings("unused")
+	private String taskId;
 	private InputSplit inputSplit;
 	private Class<? extends Mapper<?, ?>> mapperClass;
-    private String taskId;
     private boolean complete;
 
-    public MapperTask(){
+    public MapperTask()
+    {
         taskId = UUID.randomUUID().toString();
     }
 
-    public MapperTask(String taskId){
+    public MapperTask(String taskId)
+    {
         this.taskId = taskId;
+    }
+    
+    @Override
+    public String getTaskId()
+    {
+        return null;
     }
 
 	@Override
@@ -98,29 +108,25 @@ public class MapperTask
 	}
 
     @Override
-    public String getTaskId() {
-        return null;
-    }
-
-    @Override
-    public void complete() {
+    public void complete()
+    {
         complete = true;
     }
 
     @Override
-    public boolean isCompleted() {
+    public boolean isCompleted()
+    {
         return complete;
     }
 
-
     @Override
-    public Service getService() throws IOException, InterruptedException {
+    public Service getService()
+		throws IOException, InterruptedException
+    {
         return ServiceFactory.createService(
-                ServiceType.TASK_TRACKER,
-                getTaskInputSplit().getLocation(),
-                Configuration.TASK_NODE_PORT);
+               ServiceType.TASK_TRACKER,
+               getTaskInputSplit().getLocation(),
+               Configuration.TASK_NODE_PORT);
     }
-
-
 }
 /* End of MapperTask.java */
