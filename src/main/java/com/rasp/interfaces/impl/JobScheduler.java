@@ -1,57 +1,91 @@
+/**
+ * Author : Rahul Madhavan / Asad Shahabuddin
+ * File   : JobScheduler.java
+ * Email  : rahulk@ccs.neu.edu
+ * Created: Apr 4, 2015
+ * Edited : Apr 5, 2015
+ */
+
 package com.rasp.interfaces.impl;
 
-import com.rasp.config.MasterConfiguration;
+/* Import list */
+import java.io.IOException;
 import com.rasp.interfaces.Job;
 import com.rasp.interfaces.JobTracker;
 import com.rasp.interfaces.MapperTask;
 
-import java.io.IOException;
+public class JobScheduler
+	implements Runnable
+{
+	private static JobTracker jobTracker;
 
-/**
- * Author : rahulmadhavan
- * File   :
- * Email  : rahulk@ccs.neu.edu
- * Created: 4/4/15
- * Edited :
- */
-public class JobScheduler {
-
-    private MasterConfiguration configuration;
-
-    public JobScheduler(MasterConfiguration configuration){
-        this.configuration = configuration;
-    }
-
-    public void startScheduler(){
-        JobTracker jobTracker = configuration.getJobTracker();
-
-        while(true){
-            Job job = jobTracker.nextJob();
-            if(!job.isMapComplete()){
-                //create
-                jobTracker.createMapperTasksForJob(job);
-                //send job tasks to other machines
-                // sending should probably be done by job tracker
-                for(MapperTask task : job.getMapTasks()){
-                    try {
-                        jobTracker.sendTask(task);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            }else if(!job.isShuffleComplete()){
-                // do some shuffle work
-            }else if(!job.isReduceComplete()){
-                jobTracker.createReducerTasksForJob(job);
-            }else{
-
-            }
-
+    public boolean schedule()
+    	throws InterruptedException, IOException
+    {
+        Job job = jobTracker.nextJob();
+        if(job == null)
+        {
+        	return false;
         }
-
+        
+        if(!job.isMapComplete())
+        {
+            jobTracker.createMapperTasksForJob(job);
+            /*
+            (1) Send job tasks to other machines.
+            (2) Sending should probably be done by the job tracker.
+             */
+            for(MapperTask task : job.getMapTasks())
+            {
+                jobTracker.sendTask(task);
+            }
+        }
+        else if(!job.isShuffleComplete())
+        {
+            // TODO
+        }
+        else if(!job.isReduceComplete())
+        {
+            jobTracker.createReducerTasksForJob(job);
+        }
+        else
+        {
+        	// TODO
+        }
+        
+        return true;
     }
 
+    @Override
+	public void run()
+	{
+		boolean status = false;
+		
+		try
+		{
+			while(true)
+			{
+				if(status != schedule())
+				{
+					status = !status;
+					if(status)
+					{
+						System.out.println("   [echo] Job scheduler has resumed scheduling");
+					}
+					else
+					{
+						System.out.println("   [echo] Job are no tasks to schedule");
+					}
+				}
+			}
+		}
+		catch(IOException ioe)
+		{
+			ioe.printStackTrace();
+		}
+		catch(InterruptedException intre)
+		{
+			intre.printStackTrace();
+		}
+	}
 }

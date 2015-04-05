@@ -1,68 +1,64 @@
+/**
+ * Author : Rahul Madhavan
+ * File   : JobTrackerImpl.java
+ * Email  : rahulk@ccs.neu.edu
+ * Created: Apr 4, 2015
+ * Edited : Apr 5, 2015
+ */
+
 package com.rasp.interfaces.impl;
 
-
-import com.rasp.config.MasterConfiguration;
-import com.rasp.fs.InputFormat;
-import com.rasp.interfaces.*;
-import com.rasp.interfaces.MapperTask;
-import com.rasp.task.*;
-
+/* Import list */
+import java.util.Map;
+import java.util.List;
+import java.util.HashMap;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.LinkedBlockingDeque;
+import com.rasp.fs.InputFormat;
+import com.rasp.interfaces.Job;
+import com.rasp.interfaces.Task;
+import com.rasp.interfaces.InputSplit;
+import com.rasp.interfaces.JobTracker;
+import com.rasp.interfaces.MapperTask;
+import com.rasp.config.MasterConfiguration;
+import java.util.concurrent.LinkedBlockingQueue;
 
-/**
- * Author : rahulmadhavan
- * File   :
- * Email  : rahulk@ccs.neu.edu
- * Created: 4/4/15
- * Edited :
- */
-public class JobTrackerImpl implements JobTracker {
+public class JobTrackerImpl implements JobTracker
+{
+	MasterConfiguration conf;
+    Map<String, Job> jobMap;
+    Map<String, Task> taskMap;
+    LinkedBlockingQueue<Job> jobQueue;
 
-    LinkedBlockingDeque<Job> queue;
-    Map<String,Job> jobMap;
-    Map<String,Task> taskMap; // taskId -> jobId : Map
-    MasterConfiguration configuration;
-
-
-    public JobTrackerImpl(MasterConfiguration configuration){
-        this.configuration = configuration;
-        this.jobMap = new HashMap<>();
-        this.taskMap = new HashMap<>();
-        this.queue = new LinkedBlockingDeque<>();
+    public JobTrackerImpl(MasterConfiguration conf)
+    {
+    	this.conf = conf;
+    	jobMap    = new HashMap<String, Job>();
+    	taskMap   = new HashMap<String, Task>();
+    	jobQueue  = new LinkedBlockingQueue<Job>();
     }
 
     @Override
-    public void submit(Job job) {
-        jobMap.put(job.getJobId(),job);
-        queue.add(job);
+    public void submit(Job job)
+    {
+        jobMap.put(job.getJobId(), job);
+        jobQueue.add(job);
     }
 
     @Override
-    public Job nextJob() {
-        return queue.remove();
+    public Job nextJob()
+    {
+        return jobQueue.poll();
     }
 
     @Override
-    public boolean start() {
-        return false;
-    }
-
-    @Override
-    public boolean stop() {
-        return false;
-    }
-
-    @Override
-    public void createMapperTasksForJob(Job job) {
-        List<MapperTask>  taskList = new ArrayList<>();
-
-        InputFormat inputFormat = configuration.getDataMaster().getInputFormat(job.getInputPath());
-        for(InputSplit inputSplit : inputFormat.getSplits()){
+    public void createMapperTasksForJob(Job job)
+    {
+        List<MapperTask> taskList = new ArrayList<>();
+        InputFormat inputFormat = conf.getDataMaster().getInputFormat(job.getInputPath());
+        
+        for(InputSplit inputSplit : inputFormat.getSplits())
+        {
             MapperTask mapperTask = new com.rasp.task.MapperTask();
             mapperTask.setTaskInputSplit(inputSplit);
             mapperTask.setJob(job);
@@ -73,36 +69,36 @@ public class JobTrackerImpl implements JobTracker {
         job.setMapTasks(taskList);
     }
 
-
-
-
     @Override
-    public void createReducerTasksForJob(Job job) {
-
+    public void createReducerTasksForJob(Job job)
+    {
+    	// TODO
     }
 
-
     @Override
-    public void completeMapTask(String taskId) {
+    public void completeMapTask(String taskId)
+    {
         Task task = taskMap.get(taskId);
         Job job = task.getJob();
 
-        if(MapperTask.class.isInstance(task)){
+        if(task instanceof MapperTask)
+        {
             task.complete();
-            if(job.isMapComplete()){
-                queue.add(job);
+            if(job.isMapComplete())
+            {
+                jobQueue.add(job);
             }
-        }else{
-            throw new RuntimeException("type of task passed should be MapperTask");
+        }
+        else
+        {
+            throw new RuntimeException(" [error] Type of task passed should be MapperTask");
         }
     }
 
-
     @Override
-    public void sendTask(Task task) throws IOException, InterruptedException {
-
-        configuration.getTaskNode(task.getService()).sendTask(task);
-
-
+    public void sendTask(Task task)
+		throws IOException, InterruptedException
+    {
+        conf.getTaskNode(task.getService()).sendTask(task);
     }
 }

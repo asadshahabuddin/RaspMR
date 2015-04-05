@@ -16,28 +16,18 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class TaskTracker
 	implements com.rasp.interfaces.TaskTracker
 {
-    private Queue<Task> taskList = new LinkedBlockingQueue<>();
-
-    /**
-     * Get the task list.
-     * @return
-     *            The task list.
-     */
-    public Queue<Task> getTaskList()
-    {
-        return taskList;
-    }
+    private Queue<Task> taskQueue = new LinkedBlockingQueue<>();
 
     @Override
     public void submit(Task task)
     {
-        taskList.add(task);
+        taskQueue.add(task);
     }
 
     @Override
     public Task nextTask()
     {
-        return taskList.poll();
+        return taskQueue.poll();
     }
 }
 /* End of TaskTracker.java */

@@ -3,14 +3,13 @@
  * File   : JobTracker.java
  * Email  : rahulk@ccs.neu.edu
  * Created: Mar 23, 2015
- * Edited : Mar 24, 2015
+ * Edited : Apr 5, 2015
  */
 
 package com.rasp.interfaces;
 
 /* Import list */
 import java.io.IOException;
-import java.util.List;
 
 /**
  * <code>JobTracker</code>  is responsible for maintaining queue of jobs
@@ -24,38 +23,44 @@ import java.util.List;
 public interface JobTracker
 {
     /**
-     * Submits Job for execution
-     *
+     * Submits Job for execution.
      * @param job {@link Job}
      */
     void submit(Job job);
 
     /**
-     * returns the next task to be executed
-     *
+     * Returns the next task to be executed.
      * @return {@link Job}
      */
     Job nextJob();
 
     /**
-     *
-     * @return true if the <code>TaskTracker</code> has started successfully
+     * Create map tasks for the specified job.
+     * @param job
+     *            The job to work on.
      */
-    boolean start();
-
-    /**
-     *
-     * @return true if the <code>TaskTracker</code> has stopped successfully
-     */
-    boolean stop();
-
-
     void createMapperTasksForJob(Job job);
 
+    /**
+     * Create reduce tasks for the specified job.
+     * @param job
+     *            The job to work on.
+     */
     void createReducerTasksForJob(Job job);
 
+    /**
+     * Mark the map task as complete.
+     * @param taskId
+     *            Unique ID of the a task.
+     */
     void completeMapTask(String taskId);
 
+    /**
+     * Send the task to a worker node for execution. 
+     * @param task
+     *            The task to execute on a worker node.
+     * @throws IOException
+     * @throws InterruptedException
+     */
     void sendTask(Task task) throws IOException, InterruptedException;
-
 }
