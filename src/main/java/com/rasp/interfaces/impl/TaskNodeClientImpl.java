@@ -41,12 +41,15 @@ public class TaskNodeClientImpl implements TaskNode{
 
         if(task instanceof MapperTask){
             sTaskType = STaskProtos.STask.STaskType.MAPPER;
-            taskClass = MapperTask.class.toString();
+            taskClass = ((MapperTask) task).getMapperClass().toString();
         }else{
             sTaskType = STaskProtos.STask.STaskType.REDUCER;
-            taskClass = ReducerTask.class.toString();
+            taskClass = ((ReducerTask) task).getReducerClass().toString();
         }
 
+        if(task.getJob() == null){
+            throw new NullPointerException("Bhaam!!");
+        }
 
         STaskProtos.STask sTask = STaskProtos.STask.newBuilder()
                 .setClassName(taskClass)
@@ -66,7 +69,7 @@ public class TaskNodeClientImpl implements TaskNode{
 
     @Override
     public Service getService() {
-        return service;
+        return null;
     }
 }
 

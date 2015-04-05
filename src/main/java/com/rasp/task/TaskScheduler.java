@@ -11,10 +11,9 @@ package com.rasp.task;
 /* Import list */
 import java.io.IOException;
 import com.rasp.interfaces.Task;
-import com.rasp.interfaces.ReducerTask;
 
 public class TaskScheduler
-	implements com.rasp.interfaces.TaskScheduler
+	implements com.rasp.interfaces.TaskScheduler, Runnable
 {
 	public static int taskIdx = 1;
 	public static TaskTracker taskTracker = new TaskTracker();
@@ -24,36 +23,53 @@ public class TaskScheduler
 		throws IllegalAccessException, InstantiationException,
 			   InterruptedException,   IOException
     {
-    	
     	Task task = taskTracker.nextTask();
-    	if(task instanceof MapperTask)
+    	if(task == null)
     	{
-    		return scheduleMapper((MapperTask) task);
+    		return false;
     	}
-    	else if(task instanceof ReducerTask)
-    	{
-    		return scheduleReducer((ReducerTask) task);
-    	}
-    	return false;
-    	
-    	/*
-    	MapperTask mapperTask = (MapperTask) t.remove();
-        mapperTask.setTaskInputSplit(null);  // TODO : Ask Rahul
-        mapperTask.setMapoerClass();      // TODO : Ask Rahul
-        mapperTask.execute();
-        */
+    	return task.execute();
     }
-    
-    public boolean scheduleMapper(MapperTask task)
-    {
-    	
-    	return false;
-    }
-    
-    public boolean scheduleReducer(ReducerTask task)
-    {
-    	// TODO
-    	return false;
-    }
+
+	@Override
+	public void run()
+	{
+		boolean status = false;
+		
+		try
+		{
+			while(true)
+			{
+				if(status != schedule())
+				{
+					status = !status;
+					if(status)
+					{
+						System.out.println("   [echo] Task scheduler has resumed scheduling");
+					}
+					else
+					{
+						System.out.println("   [echo] There are no tasks to schedule");
+					}
+				}
+			}
+		}
+		catch(IOException ioe)
+		{
+			ioe.printStackTrace();
+		}
+		catch(InterruptedException intre)
+		{
+			intre.printStackTrace();
+		}
+		catch(InstantiationException inste)
+		{
+			inste.printStackTrace();
+		}
+		catch(IllegalAccessException iae)
+		{
+			iae.printStackTrace();
+		}
+	}
 }
 /* End of TaskScheduler.java */

@@ -9,28 +9,26 @@
 package com.rasp.task;
 
 /* Import list */
-import java.io.IOException;
 import java.util.UUID;
-
-import com.rasp.config.Configuration;
+import java.io.IOException;
 import com.rasp.interfaces.Job;
 import com.rasp.fs.RecordReader;
 import com.rasp.interfaces.Mapper;
+import com.rasp.config.Configuration;
 import com.rasp.interfaces.InputSplit;
-
 import raspmr.RaspMR.utils.autodiscovery.Service;
-import raspmr.RaspMR.utils.autodiscovery.ServiceFactory;
 import raspmr.RaspMR.utils.autodiscovery.ServiceType;
+import raspmr.RaspMR.utils.autodiscovery.ServiceFactory;
 
 public class MapperTask
     implements com.rasp.interfaces.MapperTask
 {
-	@SuppressWarnings("unused")
 	private String taskId;
+	private Job job;
 	private InputSplit inputSplit;
 	private Class<? extends Mapper<?, ?>> mapperClass;
-    private boolean complete;
-
+	private boolean complete;
+	
     public MapperTask()
     {
         taskId = UUID.randomUUID().toString();
@@ -44,14 +42,19 @@ public class MapperTask
     @Override
     public String getTaskId()
     {
-        return null;
+        return taskId;
     }
 
+    @Override
+    public void setJob(Job job)
+    {
+        this.job = job;
+    }
+    
 	@Override
 	public Job getJob()
 	{
-		// TODO
-		return null;
+		return job;
 	}
 
 	@Override
@@ -107,7 +110,6 @@ public class MapperTask
 		return complete = true;
 	}
 
-    @Override
     public void complete()
     {
         complete = true;

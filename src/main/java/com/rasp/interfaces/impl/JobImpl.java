@@ -64,7 +64,7 @@ public class JobImpl implements Job {
         return false;
     }
 
-    
+
     @Override
     public boolean isMapComplete() {
         if(!mapComplete){

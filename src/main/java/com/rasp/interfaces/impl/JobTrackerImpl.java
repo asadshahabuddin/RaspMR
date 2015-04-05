@@ -65,6 +65,7 @@ public class JobTrackerImpl implements JobTracker {
         for(InputSplit inputSplit : inputFormat.getSplits()){
             MapperTask mapperTask = new com.rasp.task.MapperTask();
             mapperTask.setTaskInputSplit(inputSplit);
+            mapperTask.setJob(job);
             mapperTask.setMapperClass(job.getMapperClass());
             taskList.add(mapperTask);
             taskMap.put(mapperTask.getTaskId(),mapperTask);
