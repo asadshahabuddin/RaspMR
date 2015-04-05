@@ -29,7 +29,7 @@ public class TaskNodeServerImpl implements TaskNode {
 
     @Override
     public void sendTask(Task task) {
-
+        System.out.println("task " + task.getTaskId() + " : input split : "+ task.getTaskInputSplit().getIdx());
     }
 
     @Override

@@ -28,6 +28,7 @@ public class MapperTask
 	private Class<? extends Mapper<?, ?>> mapperClass;
     private String taskId;
     private boolean complete;
+    private Job job;
 
     public MapperTask(){
         taskId = UUID.randomUUID().toString();
@@ -40,8 +41,7 @@ public class MapperTask
 	@Override
 	public Job getJob()
 	{
-		// TODO
-		return null;
+		return job;
 	}
 
 	@Override
@@ -99,7 +99,7 @@ public class MapperTask
 
     @Override
     public String getTaskId() {
-        return null;
+        return taskId;
     }
 
     @Override
@@ -121,6 +121,9 @@ public class MapperTask
                 Configuration.TASK_NODE_PORT);
     }
 
-
+    @Override
+    public void setJob(Job job) {
+        this.job = job;
+    }
 }
 /* End of MapperTask.java */

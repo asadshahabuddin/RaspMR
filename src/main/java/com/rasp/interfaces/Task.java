@@ -60,6 +60,7 @@ public interface Task
     boolean isCompleted();
 
 
+    void setJob(Job job);
     Service getService() throws IOException, InterruptedException;
 
 }
