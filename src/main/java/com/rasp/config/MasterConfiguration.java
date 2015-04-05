@@ -32,6 +32,7 @@ public class MasterConfiguration extends Configuration {
         super(portNo,serviceType);
         protoClient = new ProtoClient();
         dataNodeMap = new HashMap<>();
+        taskNodeMap = new HashMap<>();
     }
 
     public DataNode getDataNode(Service service){

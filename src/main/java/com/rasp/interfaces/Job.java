@@ -17,8 +17,6 @@ import java.util.List;
  *
  * Job represents a Map Reduce Job
  * It references 1 {@link Mapper} and 1 {@link Reducer} Class
- * It also has references a {@link Context} object which holds
- * the context variables and its corresponding values for the job
  */
 public interface Job
 {
@@ -65,13 +63,6 @@ public interface Job
      * @return true if the job executes correctly else returns false
      */
     boolean execute();
-
-    /**
-     * Every job has 1 {@link Context} object
-     *
-     * @return the {@link Context} object for the current job
-     */
-    Context getContext();
 
 
     boolean isMapComplete();

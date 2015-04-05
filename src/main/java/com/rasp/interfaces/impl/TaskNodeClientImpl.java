@@ -64,5 +64,9 @@ public class TaskNodeClientImpl implements TaskNode{
 
     }
 
+    @Override
+    public Service getService() {
+        return service;
+    }
 }
 

@@ -11,36 +11,32 @@ package com.rasp.fs.slave;
 /* Import list */
 import java.io.File;
 import java.io.IOException;
+
+import com.rasp.config.Configuration;
+import com.rasp.config.SlaveConfiguration;
 import com.rasp.fs.DataNode;
 import com.rasp.fs.InputSplit;
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
 import raspmr.RaspMR.utils.autodiscovery.Service;
+import raspmr.RaspMR.utils.autodiscovery.ServiceFactory;
+import raspmr.RaspMR.utils.autodiscovery.ServiceType;
 
 public class DataNodeServerImpl
     implements DataNode
 {
-	private String dataFile;
     private Service service;
-    private InputSplit inputSplit;
     private FileOutputStream f;
-    
-    /**
-     * 
-     * @param metaFile
-     *            File where meta data about the split is stored.
-     * @param dataFile
-     *            File where the split data is stored.
-     * @param service
-     *            Service object.
-     */
-    public DataNodeServerImpl(String dataFile, Service service)
-        throws FileNotFoundException
-    {
-    	this.dataFile = dataFile;
-        this.service  = service;
-        inputSplit    = null;
+    private SlaveConfiguration configuration;
+
+
+    public DataNodeServerImpl(SlaveConfiguration configuration) throws FileNotFoundException{
+        this.service  = ServiceFactory.createService(
+                ServiceType.TASK_TRACKER,
+                configuration.getLocalServiceAddress().getHostAddress(),
+                Configuration.DATA_NODE_PORT);
         f = createDataStream();
+        this.configuration = configuration;
     }
     
     /**
@@ -52,12 +48,11 @@ public class DataNodeServerImpl
     public FileOutputStream createDataStream()
         throws FileNotFoundException
     {
-    	File f = new File(dataFile);
-    	if(f.exists())
-    	{
+    	File f = new File(SlaveConfiguration.INPUT_SPLIT_FILENAME);
+    	if(f.exists()){
     		f.delete();
     	}
-    	return new FileOutputStream(dataFile, true);
+    	return new FileOutputStream(SlaveConfiguration.INPUT_SPLIT_FILENAME, true);
     }
     
     @Override
@@ -69,15 +64,11 @@ public class DataNodeServerImpl
 
     @Override
     public void storeInputSplit(InputSplit inputSplit)
-        throws FileNotFoundException, IOException
+        throws IOException
     {
-    	this.inputSplit = inputSplit;
+        configuration.addInputSplit(inputSplit);
     }
-    
-    public InputSplit getInputSplit()
-    {
-    	return inputSplit;
-    }
+
 
     @Override
     public void storeChunk(byte[] b)

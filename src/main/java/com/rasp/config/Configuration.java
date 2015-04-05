@@ -24,19 +24,16 @@ public class Configuration {
 
     private HazelcastInstance hz1;
     private Discoverer discoverer;
-    private HashMap<String,DataNode> dataNodeHashMap;
-    private ProtoClient protoClient = new ProtoClient();
     private Service service;
 
     public static final int TASK_NODE_PORT = 9797;
+    public static final int DATA_NODE_PORT = 9292;
 
 
 
     public Configuration(int portNo, ServiceType serviceType){
         hz1 = HazelCastServicePublisher.publishService(ServiceFactory.createService(serviceType, portNo));
         discoverer = new DiscovererHazelCastImpl(hz1);
-        dataNodeHashMap = new HashMap<>();
-        protoClient = new ProtoClient();
         service = ServiceFactory.createService(serviceType,getLocalServiceAddress().getHostAddress(),portNo);
     }
 

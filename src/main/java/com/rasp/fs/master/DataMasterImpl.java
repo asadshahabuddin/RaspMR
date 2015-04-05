@@ -15,6 +15,7 @@ import com.rasp.fs.DataMaster;
 import com.rasp.fs.DataNode;
 import com.rasp.fs.InputFormat;
 import raspmr.RaspMR.utils.autodiscovery.Service;
+import raspmr.RaspMR.utils.autodiscovery.ServiceFactory;
 import raspmr.RaspMR.utils.autodiscovery.ServiceType;
 
 import java.io.IOException;
@@ -60,7 +61,11 @@ public class DataMasterImpl implements DataMaster{
         InputFormat inputFormat = createInputFormat(inputFile,services.size());
         inputFileMap.put(inputFile,inputFormat);
         for(Service service: services){
-            transmit(inputFormat,configuration.getDataNode(service));
+            Service dService = ServiceFactory.createService(
+                    service.getServiceType(),
+                    service.getIp(),
+                    Configuration.DATA_NODE_PORT);
+            transmit(inputFormat,configuration.getDataNode(dService));
         }
 
     }

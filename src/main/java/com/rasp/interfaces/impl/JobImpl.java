@@ -64,11 +64,7 @@ public class JobImpl implements Job {
         return false;
     }
 
-    @Override
-    public Context getContext() {
-        return null;
-    }
-
+    
     @Override
     public boolean isMapComplete() {
         if(!mapComplete){
@@ -138,5 +134,15 @@ public class JobImpl implements Job {
 
     public String getJobId() {
         return jobId;
+    }
+
+    @Override
+    public Class<? extends Mapper<?, ?>> getMapperClass() {
+        return mapperClass;
+    }
+
+    @Override
+    public Class<? extends Reducer<?, ?, ?, ?>> getReducerClass() {
+        return reducerClass;
     }
 }
