@@ -1634,6 +1634,319 @@ public final class SInputSplitProtos {
     // @@protoc_insertion_point(class_scope:com.rasp.fs.protobuf.TransferResponse)
   }
 
+  public interface VoidOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.rasp.fs.protobuf.Void)
+      com.google.protobuf.MessageOrBuilder {
+  }
+  /**
+   * Protobuf type {@code com.rasp.fs.protobuf.Void}
+   */
+  public static final class Void extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.rasp.fs.protobuf.Void)
+      VoidOrBuilder {
+    // Use Void.newBuilder() to construct.
+    private Void(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private Void(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final Void defaultInstance;
+    public static Void getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public Void getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Void(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.rasp.fs.SInputSplitProtos.internal_static_com_rasp_fs_protobuf_Void_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.rasp.fs.SInputSplitProtos.internal_static_com_rasp_fs_protobuf_Void_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.rasp.fs.SInputSplitProtos.Void.class, com.rasp.fs.SInputSplitProtos.Void.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<Void> PARSER =
+        new com.google.protobuf.AbstractParser<Void>() {
+      public Void parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Void(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Void> getParserForType() {
+      return PARSER;
+    }
+
+    private void initFields() {
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.rasp.fs.SInputSplitProtos.Void parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.rasp.fs.SInputSplitProtos.Void parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.rasp.fs.SInputSplitProtos.Void parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.rasp.fs.SInputSplitProtos.Void parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.rasp.fs.SInputSplitProtos.Void parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.rasp.fs.SInputSplitProtos.Void parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.rasp.fs.SInputSplitProtos.Void parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.rasp.fs.SInputSplitProtos.Void parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.rasp.fs.SInputSplitProtos.Void parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.rasp.fs.SInputSplitProtos.Void parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.rasp.fs.SInputSplitProtos.Void prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.rasp.fs.protobuf.Void}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.rasp.fs.protobuf.Void)
+        com.rasp.fs.SInputSplitProtos.VoidOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.rasp.fs.SInputSplitProtos.internal_static_com_rasp_fs_protobuf_Void_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.rasp.fs.SInputSplitProtos.internal_static_com_rasp_fs_protobuf_Void_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.rasp.fs.SInputSplitProtos.Void.class, com.rasp.fs.SInputSplitProtos.Void.Builder.class);
+      }
+
+      // Construct using com.rasp.fs.SInputSplitProtos.Void.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.rasp.fs.SInputSplitProtos.internal_static_com_rasp_fs_protobuf_Void_descriptor;
+      }
+
+      public com.rasp.fs.SInputSplitProtos.Void getDefaultInstanceForType() {
+        return com.rasp.fs.SInputSplitProtos.Void.getDefaultInstance();
+      }
+
+      public com.rasp.fs.SInputSplitProtos.Void build() {
+        com.rasp.fs.SInputSplitProtos.Void result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.rasp.fs.SInputSplitProtos.Void buildPartial() {
+        com.rasp.fs.SInputSplitProtos.Void result = new com.rasp.fs.SInputSplitProtos.Void(this);
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.rasp.fs.SInputSplitProtos.Void) {
+          return mergeFrom((com.rasp.fs.SInputSplitProtos.Void)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.rasp.fs.SInputSplitProtos.Void other) {
+        if (other == com.rasp.fs.SInputSplitProtos.Void.getDefaultInstance()) return this;
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.rasp.fs.SInputSplitProtos.Void parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.rasp.fs.SInputSplitProtos.Void) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.rasp.fs.protobuf.Void)
+    }
+
+    static {
+      defaultInstance = new Void(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.rasp.fs.protobuf.Void)
+  }
+
   /**
    * Protobuf service {@code com.rasp.fs.protobuf.DataTransferService}
    */
@@ -1658,6 +1971,14 @@ public final class SInputSplitProtos {
           com.rasp.fs.SInputSplitProtos.SInputChunk request,
           com.google.protobuf.RpcCallback<com.rasp.fs.SInputSplitProtos.TransferResponse> done);
 
+      /**
+       * <code>rpc closeInputSplit(.com.rasp.fs.protobuf.Void) returns (.com.rasp.fs.protobuf.Void);</code>
+       */
+      public abstract void closeInputSplit(
+          com.google.protobuf.RpcController controller,
+          com.rasp.fs.SInputSplitProtos.Void request,
+          com.google.protobuf.RpcCallback<com.rasp.fs.SInputSplitProtos.Void> done);
+
     }
 
     public static com.google.protobuf.Service newReflectiveService(
@@ -1677,6 +1998,14 @@ public final class SInputSplitProtos {
             com.rasp.fs.SInputSplitProtos.SInputChunk request,
             com.google.protobuf.RpcCallback<com.rasp.fs.SInputSplitProtos.TransferResponse> done) {
           impl.sendChunk(controller, request, done);
+        }
+
+        @java.lang.Override
+        public  void closeInputSplit(
+            com.google.protobuf.RpcController controller,
+            com.rasp.fs.SInputSplitProtos.Void request,
+            com.google.protobuf.RpcCallback<com.rasp.fs.SInputSplitProtos.Void> done) {
+          impl.closeInputSplit(controller, request, done);
         }
 
       };
@@ -1705,6 +2034,8 @@ public final class SInputSplitProtos {
               return impl.sendInputSplit(controller, (com.rasp.fs.SInputSplitProtos.SInputSplit)request);
             case 1:
               return impl.sendChunk(controller, (com.rasp.fs.SInputSplitProtos.SInputChunk)request);
+            case 2:
+              return impl.closeInputSplit(controller, (com.rasp.fs.SInputSplitProtos.Void)request);
             default:
               throw new java.lang.AssertionError("Can't get here.");
           }
@@ -1723,6 +2054,8 @@ public final class SInputSplitProtos {
               return com.rasp.fs.SInputSplitProtos.SInputSplit.getDefaultInstance();
             case 1:
               return com.rasp.fs.SInputSplitProtos.SInputChunk.getDefaultInstance();
+            case 2:
+              return com.rasp.fs.SInputSplitProtos.Void.getDefaultInstance();
             default:
               throw new java.lang.AssertionError("Can't get here.");
           }
@@ -1741,6 +2074,8 @@ public final class SInputSplitProtos {
               return com.rasp.fs.SInputSplitProtos.TransferResponse.getDefaultInstance();
             case 1:
               return com.rasp.fs.SInputSplitProtos.TransferResponse.getDefaultInstance();
+            case 2:
+              return com.rasp.fs.SInputSplitProtos.Void.getDefaultInstance();
             default:
               throw new java.lang.AssertionError("Can't get here.");
           }
@@ -1764,6 +2099,14 @@ public final class SInputSplitProtos {
         com.google.protobuf.RpcController controller,
         com.rasp.fs.SInputSplitProtos.SInputChunk request,
         com.google.protobuf.RpcCallback<com.rasp.fs.SInputSplitProtos.TransferResponse> done);
+
+    /**
+     * <code>rpc closeInputSplit(.com.rasp.fs.protobuf.Void) returns (.com.rasp.fs.protobuf.Void);</code>
+     */
+    public abstract void closeInputSplit(
+        com.google.protobuf.RpcController controller,
+        com.rasp.fs.SInputSplitProtos.Void request,
+        com.google.protobuf.RpcCallback<com.rasp.fs.SInputSplitProtos.Void> done);
 
     public static final
         com.google.protobuf.Descriptors.ServiceDescriptor
@@ -1797,6 +2140,11 @@ public final class SInputSplitProtos {
             com.google.protobuf.RpcUtil.<com.rasp.fs.SInputSplitProtos.TransferResponse>specializeCallback(
               done));
           return;
+        case 2:
+          this.closeInputSplit(controller, (com.rasp.fs.SInputSplitProtos.Void)request,
+            com.google.protobuf.RpcUtil.<com.rasp.fs.SInputSplitProtos.Void>specializeCallback(
+              done));
+          return;
         default:
           throw new java.lang.AssertionError("Can't get here.");
       }
@@ -1815,6 +2163,8 @@ public final class SInputSplitProtos {
           return com.rasp.fs.SInputSplitProtos.SInputSplit.getDefaultInstance();
         case 1:
           return com.rasp.fs.SInputSplitProtos.SInputChunk.getDefaultInstance();
+        case 2:
+          return com.rasp.fs.SInputSplitProtos.Void.getDefaultInstance();
         default:
           throw new java.lang.AssertionError("Can't get here.");
       }
@@ -1833,6 +2183,8 @@ public final class SInputSplitProtos {
           return com.rasp.fs.SInputSplitProtos.TransferResponse.getDefaultInstance();
         case 1:
           return com.rasp.fs.SInputSplitProtos.TransferResponse.getDefaultInstance();
+        case 2:
+          return com.rasp.fs.SInputSplitProtos.Void.getDefaultInstance();
         default:
           throw new java.lang.AssertionError("Can't get here.");
       }
@@ -1883,6 +2235,21 @@ public final class SInputSplitProtos {
             com.rasp.fs.SInputSplitProtos.TransferResponse.class,
             com.rasp.fs.SInputSplitProtos.TransferResponse.getDefaultInstance()));
       }
+
+      public  void closeInputSplit(
+          com.google.protobuf.RpcController controller,
+          com.rasp.fs.SInputSplitProtos.Void request,
+          com.google.protobuf.RpcCallback<com.rasp.fs.SInputSplitProtos.Void> done) {
+        channel.callMethod(
+          getDescriptor().getMethods().get(2),
+          controller,
+          request,
+          com.rasp.fs.SInputSplitProtos.Void.getDefaultInstance(),
+          com.google.protobuf.RpcUtil.generalizeCallback(
+            done,
+            com.rasp.fs.SInputSplitProtos.Void.class,
+            com.rasp.fs.SInputSplitProtos.Void.getDefaultInstance()));
+      }
     }
 
     public static BlockingInterface newBlockingStub(
@@ -1899,6 +2266,11 @@ public final class SInputSplitProtos {
       public com.rasp.fs.SInputSplitProtos.TransferResponse sendChunk(
           com.google.protobuf.RpcController controller,
           com.rasp.fs.SInputSplitProtos.SInputChunk request)
+          throws com.google.protobuf.ServiceException;
+
+      public com.rasp.fs.SInputSplitProtos.Void closeInputSplit(
+          com.google.protobuf.RpcController controller,
+          com.rasp.fs.SInputSplitProtos.Void request)
           throws com.google.protobuf.ServiceException;
     }
 
@@ -1932,6 +2304,18 @@ public final class SInputSplitProtos {
           com.rasp.fs.SInputSplitProtos.TransferResponse.getDefaultInstance());
       }
 
+
+      public com.rasp.fs.SInputSplitProtos.Void closeInputSplit(
+          com.google.protobuf.RpcController controller,
+          com.rasp.fs.SInputSplitProtos.Void request)
+          throws com.google.protobuf.ServiceException {
+        return (com.rasp.fs.SInputSplitProtos.Void) channel.callBlockingMethod(
+          getDescriptor().getMethods().get(2),
+          controller,
+          request,
+          com.rasp.fs.SInputSplitProtos.Void.getDefaultInstance());
+      }
+
     }
 
     // @@protoc_insertion_point(class_scope:com.rasp.fs.protobuf.DataTransferService)
@@ -1952,6 +2336,11 @@ public final class SInputSplitProtos {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_rasp_fs_protobuf_TransferResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_rasp_fs_protobuf_Void_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_rasp_fs_protobuf_Void_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1965,13 +2354,15 @@ public final class SInputSplitProtos {
       "f\"L\n\013SInputSplit\022\013\n\003idx\030\001 \002(\005\022\016\n\006offset\030" +
       "\002 \002(\003\022\016\n\006length\030\003 \002(\003\022\020\n\010location\030\004 \002(\t\"" +
       "\034\n\013SInputChunk\022\r\n\005chunk\030\001 \002(\014\"\"\n\020Transfe" +
-      "rResponse\022\016\n\006status\030\001 \001(\t2\312\001\n\023DataTransf" +
-      "erService\022[\n\016sendInputSplit\022!.com.rasp.f" +
-      "s.protobuf.SInputSplit\032&.com.rasp.fs.pro" +
-      "tobuf.TransferResponse\022V\n\tsendChunk\022!.co" +
-      "m.rasp.fs.protobuf.SInputChunk\032&.com.ras" +
-      "p.fs.protobuf.TransferResponseB#\n\013com.ra",
-      "sp.fsB\021SInputSplitProtos\210\001\001"
+      "rResponse\022\016\n\006status\030\001 \001(\t\"\006\n\004Void2\225\002\n\023Da" +
+      "taTransferService\022[\n\016sendInputSplit\022!.co" +
+      "m.rasp.fs.protobuf.SInputSplit\032&.com.ras" +
+      "p.fs.protobuf.TransferResponse\022V\n\tsendCh" +
+      "unk\022!.com.rasp.fs.protobuf.SInputChunk\032&" +
+      ".com.rasp.fs.protobuf.TransferResponse\022I",
+      "\n\017closeInputSplit\022\032.com.rasp.fs.protobuf" +
+      ".Void\032\032.com.rasp.fs.protobuf.VoidB#\n\013com" +
+      ".rasp.fsB\021SInputSplitProtos\210\001\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2003,6 +2394,12 @@ public final class SInputSplitProtos {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_rasp_fs_protobuf_TransferResponse_descriptor,
         new java.lang.String[] { "Status", });
+    internal_static_com_rasp_fs_protobuf_Void_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_com_rasp_fs_protobuf_Void_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_rasp_fs_protobuf_Void_descriptor,
+        new java.lang.String[] { });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -70,4 +70,14 @@ public class DataNodeClientImpl implements DataNode {
     public Service getService() {
         return service;
     }
+
+    @Override
+    public void closeInputSplit() {
+        SInputSplitProtos.Void sVoid= SInputSplitProtos.Void.newBuilder().build();
+        try {
+            transferService.closeInputSplit(controller, sVoid);
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
+    }
 }
