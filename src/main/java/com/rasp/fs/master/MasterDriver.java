@@ -18,7 +18,8 @@ public class MasterDriver {
     public static void main(String[] args) {
 
         MasterConfiguration configuration = new MasterConfiguration(9292, ServiceType.JOB_TRACKER);
-        DataMaster dataMaster = new DataMaster(configuration);
+        DataMasterImpl dataMaster = new DataMasterImpl(configuration);
+        configuration.setDataMaster(dataMaster);
 
         while(true){
 

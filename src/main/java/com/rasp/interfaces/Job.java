@@ -11,6 +11,8 @@ package com.rasp.interfaces;
 /* Import list */
 import org.apache.hadoop.fs.Path;
 
+import java.util.List;
+
 /**
  *
  * Job represents a Map Reduce Job
@@ -25,14 +27,14 @@ public interface Job
      *
      * @param path
      */
-    void setInputPath(Path path);
+    void setInputPath(String path);
 
     /**
      * Sets the path for the output files to <code>path</code>
      *
      * @param path
      */
-    void setOutputPath(Path path);
+    void setOutputPath(String path);
 
     /**
      * Set the {@link Mapper} class which represents the mapper to be used for this Job
@@ -40,13 +42,6 @@ public interface Job
      * @param mapperClass
      */
     void setMapper(Class<? extends Mapper<?, ?>> mapperClass);
-
-    /**
-     * Set the {@link Reducer} class which represents the combiner to be used for this Job
-     *
-     * @param combinerClass
-     */
-    void setCombiner(Class<? extends Reducer<?, ?, ?, ?>> combinerClass);
 
 
     /**
@@ -65,17 +60,6 @@ public interface Job
     void setPartitioner(Partitioner partitioner);
 
     /**
-     * @return true if the job is a standalone job
-     */
-    boolean isStandalone();
-
-    /**
-     *
-     * @param standalone true if this job is to be run in standalone mode
-     */
-    void setStandalone(boolean standalone);
-
-    /**
      * executes the given job
      *
      * @return true if the job executes correctly else returns false
@@ -88,4 +72,24 @@ public interface Job
      * @return the {@link Context} object for the current job
      */
     Context getContext();
+
+
+    boolean isMapComplete();
+    boolean isShuffleComplete();
+    boolean isReduceComplete();
+
+    void mapComplete();
+    void shuffleComplete();
+    void reduceComplete();
+
+    String getInputPath();
+
+    void setMapTasks(List<MapperTask> mapTasks);
+    void setReduceTasks(List<ReducerTask> reduceTasks);
+
+    List<MapperTask> getMapTasks();
+    List<ReducerTask> getReduceTasks();
+
+    String getJobId();
+
 }

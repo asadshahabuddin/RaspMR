@@ -11,6 +11,7 @@ package com.rasp.fs.master;
 /* Import list */
 import com.rasp.config.Configuration;
 import com.rasp.config.MasterConfiguration;
+import com.rasp.fs.DataMaster;
 import com.rasp.fs.DataNode;
 import com.rasp.fs.InputFormat;
 import raspmr.RaspMR.utils.autodiscovery.Service;
@@ -18,23 +19,24 @@ import raspmr.RaspMR.utils.autodiscovery.ServiceType;
 
 import java.io.IOException;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class DataMaster{
+public class DataMasterImpl implements DataMaster{
     public static int idx = 0;
     MasterConfiguration configuration;
+    Map<String,InputFormat> inputFileMap;
 
-
-
-
-    public DataMaster(MasterConfiguration configuration){
+    public DataMasterImpl(MasterConfiguration configuration){
         this.configuration = configuration;
+        this.inputFileMap = new HashMap<>();
     }
 
 
-    private InputFormat createInputFormat(String inputFile,int workerCount)throws InterruptedException, IOException{
-
-        return new InputFormat(inputFile, workerCount); 
+    @Override
+    public InputFormat createInputFormat(String inputFile,int workerCount)throws InterruptedException, IOException{
+        return new InputFormat(inputFile, workerCount);
     }
     
     /**
@@ -51,16 +53,22 @@ public class DataMaster{
         format.split(idx++, dataNode);
     }
 
+    @Override
     public void splitAndSend(String inputFile) throws IOException, InterruptedException {
 
         List<Service> services = configuration.getDiscoverer().getServices(ServiceType.TASK_TRACKER);
         InputFormat inputFormat = createInputFormat(inputFile,services.size());
-
+        inputFileMap.put(inputFile,inputFormat);
         for(Service service: services){
             transmit(inputFormat,configuration.getDataNode(service));
         }
 
     }
-    
+
+    @Override
+    public InputFormat getInputFormat(String file){
+        return inputFileMap.get(file);
+    }
+
 
 }

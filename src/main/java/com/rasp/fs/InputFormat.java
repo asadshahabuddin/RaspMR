@@ -48,7 +48,7 @@ public class InputFormat
         splitIdx         = 0;
         totalBytesRead   = 0;
         shift            = 0;
-        getSplits();  /* Create meta data for all input splits */
+        createSplits();  /* Create meta data for all input splits */
     }
     
     /**
@@ -94,7 +94,7 @@ public class InputFormat
     }
     
     @Override
-    public void getSplits() throws IOException,
+    public void createSplits() throws IOException,
         InterruptedException
     {
         splits = new ArrayList<InputSplit>();
@@ -103,6 +103,11 @@ public class InputFormat
         {
             splits.add(new com.rasp.fs.InputSplit(i, offset(l, i), l, ""));
         }
+    }
+
+    @Override
+    public List<InputSplit> getSplits() {
+        return splits;
     }
 
     @Override

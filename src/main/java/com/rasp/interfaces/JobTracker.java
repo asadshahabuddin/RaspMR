@@ -48,11 +48,11 @@ public interface JobTracker
      */
     boolean stop();
 
-    /**
-     * returns the list of Tasks for the given job
-     *
-     * @param job
-     * @return {@link List<Task>}
-     */
-    List<Task> getTasksForJob(Job job);
+
+    void createMapperTasksForJob(Job job);
+
+    void createReducerTasksForJob(Job job);
+
+    void completeMapTask(String taskId);
+
 }

@@ -10,6 +10,7 @@ package com.rasp.interfaces;
 
 /* Import list */
 import java.io.IOException;
+import java.util.List;
 
 /**
  * <code>InputFormat</code> describes the input-specification for a Map-Reduce
@@ -61,9 +62,12 @@ public abstract class InputFormat
         return inputFile;
     }
 
+
+    public abstract List<InputSplit> getSplits();
+
     /**
      * Logically split the set of input files for the job.
-     * 
+     *
      * <p>
      * Each {@link InputSplit} is then assigned to an individual {@link Mapper}
      * for processing.
@@ -75,8 +79,7 @@ public abstract class InputFormat
      * be <i>&lt;input-file-path, start, offset&gt;</i> tuple. The InputFormat
      * also creates the {@link RecordReader} to read the {@link InputSplit}.
      */
-    public abstract void getSplits()
-        throws IOException, InterruptedException;
+    public abstract void createSplits() throws IOException, InterruptedException;
 
     /**
      * Create a record reader for a given split. The framework will call

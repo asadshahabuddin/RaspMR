@@ -1,8 +1,10 @@
 package com.rasp.config;
 
+import com.rasp.fs.DataMaster;
 import com.rasp.fs.DataNode;
 import com.rasp.fs.master.DataNodeClientImpl;
 import com.rasp.fs.protobuf.ProtoClient;
+import com.rasp.interfaces.JobTracker;
 import raspmr.RaspMR.utils.autodiscovery.Service;
 import raspmr.RaspMR.utils.autodiscovery.ServiceType;
 
@@ -20,6 +22,8 @@ public class MasterConfiguration extends Configuration {
 
     private Map<String,DataNode> dataNodeMap;
     private ProtoClient protoClient;
+    private DataMaster dataMaster;
+    private JobTracker jobTracker;
 
     public MasterConfiguration(int portNo, ServiceType serviceType){
         super(portNo,serviceType);
@@ -40,4 +44,19 @@ public class MasterConfiguration extends Configuration {
 
     }
 
+    public DataMaster getDataMaster(){
+        return dataMaster;
+    }
+
+    public void setDataMaster(DataMaster dataMaster){
+        this.dataMaster = dataMaster;
+    }
+
+    public JobTracker getJobTracker() {
+        return jobTracker;
+    }
+
+    public void setJobTracker(JobTracker jobTracker) {
+        this.jobTracker = jobTracker;
+    }
 }
