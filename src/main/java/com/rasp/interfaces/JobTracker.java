@@ -9,6 +9,7 @@
 package com.rasp.interfaces;
 
 /* Import list */
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -54,5 +55,7 @@ public interface JobTracker
     void createReducerTasksForJob(Job job);
 
     void completeMapTask(String taskId);
+
+    void sendTask(Task task) throws IOException, InterruptedException;
 
 }

@@ -4,7 +4,10 @@ package com.rasp.interfaces.impl;
 import com.rasp.config.MasterConfiguration;
 import com.rasp.fs.InputFormat;
 import com.rasp.interfaces.*;
+import com.rasp.interfaces.MapperTask;
+import com.rasp.task.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,6 +27,7 @@ public class JobTrackerImpl implements JobTracker {
     Map<String,Job> jobMap;
     Map<String,Task> taskMap; // taskId -> jobId : Map
     MasterConfiguration configuration;
+
 
     public JobTrackerImpl(MasterConfiguration configuration){
         this.configuration = configuration;
@@ -59,12 +63,17 @@ public class JobTrackerImpl implements JobTracker {
 
         InputFormat inputFormat = configuration.getDataMaster().getInputFormat(job.getInputPath());
         for(InputSplit inputSplit : inputFormat.getSplits()){
-            MapperTask mapperTask ;
+            MapperTask mapperTask = new com.rasp.task.MapperTask();
+            mapperTask.setTaskInputSplit(inputSplit);
+            mapperTask.setMapperClass(job.getMapperClass());
             taskList.add(mapperTask);
             taskMap.put(mapperTask.getTaskId(),mapperTask);
         }
         job.setMapTasks(taskList);
     }
+
+
+
 
     @Override
     public void createReducerTasksForJob(Job job) {
@@ -85,5 +94,14 @@ public class JobTrackerImpl implements JobTracker {
         }else{
             throw new RuntimeException("type of task passed should be MapperTask");
         }
+    }
+
+
+    @Override
+    public void sendTask(Task task) throws IOException, InterruptedException {
+
+        configuration.getTaskNode(task.getService()).sendTask(task);
+
+
     }
 }

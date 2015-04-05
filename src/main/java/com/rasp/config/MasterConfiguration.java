@@ -5,6 +5,8 @@ import com.rasp.fs.DataNode;
 import com.rasp.fs.master.DataNodeClientImpl;
 import com.rasp.fs.protobuf.ProtoClient;
 import com.rasp.interfaces.JobTracker;
+import com.rasp.interfaces.impl.TaskNode;
+import com.rasp.interfaces.impl.TaskNodeClientImpl;
 import raspmr.RaspMR.utils.autodiscovery.Service;
 import raspmr.RaspMR.utils.autodiscovery.ServiceType;
 
@@ -21,6 +23,7 @@ import java.util.Map;
 public class MasterConfiguration extends Configuration {
 
     private Map<String,DataNode> dataNodeMap;
+    private Map<String,TaskNode> taskNodeMap;
     private ProtoClient protoClient;
     private DataMaster dataMaster;
     private JobTracker jobTracker;
@@ -42,6 +45,18 @@ public class MasterConfiguration extends Configuration {
             throw new IllegalArgumentException("Service should be a slave: argument service is for master");
         }
 
+    }
+
+    public TaskNode getTaskNode(Service service) {
+        if(service.getServiceType() == ServiceType.TASK_TRACKER){
+            String key = service.getIp()+ ":" + service.getPort();
+            if(!taskNodeMap.containsKey(key)){
+                taskNodeMap.put(key,new TaskNodeClientImpl(protoClient,service));
+            }
+            return taskNodeMap.get(key);
+        }else{
+            throw new IllegalArgumentException("Service should be a slave: argument service is for master");
+        }
     }
 
     public DataMaster getDataMaster(){

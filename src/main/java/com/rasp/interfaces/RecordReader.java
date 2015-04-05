@@ -14,12 +14,7 @@ import java.io.IOException;
 
 public abstract class RecordReader
     implements Closeable
-{
-    /**
-     * Constructor
-     */
-    public RecordReader() {}
-  
+{ 
     /**
      * Called once at initialization.
      * @param inputSplit
@@ -29,7 +24,7 @@ public abstract class RecordReader
      * @throws IOException
      * @throws InterruptedException
      */
-    public abstract void initialize(InputSplit inputSplit, Context context)
+    public abstract void initialize(InputSplit inputSplit)
         throws IOException, InterruptedException;
   
     /**

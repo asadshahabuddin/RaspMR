@@ -28,6 +28,9 @@ public class Configuration {
     private ProtoClient protoClient = new ProtoClient();
     private Service service;
 
+    public static final int TASK_NODE_PORT = 9797;
+
+
 
     public Configuration(int portNo, ServiceType serviceType){
         hz1 = HazelCastServicePublisher.publishService(ServiceFactory.createService(serviceType, portNo));

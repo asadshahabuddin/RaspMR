@@ -8,6 +8,11 @@
 
 package com.rasp.interfaces;
 
+/* Import list */
+import raspmr.RaspMR.utils.autodiscovery.Service;
+
+import java.io.IOException;
+
 /**
  * Task represents a {@link Mapper} or {@link Reducer}
  * running for a single input split
@@ -15,7 +20,6 @@ package com.rasp.interfaces;
  */
 public interface Task
 {
-
     /**
      * returns the Job to which the task belongs
      *
@@ -44,12 +48,18 @@ public interface Task
      *
      * @return true if the task runs appropriately
      */
-    boolean execute();
+    boolean execute()
+    	throws IllegalAccessException, InstantiationException,
+               InterruptedException,   IOException;
 
 
     String getTaskId();
 
+    // can be called only from the server
     void complete();
-
     boolean isCompleted();
+
+
+    Service getService() throws IOException, InterruptedException;
+
 }

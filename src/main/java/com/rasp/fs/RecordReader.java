@@ -11,7 +11,6 @@ package com.rasp.fs;
 /* Import list */
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import com.rasp.interfaces.Context;
 import com.rasp.interfaces.InputSplit;
 
 public class RecordReader
@@ -23,7 +22,7 @@ public class RecordReader
     private String value;
     
     @Override
-    public void initialize(InputSplit inputSplit, Context context)
+    public void initialize(InputSplit inputSplit)
         throws IOException, InterruptedException {
         key = 0;
         offset = 0;

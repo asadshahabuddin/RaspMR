@@ -11,12 +11,11 @@ import java.io.IOException;
  * Created: 4/2/15
  * Edited :
  */
-public interface DataNode {
-
+public interface DataNode
+{
     void storeInputSplit(InputSplit inputSplit) throws InterruptedException,IOException;
 
     void storeChunk(byte[] b)throws InterruptedException,IOException;
 
     Service getService();
-
 }

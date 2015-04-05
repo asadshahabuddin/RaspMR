@@ -53,4 +53,6 @@ public interface InputSplit
      */
     public abstract String getLocation()
         throws IOException, InterruptedException;
+
+    public int getIdx();
 }

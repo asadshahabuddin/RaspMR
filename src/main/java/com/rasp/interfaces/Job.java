@@ -92,4 +92,7 @@ public interface Job
 
     String getJobId();
 
+    Class<? extends Mapper<?, ?>> getMapperClass();
+    Class<? extends Reducer<?, ?, ?, ?>> getReducerClass();
+
 }

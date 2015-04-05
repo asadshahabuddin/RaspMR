@@ -17,9 +17,6 @@ message SInputChunk{
     required bytes chunk =1;
 }
 
-
-
-
 message TransferResponse{
     optional string status = 1;
 }
