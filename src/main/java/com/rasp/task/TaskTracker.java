@@ -16,7 +16,7 @@ import java.util.Queue;
 public class TaskTracker implements com.rasp.interfaces.TaskTracker{
     private static Queue<Task> taskList = new PriorityQueue<Task>();
 
-    public static Queue getTaskList()
+    public static Queue<Task> getTaskList()
     {
         return taskList;
     }

@@ -8,6 +8,9 @@
 
 package com.rasp.interfaces;
 
+/* Import list */
+import java.io.IOException;
+
 /**
  * Task represents a {@link Mapper} or {@link Reducer}
  * running for a single input split
@@ -15,7 +18,6 @@ package com.rasp.interfaces;
  */
 public interface Task
 {
-
     /**
      * returns the Job to which the task belongs
      *
@@ -44,5 +46,7 @@ public interface Task
      *
      * @return true if the task runs appropriately
      */
-    boolean execute();
+    boolean execute()
+    	throws IllegalAccessException, InstantiationException,
+               InterruptedException,   IOException;
 }

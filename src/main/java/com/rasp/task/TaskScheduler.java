@@ -1,21 +1,25 @@
 package com.rasp.task;
 
-import com.rasp.interfaces.Task;
-
+/* Import list */
 import java.util.Queue;
+import java.io.IOException;
+import com.rasp.interfaces.Task;
 
 /**
  * Created by Pulkit on 4/4/15.
  */
-public class TaskScheduler implements com.rasp.interfaces.TaskScheduler {
-
+public class TaskScheduler implements com.rasp.interfaces.TaskScheduler
+{
     @Override
-    public boolean scheduleTask() {
-        Queue t = TaskTracker.getTaskList();
+    public boolean scheduleTask()
+		throws IllegalAccessException, InstantiationException,
+			   InterruptedException,   IOException
+    {
+        Queue<Task> t = TaskTracker.getTaskList();
         MapperTask mapperTask = (MapperTask) t.remove();
-        // mapperTask.setTaskInputSplit(...);
-        // mapperTask.setMapoerClass(...);
-        // mapperTask.execute(...);
+        mapperTask.setTaskInputSplit(null);  // TODO : Ask Rahul
+        // mapperTask.setMapoerClass();      // TODO : Ask Rahul
+        mapperTask.execute();
         return true;
     }
 }
