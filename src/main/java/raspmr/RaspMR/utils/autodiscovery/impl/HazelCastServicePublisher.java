@@ -24,7 +24,7 @@ public enum HazelCastServicePublisher{
                         HazelCastServiceConstants.SERVICE_ATTRIBUTE, service.getServiceType().toString());
         config.getMemberAttributeConfig().
                 setIntAttribute(HazelCastServiceConstants.PORT_ATTRIBUTE, service.getPort());
-        config.setProperty( "hazelcast.logging.type", "none" );
+        //config.setProperty( "hazelcast.logging.type", "none" );
         HazelcastInstance hz = Hazelcast.newHazelcastInstance(config);
         return hz;
     }
