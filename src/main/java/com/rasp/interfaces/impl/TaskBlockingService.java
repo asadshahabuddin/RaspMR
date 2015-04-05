@@ -42,7 +42,6 @@ public class TaskBlockingService implements STaskProtos.TaskService.BlockingInte
             mTask.setTaskInputSplit(configuration.getInputSplit(sTask.getInputSplitId()));
             try {
                 String className = sTask.getClassName().split(" ")[1];
-                System.out.println(className);
                 mTask.setMapperClass((Class<? extends Mapper<?,?>>)Class.forName(className));
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();

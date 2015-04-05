@@ -6,6 +6,7 @@ import com.rasp.interfaces.Job;
 import com.rasp.interfaces.JobTracker;
 import com.rasp.interfaces.MapperTask;
 import com.rasp.interfaces.impl.JobImpl;
+import com.rasp.interfaces.impl.JobScheduler;
 import com.rasp.interfaces.impl.JobTrackerImpl;
 import com.rasp.interfaces.impl.TestMapper;
 import raspmr.RaspMR.utils.autodiscovery.ServiceType;
@@ -27,9 +28,14 @@ public class MasterDriver {
         MasterConfiguration configuration = new MasterConfiguration(9292, ServiceType.JOB_TRACKER);
         DataMaster dataMaster = new DataMasterImpl(configuration);
         JobTracker jobTracker = new JobTrackerImpl(configuration);
+        JobScheduler jobScheduler = new JobScheduler(jobTracker);
 
         configuration.setDataMaster(dataMaster);
         configuration.setJobTracker(jobTracker);
+        configuration.setJobScheduler(jobScheduler);
+
+        Thread jobSchedulerThread = new Thread(jobScheduler);
+        jobSchedulerThread.start();
 
         while(true){
 
@@ -44,11 +50,7 @@ public class MasterDriver {
                 try {
                     dataMaster.splitAndSend(inputPath);
                     jobTracker.submit(job);
-                    Job job1 = jobTracker.nextJob();
-                    jobTracker.createMapperTasksForJob(job);
-                    for(MapperTask task : job1.getMapTasks()){
-                        jobTracker.sendTask(task);
-                    }
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

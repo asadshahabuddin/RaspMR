@@ -17,7 +17,11 @@ import com.rasp.interfaces.MapperTask;
 public class JobScheduler
 	implements Runnable
 {
-	private static JobTracker jobTracker;
+	private JobTracker jobTracker;
+
+    public JobScheduler(JobTracker jobTracker){
+        this.jobTracker = jobTracker;
+    }
 
     public boolean schedule()
     	throws InterruptedException, IOException

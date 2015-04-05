@@ -47,10 +47,6 @@ public class TaskNodeClientImpl implements TaskNode{
             taskClass = ((ReducerTask) task).getReducerClass().toString();
         }
 
-        if(task.getJob() == null){
-            throw new NullPointerException("Bhaam!!");
-        }
-
         STaskProtos.STask sTask = STaskProtos.STask.newBuilder()
                 .setClassName(taskClass)
                 .setId(task.getTaskId())

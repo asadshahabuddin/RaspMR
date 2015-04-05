@@ -3,6 +3,8 @@ package com.rasp.interfaces.impl;
 import com.rasp.interfaces.*;
 import org.apache.hadoop.fs.Path;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,6 +34,8 @@ public class JobImpl implements Job {
         shuffleComplete = false;
         reduceComplete = false;
         jobId = UUID.randomUUID().toString();
+        mapperTasks = new ArrayList<>();
+        reducerTasks = new ArrayList<>();
     }
 
     @Override

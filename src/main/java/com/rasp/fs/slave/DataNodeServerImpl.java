@@ -34,7 +34,6 @@ public class DataNodeServerImpl
         this.service  = ServiceFactory.createService(
                 ServiceType.TASK_TRACKER,
                 Configuration.DATA_NODE_PORT);
-        f = createDataStream();
         this.configuration = configuration;
     }
     
@@ -70,6 +69,7 @@ public class DataNodeServerImpl
     public void storeInputSplit(InputSplit inputSplit)
         throws IOException
     {
+        f = createDataStream();
         configuration.addInputSplit(inputSplit);
     }
 

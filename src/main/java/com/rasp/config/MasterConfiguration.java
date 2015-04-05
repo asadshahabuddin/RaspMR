@@ -5,6 +5,7 @@ import com.rasp.fs.DataNode;
 import com.rasp.fs.master.DataNodeClientImpl;
 import com.rasp.fs.protobuf.ProtoClient;
 import com.rasp.interfaces.JobTracker;
+import com.rasp.interfaces.impl.JobScheduler;
 import com.rasp.interfaces.impl.TaskNode;
 import com.rasp.interfaces.impl.TaskNodeClientImpl;
 import raspmr.RaspMR.utils.autodiscovery.Service;
@@ -27,6 +28,7 @@ public class MasterConfiguration extends Configuration {
     private ProtoClient protoClient;
     private DataMaster dataMaster;
     private JobTracker jobTracker;
+    private JobScheduler jobScheduler;
 
     public MasterConfiguration(int portNo, ServiceType serviceType){
         super(portNo,serviceType);
@@ -74,5 +76,13 @@ public class MasterConfiguration extends Configuration {
 
     public void setJobTracker(JobTracker jobTracker) {
         this.jobTracker = jobTracker;
+    }
+
+    public JobScheduler getJobScheduler() {
+        return jobScheduler;
+    }
+
+    public void setJobScheduler(JobScheduler jobScheduler) {
+        this.jobScheduler = jobScheduler;
     }
 }

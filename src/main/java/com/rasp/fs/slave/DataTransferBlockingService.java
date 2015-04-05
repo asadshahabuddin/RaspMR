@@ -2,10 +2,11 @@ package com.rasp.fs.slave;
 
 import com.google.protobuf.RpcController;
 import com.google.protobuf.ServiceException;
+import com.rasp.config.SlaveConfiguration;
 import com.rasp.fs.DataNode;
 import com.rasp.fs.InputSplit;
 import com.rasp.fs.SInputSplitProtos;
-import raspmr.RaspMR.experiments.protobuf.TransferDataProtos;
+
 
 import java.io.IOException;
 
@@ -28,7 +29,7 @@ public class DataTransferBlockingService implements SInputSplitProtos.DataTransf
     @Override
     public SInputSplitProtos.TransferResponse sendInputSplit(RpcController controller, SInputSplitProtos.SInputSplit request) {
         try {
-            dataNode.storeInputSplit(new InputSplit(request.getIdx(), request.getOffset(), request.getLength(), request.getLocation()));
+            dataNode.storeInputSplit(new InputSplit(request.getIdx(), request.getOffset(), request.getLength(), SlaveConfiguration.INPUT_SPLIT_FILENAME));
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (IOException e) {

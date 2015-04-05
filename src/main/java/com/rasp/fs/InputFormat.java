@@ -61,7 +61,11 @@ public class InputFormat
     {
         this.workerCount = workerCount;
     }
-    
+
+    public int getWorkerCount() {
+        return workerCount;
+    }
+
     /**
      * Calculate virtual block size
      * @param workerCount

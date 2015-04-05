@@ -14,6 +14,7 @@ import com.rasp.config.MasterConfiguration;
 import com.rasp.fs.DataMaster;
 import com.rasp.fs.DataNode;
 import com.rasp.fs.InputFormat;
+import com.rasp.interfaces.Partitioner;
 import raspmr.RaspMR.utils.autodiscovery.Service;
 import raspmr.RaspMR.utils.autodiscovery.ServiceFactory;
 import raspmr.RaspMR.utils.autodiscovery.ServiceType;
@@ -25,9 +26,9 @@ import java.util.List;
 import java.util.Map;
 
 public class DataMasterImpl implements DataMaster{
-    public static int idx = 0;
+
     MasterConfiguration configuration;
-    Map<String,InputFormat> inputFileMap;
+    Map<String,InputFormatMetaData> inputFileMap;
 
     public DataMasterImpl(MasterConfiguration configuration){
         this.configuration = configuration;
@@ -42,7 +43,7 @@ public class DataMasterImpl implements DataMaster{
     
     /**
      * Transmit a split to the target location.
-     * @param format
+     * @param formatMetaData
      *            The input format.
      * @param dataNode
      *            Location to write the split at.z
@@ -50,8 +51,8 @@ public class DataMasterImpl implements DataMaster{
      *            Returns true iff the current split is written
      *            successfully at the specified location.
      */
-    private void transmit(InputFormat format, DataNode dataNode) throws IOException,InterruptedException{
-        format.split(idx++, dataNode);
+    private void transmit(InputFormatMetaData formatMetaData, DataNode dataNode) throws IOException,InterruptedException{
+        formatMetaData.getInputFormat().split(formatMetaData.nextIdx(), dataNode);
     }
 
     @Override
@@ -59,21 +60,52 @@ public class DataMasterImpl implements DataMaster{
 
         List<Service> services = configuration.getDiscoverer().getServices(ServiceType.TASK_TRACKER);
         InputFormat inputFormat = createInputFormat(inputFile,services.size());
-        inputFileMap.put(inputFile,inputFormat);
+        if(!inputFileMap.containsKey(inputFile)){
+            inputFileMap.put(inputFile,new InputFormatMetaData(inputFormat));
+        }
         for(Service service: services){
             Service dService = ServiceFactory.createService(
                     service.getServiceType(),
                     service.getIp(),
                     Configuration.DATA_NODE_PORT);
-            transmit(inputFormat,configuration.getDataNode(dService));
+            transmit(inputFileMap.get(inputFile),configuration.getDataNode(dService));
         }
 
     }
 
     @Override
     public InputFormat getInputFormat(String file){
-        return inputFileMap.get(file);
+        return inputFileMap.get(file).getInputFormat();
     }
 
+
+    private class InputFormatMetaData{
+
+        private int idx;
+        private InputFormat inputFormat;
+
+        private InputFormatMetaData(InputFormat inputFormat){
+            this.inputFormat = inputFormat;
+            idx = 0;
+        }
+
+        private int nextIdx(){
+            int nextIdx = idx;
+            if(nextIdx == inputFormat.getWorkerCount() - 1){
+                idx = 0;
+            }else{
+                idx++;
+            }
+            return nextIdx;
+        }
+
+        public InputFormat getInputFormat() {
+            return inputFormat;
+        }
+
+        public void setInputFormat(InputFormat inputFormat) {
+            this.inputFormat = inputFormat;
+        }
+    }
 
 }

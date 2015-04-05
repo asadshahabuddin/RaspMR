@@ -11,13 +11,17 @@ package com.rasp.task;
 /* Import list */
 import java.io.IOException;
 import com.rasp.interfaces.Task;
+import com.rasp.interfaces.TaskTracker;
 
 public class TaskScheduler
 	implements com.rasp.interfaces.TaskScheduler, Runnable
 {
-	public static int taskIdx = 1;
-	public static TaskTracker taskTracker = new TaskTracker();
-	
+	private TaskTracker taskTracker;
+
+    public TaskScheduler(TaskTracker taskTracker) {
+        this.taskTracker = taskTracker;
+    }
+
     @Override
     public boolean schedule()
 		throws IllegalAccessException, InstantiationException,

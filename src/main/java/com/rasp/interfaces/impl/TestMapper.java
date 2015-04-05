@@ -21,6 +21,7 @@ public class TestMapper implements Mapper<Long,String>{
 
     @Override
     public Map<Long, List<String>> map(Long key, String value) {
+        System.out.println(key +"   :   " +value);
         return null;
     }
 
