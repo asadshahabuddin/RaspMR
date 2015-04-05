@@ -33,7 +33,6 @@ public class DataNodeServerImpl
     public DataNodeServerImpl(SlaveConfiguration configuration) throws FileNotFoundException{
         this.service  = ServiceFactory.createService(
                 ServiceType.TASK_TRACKER,
-                configuration.getLocalServiceAddress().getHostAddress(),
                 Configuration.DATA_NODE_PORT);
         f = createDataStream();
         this.configuration = configuration;
@@ -49,14 +48,19 @@ public class DataNodeServerImpl
         throws FileNotFoundException
     {
     	File f = new File(SlaveConfiguration.INPUT_SPLIT_FILENAME);
-    	if(f.exists()){
+    	if(f.exists())
+    	{
     		f.delete();
     	}
     	return new FileOutputStream(SlaveConfiguration.INPUT_SPLIT_FILENAME, true);
     }
-    
-    @Override
 
+    @Override
+    public void closeInputSplit() throws IOException{
+        close();
+    }
+
+    @Override
     public Service getService()
     {
         return service;

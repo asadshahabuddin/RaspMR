@@ -50,6 +50,14 @@ public class DataTransferBlockingService implements SInputSplitProtos.DataTransf
 
     }
 
+    @Override
+    public SInputSplitProtos.Void closeInputSplit(RpcController controller, SInputSplitProtos.Void request) throws ServiceException {
+        try {
+            dataNode.closeInputSplit();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return SInputSplitProtos.Void.newBuilder().build();
 
-
+    }
 }

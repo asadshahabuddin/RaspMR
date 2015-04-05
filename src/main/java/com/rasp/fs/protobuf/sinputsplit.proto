@@ -21,9 +21,12 @@ message TransferResponse{
     optional string status = 1;
 }
 
+message Void{
+}
 
 service DataTransferService {
     rpc sendInputSplit(SInputSplit) returns (TransferResponse);
     rpc sendChunk(SInputChunk) returns (TransferResponse);
+    rpc closeInputSplit(Void) returns (Void);
 }
 

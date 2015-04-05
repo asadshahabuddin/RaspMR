@@ -17,5 +17,7 @@ public interface DataNode
 
     void storeChunk(byte[] b)throws InterruptedException,IOException;
 
+    void closeInputSplit() throws IOException;
+
     Service getService();
 }

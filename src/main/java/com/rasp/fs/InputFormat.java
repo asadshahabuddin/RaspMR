@@ -202,7 +202,8 @@ public class InputFormat
                 dataNode.storeChunk(b);
                 shift++;
             }
-            
+
+
             /*
             (1) Update the current split's index, length and location.
             (2) Update the next split's starting offset.
@@ -232,6 +233,7 @@ public class InputFormat
                 try
                 {
                     f.close();
+                    dataNode.closeInputSplit();
                 }
                 catch(IOException ioe)
                 {
