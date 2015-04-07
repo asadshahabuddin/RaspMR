@@ -2,8 +2,8 @@
  * Author : Pulkit Jain
  * File   : WritableImpl.java
  * Email  :
- * Created:
- * Edited :
+ * Created: Apr 6, 2015
+ * Edited : Apr 6, 2015
  */
 
 package com.rasp.interfaces;
@@ -14,35 +14,47 @@ import java.io.Serializable;
 public  class WritableImpl
     implements Serializable, Writable
 {
-    /* Constants */
-    public static final int TYPE_NULL = 0;
+	/* Serial ID and constants */
+	private static final long serialVersionUID = 1L;
+    public static final int TYPE_NULL    = 0;
     public static final int TYPE_INTEGER = 1;
-    public static final int TYPE_STRING = 2;
-    public static final int TYPE_FLOAT = 3;
-    public static final int TYPE_DOUBLE = 4;
-    public static final int TYPE_LONG = 5;
-    public static final int TYPE_OTHER = 6;
+    public static final int TYPE_STRING  = 2;
+    public static final int TYPE_FLOAT   = 3;
+    public static final int TYPE_DOUBLE  = 4;
+    public static final int TYPE_LONG    = 5;
+    public static final int TYPE_OTHER   = 6;
 
     private Object obj;
     private Integer type;
 
+    /**
+     * Constructor
+     * @param obj
+     */
     public WritableImpl(Object obj)
     {
         this.obj = obj;
         type = TYPE_NULL;
     }
 
+    /**
+     * TODO - Write a proper description.
+     * @param obj
+     * @param type
+     */
     public WritableImpl(Object obj, Integer type)
     {
         this.obj = obj;
         this.type = type;
     }
 
+    @Override
     public Object getObj()
     {
         return obj;
     }
 
+    @Override
     public int getType()
     {
         if(obj == null)
@@ -76,10 +88,5 @@ public  class WritableImpl
         }
         return type;
     }
-
-    public static void main(String[] args) {
-
-        System.out.println(new WritableImpl("rahulk").getObj());
-
-    }
 }
+/* End of WritableImpl.java */
