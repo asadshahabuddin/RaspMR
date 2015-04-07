@@ -8,19 +8,11 @@
 
 package com.rasp.interfaces;
 
-
-public interface Writable {
-
-    /**
-     *  return the object which can be dereference
-     *
-     */
-    public Object getObj();
+public interface Context {
 
     /**
-     * return the type of the object
+     *  write to file
      *
      */
-    public int getType();
-
+    public void write();
 }

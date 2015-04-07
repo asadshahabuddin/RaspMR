@@ -1,19 +1,23 @@
 /**
  * Author : Pulkit Jain
  * File   : WritableImpl.java
- * Email  :
- * Created:
- * Edited :
+ * Email  : jain.pul@husky.neu.edu
+ * Created: Apr 6, 2015
+ * Edited : Apr 6, 2015
  */
 
 package com.rasp.interfaces;
 
 /* Import list */
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.Serializable;
 
-public  class WritableImpl
-    implements Serializable, Writable
-{
+
+public class WritableImpl
+        implements Writable, Serializable {
     /* Constants */
     public static final int TYPE_NULL = 0;
     public static final int TYPE_INTEGER = 1;
@@ -26,36 +30,29 @@ public  class WritableImpl
     private Object obj;
     private Integer type;
 
-    public WritableImpl(Object obj)
-    {
+    public WritableImpl(Object obj) {
         this.obj = obj;
         type = TYPE_NULL;
     }
 
-    public WritableImpl(Object obj, Integer type)
-    {
+    public WritableImpl(Object obj, Integer type) {
         this.obj = obj;
         this.type = type;
     }
 
-    public Object getObj()
-    {
+    public Object getObj() {
         return obj;
     }
 
-    public int getType()
-    {
-        if(obj == null)
-        {
+    public int getType() {
+        if (obj == null) {
             return TYPE_NULL;
         }
-        if(type != TYPE_NULL)
-        {
+        if (type != TYPE_NULL) {
             return type;
         }
 
-        switch(obj.getClass().toString())
-        {
+        switch (obj.getClass().toString()) {
             case "class java.lang.Integer":
                 type = TYPE_INTEGER;
                 break;
@@ -75,11 +72,5 @@ public  class WritableImpl
                 type = TYPE_OTHER;
         }
         return type;
-    }
-
-    public static void main(String[] args) {
-
-        System.out.println(new WritableImpl("rahulk").getObj());
-
     }
 }
