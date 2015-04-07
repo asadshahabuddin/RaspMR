@@ -10,32 +10,45 @@ package com.rasp.interfaces;
 
 /* Import list */
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.Serializable;
 
 
-public class WritableImpl
-        implements Writable, Serializable {
-    /* Constants */
-    public static final int TYPE_NULL = 0;
+public  class WritableImpl
+    implements Serializable, Writable
+{
+	/* Serial ID and constants */
+	private static final long serialVersionUID = 1L;
+    public static final int TYPE_NULL    = 0;
     public static final int TYPE_INTEGER = 1;
-    public static final int TYPE_STRING = 2;
-    public static final int TYPE_FLOAT = 3;
-    public static final int TYPE_DOUBLE = 4;
-    public static final int TYPE_LONG = 5;
-    public static final int TYPE_OTHER = 6;
+    public static final int TYPE_STRING  = 2;
+    public static final int TYPE_FLOAT   = 3;
+    public static final int TYPE_DOUBLE  = 4;
+    public static final int TYPE_LONG    = 5;
+    public static final int TYPE_OTHER   = 6;
 
     private Object obj;
     private Integer type;
 
-    public WritableImpl(Object obj) {
+
+    /**
+     * Constructor
+     * @param obj
+     */
+    public WritableImpl(Object obj)
+    {
+
         this.obj = obj;
         type = TYPE_NULL;
     }
 
-    public WritableImpl(Object obj, Integer type) {
+
+    /**
+     * TODO - Write a proper description.
+     * @param obj
+     * @param type
+     */
+    public WritableImpl(Object obj, Integer type)
+    {
         this.obj = obj;
         this.type = type;
     }
@@ -73,4 +86,6 @@ public class WritableImpl
         }
         return type;
     }
+
 }
+/* End of WritableImpl.java */

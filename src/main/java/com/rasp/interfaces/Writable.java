@@ -11,16 +11,18 @@ package com.rasp.interfaces;
 
 public interface Writable {
 
-    /**
-     *  return the object which can be dereference
-     *
-     */
+	/**
+	 * Get the writable object.
+	 * @return
+	 *            The writable object.
+	 */
     public Object getObj();
 
     /**
-     * return the type of the object
-     *
+     * Get the object type.
+     * @return
+     *            The object type.
      */
     public int getType();
-
 }
+/* End of Writable.java */
