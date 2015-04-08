@@ -11,17 +11,21 @@ package com.rasp.interfaces;
 /* Import list */
 
 import java.io.*;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.HashMap;
 
 public class ContextImpl implements Context {
     HashMap<String, FileOutputStream> keyMap;
+    HashMap<String, Integer> countMap;
 
     public ContextImpl() {
         keyMap = new HashMap<String, FileOutputStream>();
+        countMap = new HashMap<String, Integer>();
     }
 
-    public void write(WritableImpl k, WritableImpl v) throws IOException {
+    public void write(WritableImpl k, WritableImpl v)
+            throws IOException{
         if (v == null) {
             return;
         }
@@ -32,7 +36,11 @@ public class ContextImpl implements Context {
             if (file.exists()) {
                 file.delete();
             }
+            countMap.put(key, 1);
             keyMap.put(key, new FileOutputStream(key, true));
+        }
+        else{
+            countMap.put(key, countMap.get(key) + 1);
         }
         keyMap.get(key).write(value);
     }
@@ -44,5 +52,31 @@ public class ContextImpl implements Context {
                 entry.getValue().close();
             }
         }
+        writeHashMap();
+    }
+
+    public void writeHashMap()
+            throws IOException {
+        File dictionaryFile = new File("masterKey");
+        BufferedWriter writer = new BufferedWriter(new FileWriter(dictionaryFile));
+        Iterator<String> it = countMap.keySet().iterator();
+        String header = "Key" + "\t" + "KeyCount" + "\n";
+        writer.write(header);
+        while (it.hasNext()){
+            String key = it.next();
+            String entryLine = key + "\t" + countMap.get(key) + "\n";
+            writer.write(entryLine);
+        }
+        writer.close();
+    }
+
+    public static void main(String[] args)
+            throws IOException {
+        ContextImpl cimpl = new ContextImpl();
+        cimpl.write(new WritableImpl(1), new WritableImpl("asad"));
+        cimpl.write(new WritableImpl(2), new WritableImpl("pulkit"));
+        cimpl.write(new WritableImpl(3), new WritableImpl("pulkit"));
+        cimpl.write(new WritableImpl(1), new WritableImpl("pulkit"));
+        cimpl.close();
     }
 }

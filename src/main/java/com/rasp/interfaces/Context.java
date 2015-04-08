@@ -17,4 +17,16 @@ public interface Context {
      * write to file
      */
     public void write(WritableImpl key, WritableImpl value) throws IOException;
+
+    /**
+     * Closing all the open connections
+     */
+    public void close() throws IOException;
+
+    /**
+     * writing the key and no of
+     * values associated with the
+     * keys to file
+     */
+    public void writeHashMap() throws IOException;
 }
