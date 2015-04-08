@@ -11,17 +11,17 @@ package com.rasp.interfaces;
 
 public interface Writable {
 
-	/**
-	 * Get the writable object.
-	 * @return
-	 *            The writable object.
-	 */
+    /**
+     * Get the writable object.
+     *
+     * @return The writable object.
+     */
     public Object getObj();
 
     /**
      * Get the object type.
-     * @return
-     *            The object type.
+     *
+     * @return The object type.
      */
     public int getType();
 }

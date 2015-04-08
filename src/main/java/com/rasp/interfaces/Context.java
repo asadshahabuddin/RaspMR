@@ -8,11 +8,13 @@
 
 package com.rasp.interfaces;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public interface Context {
 
     /**
-     *  write to file
-     *
+     * write to file
      */
-    public void write();
+    public void write(WritableImpl key, WritableImpl value) throws IOException;
 }
