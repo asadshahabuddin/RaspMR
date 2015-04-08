@@ -19,11 +19,11 @@ import java.util.HashMap;
 
 public class ContextImpl implements Context {
     HashMap<String, FileOutputStream> keyMap;
-    HashMap<String, Integer> countMap;
+    HashMap<String, Long> countMap;
 
     public ContextImpl() {
         keyMap = new HashMap<String, FileOutputStream>();
-        countMap = new HashMap<String, Integer>();
+        countMap = new HashMap<String, Long>();
     }
 
     public void write(WritableImpl k, WritableImpl v)
@@ -38,7 +38,7 @@ public class ContextImpl implements Context {
             if (file.exists()) {
                 file.delete();
             }
-            countMap.put(key, 1);
+            countMap.put(key, (long)1);
             keyMap.put(key, new FileOutputStream(key, true));
         }
         else{
@@ -74,11 +74,11 @@ public class ContextImpl implements Context {
 
     public static void main(String[] args)
             throws IOException {
-        ContextImpl cimpl = new ContextImpl();
-        cimpl.write(new WritableImpl(1), new WritableImpl("asad"));
-        cimpl.write(new WritableImpl(2), new WritableImpl("pulkit"));
-        cimpl.write(new WritableImpl(3), new WritableImpl("pulkit"));
-        cimpl.write(new WritableImpl(1), new WritableImpl("pulkit"));
-        cimpl.close();
+//        ContextImpl cimpl = new ContextImpl();
+//        cimpl.write(new WritableImpl(1), new WritableImpl("asad"));
+//        cimpl.write(new WritableImpl(2), new WritableImpl("pulkit"));
+//        cimpl.write(new WritableImpl(3), new WritableImpl("pulkit"));
+//        cimpl.write(new WritableImpl(1), new WritableImpl("pulkit"));
+//        cimpl.close();
     }
 }
