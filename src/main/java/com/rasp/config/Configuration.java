@@ -1,17 +1,14 @@
 package com.rasp.config;
 
 import com.hazelcast.core.HazelcastInstance;
-import com.rasp.fs.DataNode;
-import com.rasp.fs.protobuf.ProtoClient;
-import raspmr.RaspMR.utils.autodiscovery.Discoverer;
-import raspmr.RaspMR.utils.autodiscovery.Service;
-import raspmr.RaspMR.utils.autodiscovery.ServiceFactory;
-import raspmr.RaspMR.utils.autodiscovery.ServiceType;
-import raspmr.RaspMR.utils.autodiscovery.impl.DiscovererHazelCastImpl;
-import raspmr.RaspMR.utils.autodiscovery.impl.HazelCastServicePublisher;
+import com.rasp.utils.autodiscovery.Discoverer;
+import com.rasp.utils.autodiscovery.Service;
+import com.rasp.utils.autodiscovery.ServiceFactory;
+import com.rasp.utils.autodiscovery.ServiceType;
+import com.rasp.utils.autodiscovery.impl.DiscovererHazelCastImpl;
+import com.rasp.utils.autodiscovery.impl.HazelCastServicePublisher;
 
 import java.net.InetAddress;
-import java.util.HashMap;
 
 /**
  * Author : rahulmadhavan

@@ -9,6 +9,8 @@
 package com.rasp.interfaces;
 
 /* Import list */
+import com.rasp.mr.Task;
+
 import java.io.File;
 import java.net.URL;
 

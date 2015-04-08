@@ -1,6 +1,6 @@
 package com.rasp.fs;
 
-import raspmr.RaspMR.utils.autodiscovery.Service;
+import com.rasp.utils.autodiscovery.Service;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ import java.io.IOException;
  */
 public interface DataNode
 {
-    void storeInputSplit(InputSplit inputSplit) throws InterruptedException,IOException;
+    void storeInputSplit(InputSplitImpl inputSplit) throws InterruptedException,IOException;
 
     void storeChunk(byte[] b)throws InterruptedException,IOException;
 

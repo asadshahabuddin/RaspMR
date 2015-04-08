@@ -2,106 +2,79 @@
  * Author : Asad Shahabuddin
  * File   : RecordReader.java
  * Email  : asad808@ccs.neu.edu
- * Created: Mar 31, 2015
- * Edited : Mar 31, 2015
+ * Created: Mar 24, 2015.
+ * Edited : Mar 25, 2015.
  */
 
 package com.rasp.fs;
 
 /* Import list */
+import com.rasp.fs.InputSplit;
+
+import java.io.Closeable;
 import java.io.IOException;
-import java.io.RandomAccessFile;
-import com.rasp.interfaces.InputSplit;
 
-public class RecordReader
-    extends com.rasp.interfaces.RecordReader
-{
-    RandomAccessFile f;
-    private long offset;
-    private long key;
-    private String value;
-    
-    @Override
-    public void initialize(InputSplit inputSplit)
-        throws IOException, InterruptedException {
-        key = 0;
-        offset = 0;
-        value = "";
-        f = new RandomAccessFile(inputSplit.getLocation(), "r");
-    }
-
-    @Override
-    public boolean nextKeyValue()
-        throws IOException, InterruptedException
-    {
-        if(offset >= f.length())
-        {
-            return false;
-        }
-        
-        f.seek(offset);
-        key++;
-        value = f.readLine();
-        offset += value.length() + 1;
-        return true;
-    }
-
-    @Override
-    public Long getCurrentKey()
-        throws IOException, InterruptedException
-    {
-        return key;
-    }
-
-    @Override
-    public String getCurrentValue()
-        throws IOException, InterruptedException
-    {
-        return value;
-    }
-
-    @Override
-    public float getProgress()
-        throws IOException, InterruptedException
-    {
-        // TODO
-        return 0;
-    }
-
-    @Override
-    public void close()
-        throws IOException
-    {
-        if(f != null)
-        {
-            f.close();
-        }
-    }
-    
-    /* Main method for unit testing */
-    /*
-    public static void main(String[] args)
-    {
-        try
-        {
-            RecordReader reader = new RecordReader();
-            reader.initialize(new com.rasp.fs.InputSplit(0, 8192, "test.txt"), null);
-            while(reader.nextKeyValue())
-            {
-                System.out.println("Key  : " + reader.getCurrentKey());
-                System.out.println("Value: " + reader.getCurrentValue());
-            }
-            reader.close();
-        }
-        catch(InterruptedException intre)
-        {
-            intre.printStackTrace();
-        }
-        catch(IOException ioe)
-        {
-            ioe.printStackTrace();
-        }
-    }
-    */
+public abstract class RecordReader
+    implements Closeable
+{ 
+    /**
+     * Called once at initialization.
+     * @param inputSplit
+     *            the split that defines the range of records to read
+     * @param context
+     *            information about the task
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    public abstract void initialize(InputSplit inputSplit)
+        throws IOException, InterruptedException;
+  
+    /**
+     * Read the next key, value pair
+     * 
+     * @return
+     *            true if a key/value pair was read
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    public abstract boolean nextKeyValue()
+        throws IOException, InterruptedException;
+  
+    /**
+     * Get the current key
+     * @return
+     *            the current key or null if there is no key
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    public abstract Long getCurrentKey()
+        throws IOException, InterruptedException;
+  
+    /**
+     * Get the current value
+     * @return
+     *            the line that was read
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    public abstract String getCurrentValue()
+        throws IOException, InterruptedException;
+  
+    /**
+     * The current progress of the record reader through its data.
+     * @return
+     *            a number between 0.0 and 1.0 that is the fraction of 
+     *            the data read
+     * @throws IOException
+     * @throws InterruptedException
+     */
+    public abstract float getProgress()
+        throws IOException, InterruptedException;
+  
+    /**
+     * Close the record reader
+     */
+    public abstract void close()
+        throws IOException;
 }
 /* End of RecordReader.java */

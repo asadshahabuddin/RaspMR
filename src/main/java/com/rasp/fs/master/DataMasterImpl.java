@@ -13,11 +13,10 @@ import com.rasp.config.Configuration;
 import com.rasp.config.MasterConfiguration;
 import com.rasp.fs.DataMaster;
 import com.rasp.fs.DataNode;
-import com.rasp.fs.InputFormat;
-import com.rasp.interfaces.Partitioner;
-import raspmr.RaspMR.utils.autodiscovery.Service;
-import raspmr.RaspMR.utils.autodiscovery.ServiceFactory;
-import raspmr.RaspMR.utils.autodiscovery.ServiceType;
+import com.rasp.fs.InputFormatImpl;
+import com.rasp.utils.autodiscovery.Service;
+import com.rasp.utils.autodiscovery.ServiceFactory;
+import com.rasp.utils.autodiscovery.ServiceType;
 
 import java.io.IOException;
 
@@ -37,8 +36,8 @@ public class DataMasterImpl implements DataMaster{
 
 
     @Override
-    public InputFormat createInputFormat(String inputFile,int workerCount)throws InterruptedException, IOException{
-        return new InputFormat(inputFile, workerCount);
+    public InputFormatImpl createInputFormat(String inputFile,int workerCount)throws InterruptedException, IOException{
+        return new InputFormatImpl(inputFile, workerCount);
     }
     
     /**
@@ -59,7 +58,7 @@ public class DataMasterImpl implements DataMaster{
     public void splitAndSend(String inputFile) throws IOException, InterruptedException {
 
         List<Service> services = configuration.getDiscoverer().getServices(ServiceType.TASK_TRACKER);
-        InputFormat inputFormat = createInputFormat(inputFile,services.size());
+        InputFormatImpl inputFormat = createInputFormat(inputFile,services.size());
         if(!inputFileMap.containsKey(inputFile)){
             inputFileMap.put(inputFile,new InputFormatMetaData(inputFormat));
         }
@@ -74,7 +73,7 @@ public class DataMasterImpl implements DataMaster{
     }
 
     @Override
-    public InputFormat getInputFormat(String file){
+    public InputFormatImpl getInputFormat(String file){
         return inputFileMap.get(file).getInputFormat();
     }
 
@@ -82,9 +81,9 @@ public class DataMasterImpl implements DataMaster{
     private class InputFormatMetaData{
 
         private int idx;
-        private InputFormat inputFormat;
+        private InputFormatImpl inputFormat;
 
-        private InputFormatMetaData(InputFormat inputFormat){
+        private InputFormatMetaData(InputFormatImpl inputFormat){
             this.inputFormat = inputFormat;
             idx = 0;
         }
@@ -99,11 +98,11 @@ public class DataMasterImpl implements DataMaster{
             return nextIdx;
         }
 
-        public InputFormat getInputFormat() {
+        public InputFormatImpl getInputFormat() {
             return inputFormat;
         }
 
-        public void setInputFormat(InputFormat inputFormat) {
+        public void setInputFormat(InputFormatImpl inputFormat) {
             this.inputFormat = inputFormat;
         }
     }

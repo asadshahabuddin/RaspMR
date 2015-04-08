@@ -1,0 +1,20 @@
+package com.rasp.utils.protobuf;
+
+option java_package          = "com.rasp.fs";
+option java_outer_classname  = "GroupingKeyProtos";
+option java_generic_services = true;
+
+message KeyPacket
+{
+    required string key = 1;
+}
+
+message TransferResponse
+{
+    optional string status = 1;
+}
+
+service KeyPacketService
+{
+    rpc sendKey(KeyPacket) returns (TransferResponse);
+}

@@ -9,7 +9,7 @@ public final class STaskProtos {
       com.google.protobuf.ExtensionRegistry registry) {
   }
   public interface STaskOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.rasp.fs.protobuf.STask)
+      // @@protoc_insertion_point(interface_extends:com.rasp.utils.protobuf.STask)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -64,20 +64,20 @@ public final class STaskProtos {
         getClassNameBytes();
 
     /**
-     * <code>required .com.rasp.fs.protobuf.STask.STaskType taskType = 5;</code>
+     * <code>required .com.rasp.utils.protobuf.STask.STaskType taskType = 5;</code>
      */
     boolean hasTaskType();
     /**
-     * <code>required .com.rasp.fs.protobuf.STask.STaskType taskType = 5;</code>
+     * <code>required .com.rasp.utils.protobuf.STask.STaskType taskType = 5;</code>
      */
     com.rasp.fs.STaskProtos.STask.STaskType getTaskType();
   }
   /**
-   * Protobuf type {@code com.rasp.fs.protobuf.STask}
+   * Protobuf type {@code com.rasp.utils.protobuf.STask}
    */
   public static final class STask extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.rasp.fs.protobuf.STask)
+      // @@protoc_insertion_point(message_implements:com.rasp.utils.protobuf.STask)
       STaskOrBuilder {
     // Use STask.newBuilder() to construct.
     private STask(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
@@ -198,7 +198,7 @@ public final class STaskProtos {
     }
 
     /**
-     * Protobuf enum {@code com.rasp.fs.protobuf.STask.STaskType}
+     * Protobuf enum {@code com.rasp.utils.protobuf.STask.STaskType}
      */
     public enum STaskType
         implements com.google.protobuf.ProtocolMessageEnum {
@@ -276,7 +276,7 @@ public final class STaskProtos {
         this.value = value;
       }
 
-      // @@protoc_insertion_point(enum_scope:com.rasp.fs.protobuf.STask.STaskType)
+      // @@protoc_insertion_point(enum_scope:com.rasp.utils.protobuf.STask.STaskType)
     }
 
     private int bitField0_;
@@ -424,13 +424,13 @@ public final class STaskProtos {
     public static final int TASKTYPE_FIELD_NUMBER = 5;
     private com.rasp.fs.STaskProtos.STask.STaskType taskType_;
     /**
-     * <code>required .com.rasp.fs.protobuf.STask.STaskType taskType = 5;</code>
+     * <code>required .com.rasp.utils.protobuf.STask.STaskType taskType = 5;</code>
      */
     public boolean hasTaskType() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
     /**
-     * <code>required .com.rasp.fs.protobuf.STask.STaskType taskType = 5;</code>
+     * <code>required .com.rasp.utils.protobuf.STask.STaskType taskType = 5;</code>
      */
     public com.rasp.fs.STaskProtos.STask.STaskType getTaskType() {
       return taskType_;
@@ -599,11 +599,11 @@ public final class STaskProtos {
       return builder;
     }
     /**
-     * Protobuf type {@code com.rasp.fs.protobuf.STask}
+     * Protobuf type {@code com.rasp.utils.protobuf.STask}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.rasp.fs.protobuf.STask)
+        // @@protoc_insertion_point(builder_implements:com.rasp.utils.protobuf.STask)
         com.rasp.fs.STaskProtos.STaskOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -1041,19 +1041,19 @@ public final class STaskProtos {
 
       private com.rasp.fs.STaskProtos.STask.STaskType taskType_ = com.rasp.fs.STaskProtos.STask.STaskType.MAPPER;
       /**
-       * <code>required .com.rasp.fs.protobuf.STask.STaskType taskType = 5;</code>
+       * <code>required .com.rasp.utils.protobuf.STask.STaskType taskType = 5;</code>
        */
       public boolean hasTaskType() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
       /**
-       * <code>required .com.rasp.fs.protobuf.STask.STaskType taskType = 5;</code>
+       * <code>required .com.rasp.utils.protobuf.STask.STaskType taskType = 5;</code>
        */
       public com.rasp.fs.STaskProtos.STask.STaskType getTaskType() {
         return taskType_;
       }
       /**
-       * <code>required .com.rasp.fs.protobuf.STask.STaskType taskType = 5;</code>
+       * <code>required .com.rasp.utils.protobuf.STask.STaskType taskType = 5;</code>
        */
       public Builder setTaskType(com.rasp.fs.STaskProtos.STask.STaskType value) {
         if (value == null) {
@@ -1065,7 +1065,7 @@ public final class STaskProtos {
         return this;
       }
       /**
-       * <code>required .com.rasp.fs.protobuf.STask.STaskType taskType = 5;</code>
+       * <code>required .com.rasp.utils.protobuf.STask.STaskType taskType = 5;</code>
        */
       public Builder clearTaskType() {
         bitField0_ = (bitField0_ & ~0x00000010);
@@ -1074,7 +1074,7 @@ public final class STaskProtos {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:com.rasp.fs.protobuf.STask)
+      // @@protoc_insertion_point(builder_scope:com.rasp.utils.protobuf.STask)
     }
 
     static {
@@ -1082,11 +1082,11 @@ public final class STaskProtos {
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:com.rasp.fs.protobuf.STask)
+    // @@protoc_insertion_point(class_scope:com.rasp.utils.protobuf.STask)
   }
 
   public interface TransferResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.rasp.fs.protobuf.TransferResponse)
+      // @@protoc_insertion_point(interface_extends:com.rasp.utils.protobuf.TransferResponse)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -1104,11 +1104,11 @@ public final class STaskProtos {
         getStatusBytes();
   }
   /**
-   * Protobuf type {@code com.rasp.fs.protobuf.TransferResponse}
+   * Protobuf type {@code com.rasp.utils.protobuf.TransferResponse}
    */
   public static final class TransferResponse extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.rasp.fs.protobuf.TransferResponse)
+      // @@protoc_insertion_point(message_implements:com.rasp.utils.protobuf.TransferResponse)
       TransferResponseOrBuilder {
     // Use TransferResponse.newBuilder() to construct.
     private TransferResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
@@ -1354,11 +1354,11 @@ public final class STaskProtos {
       return builder;
     }
     /**
-     * Protobuf type {@code com.rasp.fs.protobuf.TransferResponse}
+     * Protobuf type {@code com.rasp.utils.protobuf.TransferResponse}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.rasp.fs.protobuf.TransferResponse)
+        // @@protoc_insertion_point(builder_implements:com.rasp.utils.protobuf.TransferResponse)
         com.rasp.fs.STaskProtos.TransferResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -1550,7 +1550,7 @@ public final class STaskProtos {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:com.rasp.fs.protobuf.TransferResponse)
+      // @@protoc_insertion_point(builder_scope:com.rasp.utils.protobuf.TransferResponse)
     }
 
     static {
@@ -1558,11 +1558,11 @@ public final class STaskProtos {
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:com.rasp.fs.protobuf.TransferResponse)
+    // @@protoc_insertion_point(class_scope:com.rasp.utils.protobuf.TransferResponse)
   }
 
   /**
-   * Protobuf service {@code com.rasp.fs.protobuf.TaskService}
+   * Protobuf service {@code com.rasp.utils.protobuf.TaskService}
    */
   public static abstract class TaskService
       implements com.google.protobuf.Service {
@@ -1570,7 +1570,7 @@ public final class STaskProtos {
 
     public interface Interface {
       /**
-       * <code>rpc sendTask(.com.rasp.fs.protobuf.STask) returns (.com.rasp.fs.protobuf.TransferResponse);</code>
+       * <code>rpc sendTask(.com.rasp.utils.protobuf.STask) returns (.com.rasp.utils.protobuf.TransferResponse);</code>
        */
       public abstract void sendTask(
           com.google.protobuf.RpcController controller,
@@ -1655,7 +1655,7 @@ public final class STaskProtos {
     }
 
     /**
-     * <code>rpc sendTask(.com.rasp.fs.protobuf.STask) returns (.com.rasp.fs.protobuf.TransferResponse);</code>
+     * <code>rpc sendTask(.com.rasp.utils.protobuf.STask) returns (.com.rasp.utils.protobuf.TransferResponse);</code>
      */
     public abstract void sendTask(
         com.google.protobuf.RpcController controller,
@@ -1790,7 +1790,7 @@ public final class STaskProtos {
 
     }
 
-    // @@protoc_insertion_point(class_scope:com.rasp.fs.protobuf.TaskService)
+    // @@protoc_insertion_point(class_scope:com.rasp.utils.protobuf.TaskService)
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
@@ -1815,7 +1815,7 @@ public final class STaskProtos {
       "\n\013stask.proto\022\024com.rasp.fs.protobuf\"\252\001\n\005" +
       "STask\022\n\n\002id\030\001 \002(\t\022\r\n\005jobId\030\002 \002(\t\022\024\n\014inpu" +
       "tSplitId\030\003 \002(\005\022\021\n\tclassName\030\004 \002(\t\0227\n\010tas" +
-      "kType\030\005 \002(\0162%.com.rasp.fs.protobuf.STask" +
+      "kType\030\005 \002(\0162%.com.rasp.utils.protobuf.STask" +
       ".STaskType\"$\n\tSTaskType\022\n\n\006MAPPER\020\001\022\013\n\007R" +
       "EDUCER\020\002\"\"\n\020TransferResponse\022\016\n\006status\030\001" +
       " \001(\t2^\n\013TaskService\022O\n\010sendTask\022\033.com.ra" +

@@ -11,10 +11,10 @@ import java.io.IOException;
  */
 public interface DataMaster {
 
-    public InputFormat createInputFormat(String inputFile,int workerCount) throws InterruptedException, IOException;
+    public InputFormatImpl createInputFormat(String inputFile,int workerCount) throws InterruptedException, IOException;
 
     public void splitAndSend(String inputFile) throws IOException, InterruptedException;
 
-    public InputFormat getInputFormat(String path);
+    public InputFormatImpl getInputFormat(String path);
 
 }

@@ -5,10 +5,10 @@ import com.google.protobuf.RpcController;
 import com.google.protobuf.ServiceException;
 import com.googlecode.protobuf.pro.duplex.RpcClientChannel;
 import com.rasp.fs.DataNode;
-import com.rasp.fs.InputSplit;
+import com.rasp.fs.InputSplitImpl;
 import com.rasp.fs.SInputSplitProtos;
-import com.rasp.fs.protobuf.ProtoClient;
-import raspmr.RaspMR.utils.autodiscovery.Service;
+import com.rasp.utils.protobuf.ProtoClient;
+import com.rasp.utils.autodiscovery.Service;
 
 import java.io.IOException;
 
@@ -36,7 +36,7 @@ public class DataNodeClientImpl implements DataNode {
     }
 
     @Override
-    public void storeInputSplit(InputSplit inputSplit) throws InterruptedException, IOException{
+    public void storeInputSplit(InputSplitImpl inputSplit) throws InterruptedException, IOException{
         SInputSplitProtos.SInputSplit sInputSplit = SInputSplitProtos.SInputSplit
                 .newBuilder()
                 .setIdx(inputSplit.getIdx())

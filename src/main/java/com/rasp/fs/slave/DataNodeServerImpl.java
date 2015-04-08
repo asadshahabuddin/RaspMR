@@ -15,12 +15,13 @@ import java.io.IOException;
 import com.rasp.config.Configuration;
 import com.rasp.config.SlaveConfiguration;
 import com.rasp.fs.DataNode;
-import com.rasp.fs.InputSplit;
+import com.rasp.fs.InputSplitImpl;
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
-import raspmr.RaspMR.utils.autodiscovery.Service;
-import raspmr.RaspMR.utils.autodiscovery.ServiceFactory;
-import raspmr.RaspMR.utils.autodiscovery.ServiceType;
+
+import com.rasp.utils.autodiscovery.Service;
+import com.rasp.utils.autodiscovery.ServiceFactory;
+import com.rasp.utils.autodiscovery.ServiceType;
 
 public class DataNodeServerImpl
     implements DataNode
@@ -66,7 +67,7 @@ public class DataNodeServerImpl
     }
 
     @Override
-    public void storeInputSplit(InputSplit inputSplit)
+    public void storeInputSplit(InputSplitImpl inputSplit)
         throws IOException
     {
         f = createDataStream();

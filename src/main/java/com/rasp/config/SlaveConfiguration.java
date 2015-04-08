@@ -14,20 +14,16 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.rasp.fs.InputSplit;
-import com.rasp.fs.slave.DataNodeServerImpl;
-import com.rasp.interfaces.TaskScheduler;
-import com.rasp.interfaces.TaskTracker;
-import com.rasp.interfaces.impl.TaskNode;
-import raspmr.RaspMR.utils.autodiscovery.Service;
-import raspmr.RaspMR.utils.autodiscovery.ServiceFactory;
-import raspmr.RaspMR.utils.autodiscovery.ServiceType;
+import com.rasp.fs.InputSplitImpl;
+import com.rasp.mr.TaskTracker;
+import com.rasp.mr.TaskNode;
+import com.rasp.utils.autodiscovery.ServiceType;
 
 public class SlaveConfiguration extends Configuration
 {
 	private DataNode dataNode;
     private TaskNode taskNode;
-    private Map<Integer,InputSplit> inputSplitMap;
+    private Map<Integer,InputSplitImpl> inputSplitMap;
     private TaskTracker taskTracker;
     public static final String INPUT_SPLIT_FILENAME = "split.txt";
 
@@ -58,11 +54,11 @@ public class SlaveConfiguration extends Configuration
         this.taskNode = taskNode;
     }
 
-    public void addInputSplit(InputSplit inputSplit){
+    public void addInputSplit(InputSplitImpl inputSplit){
         inputSplitMap.put(inputSplit.getIdx(),inputSplit);
     }
 
-    public InputSplit getInputSplit(int idx){
+    public InputSplitImpl getInputSplit(int idx){
         return inputSplitMap.get(idx);
     }
 

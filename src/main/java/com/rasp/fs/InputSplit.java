@@ -2,8 +2,8 @@
  * Author : Asad Shahabuddin
  * File   : InputSplit.java
  * Email  : asad808@ccs.neu.edu
- * Created: Mar 30, 2015
- * Edited : Mar 30, 2015
+ * Created: Mar 24, 2015
+ * Edited : Mar 25, 2015
  */
 
 package com.rasp.fs;
@@ -11,106 +11,48 @@ package com.rasp.fs;
 /* Import list */
 import java.io.IOException;
 
-public class InputSplit
-    implements com.rasp.interfaces.InputSplit
+/**
+ * <code>InputSplit</code> represents the data to be processed by an individual 
+ * Mapper.
+ * 
+ * <p>
+ * Typically, it presents a byte-oriented view on the input and is the 
+ * responsibility of RecordReader of the job to process this and present a 
+ * record-oriented view.
+ * </p>
+ */
+public interface InputSplit
 {
-    private int idx;
-    private long offset;
-    private long length;
-    private String location;
-    
     /**
-     * Constructor
-     * @param offset
-     *            Starting offset.
-     * @param length
-     *            Block size, i.e, length.
-     * @param location
-     *            Node name where the split would be local. 
-     */
-    public InputSplit(int idx, long offset, long length, String location)
-    {
-        this.idx      = idx;
-        this.offset   = offset;
-        this.length   = length;
-        this.location = location;
-    }
-    
-    /**
-     * Set the index.
-     * @param idx
-     *            Index of the split.
-     */
-    public void setIdx(int idx)
-    {
-        this.idx = idx;
-    }
-    
-    /**
-     * Get the index.
+     * Get the offset of the split.
      * @return
-     *            Index of the split.
-     */
-    public int getIdx()
-    {
-        return idx;
-    }
-    
-    /**
-     * Set the offset.
-     * @param offset
      *            Starting offset of the split.
+     * @throws IOException
+     * @throws InterruptedException
      */
-    public void setOffset(long offset)
-    {
-        this.offset = offset;
-    }
+    public abstract long getOffset()
+        throws IOException, InterruptedException;
     
     /**
-     * Get the offset.
+     * Get the size of the split, so that the input splits can be sorted by size.
+     * @return
+     *            The number of bytes in the split.
+     * @throws IOException
+     * @throws InterruptedException
      */
-    public long getOffset()
-        throws IOException, InterruptedException
-    {
-        return offset;
-    }
+    public abstract long getLength()
+        throws IOException, InterruptedException;
     
     /**
-     * Set the length
-     * @param length
-     *            Block size of the split.
+     * Get the node by name where the data for the split would be local. 
+     * The locations do not need to be serialized.
+     * @return
+     *            a new array of the node nodes
+     * @throws IOException
+     * @throws InterruptedException
      */
-    public void setLength(long length)
-    {
-        this.length = length;
-    }
-    
-    /**
-     * Get the block size.
-     */
-    public long getLength()
-        throws IOException, InterruptedException
-    {
-        return length;
-    }
+    public abstract String getLocation()
+        throws IOException, InterruptedException;
 
-    /**
-     * Set the location.
-     * @param location
-     *            Location of the split.
-     */
-    public void setLocation(String location)
-    {
-        this.location = location;
-    }
-    
-    /**
-     * Get the location.
-     */
-    public String getLocation()
-        throws IOException, InterruptedException
-    {
-        return location;
-    }
+    public int getIdx();
 }
-/* End of InputSplit.java */
