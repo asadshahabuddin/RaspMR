@@ -11,7 +11,7 @@ package com.rasp.driver;
 /* Import list */
 import com.rasp.fs.DataNode;
 import com.rasp.mr.TaskNode;
-import com.rasp.fs.STaskProtos;
+import com.rasp.mr.STaskProtos;
 import com.rasp.mr.TaskTracker;
 import com.rasp.fs.SInputSplitProtos;
 import java.io.FileNotFoundException;
