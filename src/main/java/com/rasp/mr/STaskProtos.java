@@ -2511,6 +2511,1521 @@ public final class STaskProtos {
     // @@protoc_insertion_point(class_scope:com.rasp.utils.protobuf.SMapResponse)
   }
 
+  public interface SDataTransferTaskOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.rasp.utils.protobuf.SDataTransferTask)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>required string key = 1;</code>
+     */
+    boolean hasKey();
+    /**
+     * <code>required string key = 1;</code>
+     */
+    java.lang.String getKey();
+    /**
+     * <code>required string key = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getKeyBytes();
+
+    /**
+     * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation location = 2;</code>
+     */
+    boolean hasLocation();
+    /**
+     * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation location = 2;</code>
+     */
+    com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation getLocation();
+    /**
+     * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation location = 2;</code>
+     */
+    com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocationOrBuilder getLocationOrBuilder();
+  }
+  /**
+   * Protobuf type {@code com.rasp.utils.protobuf.SDataTransferTask}
+   */
+  public static final class SDataTransferTask extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.rasp.utils.protobuf.SDataTransferTask)
+      SDataTransferTaskOrBuilder {
+    // Use SDataTransferTask.newBuilder() to construct.
+    private SDataTransferTask(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private SDataTransferTask(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final SDataTransferTask defaultInstance;
+    public static SDataTransferTask getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public SDataTransferTask getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private SDataTransferTask(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              key_ = bs;
+              break;
+            }
+            case 18: {
+              com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = location_.toBuilder();
+              }
+              location_ = input.readMessage(com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(location_);
+                location_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.rasp.mr.STaskProtos.internal_static_com_rasp_utils_protobuf_SDataTransferTask_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.rasp.mr.STaskProtos.internal_static_com_rasp_utils_protobuf_SDataTransferTask_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.rasp.mr.STaskProtos.SDataTransferTask.class, com.rasp.mr.STaskProtos.SDataTransferTask.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<SDataTransferTask> PARSER =
+        new com.google.protobuf.AbstractParser<SDataTransferTask>() {
+      public SDataTransferTask parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new SDataTransferTask(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<SDataTransferTask> getParserForType() {
+      return PARSER;
+    }
+
+    public interface SReducerLocationOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <code>required string ip = 1;</code>
+       */
+      boolean hasIp();
+      /**
+       * <code>required string ip = 1;</code>
+       */
+      java.lang.String getIp();
+      /**
+       * <code>required string ip = 1;</code>
+       */
+      com.google.protobuf.ByteString
+          getIpBytes();
+
+      /**
+       * <code>required string port = 2;</code>
+       */
+      boolean hasPort();
+      /**
+       * <code>required string port = 2;</code>
+       */
+      java.lang.String getPort();
+      /**
+       * <code>required string port = 2;</code>
+       */
+      com.google.protobuf.ByteString
+          getPortBytes();
+
+      /**
+       * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation.STaskType taskType = 3;</code>
+       */
+      boolean hasTaskType();
+      /**
+       * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation.STaskType taskType = 3;</code>
+       */
+      com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.STaskType getTaskType();
+    }
+    /**
+     * Protobuf type {@code com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation}
+     */
+    public static final class SReducerLocation extends
+        com.google.protobuf.GeneratedMessage implements
+        // @@protoc_insertion_point(message_implements:com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation)
+        SReducerLocationOrBuilder {
+      // Use SReducerLocation.newBuilder() to construct.
+      private SReducerLocation(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private SReducerLocation(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final SReducerLocation defaultInstance;
+      public static SReducerLocation getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public SReducerLocation getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private SReducerLocation(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+                com.google.protobuf.ByteString bs = input.readBytes();
+                bitField0_ |= 0x00000001;
+                ip_ = bs;
+                break;
+              }
+              case 18: {
+                com.google.protobuf.ByteString bs = input.readBytes();
+                bitField0_ |= 0x00000002;
+                port_ = bs;
+                break;
+              }
+              case 24: {
+                int rawValue = input.readEnum();
+                com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.STaskType value = com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.STaskType.valueOf(rawValue);
+                if (value == null) {
+                  unknownFields.mergeVarintField(3, rawValue);
+                } else {
+                  bitField0_ |= 0x00000004;
+                  taskType_ = value;
+                }
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.rasp.mr.STaskProtos.internal_static_com_rasp_utils_protobuf_SDataTransferTask_SReducerLocation_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.rasp.mr.STaskProtos.internal_static_com_rasp_utils_protobuf_SDataTransferTask_SReducerLocation_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.class, com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<SReducerLocation> PARSER =
+          new com.google.protobuf.AbstractParser<SReducerLocation>() {
+        public SReducerLocation parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new SReducerLocation(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<SReducerLocation> getParserForType() {
+        return PARSER;
+      }
+
+      /**
+       * Protobuf enum {@code com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation.STaskType}
+       */
+      public enum STaskType
+          implements com.google.protobuf.ProtocolMessageEnum {
+        /**
+         * <code>MAPPER = 1;</code>
+         */
+        MAPPER(0, 1),
+        /**
+         * <code>REDUCER = 2;</code>
+         */
+        REDUCER(1, 2),
+        ;
+
+        /**
+         * <code>MAPPER = 1;</code>
+         */
+        public static final int MAPPER_VALUE = 1;
+        /**
+         * <code>REDUCER = 2;</code>
+         */
+        public static final int REDUCER_VALUE = 2;
+
+
+        public final int getNumber() { return value; }
+
+        public static STaskType valueOf(int value) {
+          switch (value) {
+            case 1: return MAPPER;
+            case 2: return REDUCER;
+            default: return null;
+          }
+        }
+
+        public static com.google.protobuf.Internal.EnumLiteMap<STaskType>
+            internalGetValueMap() {
+          return internalValueMap;
+        }
+        private static com.google.protobuf.Internal.EnumLiteMap<STaskType>
+            internalValueMap =
+              new com.google.protobuf.Internal.EnumLiteMap<STaskType>() {
+                public STaskType findValueByNumber(int number) {
+                  return STaskType.valueOf(number);
+                }
+              };
+
+        public final com.google.protobuf.Descriptors.EnumValueDescriptor
+            getValueDescriptor() {
+          return getDescriptor().getValues().get(index);
+        }
+        public final com.google.protobuf.Descriptors.EnumDescriptor
+            getDescriptorForType() {
+          return getDescriptor();
+        }
+        public static final com.google.protobuf.Descriptors.EnumDescriptor
+            getDescriptor() {
+          return com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.getDescriptor().getEnumTypes().get(0);
+        }
+
+        private static final STaskType[] VALUES = values();
+
+        public static STaskType valueOf(
+            com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+          if (desc.getType() != getDescriptor()) {
+            throw new java.lang.IllegalArgumentException(
+              "EnumValueDescriptor is not for this type.");
+          }
+          return VALUES[desc.getIndex()];
+        }
+
+        private final int index;
+        private final int value;
+
+        private STaskType(int index, int value) {
+          this.index = index;
+          this.value = value;
+        }
+
+        // @@protoc_insertion_point(enum_scope:com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation.STaskType)
+      }
+
+      private int bitField0_;
+      public static final int IP_FIELD_NUMBER = 1;
+      private java.lang.Object ip_;
+      /**
+       * <code>required string ip = 1;</code>
+       */
+      public boolean hasIp() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string ip = 1;</code>
+       */
+      public java.lang.String getIp() {
+        java.lang.Object ref = ip_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            ip_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>required string ip = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIpBytes() {
+        java.lang.Object ref = ip_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          ip_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int PORT_FIELD_NUMBER = 2;
+      private java.lang.Object port_;
+      /**
+       * <code>required string port = 2;</code>
+       */
+      public boolean hasPort() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required string port = 2;</code>
+       */
+      public java.lang.String getPort() {
+        java.lang.Object ref = port_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            port_ = s;
+          }
+          return s;
+        }
+      }
+      /**
+       * <code>required string port = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getPortBytes() {
+        java.lang.Object ref = port_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          port_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int TASKTYPE_FIELD_NUMBER = 3;
+      private com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.STaskType taskType_;
+      /**
+       * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation.STaskType taskType = 3;</code>
+       */
+      public boolean hasTaskType() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation.STaskType taskType = 3;</code>
+       */
+      public com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.STaskType getTaskType() {
+        return taskType_;
+      }
+
+      private void initFields() {
+        ip_ = "";
+        port_ = "";
+        taskType_ = com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.STaskType.MAPPER;
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        if (!hasIp()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasPort()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasTaskType()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeBytes(1, getIpBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeBytes(2, getPortBytes());
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          output.writeEnum(3, taskType_.getNumber());
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(1, getIpBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(2, getPortBytes());
+        }
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeEnumSize(3, taskType_.getNumber());
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation)
+          com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocationOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.rasp.mr.STaskProtos.internal_static_com_rasp_utils_protobuf_SDataTransferTask_SReducerLocation_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.rasp.mr.STaskProtos.internal_static_com_rasp_utils_protobuf_SDataTransferTask_SReducerLocation_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.class, com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.Builder.class);
+        }
+
+        // Construct using com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          ip_ = "";
+          bitField0_ = (bitField0_ & ~0x00000001);
+          port_ = "";
+          bitField0_ = (bitField0_ & ~0x00000002);
+          taskType_ = com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.STaskType.MAPPER;
+          bitField0_ = (bitField0_ & ~0x00000004);
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.rasp.mr.STaskProtos.internal_static_com_rasp_utils_protobuf_SDataTransferTask_SReducerLocation_descriptor;
+        }
+
+        public com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation getDefaultInstanceForType() {
+          return com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.getDefaultInstance();
+        }
+
+        public com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation build() {
+          com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation buildPartial() {
+          com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation result = new com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.ip_ = ip_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.port_ = port_;
+          if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+            to_bitField0_ |= 0x00000004;
+          }
+          result.taskType_ = taskType_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation) {
+            return mergeFrom((com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation other) {
+          if (other == com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.getDefaultInstance()) return this;
+          if (other.hasIp()) {
+            bitField0_ |= 0x00000001;
+            ip_ = other.ip_;
+            onChanged();
+          }
+          if (other.hasPort()) {
+            bitField0_ |= 0x00000002;
+            port_ = other.port_;
+            onChanged();
+          }
+          if (other.hasTaskType()) {
+            setTaskType(other.getTaskType());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          if (!hasIp()) {
+            
+            return false;
+          }
+          if (!hasPort()) {
+            
+            return false;
+          }
+          if (!hasTaskType()) {
+            
+            return false;
+          }
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        private java.lang.Object ip_ = "";
+        /**
+         * <code>required string ip = 1;</code>
+         */
+        public boolean hasIp() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>required string ip = 1;</code>
+         */
+        public java.lang.String getIp() {
+          java.lang.Object ref = ip_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            if (bs.isValidUtf8()) {
+              ip_ = s;
+            }
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>required string ip = 1;</code>
+         */
+        public com.google.protobuf.ByteString
+            getIpBytes() {
+          java.lang.Object ref = ip_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            ip_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>required string ip = 1;</code>
+         */
+        public Builder setIp(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          ip_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string ip = 1;</code>
+         */
+        public Builder clearIp() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          ip_ = getDefaultInstance().getIp();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string ip = 1;</code>
+         */
+        public Builder setIpBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          ip_ = value;
+          onChanged();
+          return this;
+        }
+
+        private java.lang.Object port_ = "";
+        /**
+         * <code>required string port = 2;</code>
+         */
+        public boolean hasPort() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>required string port = 2;</code>
+         */
+        public java.lang.String getPort() {
+          java.lang.Object ref = port_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            if (bs.isValidUtf8()) {
+              port_ = s;
+            }
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>required string port = 2;</code>
+         */
+        public com.google.protobuf.ByteString
+            getPortBytes() {
+          java.lang.Object ref = port_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            port_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>required string port = 2;</code>
+         */
+        public Builder setPort(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          port_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string port = 2;</code>
+         */
+        public Builder clearPort() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          port_ = getDefaultInstance().getPort();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required string port = 2;</code>
+         */
+        public Builder setPortBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          port_ = value;
+          onChanged();
+          return this;
+        }
+
+        private com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.STaskType taskType_ = com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.STaskType.MAPPER;
+        /**
+         * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation.STaskType taskType = 3;</code>
+         */
+        public boolean hasTaskType() {
+          return ((bitField0_ & 0x00000004) == 0x00000004);
+        }
+        /**
+         * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation.STaskType taskType = 3;</code>
+         */
+        public com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.STaskType getTaskType() {
+          return taskType_;
+        }
+        /**
+         * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation.STaskType taskType = 3;</code>
+         */
+        public Builder setTaskType(com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.STaskType value) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          bitField0_ |= 0x00000004;
+          taskType_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation.STaskType taskType = 3;</code>
+         */
+        public Builder clearTaskType() {
+          bitField0_ = (bitField0_ & ~0x00000004);
+          taskType_ = com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.STaskType.MAPPER;
+          onChanged();
+          return this;
+        }
+
+        // @@protoc_insertion_point(builder_scope:com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation)
+      }
+
+      static {
+        defaultInstance = new SReducerLocation(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation)
+    }
+
+    private int bitField0_;
+    public static final int KEY_FIELD_NUMBER = 1;
+    private java.lang.Object key_;
+    /**
+     * <code>required string key = 1;</code>
+     */
+    public boolean hasKey() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required string key = 1;</code>
+     */
+    public java.lang.String getKey() {
+      java.lang.Object ref = key_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          key_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>required string key = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getKeyBytes() {
+      java.lang.Object ref = key_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        key_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int LOCATION_FIELD_NUMBER = 2;
+    private com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation location_;
+    /**
+     * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation location = 2;</code>
+     */
+    public boolean hasLocation() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation location = 2;</code>
+     */
+    public com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation getLocation() {
+      return location_;
+    }
+    /**
+     * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation location = 2;</code>
+     */
+    public com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocationOrBuilder getLocationOrBuilder() {
+      return location_;
+    }
+
+    private void initFields() {
+      key_ = "";
+      location_ = com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      if (!hasKey()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasLocation()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getLocation().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getKeyBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, location_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getKeyBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, location_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.rasp.mr.STaskProtos.SDataTransferTask parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.rasp.mr.STaskProtos.SDataTransferTask parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.rasp.mr.STaskProtos.SDataTransferTask parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.rasp.mr.STaskProtos.SDataTransferTask parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.rasp.mr.STaskProtos.SDataTransferTask parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.rasp.mr.STaskProtos.SDataTransferTask parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.rasp.mr.STaskProtos.SDataTransferTask parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.rasp.mr.STaskProtos.SDataTransferTask parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.rasp.mr.STaskProtos.SDataTransferTask parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.rasp.mr.STaskProtos.SDataTransferTask parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.rasp.mr.STaskProtos.SDataTransferTask prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.rasp.utils.protobuf.SDataTransferTask}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.rasp.utils.protobuf.SDataTransferTask)
+        com.rasp.mr.STaskProtos.SDataTransferTaskOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.rasp.mr.STaskProtos.internal_static_com_rasp_utils_protobuf_SDataTransferTask_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.rasp.mr.STaskProtos.internal_static_com_rasp_utils_protobuf_SDataTransferTask_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.rasp.mr.STaskProtos.SDataTransferTask.class, com.rasp.mr.STaskProtos.SDataTransferTask.Builder.class);
+      }
+
+      // Construct using com.rasp.mr.STaskProtos.SDataTransferTask.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getLocationFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        key_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (locationBuilder_ == null) {
+          location_ = com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.getDefaultInstance();
+        } else {
+          locationBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.rasp.mr.STaskProtos.internal_static_com_rasp_utils_protobuf_SDataTransferTask_descriptor;
+      }
+
+      public com.rasp.mr.STaskProtos.SDataTransferTask getDefaultInstanceForType() {
+        return com.rasp.mr.STaskProtos.SDataTransferTask.getDefaultInstance();
+      }
+
+      public com.rasp.mr.STaskProtos.SDataTransferTask build() {
+        com.rasp.mr.STaskProtos.SDataTransferTask result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.rasp.mr.STaskProtos.SDataTransferTask buildPartial() {
+        com.rasp.mr.STaskProtos.SDataTransferTask result = new com.rasp.mr.STaskProtos.SDataTransferTask(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.key_ = key_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (locationBuilder_ == null) {
+          result.location_ = location_;
+        } else {
+          result.location_ = locationBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.rasp.mr.STaskProtos.SDataTransferTask) {
+          return mergeFrom((com.rasp.mr.STaskProtos.SDataTransferTask)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.rasp.mr.STaskProtos.SDataTransferTask other) {
+        if (other == com.rasp.mr.STaskProtos.SDataTransferTask.getDefaultInstance()) return this;
+        if (other.hasKey()) {
+          bitField0_ |= 0x00000001;
+          key_ = other.key_;
+          onChanged();
+        }
+        if (other.hasLocation()) {
+          mergeLocation(other.getLocation());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasKey()) {
+          
+          return false;
+        }
+        if (!hasLocation()) {
+          
+          return false;
+        }
+        if (!getLocation().isInitialized()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.rasp.mr.STaskProtos.SDataTransferTask parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.rasp.mr.STaskProtos.SDataTransferTask) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object key_ = "";
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public boolean hasKey() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public java.lang.String getKey() {
+        java.lang.Object ref = key_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            key_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getKeyBytes() {
+        java.lang.Object ref = key_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          key_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public Builder setKey(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        key_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public Builder clearKey() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        key_ = getDefaultInstance().getKey();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public Builder setKeyBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        key_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation location_ = com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation, com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.Builder, com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocationOrBuilder> locationBuilder_;
+      /**
+       * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation location = 2;</code>
+       */
+      public boolean hasLocation() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation location = 2;</code>
+       */
+      public com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation getLocation() {
+        if (locationBuilder_ == null) {
+          return location_;
+        } else {
+          return locationBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation location = 2;</code>
+       */
+      public Builder setLocation(com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation value) {
+        if (locationBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          location_ = value;
+          onChanged();
+        } else {
+          locationBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation location = 2;</code>
+       */
+      public Builder setLocation(
+          com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.Builder builderForValue) {
+        if (locationBuilder_ == null) {
+          location_ = builderForValue.build();
+          onChanged();
+        } else {
+          locationBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation location = 2;</code>
+       */
+      public Builder mergeLocation(com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation value) {
+        if (locationBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              location_ != com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.getDefaultInstance()) {
+            location_ =
+              com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.newBuilder(location_).mergeFrom(value).buildPartial();
+          } else {
+            location_ = value;
+          }
+          onChanged();
+        } else {
+          locationBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation location = 2;</code>
+       */
+      public Builder clearLocation() {
+        if (locationBuilder_ == null) {
+          location_ = com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.getDefaultInstance();
+          onChanged();
+        } else {
+          locationBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation location = 2;</code>
+       */
+      public com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.Builder getLocationBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getLocationFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation location = 2;</code>
+       */
+      public com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocationOrBuilder getLocationOrBuilder() {
+        if (locationBuilder_ != null) {
+          return locationBuilder_.getMessageOrBuilder();
+        } else {
+          return location_;
+        }
+      }
+      /**
+       * <code>required .com.rasp.utils.protobuf.SDataTransferTask.SReducerLocation location = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation, com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.Builder, com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocationOrBuilder> 
+          getLocationFieldBuilder() {
+        if (locationBuilder_ == null) {
+          locationBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation, com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocation.Builder, com.rasp.mr.STaskProtos.SDataTransferTask.SReducerLocationOrBuilder>(
+                  getLocation(),
+                  getParentForChildren(),
+                  isClean());
+          location_ = null;
+        }
+        return locationBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.rasp.utils.protobuf.SDataTransferTask)
+    }
+
+    static {
+      defaultInstance = new SDataTransferTask(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.rasp.utils.protobuf.SDataTransferTask)
+  }
+
   public interface TransferResponseOrBuilder extends
       // @@protoc_insertion_point(interface_extends:com.rasp.utils.protobuf.TransferResponse)
       com.google.protobuf.MessageOrBuilder {
@@ -3467,6 +4982,16 @@ public final class STaskProtos {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_rasp_utils_protobuf_SMapResponse_SKeyCount_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_rasp_utils_protobuf_SDataTransferTask_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_rasp_utils_protobuf_SDataTransferTask_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_rasp_utils_protobuf_SDataTransferTask_SReducerLocation_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_rasp_utils_protobuf_SDataTransferTask_SReducerLocation_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_rasp_utils_protobuf_TransferResponse_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -3488,14 +5013,22 @@ public final class STaskProtos {
       "\001\022\013\n\007REDUCER\020\002\"\206\001\n\014SMapResponse\022\n\n\002id\030\001 " +
       "\002(\t\022A\n\010mapCount\030\003 \003(\0132/.com.rasp.utils.p" +
       "rotobuf.SMapResponse.SKeyCount\032\'\n\tSKeyCo" +
-      "unt\022\013\n\003key\030\001 \002(\t\022\r\n\005count\030\002 \002(\003\"\"\n\020Trans" +
-      "ferResponse\022\016\n\006status\030\001 \001(\t2d\n\013TaskServi",
-      "ce\022U\n\010sendTask\022\036.com.rasp.utils.protobuf" +
-      ".STask\032).com.rasp.utils.protobuf.Transfe" +
-      "rResponse2q\n\nJobService\022c\n\017sendMapRespon" +
-      "se\022%.com.rasp.utils.protobuf.SMapRespons" +
-      "e\032).com.rasp.utils.protobuf.TransferResp" +
-      "onseB\035\n\013com.rasp.mrB\013STaskProtos\210\001\001"
+      "unt\022\013\n\003key\030\001 \002(\t\022\r\n\005count\030\002 \002(\003\"\235\002\n\021SDat" +
+      "aTransferTask\022\013\n\003key\030\001 \002(\t\022M\n\010location\030\002",
+      " \002(\0132;.com.rasp.utils.protobuf.SDataTran" +
+      "sferTask.SReducerLocation\032\253\001\n\020SReducerLo" +
+      "cation\022\n\n\002ip\030\001 \002(\t\022\014\n\004port\030\002 \002(\t\022W\n\010task" +
+      "Type\030\003 \002(\0162E.com.rasp.utils.protobuf.SDa" +
+      "taTransferTask.SReducerLocation.STaskTyp" +
+      "e\"$\n\tSTaskType\022\n\n\006MAPPER\020\001\022\013\n\007REDUCER\020\002\"" +
+      "\"\n\020TransferResponse\022\016\n\006status\030\001 \001(\t2d\n\013T" +
+      "askService\022U\n\010sendTask\022\036.com.rasp.utils." +
+      "protobuf.STask\032).com.rasp.utils.protobuf" +
+      ".TransferResponse2q\n\nJobService\022c\n\017sendM",
+      "apResponse\022%.com.rasp.utils.protobuf.SMa" +
+      "pResponse\032).com.rasp.utils.protobuf.Tran" +
+      "sferResponseB\035\n\013com.rasp.mrB\013STaskProtos" +
+      "\210\001\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3527,8 +5060,20 @@ public final class STaskProtos {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_rasp_utils_protobuf_SMapResponse_SKeyCount_descriptor,
         new java.lang.String[] { "Key", "Count", });
-    internal_static_com_rasp_utils_protobuf_TransferResponse_descriptor =
+    internal_static_com_rasp_utils_protobuf_SDataTransferTask_descriptor =
       getDescriptor().getMessageTypes().get(2);
+    internal_static_com_rasp_utils_protobuf_SDataTransferTask_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_rasp_utils_protobuf_SDataTransferTask_descriptor,
+        new java.lang.String[] { "Key", "Location", });
+    internal_static_com_rasp_utils_protobuf_SDataTransferTask_SReducerLocation_descriptor =
+      internal_static_com_rasp_utils_protobuf_SDataTransferTask_descriptor.getNestedTypes().get(0);
+    internal_static_com_rasp_utils_protobuf_SDataTransferTask_SReducerLocation_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_rasp_utils_protobuf_SDataTransferTask_SReducerLocation_descriptor,
+        new java.lang.String[] { "Ip", "Port", "TaskType", });
+    internal_static_com_rasp_utils_protobuf_TransferResponse_descriptor =
+      getDescriptor().getMessageTypes().get(3);
     internal_static_com_rasp_utils_protobuf_TransferResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_rasp_utils_protobuf_TransferResponse_descriptor,
