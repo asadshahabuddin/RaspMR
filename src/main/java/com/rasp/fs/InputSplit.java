@@ -21,33 +21,32 @@ import java.io.IOException;
  * record-oriented view.
  * </p>
  */
-public interface InputSplit
-{
+public interface InputSplit {
     /**
      * Get the offset of the split.
-     * @return
-     *            Starting offset of the split.
+     *
+     * @return Starting offset of the split.
      * @throws IOException
      * @throws InterruptedException
      */
     public abstract long getOffset()
         throws IOException, InterruptedException;
-    
+
     /**
      * Get the size of the split, so that the input splits can be sorted by size.
-     * @return
-     *            The number of bytes in the split.
+     *
+     * @return The number of bytes in the split.
      * @throws IOException
      * @throws InterruptedException
      */
     public abstract long getLength()
         throws IOException, InterruptedException;
-    
+
     /**
-     * Get the node by name where the data for the split would be local. 
+     * Get the node by name where the data for the split would be local.
      * The locations do not need to be serialized.
-     * @return
-     *            a new array of the node nodes
+     *
+     * @return a new array of the node nodes
      * @throws IOException
      * @throws InterruptedException
      */
@@ -56,3 +55,4 @@ public interface InputSplit
 
     public int getIdx();
 }
+/* End of InputSplit.java */

@@ -11,30 +11,26 @@ package com.rasp.fs.slave;
 /* Import list */
 import java.io.File;
 import java.io.IOException;
-
-import com.rasp.config.Configuration;
-import com.rasp.config.SlaveConfiguration;
 import com.rasp.fs.DataNode;
-import com.rasp.fs.InputSplitImpl;
 import java.io.FileOutputStream;
+import com.rasp.fs.InputSplitImpl;
+import com.rasp.config.Configuration;
 import java.io.FileNotFoundException;
-
+import com.rasp.config.SlaveConfiguration;
 import com.rasp.utils.autodiscovery.Service;
-import com.rasp.utils.autodiscovery.ServiceFactory;
 import com.rasp.utils.autodiscovery.ServiceType;
+import com.rasp.utils.autodiscovery.ServiceFactory;
 
 public class DataNodeServerImpl
-    implements DataNode
-{
+    implements DataNode {
     private Service service;
     private FileOutputStream f;
     private SlaveConfiguration configuration;
 
-
-    public DataNodeServerImpl(SlaveConfiguration configuration) throws FileNotFoundException{
+    public DataNodeServerImpl(SlaveConfiguration configuration) throws FileNotFoundException {
         this.service  = ServiceFactory.createService(
-                ServiceType.TASK_TRACKER,
-                Configuration.DATA_NODE_PORT);
+                        ServiceType.TASK_TRACKER,
+                        Configuration.DATA_NODE_PORT);
         this.configuration = configuration;
     }
     
@@ -45,48 +41,40 @@ public class DataNodeServerImpl
      * @throws FileNotFoundException
      */
     public FileOutputStream createDataStream()
-        throws FileNotFoundException
-    {
+        throws FileNotFoundException {
     	File f = new File(SlaveConfiguration.INPUT_SPLIT_FILENAME);
-    	if(f.exists())
-    	{
+    	if(f.exists()) {
     		f.delete();
     	}
     	return new FileOutputStream(SlaveConfiguration.INPUT_SPLIT_FILENAME, true);
     }
 
     @Override
-    public void closeInputSplit() throws IOException{
+    public void closeInputSplit() throws IOException {
         close();
     }
 
     @Override
-    public Service getService()
-    {
+    public Service getService() {
         return service;
     }
 
     @Override
     public void storeInputSplit(InputSplitImpl inputSplit)
-        throws IOException
-    {
+        throws IOException {
         f = createDataStream();
         configuration.addInputSplit(inputSplit);
     }
 
-
     @Override
     public void storeChunk(byte[] b)
-        throws IOException
-    {
+        throws IOException {
     	f.write(b);
     }
     
     public void close()
-        throws IOException
-    {
-    	if(f != null)
-    	{
+        throws IOException {
+    	if(f != null) {
     		f.close();
     	}
     }
