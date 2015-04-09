@@ -20,12 +20,14 @@ public interface ReducerTask extends Task
      *
      * @param reducerClass
      */
-    void setReducerClass(Class<? extends Reducer<?, ?, ?, ?>> reducerClass);
+    void setReducerClass(Class<? extends Reducer> reducerClass);
 
     /**
      * returns the {@link Reducer} for the Task
      *
      * @return {@link Class<? extends Reducer>}
      */
-    Class<? extends Reducer<?, ?, ?, ?>> getReducerClass();
+    Class<? extends Reducer> getReducerClass();
+
+
 }

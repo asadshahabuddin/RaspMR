@@ -20,12 +20,18 @@ public interface MapperTask extends Task
      *
      * @param mapperClass
      */
-    void setMapperClass(Class<? extends Mapper<?, ?>> mapperClass);
+    void setMapperClass(Class<? extends Mapper> mapperClass);
 
     /**
      * returns the {@link Mapper} for the Task
      *
      * @return {@link Class<? extends Mapper>}
      */
-    Class<? extends Mapper<?, ?>> getMapperClass();
+    Class<? extends Mapper> getMapperClass();
+
+
+    public MapContext getMapContext();
+
+    public void setMapContext(MapContext mapContext);
+
 }

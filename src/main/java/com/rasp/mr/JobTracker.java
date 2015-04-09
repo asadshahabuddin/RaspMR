@@ -11,6 +11,7 @@ package com.rasp.mr;
 /* Import list */
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * <code>JobTracker</code>  is responsible for maintaining queue of jobs
@@ -54,7 +55,7 @@ public interface JobTracker
      * @param taskId
      *            Unique ID of the a task.
      */
-    void completeMapTask(String taskId);
+    void completeMapTask(String taskId, Map<String, Long> keyCount);
 
     /**
      * Send the task to a worker node for execution. 

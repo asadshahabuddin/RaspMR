@@ -13,6 +13,8 @@ import java.util.UUID;
 import java.io.IOException;
 
 import com.rasp.fs.RecordReaderImpl;
+import com.rasp.mr.MapContext;
+import com.rasp.mr.MapContextImpl;
 import com.rasp.mr.Job;
 import com.rasp.mr.Mapper;
 import com.rasp.config.Configuration;
@@ -21,23 +23,25 @@ import com.rasp.utils.autodiscovery.Service;
 import com.rasp.utils.autodiscovery.ServiceType;
 import com.rasp.utils.autodiscovery.ServiceFactory;
 
-public class MapperTask
-    implements com.rasp.mr.MapperTask
-{
+public class MapperTaskImpl implements com.rasp.mr.MapperTask{
 	private String taskId;
 	private Job job;
 	private InputSplit inputSplit;
-	private Class<? extends Mapper<?, ?>> mapperClass;
+	private Class<? extends Mapper> mapperClass;
 	private boolean complete;
-	
-    public MapperTask()
+    private MapContext mapContext;
+
+    public MapperTaskImpl()
     {
         taskId = UUID.randomUUID().toString();
+        mapContext = new MapContextImpl();
+
     }
 
-    public MapperTask(String taskId)
+    public MapperTaskImpl(String taskId)
     {
         this.taskId = taskId;
+        mapContext = new MapContextImpl();
     }
     
     @Override
@@ -71,13 +75,13 @@ public class MapperTask
 	}
 
 	@Override
-	public void setMapperClass(Class<? extends Mapper<?, ?>> mapperClass)
+	public void setMapperClass(Class<? extends Mapper> mapperClass)
 	{
 		this.mapperClass = mapperClass;
 	}
 
 	@Override
-	public Class<? extends Mapper<?, ?>> getMapperClass()
+	public Class<? extends Mapper> getMapperClass()
 	{
 		return mapperClass;
 	}
@@ -87,7 +91,8 @@ public class MapperTask
 		throws IllegalAccessException, InstantiationException,
 			   InterruptedException,   IOException
 	{
-		Mapper<?, ?> mapper = mapperClass.newInstance();
+
+		Mapper mapper = mapperClass.newInstance();
 		if(mapper == null)
 		{
 			return false;
@@ -103,8 +108,9 @@ public class MapperTask
 		mapper.setup();
 		while(reader.nextKeyValue())
 		{
-			mapper.map(reader.getCurrentKey(), reader.getCurrentValue());
+			mapper.map(reader.getCurrentKey(), reader.getCurrentValue(), mapContext);
 		}
+        mapContext.close();
 		reader.close();
 		mapper.cleanup();
 
@@ -130,6 +136,15 @@ public class MapperTask
                ServiceType.TASK_TRACKER,
                getTaskInputSplit().getLocation(),
                Configuration.TASK_NODE_PORT);
+    }
+
+    public MapContext getMapContext() {
+        return mapContext;
+    }
+
+    @Override
+    public void setMapContext(MapContext mapContext) {
+        this.mapContext = mapContext;
     }
 }
 /* End of MapperTask.java */

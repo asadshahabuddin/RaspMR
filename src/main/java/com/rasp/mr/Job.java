@@ -39,7 +39,7 @@ public interface Job
      *
      * @param mapperClass
      */
-    void setMapper(Class<? extends Mapper<?, ?>> mapperClass);
+    void setMapper(Class<? extends Mapper> mapperClass);
 
 
     /**
@@ -47,7 +47,7 @@ public interface Job
      *
      * @param reducerClass
      */
-    void setReducer(Class<? extends Reducer<?, ?, ?, ?>> reducerClass);
+    void setReducer(Class<? extends Reducer> reducerClass);
 
 
     /**
@@ -83,7 +83,7 @@ public interface Job
 
     String getJobId();
 
-    Class<? extends Mapper<?, ?>> getMapperClass();
-    Class<? extends Reducer<?, ?, ?, ?>> getReducerClass();
+    Class<? extends Mapper> getMapperClass();
+    Class<? extends Reducer> getReducerClass();
 
 }

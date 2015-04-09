@@ -1,7 +1,7 @@
 package com.rasp.utils.protobuf;
 
-option java_package          = "com.rasp.fs";
-option java_outer_classname  = "GroupingKeyProtos";
+option java_package          = "com.rasp.mr";
+option java_outer_classname  = "SJobNode";
 option java_generic_services = true;
 
 message KeyPacket {

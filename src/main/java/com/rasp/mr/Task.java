@@ -64,4 +64,5 @@ public interface Task
     void setJob(Job job);
     Service getService() throws IOException, InterruptedException;
 
+
 }
