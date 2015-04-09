@@ -66,8 +66,19 @@ public class TaskNodeClientImpl implements TaskNode {
     }
 
     @Override
-    public void sendDataTransferTask(Task task) {
-        // TODO
+    public void sendDataTransferTask(String key, Service service)
+        throws ServiceException {
+        STaskProtos.SDataTransferTask.SReducerLocation location =
+                STaskProtos.SDataTransferTask.SReducerLocation.newBuilder()
+                        .setIp(service.getIp())
+                        .setPort(service.getPort();
+
+        STaskProtos.SDataTransferTask task = STaskProtos.SDataTransferTask
+                .newBuilder()
+                .setKey(key)
+                .setLocation(location).build();
+
+        taskService.sendDataTransferTask(controller, task);
     }
 }
 /* End of TaskNodeClientImpl.java */

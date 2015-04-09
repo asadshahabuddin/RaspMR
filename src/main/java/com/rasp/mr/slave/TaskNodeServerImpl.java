@@ -41,32 +41,7 @@ public class TaskNodeServerImpl
     }
 
     @Override
-    public void sendDataTransferTask(Task task) {
-        /*
-        STaskProtos.STask.STaskType sTaskType;
-        String taskClass;
-
-        if(task instanceof MapperTask){
-            sTaskType = STaskProtos.STask.STaskType.MAPPER;
-            taskClass = ((MapperTask) task).getMapperClass().toString();
-        } else {
-            sTaskType = STaskProtos.STask.STaskType.REDUCER;
-            taskClass = ((ReducerTask) task).getReducerClass().toString();
-        }
-
-        STaskProtos.STask sTask = STaskProtos.STask.newBuilder()
-                .setClassName(taskClass)
-                .setId(task.getTaskId())
-                .setJobId(task.getJob().getJobId())
-                .setTaskType(sTaskType)
-                .setInputSplitId(task.getTaskInputSplit().getIdx())
-                .build();
-
-        try {
-            taskService.sendTask(controller,sTask);
-        } catch (ServiceException e) {
-            e.printStackTrace();
-        }
+    public void sendDataTransferTask(String key, Service service) {
+        // TODO
     }
-    */
 }

@@ -1,3 +1,11 @@
+/**
+ * Author : Rahul Madhavan
+ * File   : TaskBlockingService.java
+ * Email  : rahulk@ccs.neu.edu
+ * Created: Apr 4, 2015
+ * Edited : Apr 9, 2015
+ */
+
 package com.rasp.mr.slave;
 
 import com.google.protobuf.RpcController;
@@ -8,15 +16,8 @@ import com.rasp.mr.Mapper;
 import com.rasp.mr.Task;
 import com.rasp.mr.TaskNode;
 
-/**
- * Author : rahulmadhavan
- * File   :
- * Email  : rahulk@ccs.neu.edu
- * Created: 4/4/15
- * Edited :
- */
-public class TaskBlockingService implements STaskProtos.TaskService.BlockingInterface{
-
+public class TaskBlockingService
+    implements STaskProtos.TaskService.BlockingInterface{
     private TaskNode taskNode;
     private SlaveConfiguration configuration;
     public TaskBlockingService(TaskNode taskNode, SlaveConfiguration slaveConfiguration) {
@@ -29,7 +30,6 @@ public class TaskBlockingService implements STaskProtos.TaskService.BlockingInte
         taskNode.sendTask(sTaskToTask(sTask));
         return STaskProtos.TransferResponse.newBuilder().setStatus("OK").build();
     }
-
 
     private Task sTaskToTask(STaskProtos.STask sTask){
         Task task;

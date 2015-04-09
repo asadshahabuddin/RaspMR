@@ -35,12 +35,6 @@ message SDataTransferTask {
     message SReducerLocation {
         required string ip          = 1;
         required string port        = 2;
-        required STaskType taskType = 3;
-
-        enum STaskType {
-            MAPPER  = 1;
-            REDUCER = 2;
-        }
     }
 }
 

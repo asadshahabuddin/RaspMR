@@ -1,7 +1,3 @@
-package com.rasp.mr;
-
-import com.rasp.utils.autodiscovery.Service;
-
 /**
  * Author : Rahul Madhavan
  * File   : TaskNode.java
@@ -9,6 +5,11 @@ import com.rasp.utils.autodiscovery.Service;
  * Created: Apr 4, 2015
  * Edited : Apr 9, 2015
  */
+
+package com.rasp.mr;
+
+import com.google.protobuf.ServiceException;
+import com.rasp.utils.autodiscovery.Service;
 
 public interface TaskNode {
     /**
@@ -30,7 +31,8 @@ public interface TaskNode {
      * @param task
      *            The data transfer task requested from a worker node.
      */
-    void sendDataTransferTask(Task task);
+    void sendDataTransferTask(String key, Service service)
+        throws ServiceException;
 
     /*
     void initiateTransferDataForKey(String key);
@@ -40,3 +42,4 @@ public interface TaskNode {
     void terminateTransferDataForKey(String key);
     */
 }
+/* End of TaskNode.java */
