@@ -9,7 +9,7 @@ public final class TransferDataProtos {
       com.google.protobuf.ExtensionRegistry registry) {
   }
   public interface TransferDataOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.rasp.experiments.protobuf.TransferData)
+      // @@protoc_insertion_point(interface_extends:raspmr.RaspMR.experiments.protobuf.TransferData)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -27,11 +27,11 @@ public final class TransferDataProtos {
         getDataBytes();
   }
   /**
-   * Protobuf type {@code com.rasp.experiments.protobuf.TransferData}
+   * Protobuf type {@code raspmr.RaspMR.experiments.protobuf.TransferData}
    */
   public static final class TransferData extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.rasp.experiments.protobuf.TransferData)
+      // @@protoc_insertion_point(message_implements:raspmr.RaspMR.experiments.protobuf.TransferData)
       TransferDataOrBuilder {
     // Use TransferData.newBuilder() to construct.
     private TransferData(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
@@ -281,11 +281,11 @@ public final class TransferDataProtos {
       return builder;
     }
     /**
-     * Protobuf type {@code com.rasp.experiments.protobuf.TransferData}
+     * Protobuf type {@code raspmr.RaspMR.experiments.protobuf.TransferData}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.rasp.experiments.protobuf.TransferData)
+        // @@protoc_insertion_point(builder_implements:raspmr.RaspMR.experiments.protobuf.TransferData)
         com.rasp.experiments.protobuf.TransferDataProtos.TransferDataOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -481,7 +481,7 @@ public final class TransferDataProtos {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:com.rasp.experiments.protobuf.TransferData)
+      // @@protoc_insertion_point(builder_scope:raspmr.RaspMR.experiments.protobuf.TransferData)
     }
 
     static {
@@ -489,11 +489,11 @@ public final class TransferDataProtos {
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:com.rasp.experiments.protobuf.TransferData)
+    // @@protoc_insertion_point(class_scope:raspmr.RaspMR.experiments.protobuf.TransferData)
   }
 
   public interface TransferResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.rasp.experiments.protobuf.TransferResponse)
+      // @@protoc_insertion_point(interface_extends:raspmr.RaspMR.experiments.protobuf.TransferResponse)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -511,11 +511,11 @@ public final class TransferDataProtos {
         getStatusBytes();
   }
   /**
-   * Protobuf type {@code com.rasp.experiments.protobuf.TransferResponse}
+   * Protobuf type {@code raspmr.RaspMR.experiments.protobuf.TransferResponse}
    */
   public static final class TransferResponse extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.rasp.experiments.protobuf.TransferResponse)
+      // @@protoc_insertion_point(message_implements:raspmr.RaspMR.experiments.protobuf.TransferResponse)
       TransferResponseOrBuilder {
     // Use TransferResponse.newBuilder() to construct.
     private TransferResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
@@ -761,11 +761,11 @@ public final class TransferDataProtos {
       return builder;
     }
     /**
-     * Protobuf type {@code com.rasp.experiments.protobuf.TransferResponse}
+     * Protobuf type {@code raspmr.RaspMR.experiments.protobuf.TransferResponse}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.rasp.experiments.protobuf.TransferResponse)
+        // @@protoc_insertion_point(builder_implements:raspmr.RaspMR.experiments.protobuf.TransferResponse)
         com.rasp.experiments.protobuf.TransferDataProtos.TransferResponseOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -957,7 +957,7 @@ public final class TransferDataProtos {
         return this;
       }
 
-      // @@protoc_insertion_point(builder_scope:com.rasp.experiments.protobuf.TransferResponse)
+      // @@protoc_insertion_point(builder_scope:raspmr.RaspMR.experiments.protobuf.TransferResponse)
     }
 
     static {
@@ -965,11 +965,11 @@ public final class TransferDataProtos {
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:com.rasp.experiments.protobuf.TransferResponse)
+    // @@protoc_insertion_point(class_scope:raspmr.RaspMR.experiments.protobuf.TransferResponse)
   }
 
   /**
-   * Protobuf service {@code com.rasp.experiments.protobuf.TransferService}
+   * Protobuf service {@code raspmr.RaspMR.experiments.protobuf.TransferService}
    */
   public static abstract class TransferService
       implements com.google.protobuf.Service {
@@ -977,7 +977,7 @@ public final class TransferDataProtos {
 
     public interface Interface {
       /**
-       * <code>rpc ping(.com.rasp.experiments.protobuf.TransferData) returns (.com.rasp.experiments.protobuf.TransferResponse);</code>
+       * <code>rpc ping(.raspmr.RaspMR.experiments.protobuf.TransferData) returns (.raspmr.RaspMR.experiments.protobuf.TransferResponse);</code>
        */
       public abstract void ping(
           com.google.protobuf.RpcController controller,
@@ -1062,7 +1062,7 @@ public final class TransferDataProtos {
     }
 
     /**
-     * <code>rpc ping(.com.rasp.experiments.protobuf.TransferData) returns (.com.rasp.experiments.protobuf.TransferResponse);</code>
+     * <code>rpc ping(.raspmr.RaspMR.experiments.protobuf.TransferData) returns (.raspmr.RaspMR.experiments.protobuf.TransferResponse);</code>
      */
     public abstract void ping(
         com.google.protobuf.RpcController controller,
@@ -1197,7 +1197,7 @@ public final class TransferDataProtos {
 
     }
 
-    // @@protoc_insertion_point(class_scope:com.rasp.experiments.protobuf.TransferService)
+    // @@protoc_insertion_point(class_scope:raspmr.RaspMR.experiments.protobuf.TransferService)
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
@@ -1224,9 +1224,9 @@ public final class TransferDataProtos {
       "\030\001 \002(\t\"\"\n\020TransferResponse\022\016\n\006status\030\001 \001" +
       "(\t2\201\001\n\017TransferService\022n\n\004ping\0220.raspmr." +
       "RaspMR.experiments.protobuf.TransferData" +
-      "\0324.com.rasp.experiments.protobuf.Tr" +
-      "ansferResponseB;\n\"raspmr.RaspMR.experime" +
-      "nts.protobufB\022TransferDataProtos\210\001\001"
+      "\0324.raspmr.RaspMR.experiments.protobuf.Tr" +
+      "ansferResponseB6\n\035com.rasp.experiments.p" +
+      "rotobufB\022TransferDataProtos\210\001\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

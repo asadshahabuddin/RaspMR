@@ -31,8 +31,8 @@ public class JobNodeServerImpl implements JobNode{
         throws FileNotFoundException
     {
         this.service  = ServiceFactory.createService(
-                        ServiceType.TASK_TRACKER,
-                        Configuration.DATA_NODE_PORT);
+                        ServiceType.JOB_TRACKER,
+                        Configuration.JOB_NODE_PORT);
         this.configuration = configuration;
     }
 

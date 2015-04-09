@@ -83,6 +83,10 @@ public class JobTrackerImpl implements JobTracker
         if(task instanceof MapperTask){
 
             task.complete();
+            for (String key :keyCount.keySet()){
+                System.out.println("MAP ::    key   ::"+key+"::    Value   ::"+keyCount.get(key));
+            }
+
             ((MapperTask) task).getMapContext().setKeyCountMap(keyCount);
             if(job.isMapComplete()){
                 jobQueue.add(job);

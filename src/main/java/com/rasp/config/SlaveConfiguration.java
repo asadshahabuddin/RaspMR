@@ -9,9 +9,14 @@
 package com.rasp.config;
 
 /* Import list */
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
+import com.rasp.fs.master.DataNodeClientImpl;
+import com.rasp.mr.slave.JobNodeClientImpl;
+import com.rasp.utils.autodiscovery.Service;
+import com.rasp.utils.autodiscovery.ServiceFactory;
 import com.rasp.utils.protobuf.ProtoClient;
 import com.rasp.fs.DataNode;
 import com.rasp.mr.JobNode;
@@ -35,6 +40,22 @@ public class SlaveConfiguration extends Configuration {
         super(Configuration.DATA_NODE_PORT,ServiceType.TASK_TRACKER);
         protoClient = new ProtoClient();
         inputSplitMap = new HashMap<>();
+    }
+
+
+    public JobNode getJobNode() {
+        if(jobNode == null){
+            List<Service> services=  this.getDiscoverer().getServices(ServiceType.JOB_TRACKER);
+            if(services.size() != 1){
+                throw new RuntimeException("There must be exactly one master node running in the network");
+            }
+            Service jobService = services.get(0);
+            jobService = ServiceFactory.createService(ServiceType.JOB_TRACKER,jobService.getIp(),Configuration.JOB_NODE_PORT);
+            jobNode = new JobNodeClientImpl(protoClient,jobService);
+            return jobNode;
+        }else{
+            return jobNode;
+        }
     }
 
     public void setDataNode(DataNode dataNode) {
@@ -69,12 +90,7 @@ public class SlaveConfiguration extends Configuration {
         this.taskTracker = taskTracker;
     }
 
-    public JobNode getJobNode() {
-        return jobNode;
-    }
 
-    public void setJobNode(JobNode jobNode) {
-        this.jobNode = jobNode;
-    }
+
 }
 /* End of SlaveConfiguration.java */

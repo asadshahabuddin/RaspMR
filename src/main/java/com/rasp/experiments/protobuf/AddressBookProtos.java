@@ -9,7 +9,7 @@ public final class AddressBookProtos {
       com.google.protobuf.ExtensionRegistry registry) {
   }
   public interface PersonOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.rasp.experiments.protobuf.Person)
+      // @@protoc_insertion_point(interface_extends:raspmr.RaspMR.experiments.protobuf.Person)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -50,35 +50,35 @@ public final class AddressBookProtos {
         getEmailBytes();
 
     /**
-     * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+     * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
      */
-    java.util.List<com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber>
+    java.util.List<com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber> 
         getPhoneList();
     /**
-     * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+     * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
      */
     com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber getPhone(int index);
     /**
-     * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+     * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
      */
     int getPhoneCount();
     /**
-     * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+     * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
      */
-    java.util.List<? extends com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumberOrBuilder>
+    java.util.List<? extends com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumberOrBuilder> 
         getPhoneOrBuilderList();
     /**
-     * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+     * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
      */
     com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumberOrBuilder getPhoneOrBuilder(
         int index);
   }
   /**
-   * Protobuf type {@code com.rasp.experiments.protobuf.Person}
+   * Protobuf type {@code raspmr.RaspMR.experiments.protobuf.Person}
    */
   public static final class Person extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.rasp.experiments.protobuf.Person)
+      // @@protoc_insertion_point(message_implements:raspmr.RaspMR.experiments.protobuf.Person)
       PersonOrBuilder {
     // Use Person.newBuilder() to construct.
     private Person(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
@@ -193,7 +193,7 @@ public final class AddressBookProtos {
     }
 
     /**
-     * Protobuf enum {@code com.rasp.experiments.protobuf.Person.PhoneType}
+     * Protobuf enum {@code raspmr.RaspMR.experiments.protobuf.Person.PhoneType}
      */
     public enum PhoneType
         implements com.google.protobuf.ProtocolMessageEnum {
@@ -280,11 +280,11 @@ public final class AddressBookProtos {
         this.value = value;
       }
 
-      // @@protoc_insertion_point(enum_scope:com.rasp.experiments.protobuf.Person.PhoneType)
+      // @@protoc_insertion_point(enum_scope:raspmr.RaspMR.experiments.protobuf.Person.PhoneType)
     }
 
     public interface PhoneNumberOrBuilder extends
-        // @@protoc_insertion_point(interface_extends:com.rasp.experiments.protobuf.Person.PhoneNumber)
+        // @@protoc_insertion_point(interface_extends:raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber)
         com.google.protobuf.MessageOrBuilder {
 
       /**
@@ -302,20 +302,20 @@ public final class AddressBookProtos {
           getNumberBytes();
 
       /**
-       * <code>optional .com.rasp.experiments.protobuf.Person.PhoneType type = 2 [default = HOME];</code>
+       * <code>optional .raspmr.RaspMR.experiments.protobuf.Person.PhoneType type = 2 [default = HOME];</code>
        */
       boolean hasType();
       /**
-       * <code>optional .com.rasp.experiments.protobuf.Person.PhoneType type = 2 [default = HOME];</code>
+       * <code>optional .raspmr.RaspMR.experiments.protobuf.Person.PhoneType type = 2 [default = HOME];</code>
        */
       com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneType getType();
     }
     /**
-     * Protobuf type {@code com.rasp.experiments.protobuf.Person.PhoneNumber}
+     * Protobuf type {@code raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber}
      */
     public static final class PhoneNumber extends
         com.google.protobuf.GeneratedMessage implements
-        // @@protoc_insertion_point(message_implements:com.rasp.experiments.protobuf.Person.PhoneNumber)
+        // @@protoc_insertion_point(message_implements:raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber)
         PhoneNumberOrBuilder {
       // Use PhoneNumber.newBuilder() to construct.
       private PhoneNumber(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
@@ -464,13 +464,13 @@ public final class AddressBookProtos {
       public static final int TYPE_FIELD_NUMBER = 2;
       private com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneType type_;
       /**
-       * <code>optional .com.rasp.experiments.protobuf.Person.PhoneType type = 2 [default = HOME];</code>
+       * <code>optional .raspmr.RaspMR.experiments.protobuf.Person.PhoneType type = 2 [default = HOME];</code>
        */
       public boolean hasType() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>optional .com.rasp.experiments.protobuf.Person.PhoneType type = 2 [default = HOME];</code>
+       * <code>optional .raspmr.RaspMR.experiments.protobuf.Person.PhoneType type = 2 [default = HOME];</code>
        */
       public com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneType getType() {
         return type_;
@@ -599,11 +599,11 @@ public final class AddressBookProtos {
         return builder;
       }
       /**
-       * Protobuf type {@code com.rasp.experiments.protobuf.Person.PhoneNumber}
+       * Protobuf type {@code raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber}
        */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-          // @@protoc_insertion_point(builder_implements:com.rasp.experiments.protobuf.Person.PhoneNumber)
+          // @@protoc_insertion_point(builder_implements:raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber)
           com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumberOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
@@ -810,19 +810,19 @@ public final class AddressBookProtos {
 
         private com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneType type_ = com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneType.HOME;
         /**
-         * <code>optional .com.rasp.experiments.protobuf.Person.PhoneType type = 2 [default = HOME];</code>
+         * <code>optional .raspmr.RaspMR.experiments.protobuf.Person.PhoneType type = 2 [default = HOME];</code>
          */
         public boolean hasType() {
           return ((bitField0_ & 0x00000002) == 0x00000002);
         }
         /**
-         * <code>optional .com.rasp.experiments.protobuf.Person.PhoneType type = 2 [default = HOME];</code>
+         * <code>optional .raspmr.RaspMR.experiments.protobuf.Person.PhoneType type = 2 [default = HOME];</code>
          */
         public com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneType getType() {
           return type_;
         }
         /**
-         * <code>optional .com.rasp.experiments.protobuf.Person.PhoneType type = 2 [default = HOME];</code>
+         * <code>optional .raspmr.RaspMR.experiments.protobuf.Person.PhoneType type = 2 [default = HOME];</code>
          */
         public Builder setType(com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneType value) {
           if (value == null) {
@@ -834,7 +834,7 @@ public final class AddressBookProtos {
           return this;
         }
         /**
-         * <code>optional .com.rasp.experiments.protobuf.Person.PhoneType type = 2 [default = HOME];</code>
+         * <code>optional .raspmr.RaspMR.experiments.protobuf.Person.PhoneType type = 2 [default = HOME];</code>
          */
         public Builder clearType() {
           bitField0_ = (bitField0_ & ~0x00000002);
@@ -843,7 +843,7 @@ public final class AddressBookProtos {
           return this;
         }
 
-        // @@protoc_insertion_point(builder_scope:com.rasp.experiments.protobuf.Person.PhoneNumber)
+        // @@protoc_insertion_point(builder_scope:raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber)
       }
 
       static {
@@ -851,7 +851,7 @@ public final class AddressBookProtos {
         defaultInstance.initFields();
       }
 
-      // @@protoc_insertion_point(class_scope:com.rasp.experiments.protobuf.Person.PhoneNumber)
+      // @@protoc_insertion_point(class_scope:raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber)
     }
 
     private int bitField0_;
@@ -957,32 +957,32 @@ public final class AddressBookProtos {
     public static final int PHONE_FIELD_NUMBER = 4;
     private java.util.List<com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber> phone_;
     /**
-     * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+     * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
      */
     public java.util.List<com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber> getPhoneList() {
       return phone_;
     }
     /**
-     * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+     * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
      */
-    public java.util.List<? extends com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumberOrBuilder>
+    public java.util.List<? extends com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumberOrBuilder> 
         getPhoneOrBuilderList() {
       return phone_;
     }
     /**
-     * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+     * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
      */
     public int getPhoneCount() {
       return phone_.size();
     }
     /**
-     * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+     * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
      */
     public com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber getPhone(int index) {
       return phone_.get(index);
     }
     /**
-     * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+     * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
      */
     public com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumberOrBuilder getPhoneOrBuilder(
         int index) {
@@ -1138,11 +1138,11 @@ public final class AddressBookProtos {
       return builder;
     }
     /**
-     * Protobuf type {@code com.rasp.experiments.protobuf.Person}
+     * Protobuf type {@code raspmr.RaspMR.experiments.protobuf.Person}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.rasp.experiments.protobuf.Person)
+        // @@protoc_insertion_point(builder_implements:raspmr.RaspMR.experiments.protobuf.Person)
         com.rasp.experiments.protobuf.AddressBookProtos.PersonOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -1531,7 +1531,7 @@ public final class AddressBookProtos {
           com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber, com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber.Builder, com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumberOrBuilder> phoneBuilder_;
 
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
        */
       public java.util.List<com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber> getPhoneList() {
         if (phoneBuilder_ == null) {
@@ -1541,7 +1541,7 @@ public final class AddressBookProtos {
         }
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
        */
       public int getPhoneCount() {
         if (phoneBuilder_ == null) {
@@ -1551,7 +1551,7 @@ public final class AddressBookProtos {
         }
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
        */
       public com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber getPhone(int index) {
         if (phoneBuilder_ == null) {
@@ -1561,7 +1561,7 @@ public final class AddressBookProtos {
         }
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
        */
       public Builder setPhone(
           int index, com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber value) {
@@ -1578,7 +1578,7 @@ public final class AddressBookProtos {
         return this;
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
        */
       public Builder setPhone(
           int index, com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber.Builder builderForValue) {
@@ -1592,7 +1592,7 @@ public final class AddressBookProtos {
         return this;
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
        */
       public Builder addPhone(com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber value) {
         if (phoneBuilder_ == null) {
@@ -1608,7 +1608,7 @@ public final class AddressBookProtos {
         return this;
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
        */
       public Builder addPhone(
           int index, com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber value) {
@@ -1625,7 +1625,7 @@ public final class AddressBookProtos {
         return this;
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
        */
       public Builder addPhone(
           com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber.Builder builderForValue) {
@@ -1639,7 +1639,7 @@ public final class AddressBookProtos {
         return this;
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
        */
       public Builder addPhone(
           int index, com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber.Builder builderForValue) {
@@ -1653,7 +1653,7 @@ public final class AddressBookProtos {
         return this;
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
        */
       public Builder addAllPhone(
           java.lang.Iterable<? extends com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber> values) {
@@ -1668,7 +1668,7 @@ public final class AddressBookProtos {
         return this;
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
        */
       public Builder clearPhone() {
         if (phoneBuilder_ == null) {
@@ -1681,7 +1681,7 @@ public final class AddressBookProtos {
         return this;
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
        */
       public Builder removePhone(int index) {
         if (phoneBuilder_ == null) {
@@ -1694,14 +1694,14 @@ public final class AddressBookProtos {
         return this;
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
        */
       public com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber.Builder getPhoneBuilder(
           int index) {
         return getPhoneFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
        */
       public com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumberOrBuilder getPhoneOrBuilder(
           int index) {
@@ -1711,9 +1711,9 @@ public final class AddressBookProtos {
         }
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
        */
-      public java.util.List<? extends com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumberOrBuilder>
+      public java.util.List<? extends com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumberOrBuilder> 
            getPhoneOrBuilderList() {
         if (phoneBuilder_ != null) {
           return phoneBuilder_.getMessageOrBuilderList();
@@ -1722,14 +1722,14 @@ public final class AddressBookProtos {
         }
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
        */
       public com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber.Builder addPhoneBuilder() {
         return getPhoneFieldBuilder().addBuilder(
             com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
        */
       public com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber.Builder addPhoneBuilder(
           int index) {
@@ -1737,14 +1737,14 @@ public final class AddressBookProtos {
             index, com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person.PhoneNumber phone = 4;</code>
        */
-      public java.util.List<com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber.Builder>
+      public java.util.List<com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber.Builder> 
            getPhoneBuilderList() {
         return getPhoneFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber, com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber.Builder, com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumberOrBuilder>
+          com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber, com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumber.Builder, com.rasp.experiments.protobuf.AddressBookProtos.Person.PhoneNumberOrBuilder> 
           getPhoneFieldBuilder() {
         if (phoneBuilder_ == null) {
           phoneBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
@@ -1758,7 +1758,7 @@ public final class AddressBookProtos {
         return phoneBuilder_;
       }
 
-      // @@protoc_insertion_point(builder_scope:com.rasp.experiments.protobuf.Person)
+      // @@protoc_insertion_point(builder_scope:raspmr.RaspMR.experiments.protobuf.Person)
     }
 
     static {
@@ -1766,43 +1766,43 @@ public final class AddressBookProtos {
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:com.rasp.experiments.protobuf.Person)
+    // @@protoc_insertion_point(class_scope:raspmr.RaspMR.experiments.protobuf.Person)
   }
 
   public interface AddressBookOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:com.rasp.experiments.protobuf.AddressBook)
+      // @@protoc_insertion_point(interface_extends:raspmr.RaspMR.experiments.protobuf.AddressBook)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+     * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
      */
-    java.util.List<com.rasp.experiments.protobuf.AddressBookProtos.Person>
+    java.util.List<com.rasp.experiments.protobuf.AddressBookProtos.Person> 
         getPersonList();
     /**
-     * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+     * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
      */
     com.rasp.experiments.protobuf.AddressBookProtos.Person getPerson(int index);
     /**
-     * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+     * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
      */
     int getPersonCount();
     /**
-     * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+     * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
      */
-    java.util.List<? extends com.rasp.experiments.protobuf.AddressBookProtos.PersonOrBuilder>
+    java.util.List<? extends com.rasp.experiments.protobuf.AddressBookProtos.PersonOrBuilder> 
         getPersonOrBuilderList();
     /**
-     * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+     * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
      */
     com.rasp.experiments.protobuf.AddressBookProtos.PersonOrBuilder getPersonOrBuilder(
         int index);
   }
   /**
-   * Protobuf type {@code com.rasp.experiments.protobuf.AddressBook}
+   * Protobuf type {@code raspmr.RaspMR.experiments.protobuf.AddressBook}
    */
   public static final class AddressBook extends
       com.google.protobuf.GeneratedMessage implements
-      // @@protoc_insertion_point(message_implements:com.rasp.experiments.protobuf.AddressBook)
+      // @@protoc_insertion_point(message_implements:raspmr.RaspMR.experiments.protobuf.AddressBook)
       AddressBookOrBuilder {
     // Use AddressBook.newBuilder() to construct.
     private AddressBook(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
@@ -1902,32 +1902,32 @@ public final class AddressBookProtos {
     public static final int PERSON_FIELD_NUMBER = 1;
     private java.util.List<com.rasp.experiments.protobuf.AddressBookProtos.Person> person_;
     /**
-     * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+     * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
      */
     public java.util.List<com.rasp.experiments.protobuf.AddressBookProtos.Person> getPersonList() {
       return person_;
     }
     /**
-     * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+     * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
      */
-    public java.util.List<? extends com.rasp.experiments.protobuf.AddressBookProtos.PersonOrBuilder>
+    public java.util.List<? extends com.rasp.experiments.protobuf.AddressBookProtos.PersonOrBuilder> 
         getPersonOrBuilderList() {
       return person_;
     }
     /**
-     * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+     * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
      */
     public int getPersonCount() {
       return person_.size();
     }
     /**
-     * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+     * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
      */
     public com.rasp.experiments.protobuf.AddressBookProtos.Person getPerson(int index) {
       return person_.get(index);
     }
     /**
-     * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+     * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
      */
     public com.rasp.experiments.protobuf.AddressBookProtos.PersonOrBuilder getPersonOrBuilder(
         int index) {
@@ -2051,11 +2051,11 @@ public final class AddressBookProtos {
       return builder;
     }
     /**
-     * Protobuf type {@code com.rasp.experiments.protobuf.AddressBook}
+     * Protobuf type {@code raspmr.RaspMR.experiments.protobuf.AddressBook}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:com.rasp.experiments.protobuf.AddressBook)
+        // @@protoc_insertion_point(builder_implements:raspmr.RaspMR.experiments.protobuf.AddressBook)
         com.rasp.experiments.protobuf.AddressBookProtos.AddressBookOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
@@ -2219,7 +2219,7 @@ public final class AddressBookProtos {
           com.rasp.experiments.protobuf.AddressBookProtos.Person, com.rasp.experiments.protobuf.AddressBookProtos.Person.Builder, com.rasp.experiments.protobuf.AddressBookProtos.PersonOrBuilder> personBuilder_;
 
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
        */
       public java.util.List<com.rasp.experiments.protobuf.AddressBookProtos.Person> getPersonList() {
         if (personBuilder_ == null) {
@@ -2229,7 +2229,7 @@ public final class AddressBookProtos {
         }
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
        */
       public int getPersonCount() {
         if (personBuilder_ == null) {
@@ -2239,7 +2239,7 @@ public final class AddressBookProtos {
         }
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
        */
       public com.rasp.experiments.protobuf.AddressBookProtos.Person getPerson(int index) {
         if (personBuilder_ == null) {
@@ -2249,7 +2249,7 @@ public final class AddressBookProtos {
         }
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
        */
       public Builder setPerson(
           int index, com.rasp.experiments.protobuf.AddressBookProtos.Person value) {
@@ -2266,7 +2266,7 @@ public final class AddressBookProtos {
         return this;
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
        */
       public Builder setPerson(
           int index, com.rasp.experiments.protobuf.AddressBookProtos.Person.Builder builderForValue) {
@@ -2280,7 +2280,7 @@ public final class AddressBookProtos {
         return this;
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
        */
       public Builder addPerson(com.rasp.experiments.protobuf.AddressBookProtos.Person value) {
         if (personBuilder_ == null) {
@@ -2296,7 +2296,7 @@ public final class AddressBookProtos {
         return this;
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
        */
       public Builder addPerson(
           int index, com.rasp.experiments.protobuf.AddressBookProtos.Person value) {
@@ -2313,7 +2313,7 @@ public final class AddressBookProtos {
         return this;
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
        */
       public Builder addPerson(
           com.rasp.experiments.protobuf.AddressBookProtos.Person.Builder builderForValue) {
@@ -2327,7 +2327,7 @@ public final class AddressBookProtos {
         return this;
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
        */
       public Builder addPerson(
           int index, com.rasp.experiments.protobuf.AddressBookProtos.Person.Builder builderForValue) {
@@ -2341,7 +2341,7 @@ public final class AddressBookProtos {
         return this;
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
        */
       public Builder addAllPerson(
           java.lang.Iterable<? extends com.rasp.experiments.protobuf.AddressBookProtos.Person> values) {
@@ -2356,7 +2356,7 @@ public final class AddressBookProtos {
         return this;
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
        */
       public Builder clearPerson() {
         if (personBuilder_ == null) {
@@ -2369,7 +2369,7 @@ public final class AddressBookProtos {
         return this;
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
        */
       public Builder removePerson(int index) {
         if (personBuilder_ == null) {
@@ -2382,14 +2382,14 @@ public final class AddressBookProtos {
         return this;
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
        */
       public com.rasp.experiments.protobuf.AddressBookProtos.Person.Builder getPersonBuilder(
           int index) {
         return getPersonFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
        */
       public com.rasp.experiments.protobuf.AddressBookProtos.PersonOrBuilder getPersonOrBuilder(
           int index) {
@@ -2399,9 +2399,9 @@ public final class AddressBookProtos {
         }
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
        */
-      public java.util.List<? extends com.rasp.experiments.protobuf.AddressBookProtos.PersonOrBuilder>
+      public java.util.List<? extends com.rasp.experiments.protobuf.AddressBookProtos.PersonOrBuilder> 
            getPersonOrBuilderList() {
         if (personBuilder_ != null) {
           return personBuilder_.getMessageOrBuilderList();
@@ -2410,14 +2410,14 @@ public final class AddressBookProtos {
         }
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
        */
       public com.rasp.experiments.protobuf.AddressBookProtos.Person.Builder addPersonBuilder() {
         return getPersonFieldBuilder().addBuilder(
             com.rasp.experiments.protobuf.AddressBookProtos.Person.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
        */
       public com.rasp.experiments.protobuf.AddressBookProtos.Person.Builder addPersonBuilder(
           int index) {
@@ -2425,14 +2425,14 @@ public final class AddressBookProtos {
             index, com.rasp.experiments.protobuf.AddressBookProtos.Person.getDefaultInstance());
       }
       /**
-       * <code>repeated .com.rasp.experiments.protobuf.Person person = 1;</code>
+       * <code>repeated .raspmr.RaspMR.experiments.protobuf.Person person = 1;</code>
        */
-      public java.util.List<com.rasp.experiments.protobuf.AddressBookProtos.Person.Builder>
+      public java.util.List<com.rasp.experiments.protobuf.AddressBookProtos.Person.Builder> 
            getPersonBuilderList() {
         return getPersonFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilder<
-          com.rasp.experiments.protobuf.AddressBookProtos.Person, com.rasp.experiments.protobuf.AddressBookProtos.Person.Builder, com.rasp.experiments.protobuf.AddressBookProtos.PersonOrBuilder>
+          com.rasp.experiments.protobuf.AddressBookProtos.Person, com.rasp.experiments.protobuf.AddressBookProtos.Person.Builder, com.rasp.experiments.protobuf.AddressBookProtos.PersonOrBuilder> 
           getPersonFieldBuilder() {
         if (personBuilder_ == null) {
           personBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
@@ -2446,7 +2446,7 @@ public final class AddressBookProtos {
         return personBuilder_;
       }
 
-      // @@protoc_insertion_point(builder_scope:com.rasp.experiments.protobuf.AddressBook)
+      // @@protoc_insertion_point(builder_scope:raspmr.RaspMR.experiments.protobuf.AddressBook)
     }
 
     static {
@@ -2454,7 +2454,7 @@ public final class AddressBookProtos {
       defaultInstance.initFields();
     }
 
-    // @@protoc_insertion_point(class_scope:com.rasp.experiments.protobuf.AddressBook)
+    // @@protoc_insertion_point(class_scope:raspmr.RaspMR.experiments.protobuf.AddressBook)
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
@@ -2484,15 +2484,15 @@ public final class AddressBookProtos {
       "\n\021addressbook.proto\022\"raspmr.RaspMR.exper" +
       "iments.protobuf\"\216\002\n\006Person\022\014\n\004name\030\001 \002(\t" +
       "\022\n\n\002id\030\002 \002(\005\022\r\n\005email\030\003 \001(\t\022E\n\005phone\030\004 \003" +
-      "(\01326.com.rasp.experiments.protobuf." +
+      "(\01326.raspmr.RaspMR.experiments.protobuf." +
       "Person.PhoneNumber\032g\n\013PhoneNumber\022\016\n\006num" +
       "ber\030\001 \002(\t\022H\n\004type\030\002 \001(\01624.raspmr.RaspMR." +
       "experiments.protobuf.Person.PhoneType:\004H" +
       "OME\"+\n\tPhoneType\022\n\n\006MOBILE\020\000\022\010\n\004HOME\020\001\022\010" +
       "\n\004WORK\020\002\"I\n\013AddressBook\022:\n\006person\030\001 \003(\0132" +
-      "*.com.rasp.experiments.protobuf.Per",
-      "sonB7\n\"com.rasp.experiments.protobu" +
-      "fB\021AddressBookProtos"
+      "*.raspmr.RaspMR.experiments.protobuf.Per",
+      "sonB2\n\035com.rasp.experiments.protobufB\021Ad" +
+      "dressBookProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

@@ -87,14 +87,10 @@ public class MapperTaskImpl implements com.rasp.mr.MapperTask{
 	}
 	
 	@Override
-	public boolean execute()
-		throws IllegalAccessException, InstantiationException,
-			   InterruptedException,   IOException
-	{
+	public boolean execute() throws IllegalAccessException, InstantiationException, InterruptedException, IOException{
 
 		Mapper mapper = mapperClass.newInstance();
-		if(mapper == null)
-		{
+		if(mapper == null){
 			return false;
 		}
 		

@@ -1,5 +1,5 @@
 /**
- * Author : Asad Shahabuddin
+ * Author : Asad Shahabuddin, Rahul Madhavan
  * File   : TaskTracker.java
  * Email  : asad808@ccs.neu.edu
  * Created: Apr 4, 2015
@@ -10,6 +10,12 @@ package com.rasp.mr.slave;
 
 /* Import list */
 import java.io.IOException;
+
+import com.google.protobuf.ServiceException;
+import com.rasp.config.MasterConfiguration;
+import com.rasp.config.SlaveConfiguration;
+import com.rasp.mr.MapperTask;
+import com.rasp.mr.ReducerTask;
 import com.rasp.mr.Task;
 import com.rasp.mr.TaskTracker;
 
@@ -17,9 +23,12 @@ public class TaskScheduler
 	implements com.rasp.mr.TaskScheduler, Runnable
 {
 	private TaskTracker taskTracker;
+    private SlaveConfiguration configuration;
 
-    public TaskScheduler(TaskTracker taskTracker) {
+    public TaskScheduler(TaskTracker taskTracker, SlaveConfiguration configuration) {
         this.taskTracker = taskTracker;
+        this.configuration = configuration;
+
     }
 
     @Override
@@ -32,7 +41,25 @@ public class TaskScheduler
     	{
     		return false;
     	}
-    	return task.execute();
+        if(task instanceof MapperTask){
+            task.execute();
+            try {
+                configuration.getJobNode().
+                        mapCompleted(task.getTaskId(),
+                                ((MapperTask) task).getMapContext().getKeyCountMap());
+            } catch (ServiceException e) {
+                e.printStackTrace();
+            }
+
+        }else if(task instanceof ReducerTask){
+
+
+        }else{
+            throw new RuntimeException("unknown task type given to task scheduler: "+task.getClass());
+        }
+
+
+    	return true;
     }
 
 	@Override

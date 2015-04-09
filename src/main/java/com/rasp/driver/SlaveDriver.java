@@ -39,19 +39,14 @@ public class SlaveDriver
         SlaveConfiguration configuration = new SlaveConfiguration();
         DataNode dataServer = new DataNodeServerImpl(configuration);
         TaskNode taskServer = new TaskNodeServerImpl(configuration);
-        JobNode jobNode = new JobNodeClientImpl(
-                configuration.protoClient,
-                ServiceFactory.createService(ServiceType.JOB_TRACKER,
-                        Configuration.JOB_NODE_PORT));
 
         TaskTracker taskTracker = new com.rasp.mr.slave.TaskTracker();
-        TaskScheduler taskScheduler = new TaskScheduler(taskTracker);
+        TaskScheduler taskScheduler = new TaskScheduler(taskTracker,configuration);
         Thread taskSchedulerThread = new Thread(taskScheduler);
 
         configuration.setDataNode(dataServer);
         configuration.setTaskNode(taskServer);
         configuration.setTaskTracker(taskTracker);
-        configuration.setJobNode(jobNode);
 
         SInputSplitProtos.DataTransferService.BlockingInterface dataTransferService
                 = new DataTransferBlockingService(configuration.getDataNode());
