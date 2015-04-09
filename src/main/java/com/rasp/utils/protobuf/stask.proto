@@ -50,6 +50,7 @@ message TransferResponse {
 
 service TaskService {
     rpc sendTask(STask) returns (TransferResponse);
+    rpc sendDataTransferTask(SDataTransferTask) returns (TransferResponse);
 }
 
 service JobService {
