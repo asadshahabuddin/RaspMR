@@ -22,6 +22,7 @@ public class Configuration {
     /* Constants */
     public static final int TASK_NODE_PORT = 9797;
     public static final int DATA_NODE_PORT = 9292;
+    public static final int JOB_NODE_PORT = 9595;
 
     private HazelcastInstance hz1;
     private Discoverer discoverer;

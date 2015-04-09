@@ -19,5 +19,7 @@ public interface JobNode
 
     public void mapCompleted(String taskId, Map<String,Long> keyCount)
         throws ServiceException;
+
+    public Service getService();
 }
 /* End of KeyPacket.java */

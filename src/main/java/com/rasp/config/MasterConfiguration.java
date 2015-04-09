@@ -12,6 +12,7 @@ package com.rasp.config;
 import java.util.Map;
 import java.util.HashMap;
 import com.rasp.fs.DataNode;
+import com.rasp.mr.JobNode;
 import com.rasp.mr.TaskNode;
 import com.rasp.fs.DataMaster;
 import com.rasp.mr.JobTracker;
@@ -29,6 +30,7 @@ public class MasterConfiguration extends Configuration {
     private DataMaster dataMaster;
     private JobTracker jobTracker;
     private JobScheduler jobScheduler;
+    private JobNode jobServer;
 
     public MasterConfiguration(int portNo, ServiceType serviceType) {
         super(portNo,serviceType);
@@ -83,6 +85,14 @@ public class MasterConfiguration extends Configuration {
 
     public void setJobScheduler(JobScheduler jobScheduler) {
         this.jobScheduler = jobScheduler;
+    }
+
+    public JobNode getJobServer() {
+        return jobServer;
+    }
+
+    public void setJobServer(JobNode jobServer) {
+        this.jobServer = jobServer;
     }
 }
 /* End of MasterConfiguration.java */

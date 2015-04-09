@@ -11,7 +11,10 @@ package com.rasp.config;
 /* Import list */
 import java.util.Map;
 import java.util.HashMap;
+
+import com.rasp.utils.protobuf.ProtoClient;
 import com.rasp.fs.DataNode;
+import com.rasp.mr.JobNode;
 import com.rasp.mr.TaskNode;
 import com.rasp.mr.TaskTracker;
 import com.rasp.fs.InputSplitImpl;
@@ -21,13 +24,16 @@ import com.rasp.utils.autodiscovery.ServiceType;
 public class SlaveConfiguration extends Configuration {
 	private DataNode dataNode;
     private TaskNode taskNode;
+    private JobNode jobNode;
     private Map<Integer,InputSplitImpl> inputSplitMap;
     private TaskTracker taskTracker;
     public static final String INPUT_SPLIT_FILENAME = "split.txt";
+    public ProtoClient protoClient;
 
     public SlaveConfiguration()
         throws FileNotFoundException {
         super(Configuration.DATA_NODE_PORT,ServiceType.TASK_TRACKER);
+        protoClient = new ProtoClient();
         inputSplitMap = new HashMap<>();
     }
 
@@ -61,6 +67,14 @@ public class SlaveConfiguration extends Configuration {
 
     public void setTaskTracker(TaskTracker taskTracker) {
         this.taskTracker = taskTracker;
+    }
+
+    public JobNode getJobNode() {
+        return jobNode;
+    }
+
+    public void setJobNode(JobNode jobNode) {
+        this.jobNode = jobNode;
     }
 }
 /* End of SlaveConfiguration.java */

@@ -57,5 +57,10 @@ public class JobNodeClientImpl implements JobNode{
 
         jobService.sendMapResponse(controller,builder.build());
     }
+
+    @Override
+    public Service getService() {
+        return service;
+    }
 }
 /* End of KeyPacketClientImpl.java */

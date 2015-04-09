@@ -41,5 +41,10 @@ public class JobNodeServerImpl implements JobNode{
 
         configuration.getJobTracker().completeMapTask(taskId,keyCount);
     }
+
+    @Override
+    public Service getService() {
+        return service;
+    }
 }
 /* End of KeyPacketServerImpl.java */

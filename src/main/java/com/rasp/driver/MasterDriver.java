@@ -9,18 +9,25 @@
 package com.rasp.driver;
 
 /* Import list */
+import com.google.protobuf.BlockingService;
+import com.rasp.fs.DataNode;
+import com.rasp.fs.SInputSplitProtos;
+import com.rasp.fs.slave.DataNodeServerImpl;
+import com.rasp.fs.slave.DataTransferBlockingService;
 import com.rasp.mr.Job;
 import java.util.Scanner;
 import java.io.IOException;
 import com.rasp.fs.DataMaster;
+import com.rasp.mr.JobNode;
 import com.rasp.mr.JobTracker;
-import com.rasp.mr.master.JobImpl;
+import com.rasp.mr.STaskProtos;
+import com.rasp.mr.master.*;
+import com.rasp.mr.slave.TaskBlockingService;
 import com.rasp.mr.slave.TestMapper;
-import com.rasp.mr.master.JobScheduler;
-import com.rasp.mr.master.JobTrackerImpl;
 import com.rasp.fs.master.DataMasterImpl;
 import com.rasp.config.MasterConfiguration;
 import com.rasp.utils.autodiscovery.ServiceType;
+import com.rasp.utils.protobuf.ProtoServer;
 
 public class MasterDriver {
     /* Constant(s) */
@@ -32,13 +39,22 @@ public class MasterDriver {
         DataMaster dataMaster = new DataMasterImpl(configuration);
         JobTracker jobTracker = new JobTrackerImpl(configuration);
         JobScheduler jobScheduler = new JobScheduler(jobTracker);
+        JobNode jobServer = new JobNodeServerImpl(configuration);
+
 
         configuration.setDataMaster(dataMaster);
         configuration.setJobTracker(jobTracker);
         configuration.setJobScheduler(jobScheduler);
+        configuration.setJobServer(jobServer);
 
         Thread jobSchedulerThread = new Thread(jobScheduler);
         jobSchedulerThread.start();
+
+
+        STaskProtos.JobService.BlockingInterface jobService
+                = new JobNodeBlockingService(configuration.getJobServer());
+        BlockingService js = STaskProtos.JobService.newReflectiveBlockingService(jobService);
+        ProtoServer.startServer(configuration.getJobServer().getService(), js);
 
         while(true) {
             Scanner scanner = new Scanner(System.in);
