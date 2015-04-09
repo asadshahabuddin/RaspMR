@@ -129,9 +129,5 @@ public class TaskNodeClientImpl implements TaskNode {
     public Service getService() {
         return service;
     }
-
-    public void sendDataTransferTask(Task task) {
-        // TODO
-    }
 }
 /* End of TaskNodeClientImpl.java */
