@@ -5882,6 +5882,14 @@ public final class STaskProtos {
           com.rasp.mr.STaskProtos.STransferKeyData request,
           com.google.protobuf.RpcCallback<com.rasp.mr.STaskProtos.TransferResponse> done);
 
+      /**
+       * <code>rpc sendDataTransferTask(.com.rasp.utils.protobuf.SDataTransferTask) returns (.com.rasp.utils.protobuf.TransferResponse);</code>
+       */
+      public abstract void sendDataTransferTask(
+          com.google.protobuf.RpcController controller,
+          com.rasp.mr.STaskProtos.SDataTransferTask request,
+          com.google.protobuf.RpcCallback<com.rasp.mr.STaskProtos.TransferResponse> done);
+
     }
 
     public static com.google.protobuf.Service newReflectiveService(
@@ -5919,6 +5927,14 @@ public final class STaskProtos {
           impl.terminateTransferDataForKey(controller, request, done);
         }
 
+        @java.lang.Override
+        public  void sendDataTransferTask(
+            com.google.protobuf.RpcController controller,
+            com.rasp.mr.STaskProtos.SDataTransferTask request,
+            com.google.protobuf.RpcCallback<com.rasp.mr.STaskProtos.TransferResponse> done) {
+          impl.sendDataTransferTask(controller, request, done);
+        }
+
       };
     }
 
@@ -5949,6 +5965,8 @@ public final class STaskProtos {
               return impl.transferDataForKey(controller, (com.rasp.mr.STaskProtos.STransferKeyData)request);
             case 3:
               return impl.terminateTransferDataForKey(controller, (com.rasp.mr.STaskProtos.STransferKeyData)request);
+            case 4:
+              return impl.sendDataTransferTask(controller, (com.rasp.mr.STaskProtos.SDataTransferTask)request);
             default:
               throw new java.lang.AssertionError("Can't get here.");
           }
@@ -5971,6 +5989,8 @@ public final class STaskProtos {
               return com.rasp.mr.STaskProtos.STransferKeyData.getDefaultInstance();
             case 3:
               return com.rasp.mr.STaskProtos.STransferKeyData.getDefaultInstance();
+            case 4:
+              return com.rasp.mr.STaskProtos.SDataTransferTask.getDefaultInstance();
             default:
               throw new java.lang.AssertionError("Can't get here.");
           }
@@ -5992,6 +6012,8 @@ public final class STaskProtos {
             case 2:
               return com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance();
             case 3:
+              return com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance();
+            case 4:
               return com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance();
             default:
               throw new java.lang.AssertionError("Can't get here.");
@@ -6031,6 +6053,14 @@ public final class STaskProtos {
     public abstract void terminateTransferDataForKey(
         com.google.protobuf.RpcController controller,
         com.rasp.mr.STaskProtos.STransferKeyData request,
+        com.google.protobuf.RpcCallback<com.rasp.mr.STaskProtos.TransferResponse> done);
+
+    /**
+     * <code>rpc sendDataTransferTask(.com.rasp.utils.protobuf.SDataTransferTask) returns (.com.rasp.utils.protobuf.TransferResponse);</code>
+     */
+    public abstract void sendDataTransferTask(
+        com.google.protobuf.RpcController controller,
+        com.rasp.mr.STaskProtos.SDataTransferTask request,
         com.google.protobuf.RpcCallback<com.rasp.mr.STaskProtos.TransferResponse> done);
 
     public static final
@@ -6075,6 +6105,11 @@ public final class STaskProtos {
             com.google.protobuf.RpcUtil.<com.rasp.mr.STaskProtos.TransferResponse>specializeCallback(
               done));
           return;
+        case 4:
+          this.sendDataTransferTask(controller, (com.rasp.mr.STaskProtos.SDataTransferTask)request,
+            com.google.protobuf.RpcUtil.<com.rasp.mr.STaskProtos.TransferResponse>specializeCallback(
+              done));
+          return;
         default:
           throw new java.lang.AssertionError("Can't get here.");
       }
@@ -6097,6 +6132,8 @@ public final class STaskProtos {
           return com.rasp.mr.STaskProtos.STransferKeyData.getDefaultInstance();
         case 3:
           return com.rasp.mr.STaskProtos.STransferKeyData.getDefaultInstance();
+        case 4:
+          return com.rasp.mr.STaskProtos.SDataTransferTask.getDefaultInstance();
         default:
           throw new java.lang.AssertionError("Can't get here.");
       }
@@ -6118,6 +6155,8 @@ public final class STaskProtos {
         case 2:
           return com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance();
         case 3:
+          return com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance();
+        case 4:
           return com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance();
         default:
           throw new java.lang.AssertionError("Can't get here.");
@@ -6199,6 +6238,21 @@ public final class STaskProtos {
             com.rasp.mr.STaskProtos.TransferResponse.class,
             com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance()));
       }
+
+      public  void sendDataTransferTask(
+          com.google.protobuf.RpcController controller,
+          com.rasp.mr.STaskProtos.SDataTransferTask request,
+          com.google.protobuf.RpcCallback<com.rasp.mr.STaskProtos.TransferResponse> done) {
+        channel.callMethod(
+          getDescriptor().getMethods().get(4),
+          controller,
+          request,
+          com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance(),
+          com.google.protobuf.RpcUtil.generalizeCallback(
+            done,
+            com.rasp.mr.STaskProtos.TransferResponse.class,
+            com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance()));
+      }
     }
 
     public static BlockingInterface newBlockingStub(
@@ -6225,6 +6279,11 @@ public final class STaskProtos {
       public com.rasp.mr.STaskProtos.TransferResponse terminateTransferDataForKey(
           com.google.protobuf.RpcController controller,
           com.rasp.mr.STaskProtos.STransferKeyData request)
+          throws com.google.protobuf.ServiceException;
+
+      public com.rasp.mr.STaskProtos.TransferResponse sendDataTransferTask(
+          com.google.protobuf.RpcController controller,
+          com.rasp.mr.STaskProtos.SDataTransferTask request)
           throws com.google.protobuf.ServiceException;
     }
 
@@ -6277,6 +6336,18 @@ public final class STaskProtos {
           throws com.google.protobuf.ServiceException {
         return (com.rasp.mr.STaskProtos.TransferResponse) channel.callBlockingMethod(
           getDescriptor().getMethods().get(3),
+          controller,
+          request,
+          com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance());
+      }
+
+
+      public com.rasp.mr.STaskProtos.TransferResponse sendDataTransferTask(
+          com.google.protobuf.RpcController controller,
+          com.rasp.mr.STaskProtos.SDataTransferTask request)
+          throws com.google.protobuf.ServiceException {
+        return (com.rasp.mr.STaskProtos.TransferResponse) channel.callBlockingMethod(
+          getDescriptor().getMethods().get(4),
           controller,
           request,
           com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance());
@@ -6588,7 +6659,7 @@ public final class STaskProtos {
       "STransferKeyData\022\013\n\003key\030\001 \002(\t\022\014\n\004data\030\002 " +
       "\001(\014\022E\n\010dataHost\030\003 \002(\01323.com.rasp.utils.p" +
       "rotobuf.STransferKeyData.SDataHost\032%\n\tSD",
-      "ataHost\022\n\n\002ip\030\001 \002(\t\022\014\n\004port\030\002 \002(\0052\271\003\n\013Ta" +
+      "ataHost\022\n\n\002ip\030\001 \002(\t\022\014\n\004port\030\002 \002(\0052\250\004\n\013Ta" +
       "skService\022U\n\010sendTask\022\036.com.rasp.utils.p" +
       "rotobuf.STask\032).com.rasp.utils.protobuf." +
       "TransferResponse\022r\n\032initiateTransferData" +
@@ -6599,11 +6670,14 @@ public final class STaskProtos {
       "com.rasp.utils.protobuf.TransferResponse" +
       "\022s\n\033terminateTransferDataForKey\022).com.ra",
       "sp.utils.protobuf.STransferKeyData\032).com" +
-      ".rasp.utils.protobuf.TransferResponse2q\n" +
-      "\nJobService\022c\n\017sendMapResponse\022%.com.ras" +
-      "p.utils.protobuf.SMapResponse\032).com.rasp" +
-      ".utils.protobuf.TransferResponseB\035\n\013com." +
-      "rasp.mrB\013STaskProtos\210\001\001"
+      ".rasp.utils.protobuf.TransferResponse\022m\n" +
+      "\024sendDataTransferTask\022*.com.rasp.utils.p" +
+      "rotobuf.SDataTransferTask\032).com.rasp.uti" +
+      "ls.protobuf.TransferResponse2q\n\nJobServi" +
+      "ce\022c\n\017sendMapResponse\022%.com.rasp.utils.p" +
+      "rotobuf.SMapResponse\032).com.rasp.utils.pr" +
+      "otobuf.TransferResponseB\035\n\013com.rasp.mrB\013" +
+      "STaskProtos\210\001\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

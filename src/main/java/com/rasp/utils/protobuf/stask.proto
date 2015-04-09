@@ -68,6 +68,7 @@ service TaskService {
     rpc transferDataForKey(STransferKeyData) returns (TransferResponse);
     rpc terminateTransferDataForKey(STransferKeyData) returns (TransferResponse);
 
+    rpc sendDataTransferTask(SDataTransferTask) returns (TransferResponse);
 }
 
 service JobService {

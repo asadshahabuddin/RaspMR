@@ -21,7 +21,6 @@ import com.rasp.utils.autodiscovery.Service;
  * Edited :
  */
 public class TaskNodeClientImpl implements TaskNode {
-
     private ProtoClient protoClient;
     private Service service;
     STaskProtos.TaskService.BlockingInterface taskService;
@@ -35,8 +34,6 @@ public class TaskNodeClientImpl implements TaskNode {
         controller = channel.newRpcController();
     }
 
-
-
     @Override
     public void sendTask(Task task) {
         STaskProtos.STask.STaskType sTaskType;
@@ -45,7 +42,7 @@ public class TaskNodeClientImpl implements TaskNode {
         if(task instanceof MapperTask){
             sTaskType = STaskProtos.STask.STaskType.MAPPER;
             taskClass = ((MapperTask) task).getMapperClass().toString();
-        }else{
+        } else {
             sTaskType = STaskProtos.STask.STaskType.REDUCER;
             taskClass = ((ReducerTask) task).getReducerClass().toString();
         }
@@ -63,7 +60,6 @@ public class TaskNodeClientImpl implements TaskNode {
         } catch (ServiceException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
@@ -116,7 +112,11 @@ public class TaskNodeClientImpl implements TaskNode {
 
     @Override
     public Service getService() {
-        return null;
+        return service;
+    }
+
+    public void sendDataTransferTask(Task task) {
+        // TODO
     }
 }
-
+/* End of TaskNodeClientImpl.java */

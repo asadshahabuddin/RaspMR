@@ -41,8 +41,5 @@ public class JobNodeBlockingService implements STaskProtos.JobService.BlockingIn
         }
         return keyCount;
     }
-
-
-
 }
 /* End of JobNodeBlockingService.java */

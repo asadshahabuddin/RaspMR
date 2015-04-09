@@ -3,7 +3,7 @@
  * File   : Task.java
  * Email  : rahulk@ccs.neu.edu
  * Created: Mar 23, 2015
- * Edited : Mar 24, 2015
+ * Edited : Apr 9, 2015
  */
 
 package com.rasp.mr;
@@ -19,8 +19,7 @@ import java.io.IOException;
  * running for a single input split
  *
  */
-public interface Task
-{
+public interface Task {
     /**
      * returns the Job to which the task belongs
      *
@@ -35,14 +34,12 @@ public interface Task
      */
     InputSplit getTaskInputSplit();
 
-
     /**
      * sets the InputSplit for the Task
      *
      * @param inputSplit
      */
     void setTaskInputSplit(InputSplit inputSplit);
-
 
     /**
      * executes the task with the {@link com.rasp.fs.InputSplit} given from {@link Task#getTaskInputSplit}
@@ -53,16 +50,14 @@ public interface Task
     	throws IllegalAccessException, InstantiationException,
                InterruptedException,   IOException;
 
-
     String getTaskId();
 
-    // can be called only from the server
     void complete();
+
     boolean isCompleted();
 
-
     void setJob(Job job);
+
     Service getService() throws IOException, InterruptedException;
-
-
 }
+/* End of Task.java */
