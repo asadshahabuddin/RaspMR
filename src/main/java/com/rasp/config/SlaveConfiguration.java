@@ -15,6 +15,7 @@ import java.util.HashMap;
 
 import com.rasp.fs.master.DataNodeClientImpl;
 import com.rasp.mr.slave.JobNodeClientImpl;
+import com.rasp.shuffle.ShuffleSlave;
 import com.rasp.utils.autodiscovery.Service;
 import com.rasp.utils.autodiscovery.ServiceFactory;
 import com.rasp.utils.protobuf.ProtoClient;
@@ -30,6 +31,7 @@ public class SlaveConfiguration extends Configuration {
 	private DataNode dataNode;
     private TaskNode taskNode;
     private JobNode jobNode;
+    private ShuffleSlave shuffleSlave;
     private Map<Integer,InputSplitImpl> inputSplitMap;
     private TaskTracker taskTracker;
     public static final String INPUT_SPLIT_FILENAME = "split.txt";
@@ -90,7 +92,12 @@ public class SlaveConfiguration extends Configuration {
         this.taskTracker = taskTracker;
     }
 
+    public ShuffleSlave getShuffleSlave() {
+        return shuffleSlave;
+    }
 
-
+    public void setShuffleSlave(ShuffleSlave shuffleSlave) {
+        this.shuffleSlave = shuffleSlave;
+    }
 }
 /* End of SlaveConfiguration.java */

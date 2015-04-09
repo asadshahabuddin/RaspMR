@@ -1,5 +1,6 @@
 package com.rasp.mr.slave;
 
+import com.google.protobuf.ByteString;
 import com.google.protobuf.RpcController;
 import com.google.protobuf.ServiceException;
 import com.rasp.config.SlaveConfiguration;
@@ -7,6 +8,9 @@ import com.rasp.mr.STaskProtos;
 import com.rasp.mr.Mapper;
 import com.rasp.mr.Task;
 import com.rasp.mr.TaskNode;
+import com.rasp.utils.autodiscovery.Service;
+import com.rasp.utils.autodiscovery.ServiceFactory;
+import com.rasp.utils.autodiscovery.ServiceType;
 
 /**
  * Author : rahulmadhavan
@@ -50,5 +54,35 @@ public class TaskBlockingService implements STaskProtos.TaskService.BlockingInte
             task = null;
         }
         return task;
+    }
+
+    @Override
+    public STaskProtos.TransferResponse initiateTransferDataForKey(RpcController controller, STaskProtos.STransferKeyData request) throws ServiceException {
+        Service service = ServiceFactory.
+                createService(ServiceType.TASK_TRACKER,
+                        request.getDataHost().getIp(),
+                        request.getDataHost().getPort());
+        taskNode.initiateDataTransferForKey(request.getKey(),service);
+        return STaskProtos.TransferResponse.newBuilder().setStatus("OK").build();
+    }
+
+    @Override
+    public STaskProtos.TransferResponse transferDataForKey(RpcController controller, STaskProtos.STransferKeyData request) throws ServiceException {
+        Service service = ServiceFactory.
+                createService(ServiceType.TASK_TRACKER,
+                        request.getDataHost().getIp(),
+                        request.getDataHost().getPort());
+        taskNode.transferDataForKey(request.getData().toByteArray(), request.getKey(),service);
+        return STaskProtos.TransferResponse.newBuilder().setStatus("OK").build();
+    }
+
+    @Override
+    public STaskProtos.TransferResponse terminateTransferDataForKey(RpcController controller, STaskProtos.STransferKeyData request) throws ServiceException {
+        Service service = ServiceFactory.
+                createService(ServiceType.TASK_TRACKER,
+                        request.getDataHost().getIp(),
+                        request.getDataHost().getPort());
+        taskNode.terminateTransferDataForKey(request.getKey(),service);
+        return STaskProtos.TransferResponse.newBuilder().setStatus("OK").build();
     }
 }

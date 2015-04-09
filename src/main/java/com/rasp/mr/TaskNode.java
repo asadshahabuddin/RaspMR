@@ -15,11 +15,11 @@ public interface TaskNode {
 
     Service getService();
 
-//    void initiateTransferDataForKey(String key);
-//
-//    void transferDataForKey(byte[] data, String key);
-//
-//    void terminateTransferDataForKey(String key);
+    void initiateDataTransferForKey(String key,Service service);
+
+    void transferDataForKey(byte[] data, String key, Service service);
+
+    void terminateTransferDataForKey(String key,Service service);
 
 
 }

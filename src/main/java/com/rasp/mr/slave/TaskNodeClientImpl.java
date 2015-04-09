@@ -1,8 +1,10 @@
 package com.rasp.mr.slave;
 
+import com.google.protobuf.ByteString;
 import com.google.protobuf.RpcController;
 import com.google.protobuf.ServiceException;
 import com.googlecode.protobuf.pro.duplex.RpcClientChannel;
+import com.rasp.config.MasterConfiguration;
 import com.rasp.mr.STaskProtos;
 import com.rasp.utils.protobuf.ProtoClient;
 import com.rasp.mr.MapperTask;
@@ -33,6 +35,8 @@ public class TaskNodeClientImpl implements TaskNode {
         controller = channel.newRpcController();
     }
 
+
+
     @Override
     public void sendTask(Task task) {
         STaskProtos.STask.STaskType sTaskType;
@@ -60,6 +64,54 @@ public class TaskNodeClientImpl implements TaskNode {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void initiateDataTransferForKey(String key,Service service) {
+        STaskProtos.STransferKeyData.SDataHost sDataHost = STaskProtos.STransferKeyData
+                .SDataHost
+                .newBuilder()
+                .setIp(service.getIp())
+                .setPort(service.getPort())
+                .build();
+        STaskProtos.STransferKeyData sTransferKeyData = STaskProtos.STransferKeyData
+                .newBuilder()
+                .setKey(key)
+                .setDataHost(sDataHost)
+                .build();
+
+        try {
+            taskService.initiateTransferDataForKey(controller,sTransferKeyData);
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void transferDataForKey(byte[] data, String key,Service service) {
+        STaskProtos.STransferKeyData sTransferKeyData = STaskProtos.
+                STransferKeyData.newBuilder()
+                .setKey(key)
+                .setData(ByteString.copyFrom(data))
+                .build();
+
+        try {
+            taskService.transferDataForKey(controller, sTransferKeyData);
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void terminateTransferDataForKey(String key,Service service) {
+        STaskProtos.STransferKeyData sTransferKeyData = STaskProtos.STransferKeyData.newBuilder().setKey(key).build();
+        try {
+            taskService.terminateTransferDataForKey(controller, sTransferKeyData);
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -34,9 +34,26 @@ public class TaskNodeServerImpl implements TaskNode {
         configuration.getTaskTracker().submit(task);
     }
 
+
+    @Override
+    public void initiateDataTransferForKey(String key, Service service) {
+        configuration.getShuffleSlave().createDataHandlerFor(key,service);
+    }
+
+    @Override
+    public void transferDataForKey(byte[] data, String key, Service service) {
+        configuration.getShuffleSlave().storeDataFor(data,key,service);
+    }
+
+    @Override
+    public void terminateTransferDataForKey(String key, Service service) {
+        configuration.getShuffleSlave().closeDataHandlerFor(key,service);
+    }
+
     @Override
     public Service getService() {
         return service;
     }
+
 
 }
