@@ -67,4 +67,5 @@ service TaskService {
 
 service JobService {
     rpc sendMapResponse(SMapResponse) returns (TransferResponse);
+    rpc shuffleDataTransferCompleted(SDataTransferTask) returns (TransferResponse);
 }

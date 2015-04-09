@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by Sourabh,Shiva on 4/7/2015.
  */
-public class ShuffleMasterImpl {
+public class ShuffleMasterImpl implements ShuffleMaster {
 
     MasterConfiguration config;
 
@@ -91,9 +91,13 @@ public class ShuffleMasterImpl {
 
     //
     void checkAllAcksReceivedAndTriggerReduce(){
-    	
-    	//   create a lookup map to map for a machine(for a set of keys 
-    	// lying on that machine)
+    	//  create a lookup map to map for a machine(for a set of keys
+        // lying on that machine)
+
+    }
+
+    @Override
+    public void shuffleDataTransferCompleted(String key, Service service) {
 
     }
 }

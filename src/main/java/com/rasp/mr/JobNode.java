@@ -20,6 +20,8 @@ public interface JobNode
     public void mapCompleted(String taskId, Map<String,Long> keyCount)
         throws ServiceException;
 
+    public void shuffleDataTransferCompleted(String key, Service service) throws ServiceException;
+
     public Service getService();
 }
 /* End of KeyPacket.java */

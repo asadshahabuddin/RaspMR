@@ -15,8 +15,8 @@ import com.rasp.mr.Writable;
 import java.io.Serializable;
 
 
-public class WritableImpl
-        implements Serializable, Writable {
+public class WritableImpl implements Serializable, Writable {
+
     /* Serial ID and constants */
     private static final long serialVersionUID = 1L;
     public static final int TYPE_NULL = 0;

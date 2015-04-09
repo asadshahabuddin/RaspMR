@@ -15,6 +15,9 @@ import com.rasp.mr.JobNode;
 import com.google.protobuf.RpcController;
 import com.google.protobuf.ServiceException;
 import com.rasp.mr.STaskProtos;
+import com.rasp.utils.autodiscovery.Service;
+import com.rasp.utils.autodiscovery.ServiceFactory;
+import com.rasp.utils.autodiscovery.ServiceType;
 
 import java.util.HashMap;
 import java.util.List;
@@ -41,5 +44,16 @@ public class JobNodeBlockingService implements STaskProtos.JobService.BlockingIn
         }
         return keyCount;
     }
+
+    @Override
+    public STaskProtos.TransferResponse shuffleDataTransferCompleted(RpcController controller, STaskProtos.SDataTransferTask request) throws ServiceException {
+        Service service = ServiceFactory.
+                createService(ServiceType.TASK_TRACKER,
+                        request.getLocation().getIp(),
+                        request.getLocation().getPort());
+        jobNode.shuffleDataTransferCompleted(request.getKey(),service);
+        return STaskProtos.TransferResponse.newBuilder().setStatus("OK").build();
+    }
+
 }
 /* End of JobNodeBlockingService.java */

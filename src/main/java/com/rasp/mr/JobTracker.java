@@ -10,6 +10,8 @@ package com.rasp.mr;
 
 /* Import list */
 
+import com.rasp.shuffle.ShuffleMaster;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -65,4 +67,7 @@ public interface JobTracker
      * @throws InterruptedException
      */
     void sendTask(Task task) throws IOException, InterruptedException;
+
+
+    ShuffleMaster getShuffleMaster();
 }

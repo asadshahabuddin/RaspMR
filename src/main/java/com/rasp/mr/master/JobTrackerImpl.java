@@ -19,15 +19,18 @@ import com.rasp.mr.*;
 import com.rasp.fs.InputSplit;
 import com.rasp.config.MasterConfiguration;
 import com.rasp.mr.slave.MapperTaskImpl;
+import com.rasp.shuffle.ShuffleMaster;
+import com.rasp.shuffle.ShuffleMasterImpl;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class JobTrackerImpl implements JobTracker
-{
-	MasterConfiguration conf;
+public class JobTrackerImpl implements JobTracker{
+
+    MasterConfiguration conf;
     Map<String, Job> jobMap;
     Map<String, Task> taskMap;
     LinkedBlockingQueue<Job> jobQueue;
+    ShuffleMaster shuffleMaster;
 
     public JobTrackerImpl(MasterConfiguration conf)
     {
@@ -35,6 +38,7 @@ public class JobTrackerImpl implements JobTracker
     	jobMap    = new HashMap<String, Job>();
     	taskMap   = new HashMap<String, Task>();
     	jobQueue  = new LinkedBlockingQueue<Job>();
+        shuffleMaster = new ShuffleMasterImpl(this.conf);
     }
 
     @Override
@@ -103,5 +107,10 @@ public class JobTrackerImpl implements JobTracker
 		throws IOException, InterruptedException
     {
         conf.getTaskNode(task.getService()).sendTask(task);
+    }
+
+    @Override
+    public ShuffleMaster getShuffleMaster() {
+        return shuffleMaster;
     }
 }

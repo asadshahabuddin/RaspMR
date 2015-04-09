@@ -31,8 +31,8 @@ public class JobNodeServerImpl implements JobNode{
         throws FileNotFoundException
     {
         this.service  = ServiceFactory.createService(
-                        ServiceType.JOB_TRACKER,
-                        Configuration.JOB_NODE_PORT);
+                            ServiceType.JOB_TRACKER,
+                            Configuration.JOB_NODE_PORT);
         this.configuration = configuration;
     }
 
@@ -40,6 +40,12 @@ public class JobNodeServerImpl implements JobNode{
     public void mapCompleted(String taskId, Map<String, Long> keyCount) throws ServiceException {
 
         configuration.getJobTracker().completeMapTask(taskId,keyCount);
+    }
+
+    @Override
+    public void shuffleDataTransferCompleted(String key, Service service) throws ServiceException {
+        configuration.getJobTracker()
+                .getShuffleMaster().shuffleDataTransferCompleted(key,service);
     }
 
     @Override

@@ -59,6 +59,11 @@ public class JobNodeClientImpl implements JobNode{
     }
 
     @Override
+    public void shuffleDataTransferCompleted(String key, Service service) throws ServiceException {
+        
+    }
+
+    @Override
     public Service getService() {
         return service;
     }
