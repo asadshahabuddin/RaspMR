@@ -1,22 +1,23 @@
+/**
+ * Author : Rahul Madhavan
+ * File   : ServiceImpl.java
+ * Email  : rahulk@ccs.neu.edu
+ * Created: Mar 30, 2015
+ * Edited : Apr 8, 2015
+ */
+
 package com.rasp.utils.autodiscovery.impl;
 
+/* Import list */
 import com.rasp.utils.autodiscovery.Service;
 import com.rasp.utils.autodiscovery.ServiceType;
 
-/**
- * Author : rahulmadhavan
- * File   :
- * Email  : rahulk@ccs.neu.edu
- * Created: 3/30/15
- * Edited :
- */
 public class ServiceImpl implements Service {
-
     private int port;
     private String ip;
     private ServiceType serviceType;
 
-    public ServiceImpl(ServiceType serviceType, String ip, int port){
+    public ServiceImpl(ServiceType serviceType, String ip, int port) {
         this.port = port;
         this.ip = ip;
         this.serviceType = serviceType;
@@ -36,5 +37,5 @@ public class ServiceImpl implements Service {
     public ServiceType getServiceType() {
         return serviceType;
     }
-
 }
+/* End of ServiceImpl.java */

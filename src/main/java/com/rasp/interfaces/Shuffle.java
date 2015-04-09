@@ -9,13 +9,11 @@
 package com.rasp.interfaces;
 
 /* Import list */
-import com.rasp.mr.Task;
-
 import java.io.File;
 import java.net.URL;
+import com.rasp.mr.Task;
 
-public interface Shuffle
-{
+public interface Shuffle {
     /**
      * @return ID of the current reduce task
      */
@@ -39,3 +37,4 @@ public interface Shuffle
      */
     public void shuffleAndSendOutput(URL url);   
 }
+/* End of Shuffle.java */

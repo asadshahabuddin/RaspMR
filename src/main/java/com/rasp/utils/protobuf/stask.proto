@@ -4,28 +4,23 @@ option java_package = "com.rasp.fs";
 option java_outer_classname = "STaskProtos";
 option java_generic_services = true;
 
-
-message STask{
+message STask {
     required string id = 1;
     required string jobId = 2;
     required int32  inputSplitId = 3;
     required string className = 4;
     required STaskType taskType = 5;
 
-    enum STaskType{
+    enum STaskType {
         MAPPER = 1;
         REDUCER = 2;
     }
-
 }
 
-
-message TransferResponse{
+message TransferResponse {
     optional string status = 1;
 }
-
 
 service TaskService {
     rpc sendTask(STask) returns (TransferResponse);
 }
-
