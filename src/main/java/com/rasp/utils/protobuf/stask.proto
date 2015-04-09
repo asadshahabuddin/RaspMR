@@ -1,18 +1,18 @@
 package com.rasp.utils.protobuf;
 
-option java_package = "com.rasp.mr";
-option java_outer_classname = "STaskProtos";
+option java_package          = "com.rasp.mr";
+option java_outer_classname  = "STaskProtos";
 option java_generic_services = true;
 
 message STask {
-    required string id = 1;
-    required string jobId = 2;
+    required string id           = 1;
+    required string jobId        = 2;
     required int32  inputSplitId = 3;
-    required string className = 4;
-    required STaskType taskType = 5;
+    required string className    = 4;
+    required STaskType taskType  = 5;
 
     enum STaskType {
-        MAPPER = 1;
+        MAPPER  = 1;
         REDUCER = 2;
     }
 }
@@ -20,12 +20,28 @@ message STask {
 message SMapResponse {
     required string id = 1;
 
-    message SKeyCount{
-        required string key = 1;
+    message SKeyCount {
+        required string key  = 1;
         required int64 count = 2;
     }
 
     repeated SKeyCount mapCount = 3;
+}
+
+message SDataTransferTask {
+    required string key                = 1;
+    required SReducerLocation location = 2;
+
+    message SReducerLocation {
+        required string ip          = 1;
+        required string port        = 2;
+        required STaskType taskType = 3;
+
+        enum STaskType {
+            MAPPER  = 1;
+            REDUCER = 2;
+        }
+    }
 }
 
 message TransferResponse {
