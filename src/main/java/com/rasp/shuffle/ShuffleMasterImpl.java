@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Created by Sourabh on 4/7/2015.
+ * Created by Sourabh,Shiva on 4/7/2015.
  */
 public class ShuffleMasterImpl {
 
@@ -27,7 +27,7 @@ public class ShuffleMasterImpl {
         List<Service> slaves = new ArrayList<Service>();
         return slaves;
     }
-
+//create a job 
     public void run(HashMap<Service, HashMap<String, Long>> data){
         HashMap<String, Service> keyWithService = getServicesWithMaxKeyFreq(data);
         triggerMapDataTransferForAll(keyWithService, getAllSlaves());
@@ -91,6 +91,9 @@ public class ShuffleMasterImpl {
 
     //
     void checkAllAcksReceivedAndTriggerReduce(){
+    	
+    	//   create a lookup map to map for a machine(for a set of keys 
+    	// lying on that machine)
 
     }
 }
