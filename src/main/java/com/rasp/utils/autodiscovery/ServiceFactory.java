@@ -1,23 +1,25 @@
+/**
+ * Author : Rahul Madhavan
+ * File   : ServiceFactory.java
+ * Email  : rahulk@ccs.neu.edu
+ * Created: Mar 30, 2015
+ * Edited : Apr 8, 2015
+ */
+
 package com.rasp.utils.autodiscovery;
 
+/* Import list */
+import java.net.InetAddress;
 import com.rasp.utils.autodiscovery.impl.ServiceImpl;
 
-import java.net.InetAddress;
-
-/**
- * Author : rahulmadhavan
- * File   :
- * Email  : rahulk@ccs.neu.edu
- * Created: 3/30/15
- * Edited :
- */
 public class ServiceFactory {
-
-    public static Service createService(ServiceType serviceType, String ip, int port){
+    public static Service createService(ServiceType serviceType,
+                                        String ip,
+                                        int port) {
         return new ServiceImpl(serviceType,ip,port);
     }
 
-    public static Service createService(ServiceType serviceType, int port){
+    public static Service createService(ServiceType serviceType, int port) {
         String ip = null;
         try {
             ip = InetAddress.getLocalHost().getHostAddress();
@@ -26,5 +28,5 @@ public class ServiceFactory {
         }
         return new ServiceImpl(serviceType,ip,port);
     }
-
 }
+/* End of ServiceFactory.java */

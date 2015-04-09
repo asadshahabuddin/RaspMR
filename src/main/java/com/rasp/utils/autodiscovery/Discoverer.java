@@ -1,18 +1,19 @@
+/**
+ * Author : Rahul Madhavan
+ * File   : Discoverer.java
+ * Email  : rahulk@ccs.neu.edu
+ * Created: Mar 30, 2015
+ * Edited : Apr 8, 2015
+ */
+
 package com.rasp.utils.autodiscovery;
 
+/* Import list */
 import java.util.List;
 
-/**
- * Author : rahulmadhavan
- * File   :
- * Email  : rahulk@ccs.neu.edu
- * Created: 3/30/15
- * Edited :
- */
 public interface Discoverer {
-
     List<Service> getServices(ServiceType serviceType);
 
     List<Service> getServices();
-
 }
+/* End of Discoverer.java */

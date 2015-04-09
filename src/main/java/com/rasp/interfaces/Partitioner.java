@@ -13,8 +13,7 @@ package com.rasp.interfaces;
  * groups for sending as input to reducer.
  * Values for same key must be sent to the same reducer.
  * */
-public interface Partitioner<KEY, VALUE>
-{
+public interface Partitioner<KEY, VALUE> {
     /** 
     * Get the partition number for a given key (hence record) given the total 
     * number of partitions i.e. number of reduce-tasks for the job.
@@ -25,3 +24,4 @@ public interface Partitioner<KEY, VALUE>
     */
     public abstract int getPartition(KEY key, VALUE value, int totalPartitions);
 }
+/* End of Partitioner.java */

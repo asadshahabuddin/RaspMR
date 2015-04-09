@@ -4,24 +4,22 @@ option java_package = "com.rasp.fs";
 option java_outer_classname = "SInputSplitProtos";
 option java_generic_services = true;
 
-
-message SInputSplit{
+message SInputSplit {
     required int32 idx = 1;
     required int64 offset = 2;
     required int64 length = 3;
     required string location = 4;
 }
 
-message SInputChunk{
-
+message SInputChunk {
     required bytes chunk =1;
 }
 
-message TransferResponse{
+message TransferResponse {
     optional string status = 1;
 }
 
-message Void{
+message Void {
 }
 
 service DataTransferService {
@@ -29,4 +27,3 @@ service DataTransferService {
     rpc sendChunk(SInputChunk) returns (TransferResponse);
     rpc closeInputSplit(Void) returns (Void);
 }
-
