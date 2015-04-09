@@ -3,7 +3,7 @@ package com.rasp.mr.slave;
 import com.google.protobuf.RpcController;
 import com.google.protobuf.ServiceException;
 import com.googlecode.protobuf.pro.duplex.RpcClientChannel;
-import com.rasp.fs.STaskProtos;
+import com.rasp.mr.STaskProtos;
 import com.rasp.utils.protobuf.ProtoClient;
 import com.rasp.mr.MapperTask;
 import com.rasp.mr.ReducerTask;

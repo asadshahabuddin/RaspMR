@@ -15,12 +15,11 @@ import java.util.HashMap;
 import java.io.IOException;
 import java.util.ArrayList;
 import com.rasp.fs.InputFormatImpl;
-import com.rasp.mr.Job;
-import com.rasp.mr.Task;
+import com.rasp.mr.*;
 import com.rasp.fs.InputSplit;
-import com.rasp.mr.JobTracker;
-import com.rasp.mr.MapperTask;
 import com.rasp.config.MasterConfiguration;
+import com.rasp.mr.slave.MapperTaskImpl;
+
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class JobTrackerImpl implements JobTracker
@@ -59,7 +58,7 @@ public class JobTrackerImpl implements JobTracker
         
         for(InputSplit inputSplit : inputFormat.getSplits())
         {
-            MapperTask mapperTask = new com.rasp.mr.slave.MapperTask();
+            MapperTask mapperTask = new MapperTaskImpl();
             mapperTask.setTaskInputSplit(inputSplit);
             mapperTask.setJob(job);
             mapperTask.setMapperClass(job.getMapperClass());
@@ -76,16 +75,16 @@ public class JobTrackerImpl implements JobTracker
     }
 
     @Override
-    public void completeMapTask(String taskId)
+    public void completeMapTask(String taskId, Map<String, Long> keyCount)
     {
         Task task = taskMap.get(taskId);
         Job job = task.getJob();
 
-        if(task instanceof MapperTask)
-        {
+        if(task instanceof MapperTask){
+
             task.complete();
-            if(job.isMapComplete())
-            {
+            ((MapperTask) task).getMapContext().setKeyCountMap(keyCount);
+            if(job.isMapComplete()){
                 jobQueue.add(job);
             }
         }

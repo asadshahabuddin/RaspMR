@@ -19,8 +19,8 @@ public class JobImpl implements Job {
     private String jobId;
     private String inputPath;
     private String outputPath;
-    private Class<? extends Mapper<?, ?>> mapperClass;
-    private Class<? extends Reducer<?, ?, ?, ?>> reducerClass;
+    private Class<? extends Mapper> mapperClass;
+    private Class<? extends Reducer> reducerClass;
     private boolean mapComplete;
     private boolean shuffleComplete;
     private boolean reduceComplete;
@@ -48,12 +48,12 @@ public class JobImpl implements Job {
     }
 
     @Override
-    public void setMapper(Class<? extends Mapper<?, ?>> mapperClass) {
+    public void setMapper(Class<? extends Mapper> mapperClass) {
         this.mapperClass = mapperClass;
     }
 
     @Override
-    public void setReducer(Class<? extends Reducer<?, ?, ?, ?>> reducerClass) {
+    public void setReducer(Class<? extends Reducer> reducerClass) {
         this.reducerClass = reducerClass;
     }
 
@@ -140,12 +140,12 @@ public class JobImpl implements Job {
     }
 
     @Override
-    public Class<? extends Mapper<?, ?>> getMapperClass() {
+    public Class<? extends Mapper> getMapperClass() {
         return mapperClass;
     }
 
     @Override
-    public Class<? extends Reducer<?, ?, ?, ?>> getReducerClass() {
+    public Class<? extends Reducer> getReducerClass() {
         return reducerClass;
     }
 }

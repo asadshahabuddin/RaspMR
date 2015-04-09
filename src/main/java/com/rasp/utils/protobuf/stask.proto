@@ -1,6 +1,6 @@
 package com.rasp.utils.protobuf;
 
-option java_package = "com.rasp.fs";
+option java_package = "com.rasp.mr";
 option java_outer_classname = "STaskProtos";
 option java_generic_services = true;
 
@@ -19,6 +19,17 @@ message STask{
 
 }
 
+message SMapResponse{
+    required string id = 1;
+
+    message SKeyCount{
+        required string key = 1;
+        required int64 count = 2;
+    }
+
+    repeated SKeyCount mapCount = 3;
+}
+
 
 message TransferResponse{
     optional string status = 1;
@@ -27,5 +38,10 @@ message TransferResponse{
 
 service TaskService {
     rpc sendTask(STask) returns (TransferResponse);
+}
+
+service JobService {
+    rpc sendMapResponse(SMapResponse) returns (TransferResponse);
+
 }
 

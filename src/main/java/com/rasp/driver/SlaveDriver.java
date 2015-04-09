@@ -14,7 +14,7 @@ import com.rasp.fs.SInputSplitProtos;
 import java.io.FileNotFoundException;
 import java.net.UnknownHostException;
 
-import com.rasp.fs.STaskProtos;
+import com.rasp.mr.STaskProtos;
 import com.rasp.utils.protobuf.ProtoServer;
 import com.rasp.config.SlaveConfiguration;
 import com.google.protobuf.BlockingService;
@@ -35,6 +35,7 @@ public class SlaveDriver
         SlaveConfiguration configuration = new SlaveConfiguration();
         DataNode dataServer = new DataNodeServerImpl(configuration);
         TaskNode taskServer = new TaskNodeServerImpl(configuration);
+
         TaskTracker taskTracker = new com.rasp.mr.slave.TaskTracker();
         TaskScheduler taskScheduler = new TaskScheduler(taskTracker);
         Thread taskSchedulerThread = new Thread(taskScheduler);

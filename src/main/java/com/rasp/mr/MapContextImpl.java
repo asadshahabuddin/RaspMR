@@ -13,20 +13,19 @@ package com.rasp.mr;
 import com.rasp.mr.slave.WritableImpl;
 
 import java.io.*;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.HashMap;
 
-public class ContextImpl implements Context {
+public class MapContextImpl implements MapContext {
     HashMap<String, FileOutputStream> keyMap;
-    HashMap<String, Integer> countMap;
+    Map<String, Long> countMap;
 
-    public ContextImpl() {
+    public MapContextImpl() {
         keyMap = new HashMap<String, FileOutputStream>();
-        countMap = new HashMap<String, Integer>();
+        countMap = new HashMap<String, Long>();
     }
 
-    public void write(WritableImpl k, WritableImpl v)
+    public void write(Writable k, Writable v)
             throws IOException{
         if (v == null) {
             return;
@@ -38,7 +37,7 @@ public class ContextImpl implements Context {
             if (file.exists()) {
                 file.delete();
             }
-            countMap.put(key, 1);
+            countMap.put(key, 1L);
             keyMap.put(key, new FileOutputStream(key, true));
         }
         else{
@@ -54,31 +53,41 @@ public class ContextImpl implements Context {
                 entry.getValue().close();
             }
         }
-        writeHashMap();
+        //writeHashMap();
     }
 
-    public void writeHashMap()
-            throws IOException {
-        File dictionaryFile = new File("masterKey");
-        BufferedWriter writer = new BufferedWriter(new FileWriter(dictionaryFile));
-        Iterator<String> it = countMap.keySet().iterator();
-        String header = "Key" + "\t" + "KeyCount" + "\n";
-        writer.write(header);
-        while (it.hasNext()){
-            String key = it.next();
-            String entryLine = key + "\t" + countMap.get(key) + "\n";
-            writer.write(entryLine);
-        }
-        writer.close();
-    }
+//    public void writeHashMap()
+//            throws IOException {
+//        File dictionaryFile = new File("masterKey");
+//        BufferedWriter writer = new BufferedWriter(new FileWriter(dictionaryFile));
+//        Iterator<String> it = countMap.keySet().iterator();
+//        String header = "Key" + "\t" + "KeyCount" + "\n";
+//        writer.write(header);
+//        while (it.hasNext()){
+//            String key = it.next();
+//            String entryLine = key + "\t" + countMap.get(key) + "\n";
+//            writer.write(entryLine);
+//        }
+//        writer.close();
+//    }
 
     public static void main(String[] args)
             throws IOException {
-        ContextImpl cimpl = new ContextImpl();
+        MapContextImpl cimpl = new MapContextImpl();
         cimpl.write(new WritableImpl(1), new WritableImpl("asad"));
         cimpl.write(new WritableImpl(2), new WritableImpl("pulkit"));
         cimpl.write(new WritableImpl(3), new WritableImpl("pulkit"));
         cimpl.write(new WritableImpl(1), new WritableImpl("pulkit"));
         cimpl.close();
+    }
+
+    @Override
+    public void setKeyCountMap(Map<String, Long> keyCountMap) {
+        countMap = keyCountMap;
+    }
+
+    @Override
+    public Map<String, Long> getKeyCountMap() {
+        return countMap;
     }
 }

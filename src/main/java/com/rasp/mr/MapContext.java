@@ -11,23 +11,21 @@ package com.rasp.mr;
 import com.rasp.mr.slave.WritableImpl;
 
 import java.io.IOException;
+import java.util.Map;
 
-public interface Context {
+public interface MapContext {
 
     /**
      * write to file
      */
-    public void write(WritableImpl key, WritableImpl value) throws IOException;
+    public void write(Writable key, Writable value) throws IOException;
 
     /**
      * Closing all the open connections
      */
     public void close() throws IOException;
 
-    /**
-     * writing the key and no of
-     * values associated with the
-     * keys to file
-     */
-    public void writeHashMap() throws IOException;
+    public Map<String,Long> getKeyCountMap();
+
+    public void setKeyCountMap(Map<String,Long> keyCountMap);
 }

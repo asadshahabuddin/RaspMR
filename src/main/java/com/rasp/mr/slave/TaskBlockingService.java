@@ -3,7 +3,7 @@ package com.rasp.mr.slave;
 import com.google.protobuf.RpcController;
 import com.google.protobuf.ServiceException;
 import com.rasp.config.SlaveConfiguration;
-import com.rasp.fs.STaskProtos;
+import com.rasp.mr.STaskProtos;
 import com.rasp.mr.Mapper;
 import com.rasp.mr.Task;
 import com.rasp.mr.TaskNode;
@@ -34,11 +34,11 @@ public class TaskBlockingService implements STaskProtos.TaskService.BlockingInte
     private Task sTaskToTask(STaskProtos.STask sTask){
         Task task;
         if(sTask.getTaskType() == STaskProtos.STask.STaskType.MAPPER){
-            MapperTask mTask = new MapperTask(sTask.getId());
+            MapperTaskImpl mTask = new MapperTaskImpl(sTask.getId());
             mTask.setTaskInputSplit(configuration.getInputSplit(sTask.getInputSplitId()));
             try {
                 String className = sTask.getClassName().split(" ")[1];
-                mTask.setMapperClass((Class<? extends Mapper<?,?>>)Class.forName(className));
+                mTask.setMapperClass((Class<? extends Mapper>)Class.forName(className));
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
