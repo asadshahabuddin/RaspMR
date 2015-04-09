@@ -33,8 +33,8 @@ message SDataTransferTask {
     required SReducerLocation location = 2;
 
     message SReducerLocation {
-        required string ip          = 1;
-        required string port        = 2;
+        required string ip  = 1;
+        required int32 port = 2;
     }
 }
 
@@ -42,8 +42,26 @@ message TransferResponse {
     optional string status = 1;
 }
 
+message STransferKeyData{
+    required string key = 1;
+    optional bytes data = 2;
+    required SDataHost dataHost = 3;
+
+
+    message SDataHost {
+        required string ip          = 1;
+        required int32 port        = 2;
+    }
+}
+
 service TaskService {
+
     rpc sendTask(STask) returns (TransferResponse);
+
+    rpc initiateTransferDataForKey(STransferKeyData) returns (TransferResponse);
+    rpc transferDataForKey(STransferKeyData) returns (TransferResponse);
+    rpc terminateTransferDataForKey(STransferKeyData) returns (TransferResponse);
+
     rpc sendDataTransferTask(SDataTransferTask) returns (TransferResponse);
 }
 

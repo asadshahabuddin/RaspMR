@@ -40,8 +40,23 @@ public class TaskNodeServerImpl
         configuration.getTaskTracker().submit(task);
     }
 
+
+    @Override
+    public void initiateDataTransferForKey(String key, Service service) {
+        configuration.getShuffleSlave().createDataHandlerFor(key,service);
+    }
+
+    @Override
+    public void transferDataForKey(byte[] data, String key, Service service) {
+        configuration.getShuffleSlave().storeDataFor(data, key, service);
+    }
+
     @Override
     public void sendDataTransferTask(String key, Service service) {
         // TODO
+    }
+
+    public void terminateTransferDataForKey(String key, Service service) {
+        configuration.getShuffleSlave().closeDataHandlerFor(key, service);
     }
 }

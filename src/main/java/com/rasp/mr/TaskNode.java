@@ -1,4 +1,6 @@
 /**
+ * Author : rahulmadhavan
+ * File   :
  * Author : Rahul Madhavan
  * File   : TaskNode.java
  * Email  : rahulk@ccs.neu.edu
@@ -34,12 +36,10 @@ public interface TaskNode {
     void sendDataTransferTask(String key, Service service)
         throws ServiceException;
 
-    /*
-    void initiateTransferDataForKey(String key);
+    void initiateDataTransferForKey(String key,Service service);
 
-    void transferDataForKey(byte[] data, String key);
+    void transferDataForKey(byte[] data, String key, Service service);
 
-    void terminateTransferDataForKey(String key);
-    */
+    void terminateTransferDataForKey(String key,Service service);
 }
 /* End of TaskNode.java */

@@ -23,6 +23,8 @@ import com.rasp.mr.slave.JobNodeClientImpl;
 import com.rasp.mr.slave.TaskScheduler;
 import com.rasp.config.SlaveConfiguration;
 import com.google.protobuf.BlockingService;
+import com.rasp.shuffle.ShuffleSlave;
+import com.rasp.shuffle.ShuffleSlaveImpl;
 import com.rasp.utils.autodiscovery.ServiceFactory;
 import com.rasp.utils.autodiscovery.ServiceType;
 import com.rasp.utils.protobuf.ProtoServer;
@@ -39,6 +41,7 @@ public class SlaveDriver
         SlaveConfiguration configuration = new SlaveConfiguration();
         DataNode dataServer = new DataNodeServerImpl(configuration);
         TaskNode taskServer = new TaskNodeServerImpl(configuration);
+        ShuffleSlave shuffleSlave = new ShuffleSlaveImpl(configuration);
 
         TaskTracker taskTracker = new com.rasp.mr.slave.TaskTracker();
         TaskScheduler taskScheduler = new TaskScheduler(taskTracker,configuration);
@@ -47,6 +50,7 @@ public class SlaveDriver
         configuration.setDataNode(dataServer);
         configuration.setTaskNode(taskServer);
         configuration.setTaskTracker(taskTracker);
+        configuration.setShuffleSlave(shuffleSlave);
 
         SInputSplitProtos.DataTransferService.BlockingInterface dataTransferService
                 = new DataTransferBlockingService(configuration.getDataNode());
