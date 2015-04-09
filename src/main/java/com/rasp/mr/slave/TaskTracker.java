@@ -9,18 +9,20 @@
 package com.rasp.mr.slave;
 
 /* Import list */
+import java.util.Map;
 import java.util.Queue;
+
+import com.rasp.mr.MapContext;
 import com.rasp.mr.Task;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class TaskTracker
-	implements com.rasp.mr.TaskTracker
-{
+public class TaskTracker implements com.rasp.mr.TaskTracker{
     private Queue<Task> taskQueue = new LinkedBlockingQueue<>();
+    private Map<String,Task> taskMap;
 
     @Override
-    public void submit(Task task)
-    {
+    public void submit(Task task){
+        taskMap.put(task.getTaskId(),task);
         taskQueue.add(task);
     }
 
@@ -29,5 +31,6 @@ public class TaskTracker
     {
         return taskQueue.poll();
     }
+
 }
 /* End of TaskTracker.java */
