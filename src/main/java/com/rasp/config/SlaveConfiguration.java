@@ -9,42 +9,35 @@
 package com.rasp.config;
 
 /* Import list */
-import com.rasp.fs.DataNode;
-import java.io.FileNotFoundException;
-import java.util.HashMap;
 import java.util.Map;
-
-import com.rasp.fs.InputSplitImpl;
-import com.rasp.mr.TaskTracker;
+import java.util.HashMap;
+import com.rasp.fs.DataNode;
 import com.rasp.mr.TaskNode;
+import com.rasp.mr.TaskTracker;
+import com.rasp.fs.InputSplitImpl;
+import java.io.FileNotFoundException;
 import com.rasp.utils.autodiscovery.ServiceType;
 
-public class SlaveConfiguration extends Configuration
-{
+public class SlaveConfiguration extends Configuration {
 	private DataNode dataNode;
     private TaskNode taskNode;
     private Map<Integer,InputSplitImpl> inputSplitMap;
     private TaskTracker taskTracker;
     public static final String INPUT_SPLIT_FILENAME = "split.txt";
 
-
     public SlaveConfiguration()
-        throws FileNotFoundException
-    {
+        throws FileNotFoundException {
         super(Configuration.DATA_NODE_PORT,ServiceType.TASK_TRACKER);
         inputSplitMap = new HashMap<>();
     }
-
 
     public void setDataNode(DataNode dataNode) {
         this.dataNode = dataNode;
     }
 
-    public DataNode getDataNode()
-    {
+    public DataNode getDataNode() {
         return dataNode;
     }
-
 
     public TaskNode getTaskNode() {
         return taskNode;
@@ -54,11 +47,11 @@ public class SlaveConfiguration extends Configuration
         this.taskNode = taskNode;
     }
 
-    public void addInputSplit(InputSplitImpl inputSplit){
+    public void addInputSplit(InputSplitImpl inputSplit) {
         inputSplitMap.put(inputSplit.getIdx(),inputSplit);
     }
 
-    public InputSplitImpl getInputSplit(int idx){
+    public InputSplitImpl getInputSplit(int idx) {
         return inputSplitMap.get(idx);
     }
 

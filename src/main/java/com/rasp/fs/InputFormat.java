@@ -2,16 +2,15 @@
  * Author : Asad Shahabuddin
  * File   : InputFormat.java
  * Email  : asad808@ccs.neu.edu
- * Created: Mar 24, 2015.
- * Edited : Mar 24, 2015.
+ * Created: Mar 24, 2015
+ * Edited : Mar 24, 2015
  */
 
 package com.rasp.fs;
 
 /* Import list */
-
-import java.io.IOException;
 import java.util.List;
+import java.io.IOException;
 
 /**
  * <code>InputFormat</code> describes the input-specification for a Map-Reduce
@@ -40,17 +39,14 @@ import java.util.List;
  * input files.
  * </p>
  */
-
-public abstract class InputFormat
-{
+public abstract class InputFormat {
     private String inputFile;
 
     /**
      * Set input file
      * @param inputFile
      */
-    public void setInputFile(String inputFile)
-    {
+    public void setInputFile(String inputFile) {
         this.inputFile = inputFile;
     }
     
@@ -58,11 +54,9 @@ public abstract class InputFormat
      * Get input file
      * @return
      */
-    public String getInputFile()
-    {
+    public String getInputFile() {
         return inputFile;
     }
-
 
     public abstract List<InputSplit> getSplits();
 
@@ -80,7 +74,8 @@ public abstract class InputFormat
      * be <i>&lt;input-file-path, start, offset&gt;</i> tuple. The InputFormat
      * also creates the {@link RecordReader} to read the {@link InputSplit}.
      */
-    public abstract void createSplits() throws IOException, InterruptedException;
+    public abstract void createSplits()
+        throws IOException, InterruptedException;
 
     /**
      * Create a record reader for a given split. The framework will call

@@ -1,6 +1,6 @@
 /**
  * Author : Asad Shahabuddin
- * File   : InputSplit.java
+ * File   : InputSplitImpl.java
  * Email  : asad808@ccs.neu.edu
  * Created: Mar 30, 2015
  * Edited : Mar 30, 2015
@@ -12,8 +12,7 @@ package com.rasp.fs;
 import java.io.IOException;
 
 public class InputSplitImpl
-    implements InputSplit
-{
+    implements InputSplit {
     private int idx;
     private long offset;
     private long length;
@@ -28,8 +27,7 @@ public class InputSplitImpl
      * @param location
      *            Node name where the split would be local. 
      */
-    public InputSplitImpl(int idx, long offset, long length, String location)
-    {
+    public InputSplitImpl(int idx, long offset, long length, String location) {
         this.idx      = idx;
         this.offset   = offset;
         this.length   = length;
@@ -41,8 +39,7 @@ public class InputSplitImpl
      * @param idx
      *            Index of the split.
      */
-    public void setIdx(int idx)
-    {
+    public void setIdx(int idx) {
         this.idx = idx;
     }
     
@@ -51,8 +48,7 @@ public class InputSplitImpl
      * @return
      *            Index of the split.
      */
-    public int getIdx()
-    {
+    public int getIdx() {
         return idx;
     }
     
@@ -61,8 +57,7 @@ public class InputSplitImpl
      * @param offset
      *            Starting offset of the split.
      */
-    public void setOffset(long offset)
-    {
+    public void setOffset(long offset) {
         this.offset = offset;
     }
     
@@ -70,8 +65,7 @@ public class InputSplitImpl
      * Get the offset.
      */
     public long getOffset()
-        throws IOException, InterruptedException
-    {
+        throws IOException, InterruptedException {
         return offset;
     }
     
@@ -80,8 +74,7 @@ public class InputSplitImpl
      * @param length
      *            Block size of the split.
      */
-    public void setLength(long length)
-    {
+    public void setLength(long length) {
         this.length = length;
     }
     
@@ -89,8 +82,7 @@ public class InputSplitImpl
      * Get the block size.
      */
     public long getLength()
-        throws IOException, InterruptedException
-    {
+        throws IOException, InterruptedException {
         return length;
     }
 
@@ -99,8 +91,7 @@ public class InputSplitImpl
      * @param location
      *            Location of the split.
      */
-    public void setLocation(String location)
-    {
+    public void setLocation(String location) {
         this.location = location;
     }
     
@@ -108,9 +99,8 @@ public class InputSplitImpl
      * Get the location.
      */
     public String getLocation()
-        throws IOException, InterruptedException
-    {
+        throws IOException, InterruptedException {
         return location;
     }
 }
-/* End of InputSplit.java */
+/* End of InputSplitImpl.java */

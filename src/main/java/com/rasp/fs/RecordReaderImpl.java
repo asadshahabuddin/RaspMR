@@ -13,8 +13,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 
 public class RecordReaderImpl
-    extends RecordReader
-{
+    extends RecordReader {
     RandomAccessFile f;
     private long offset;
     private long key;
@@ -31,10 +30,8 @@ public class RecordReaderImpl
 
     @Override
     public boolean nextKeyValue()
-        throws IOException, InterruptedException
-    {
-        if(offset >= f.length())
-        {
+        throws IOException, InterruptedException {
+        if(offset >= f.length()) {
             return false;
         }
         
@@ -47,57 +44,45 @@ public class RecordReaderImpl
 
     @Override
     public Long getCurrentKey()
-        throws IOException, InterruptedException
-    {
+        throws IOException, InterruptedException {
         return key;
     }
 
     @Override
     public String getCurrentValue()
-        throws IOException, InterruptedException
-    {
+        throws IOException, InterruptedException {
         return value;
     }
 
     @Override
     public float getProgress()
-        throws IOException, InterruptedException
-    {
+        throws IOException, InterruptedException {
         // TODO
         return 0;
     }
 
     @Override
     public void close()
-        throws IOException
-    {
-        if(f != null)
-        {
+        throws IOException {
+        if(f != null) {
             f.close();
         }
     }
     
     /* Main method for unit testing */
     /*
-    public static void main(String[] args)
-    {
-        try
-        {
+    public static void main(String[] args) {
+        try {
             RecordReader reader = new RecordReader();
             reader.initialize(new com.rasp.fs.InputSplit(0, 8192, "test.txt"), null);
-            while(reader.nextKeyValue())
-            {
+            while(reader.nextKeyValue()) {
                 System.out.println("Key  : " + reader.getCurrentKey());
                 System.out.println("Value: " + reader.getCurrentValue());
             }
             reader.close();
-        }
-        catch(InterruptedException intre)
-        {
+        } catch(InterruptedException intre) {
             intre.printStackTrace();
-        }
-        catch(IOException ioe)
-        {
+        } catch(IOException ioe) {
             ioe.printStackTrace();
         }
     }

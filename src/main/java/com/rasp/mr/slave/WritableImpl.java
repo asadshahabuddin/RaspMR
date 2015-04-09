@@ -88,11 +88,9 @@ public class WritableImpl
         return type;
     }
 
-
-
-    public static void main(String[] args) {
-        System.out.println(new WritableImpl("rahulk").getClass());
-    }
+//    public static void main(String[] args) {
+//        System.out.println(new WritableImpl("rahulk").getClass());
+//    }
 
 }
 /* End of WritableImpl.java */

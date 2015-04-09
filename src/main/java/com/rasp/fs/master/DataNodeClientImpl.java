@@ -1,33 +1,32 @@
+/**
+ * Author : Rahul Madhavan
+ * File   : DataNodeClientImpl.java
+ * Email  : rahulk@ccs.neu.edu
+ * Created: Apr 3, 2015
+ * Edited : Apr 8, 2015
+ */
+
 package com.rasp.fs.master;
 
-import com.google.protobuf.ByteString;
-import com.google.protobuf.RpcController;
-import com.google.protobuf.ServiceException;
-import com.googlecode.protobuf.pro.duplex.RpcClientChannel;
+/* Import list */
+import java.io.IOException;
 import com.rasp.fs.DataNode;
 import com.rasp.fs.InputSplitImpl;
 import com.rasp.fs.SInputSplitProtos;
+import com.google.protobuf.ByteString;
+import com.google.protobuf.RpcController;
 import com.rasp.utils.protobuf.ProtoClient;
 import com.rasp.utils.autodiscovery.Service;
+import com.google.protobuf.ServiceException;
+import com.googlecode.protobuf.pro.duplex.RpcClientChannel;
 
-import java.io.IOException;
-
-/**
- * Author : rahulmadhavan
- * File   :
- * Email  : rahulk@ccs.neu.edu
- * Created: 4/3/15
- * Edited :
- */
 public class DataNodeClientImpl implements DataNode {
-
     private ProtoClient protoClient;
     private Service service;
     private SInputSplitProtos.DataTransferService.BlockingInterface transferService;
     private RpcController controller;
 
-
-    public DataNodeClientImpl(ProtoClient protoClient, Service service){
+    public DataNodeClientImpl(ProtoClient protoClient, Service service) {
         this.protoClient = protoClient;
         this.service = service;
         RpcClientChannel channel = protoClient.getConnection(service.getIp(),service.getPort());
@@ -38,13 +37,13 @@ public class DataNodeClientImpl implements DataNode {
     @Override
     public void storeInputSplit(InputSplitImpl inputSplit) throws InterruptedException, IOException{
         SInputSplitProtos.SInputSplit sInputSplit = SInputSplitProtos.SInputSplit
-                .newBuilder()
-                .setIdx(inputSplit.getIdx())
-                .setLength(inputSplit.getLength())
-                .setLocation(inputSplit.getLocation())
-                .setOffset(inputSplit.getOffset())
-                .setLength(inputSplit.getLength())
-                .build();
+                                                    .newBuilder()
+                                                    .setIdx(inputSplit.getIdx())
+                                                    .setLength(inputSplit.getLength())
+                                                    .setLocation(inputSplit.getLocation())
+                                                    .setOffset(inputSplit.getOffset())
+                                                    .setLength(inputSplit.getLength())
+                                                    .build();
         try {
             transferService.sendInputSplit(controller,sInputSplit);
         } catch (ServiceException e) {
@@ -55,9 +54,9 @@ public class DataNodeClientImpl implements DataNode {
     @Override
     public void storeChunk(byte[] b) throws InterruptedException, IOException{
         SInputSplitProtos.SInputChunk sInputChunk = SInputSplitProtos.SInputChunk
-                .newBuilder()
-                .setChunk(ByteString.copyFrom(b))
-                .build();
+                                                    .newBuilder()
+                                                    .setChunk(ByteString.copyFrom(b))
+                                                    .build();
 
         try {
             transferService.sendChunk(controller, sInputChunk);
@@ -81,3 +80,4 @@ public class DataNodeClientImpl implements DataNode {
         }
     }
 }
+/* End of DataNodeClientImpl.java */

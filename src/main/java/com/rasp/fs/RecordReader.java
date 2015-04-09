@@ -9,14 +9,11 @@
 package com.rasp.fs;
 
 /* Import list */
-import com.rasp.fs.InputSplit;
-
 import java.io.Closeable;
 import java.io.IOException;
 
 public abstract class RecordReader
-    implements Closeable
-{ 
+    implements Closeable {
     /**
      * Called once at initialization.
      * @param inputSplit

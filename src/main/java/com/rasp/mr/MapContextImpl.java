@@ -73,12 +73,12 @@ public class MapContextImpl implements MapContext {
 
     public static void main(String[] args)
             throws IOException {
-        MapContextImpl cimpl = new MapContextImpl();
-        cimpl.write(new WritableImpl(1), new WritableImpl("asad"));
-        cimpl.write(new WritableImpl(2), new WritableImpl("pulkit"));
-        cimpl.write(new WritableImpl(3), new WritableImpl("pulkit"));
-        cimpl.write(new WritableImpl(1), new WritableImpl("pulkit"));
-        cimpl.close();
+//        ContextImpl cimpl = new ContextImpl();
+//        cimpl.write(new WritableImpl(1), new WritableImpl("asad"));
+//        cimpl.write(new WritableImpl(2), new WritableImpl("pulkit"));
+//        cimpl.write(new WritableImpl(3), new WritableImpl("pulkit"));
+//        cimpl.write(new WritableImpl(1), new WritableImpl("pulkit"));
+//        cimpl.close();
     }
 
     @Override
