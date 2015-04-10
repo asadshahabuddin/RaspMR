@@ -79,7 +79,7 @@ public class JobTrackerImpl implements JobTracker{
     }
 
     @Override
-    public void completeMapTask(String taskId, Map<String, Long> keyCount)
+    public synchronized void completeMapTask(String taskId, Map<String, Long> keyCount)
     {
         Task task = taskMap.get(taskId);
         Job job = task.getJob();
