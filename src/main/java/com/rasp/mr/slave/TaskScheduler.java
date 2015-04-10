@@ -15,13 +15,12 @@ import com.google.protobuf.ServiceException;
 import com.rasp.config.MasterConfiguration;
 import com.rasp.config.SlaveConfiguration;
 import com.rasp.mr.MapperTask;
-import com.rasp.mr.ReducerTask;
+import com.rasp.mr.ShuffleTask;
 import com.rasp.mr.Task;
 import com.rasp.mr.TaskTracker;
+import com.rasp.mr.ReducerTask;
 
-public class TaskScheduler
-	implements com.rasp.mr.TaskScheduler, Runnable
-{
+public class TaskScheduler implements com.rasp.mr.TaskScheduler, Runnable{
 	private TaskTracker taskTracker;
     private SlaveConfiguration configuration;
 
@@ -51,8 +50,17 @@ public class TaskScheduler
                 e.printStackTrace();
             }
 
-        }else if(task instanceof ReducerTask){
+        }else if(task instanceof ShuffleTask){
+            task.execute();
+            try {
+                configuration.getJobNode().
+                        shuffleDataTransferCompleted(task.getTaskId());
 
+            } catch (ServiceException e) {
+                e.printStackTrace();
+            }
+
+        }else if(task instanceof ReducerTask){
 
         }else{
             throw new RuntimeException("unknown task type given to task scheduler: "+task.getClass());

@@ -8,12 +8,13 @@ message STask {
     required string id           = 1;
     required string jobId        = 2;
     required int32  inputSplitId = 3;
-    required string className    = 4;
+    optional string className    = 4;
     required STaskType taskType  = 5;
 
     enum STaskType {
         MAPPER  = 1;
         REDUCER = 2;
+        SHUFFLE = 3;
     }
 }
 
@@ -42,6 +43,11 @@ message TransferResponse {
     optional string status = 1;
 }
 
+message ShuffleResponse {
+    optional string taskId = 1;
+}
+
+
 message STransferKeyData{
     required string key = 1;
     optional bytes data = 2;
@@ -49,7 +55,7 @@ message STransferKeyData{
 
 
     message SDataHost {
-        required string ip          = 1;
+        required string ip         = 1;
         required int32 port        = 2;
     }
 }
@@ -62,10 +68,9 @@ service TaskService {
     rpc transferDataForKey(STransferKeyData) returns (TransferResponse);
     rpc terminateTransferDataForKey(STransferKeyData) returns (TransferResponse);
 
-    rpc sendDataTransferTask(SDataTransferTask) returns (TransferResponse);
 }
 
 service JobService {
     rpc sendMapResponse(SMapResponse) returns (TransferResponse);
-    rpc shuffleDataTransferCompleted(SDataTransferTask) returns (TransferResponse);
+    rpc shuffleDataTransferCompleted(ShuffleResponse) returns (TransferResponse);
 }

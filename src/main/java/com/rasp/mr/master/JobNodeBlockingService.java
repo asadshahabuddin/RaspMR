@@ -46,12 +46,8 @@ public class JobNodeBlockingService implements STaskProtos.JobService.BlockingIn
     }
 
     @Override
-    public STaskProtos.TransferResponse shuffleDataTransferCompleted(RpcController controller, STaskProtos.SDataTransferTask request) throws ServiceException {
-        Service service = ServiceFactory.
-                createService(ServiceType.TASK_TRACKER,
-                        request.getLocation().getIp(),
-                        request.getLocation().getPort());
-        jobNode.shuffleDataTransferCompleted(request.getKey(),service);
+    public STaskProtos.TransferResponse shuffleDataTransferCompleted(RpcController controller, STaskProtos.ShuffleResponse request) throws ServiceException {
+        jobNode.shuffleDataTransferCompleted(request.getTaskId());
         return STaskProtos.TransferResponse.newBuilder().setStatus("OK").build();
     }
 

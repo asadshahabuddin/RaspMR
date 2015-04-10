@@ -87,16 +87,5 @@ public class TaskBlockingService
         return STaskProtos.TransferResponse.newBuilder().setStatus("OK").build();
     }
 
-    @Override
-    public STaskProtos.TransferResponse sendDataTransferTask(RpcController controller,
-                                                             STaskProtos.SDataTransferTask task)
-        throws ServiceException
-    {
-        STaskProtos.SDataTransferTask.SReducerLocation location = task.getLocation();
-        Service service = ServiceFactory.createService(ServiceType.TASK_TRACKER,
-                                                       location.getIp(),
-                                                       location.getPort());
-        taskNode.sendDataTransferTask(task.getKey(), service);
-        return STaskProtos.TransferResponse.newBuilder().setStatus("OK").build();
-    }
+
 }

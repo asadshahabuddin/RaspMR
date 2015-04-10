@@ -97,7 +97,7 @@ public class ShuffleMasterImpl implements ShuffleMaster {
     }
 
     @Override
-    public void shuffleDataTransferCompleted(String key, Service service) {
+    public void shuffleDataTransferCompleted(String taskId) {
 
     }
 }

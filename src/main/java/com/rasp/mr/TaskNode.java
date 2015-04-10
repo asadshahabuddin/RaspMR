@@ -28,14 +28,6 @@ public interface TaskNode {
      */
     void sendTask(Task task);
 
-    /**
-     * Send a data transfer task from the server to a worker node.
-     * @param task
-     *            The data transfer task requested from a worker node.
-     */
-    void sendDataTransferTask(String key, Service service)
-        throws ServiceException;
-
     void initiateDataTransferForKey(String key,Service service);
 
     void transferDataForKey(byte[] data, String key, Service service);

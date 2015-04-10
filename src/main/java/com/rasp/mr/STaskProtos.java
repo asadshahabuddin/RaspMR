@@ -50,15 +50,15 @@ public final class STaskProtos {
     int getInputSplitId();
 
     /**
-     * <code>required string className = 4;</code>
+     * <code>optional string className = 4;</code>
      */
     boolean hasClassName();
     /**
-     * <code>required string className = 4;</code>
+     * <code>optional string className = 4;</code>
      */
     java.lang.String getClassName();
     /**
-     * <code>required string className = 4;</code>
+     * <code>optional string className = 4;</code>
      */
     com.google.protobuf.ByteString
         getClassNameBytes();
@@ -210,6 +210,10 @@ public final class STaskProtos {
        * <code>REDUCER = 2;</code>
        */
       REDUCER(1, 2),
+      /**
+       * <code>SHUFFLE = 3;</code>
+       */
+      SHUFFLE(2, 3),
       ;
 
       /**
@@ -220,6 +224,10 @@ public final class STaskProtos {
        * <code>REDUCER = 2;</code>
        */
       public static final int REDUCER_VALUE = 2;
+      /**
+       * <code>SHUFFLE = 3;</code>
+       */
+      public static final int SHUFFLE_VALUE = 3;
 
 
       public final int getNumber() { return value; }
@@ -228,6 +236,7 @@ public final class STaskProtos {
         switch (value) {
           case 1: return MAPPER;
           case 2: return REDUCER;
+          case 3: return SHUFFLE;
           default: return null;
         }
       }
@@ -382,13 +391,13 @@ public final class STaskProtos {
     public static final int CLASSNAME_FIELD_NUMBER = 4;
     private java.lang.Object className_;
     /**
-     * <code>required string className = 4;</code>
+     * <code>optional string className = 4;</code>
      */
     public boolean hasClassName() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
     /**
-     * <code>required string className = 4;</code>
+     * <code>optional string className = 4;</code>
      */
     public java.lang.String getClassName() {
       java.lang.Object ref = className_;
@@ -405,7 +414,7 @@ public final class STaskProtos {
       }
     }
     /**
-     * <code>required string className = 4;</code>
+     * <code>optional string className = 4;</code>
      */
     public com.google.protobuf.ByteString
         getClassNameBytes() {
@@ -458,10 +467,6 @@ public final class STaskProtos {
         return false;
       }
       if (!hasInputSplitId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasClassName()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -749,10 +754,6 @@ public final class STaskProtos {
           
           return false;
         }
-        if (!hasClassName()) {
-          
-          return false;
-        }
         if (!hasTaskType()) {
           
           return false;
@@ -965,13 +966,13 @@ public final class STaskProtos {
 
       private java.lang.Object className_ = "";
       /**
-       * <code>required string className = 4;</code>
+       * <code>optional string className = 4;</code>
        */
       public boolean hasClassName() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
       /**
-       * <code>required string className = 4;</code>
+       * <code>optional string className = 4;</code>
        */
       public java.lang.String getClassName() {
         java.lang.Object ref = className_;
@@ -988,7 +989,7 @@ public final class STaskProtos {
         }
       }
       /**
-       * <code>required string className = 4;</code>
+       * <code>optional string className = 4;</code>
        */
       public com.google.protobuf.ByteString
           getClassNameBytes() {
@@ -1004,7 +1005,7 @@ public final class STaskProtos {
         }
       }
       /**
-       * <code>required string className = 4;</code>
+       * <code>optional string className = 4;</code>
        */
       public Builder setClassName(
           java.lang.String value) {
@@ -1017,7 +1018,7 @@ public final class STaskProtos {
         return this;
       }
       /**
-       * <code>required string className = 4;</code>
+       * <code>optional string className = 4;</code>
        */
       public Builder clearClassName() {
         bitField0_ = (bitField0_ & ~0x00000008);
@@ -1026,7 +1027,7 @@ public final class STaskProtos {
         return this;
       }
       /**
-       * <code>required string className = 4;</code>
+       * <code>optional string className = 4;</code>
        */
       public Builder setClassNameBytes(
           com.google.protobuf.ByteString value) {
@@ -4246,6 +4247,482 @@ public final class STaskProtos {
     // @@protoc_insertion_point(class_scope:com.rasp.utils.protobuf.TransferResponse)
   }
 
+  public interface ShuffleResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:com.rasp.utils.protobuf.ShuffleResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string taskId = 1;</code>
+     */
+    boolean hasTaskId();
+    /**
+     * <code>optional string taskId = 1;</code>
+     */
+    java.lang.String getTaskId();
+    /**
+     * <code>optional string taskId = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getTaskIdBytes();
+  }
+  /**
+   * Protobuf type {@code com.rasp.utils.protobuf.ShuffleResponse}
+   */
+  public static final class ShuffleResponse extends
+      com.google.protobuf.GeneratedMessage implements
+      // @@protoc_insertion_point(message_implements:com.rasp.utils.protobuf.ShuffleResponse)
+      ShuffleResponseOrBuilder {
+    // Use ShuffleResponse.newBuilder() to construct.
+    private ShuffleResponse(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private ShuffleResponse(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final ShuffleResponse defaultInstance;
+    public static ShuffleResponse getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public ShuffleResponse getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ShuffleResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000001;
+              taskId_ = bs;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.rasp.mr.STaskProtos.internal_static_com_rasp_utils_protobuf_ShuffleResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.rasp.mr.STaskProtos.internal_static_com_rasp_utils_protobuf_ShuffleResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.rasp.mr.STaskProtos.ShuffleResponse.class, com.rasp.mr.STaskProtos.ShuffleResponse.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<ShuffleResponse> PARSER =
+        new com.google.protobuf.AbstractParser<ShuffleResponse>() {
+      public ShuffleResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ShuffleResponse(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ShuffleResponse> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    public static final int TASKID_FIELD_NUMBER = 1;
+    private java.lang.Object taskId_;
+    /**
+     * <code>optional string taskId = 1;</code>
+     */
+    public boolean hasTaskId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>optional string taskId = 1;</code>
+     */
+    public java.lang.String getTaskId() {
+      java.lang.Object ref = taskId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          taskId_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string taskId = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getTaskIdBytes() {
+      java.lang.Object ref = taskId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        taskId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private void initFields() {
+      taskId_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getTaskIdBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getTaskIdBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static com.rasp.mr.STaskProtos.ShuffleResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.rasp.mr.STaskProtos.ShuffleResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.rasp.mr.STaskProtos.ShuffleResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.rasp.mr.STaskProtos.ShuffleResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.rasp.mr.STaskProtos.ShuffleResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.rasp.mr.STaskProtos.ShuffleResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static com.rasp.mr.STaskProtos.ShuffleResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static com.rasp.mr.STaskProtos.ShuffleResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static com.rasp.mr.STaskProtos.ShuffleResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static com.rasp.mr.STaskProtos.ShuffleResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.rasp.mr.STaskProtos.ShuffleResponse prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code com.rasp.utils.protobuf.ShuffleResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:com.rasp.utils.protobuf.ShuffleResponse)
+        com.rasp.mr.STaskProtos.ShuffleResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.rasp.mr.STaskProtos.internal_static_com_rasp_utils_protobuf_ShuffleResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.rasp.mr.STaskProtos.internal_static_com_rasp_utils_protobuf_ShuffleResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.rasp.mr.STaskProtos.ShuffleResponse.class, com.rasp.mr.STaskProtos.ShuffleResponse.Builder.class);
+      }
+
+      // Construct using com.rasp.mr.STaskProtos.ShuffleResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        taskId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.rasp.mr.STaskProtos.internal_static_com_rasp_utils_protobuf_ShuffleResponse_descriptor;
+      }
+
+      public com.rasp.mr.STaskProtos.ShuffleResponse getDefaultInstanceForType() {
+        return com.rasp.mr.STaskProtos.ShuffleResponse.getDefaultInstance();
+      }
+
+      public com.rasp.mr.STaskProtos.ShuffleResponse build() {
+        com.rasp.mr.STaskProtos.ShuffleResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.rasp.mr.STaskProtos.ShuffleResponse buildPartial() {
+        com.rasp.mr.STaskProtos.ShuffleResponse result = new com.rasp.mr.STaskProtos.ShuffleResponse(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.taskId_ = taskId_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.rasp.mr.STaskProtos.ShuffleResponse) {
+          return mergeFrom((com.rasp.mr.STaskProtos.ShuffleResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.rasp.mr.STaskProtos.ShuffleResponse other) {
+        if (other == com.rasp.mr.STaskProtos.ShuffleResponse.getDefaultInstance()) return this;
+        if (other.hasTaskId()) {
+          bitField0_ |= 0x00000001;
+          taskId_ = other.taskId_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.rasp.mr.STaskProtos.ShuffleResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.rasp.mr.STaskProtos.ShuffleResponse) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object taskId_ = "";
+      /**
+       * <code>optional string taskId = 1;</code>
+       */
+      public boolean hasTaskId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>optional string taskId = 1;</code>
+       */
+      public java.lang.String getTaskId() {
+        java.lang.Object ref = taskId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            taskId_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string taskId = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getTaskIdBytes() {
+        java.lang.Object ref = taskId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          taskId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string taskId = 1;</code>
+       */
+      public Builder setTaskId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        taskId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string taskId = 1;</code>
+       */
+      public Builder clearTaskId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        taskId_ = getDefaultInstance().getTaskId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string taskId = 1;</code>
+       */
+      public Builder setTaskIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        taskId_ = value;
+        onChanged();
+        return this;
+      }
+
+      // @@protoc_insertion_point(builder_scope:com.rasp.utils.protobuf.ShuffleResponse)
+    }
+
+    static {
+      defaultInstance = new ShuffleResponse(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:com.rasp.utils.protobuf.ShuffleResponse)
+  }
+
   public interface STransferKeyDataOrBuilder extends
       // @@protoc_insertion_point(interface_extends:com.rasp.utils.protobuf.STransferKeyData)
       com.google.protobuf.MessageOrBuilder {
@@ -5626,14 +6103,6 @@ public final class STaskProtos {
           com.rasp.mr.STaskProtos.STransferKeyData request,
           com.google.protobuf.RpcCallback<com.rasp.mr.STaskProtos.TransferResponse> done);
 
-      /**
-       * <code>rpc sendDataTransferTask(.com.rasp.utils.protobuf.SDataTransferTask) returns (.com.rasp.utils.protobuf.TransferResponse);</code>
-       */
-      public abstract void sendDataTransferTask(
-          com.google.protobuf.RpcController controller,
-          com.rasp.mr.STaskProtos.SDataTransferTask request,
-          com.google.protobuf.RpcCallback<com.rasp.mr.STaskProtos.TransferResponse> done);
-
     }
 
     public static com.google.protobuf.Service newReflectiveService(
@@ -5671,14 +6140,6 @@ public final class STaskProtos {
           impl.terminateTransferDataForKey(controller, request, done);
         }
 
-        @java.lang.Override
-        public  void sendDataTransferTask(
-            com.google.protobuf.RpcController controller,
-            com.rasp.mr.STaskProtos.SDataTransferTask request,
-            com.google.protobuf.RpcCallback<com.rasp.mr.STaskProtos.TransferResponse> done) {
-          impl.sendDataTransferTask(controller, request, done);
-        }
-
       };
     }
 
@@ -5709,8 +6170,6 @@ public final class STaskProtos {
               return impl.transferDataForKey(controller, (com.rasp.mr.STaskProtos.STransferKeyData)request);
             case 3:
               return impl.terminateTransferDataForKey(controller, (com.rasp.mr.STaskProtos.STransferKeyData)request);
-            case 4:
-              return impl.sendDataTransferTask(controller, (com.rasp.mr.STaskProtos.SDataTransferTask)request);
             default:
               throw new java.lang.AssertionError("Can't get here.");
           }
@@ -5733,8 +6192,6 @@ public final class STaskProtos {
               return com.rasp.mr.STaskProtos.STransferKeyData.getDefaultInstance();
             case 3:
               return com.rasp.mr.STaskProtos.STransferKeyData.getDefaultInstance();
-            case 4:
-              return com.rasp.mr.STaskProtos.SDataTransferTask.getDefaultInstance();
             default:
               throw new java.lang.AssertionError("Can't get here.");
           }
@@ -5756,8 +6213,6 @@ public final class STaskProtos {
             case 2:
               return com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance();
             case 3:
-              return com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance();
-            case 4:
               return com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance();
             default:
               throw new java.lang.AssertionError("Can't get here.");
@@ -5797,14 +6252,6 @@ public final class STaskProtos {
     public abstract void terminateTransferDataForKey(
         com.google.protobuf.RpcController controller,
         com.rasp.mr.STaskProtos.STransferKeyData request,
-        com.google.protobuf.RpcCallback<com.rasp.mr.STaskProtos.TransferResponse> done);
-
-    /**
-     * <code>rpc sendDataTransferTask(.com.rasp.utils.protobuf.SDataTransferTask) returns (.com.rasp.utils.protobuf.TransferResponse);</code>
-     */
-    public abstract void sendDataTransferTask(
-        com.google.protobuf.RpcController controller,
-        com.rasp.mr.STaskProtos.SDataTransferTask request,
         com.google.protobuf.RpcCallback<com.rasp.mr.STaskProtos.TransferResponse> done);
 
     public static final
@@ -5849,11 +6296,6 @@ public final class STaskProtos {
             com.google.protobuf.RpcUtil.<com.rasp.mr.STaskProtos.TransferResponse>specializeCallback(
               done));
           return;
-        case 4:
-          this.sendDataTransferTask(controller, (com.rasp.mr.STaskProtos.SDataTransferTask)request,
-            com.google.protobuf.RpcUtil.<com.rasp.mr.STaskProtos.TransferResponse>specializeCallback(
-              done));
-          return;
         default:
           throw new java.lang.AssertionError("Can't get here.");
       }
@@ -5876,8 +6318,6 @@ public final class STaskProtos {
           return com.rasp.mr.STaskProtos.STransferKeyData.getDefaultInstance();
         case 3:
           return com.rasp.mr.STaskProtos.STransferKeyData.getDefaultInstance();
-        case 4:
-          return com.rasp.mr.STaskProtos.SDataTransferTask.getDefaultInstance();
         default:
           throw new java.lang.AssertionError("Can't get here.");
       }
@@ -5899,8 +6339,6 @@ public final class STaskProtos {
         case 2:
           return com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance();
         case 3:
-          return com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance();
-        case 4:
           return com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance();
         default:
           throw new java.lang.AssertionError("Can't get here.");
@@ -5982,21 +6420,6 @@ public final class STaskProtos {
             com.rasp.mr.STaskProtos.TransferResponse.class,
             com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance()));
       }
-
-      public  void sendDataTransferTask(
-          com.google.protobuf.RpcController controller,
-          com.rasp.mr.STaskProtos.SDataTransferTask request,
-          com.google.protobuf.RpcCallback<com.rasp.mr.STaskProtos.TransferResponse> done) {
-        channel.callMethod(
-          getDescriptor().getMethods().get(4),
-          controller,
-          request,
-          com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance(),
-          com.google.protobuf.RpcUtil.generalizeCallback(
-            done,
-            com.rasp.mr.STaskProtos.TransferResponse.class,
-            com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance()));
-      }
     }
 
     public static BlockingInterface newBlockingStub(
@@ -6023,11 +6446,6 @@ public final class STaskProtos {
       public com.rasp.mr.STaskProtos.TransferResponse terminateTransferDataForKey(
           com.google.protobuf.RpcController controller,
           com.rasp.mr.STaskProtos.STransferKeyData request)
-          throws com.google.protobuf.ServiceException;
-
-      public com.rasp.mr.STaskProtos.TransferResponse sendDataTransferTask(
-          com.google.protobuf.RpcController controller,
-          com.rasp.mr.STaskProtos.SDataTransferTask request)
           throws com.google.protobuf.ServiceException;
     }
 
@@ -6085,18 +6503,6 @@ public final class STaskProtos {
           com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance());
       }
 
-
-      public com.rasp.mr.STaskProtos.TransferResponse sendDataTransferTask(
-          com.google.protobuf.RpcController controller,
-          com.rasp.mr.STaskProtos.SDataTransferTask request)
-          throws com.google.protobuf.ServiceException {
-        return (com.rasp.mr.STaskProtos.TransferResponse) channel.callBlockingMethod(
-          getDescriptor().getMethods().get(4),
-          controller,
-          request,
-          com.rasp.mr.STaskProtos.TransferResponse.getDefaultInstance());
-      }
-
     }
 
     // @@protoc_insertion_point(class_scope:com.rasp.utils.protobuf.TaskService)
@@ -6119,11 +6525,11 @@ public final class STaskProtos {
           com.google.protobuf.RpcCallback<com.rasp.mr.STaskProtos.TransferResponse> done);
 
       /**
-       * <code>rpc shuffleDataTransferCompleted(.com.rasp.utils.protobuf.SDataTransferTask) returns (.com.rasp.utils.protobuf.TransferResponse);</code>
+       * <code>rpc shuffleDataTransferCompleted(.com.rasp.utils.protobuf.ShuffleResponse) returns (.com.rasp.utils.protobuf.TransferResponse);</code>
        */
       public abstract void shuffleDataTransferCompleted(
           com.google.protobuf.RpcController controller,
-          com.rasp.mr.STaskProtos.SDataTransferTask request,
+          com.rasp.mr.STaskProtos.ShuffleResponse request,
           com.google.protobuf.RpcCallback<com.rasp.mr.STaskProtos.TransferResponse> done);
 
     }
@@ -6142,7 +6548,7 @@ public final class STaskProtos {
         @java.lang.Override
         public  void shuffleDataTransferCompleted(
             com.google.protobuf.RpcController controller,
-            com.rasp.mr.STaskProtos.SDataTransferTask request,
+            com.rasp.mr.STaskProtos.ShuffleResponse request,
             com.google.protobuf.RpcCallback<com.rasp.mr.STaskProtos.TransferResponse> done) {
           impl.shuffleDataTransferCompleted(controller, request, done);
         }
@@ -6172,7 +6578,7 @@ public final class STaskProtos {
             case 0:
               return impl.sendMapResponse(controller, (com.rasp.mr.STaskProtos.SMapResponse)request);
             case 1:
-              return impl.shuffleDataTransferCompleted(controller, (com.rasp.mr.STaskProtos.SDataTransferTask)request);
+              return impl.shuffleDataTransferCompleted(controller, (com.rasp.mr.STaskProtos.ShuffleResponse)request);
             default:
               throw new java.lang.AssertionError("Can't get here.");
           }
@@ -6190,7 +6596,7 @@ public final class STaskProtos {
             case 0:
               return com.rasp.mr.STaskProtos.SMapResponse.getDefaultInstance();
             case 1:
-              return com.rasp.mr.STaskProtos.SDataTransferTask.getDefaultInstance();
+              return com.rasp.mr.STaskProtos.ShuffleResponse.getDefaultInstance();
             default:
               throw new java.lang.AssertionError("Can't get here.");
           }
@@ -6226,11 +6632,11 @@ public final class STaskProtos {
         com.google.protobuf.RpcCallback<com.rasp.mr.STaskProtos.TransferResponse> done);
 
     /**
-     * <code>rpc shuffleDataTransferCompleted(.com.rasp.utils.protobuf.SDataTransferTask) returns (.com.rasp.utils.protobuf.TransferResponse);</code>
+     * <code>rpc shuffleDataTransferCompleted(.com.rasp.utils.protobuf.ShuffleResponse) returns (.com.rasp.utils.protobuf.TransferResponse);</code>
      */
     public abstract void shuffleDataTransferCompleted(
         com.google.protobuf.RpcController controller,
-        com.rasp.mr.STaskProtos.SDataTransferTask request,
+        com.rasp.mr.STaskProtos.ShuffleResponse request,
         com.google.protobuf.RpcCallback<com.rasp.mr.STaskProtos.TransferResponse> done);
 
     public static final
@@ -6261,7 +6667,7 @@ public final class STaskProtos {
               done));
           return;
         case 1:
-          this.shuffleDataTransferCompleted(controller, (com.rasp.mr.STaskProtos.SDataTransferTask)request,
+          this.shuffleDataTransferCompleted(controller, (com.rasp.mr.STaskProtos.ShuffleResponse)request,
             com.google.protobuf.RpcUtil.<com.rasp.mr.STaskProtos.TransferResponse>specializeCallback(
               done));
           return;
@@ -6282,7 +6688,7 @@ public final class STaskProtos {
         case 0:
           return com.rasp.mr.STaskProtos.SMapResponse.getDefaultInstance();
         case 1:
-          return com.rasp.mr.STaskProtos.SDataTransferTask.getDefaultInstance();
+          return com.rasp.mr.STaskProtos.ShuffleResponse.getDefaultInstance();
         default:
           throw new java.lang.AssertionError("Can't get here.");
       }
@@ -6339,7 +6745,7 @@ public final class STaskProtos {
 
       public  void shuffleDataTransferCompleted(
           com.google.protobuf.RpcController controller,
-          com.rasp.mr.STaskProtos.SDataTransferTask request,
+          com.rasp.mr.STaskProtos.ShuffleResponse request,
           com.google.protobuf.RpcCallback<com.rasp.mr.STaskProtos.TransferResponse> done) {
         channel.callMethod(
           getDescriptor().getMethods().get(1),
@@ -6366,7 +6772,7 @@ public final class STaskProtos {
 
       public com.rasp.mr.STaskProtos.TransferResponse shuffleDataTransferCompleted(
           com.google.protobuf.RpcController controller,
-          com.rasp.mr.STaskProtos.SDataTransferTask request)
+          com.rasp.mr.STaskProtos.ShuffleResponse request)
           throws com.google.protobuf.ServiceException;
     }
 
@@ -6391,7 +6797,7 @@ public final class STaskProtos {
 
       public com.rasp.mr.STaskProtos.TransferResponse shuffleDataTransferCompleted(
           com.google.protobuf.RpcController controller,
-          com.rasp.mr.STaskProtos.SDataTransferTask request)
+          com.rasp.mr.STaskProtos.ShuffleResponse request)
           throws com.google.protobuf.ServiceException {
         return (com.rasp.mr.STaskProtos.TransferResponse) channel.callBlockingMethod(
           getDescriptor().getMethods().get(1),
@@ -6436,6 +6842,11 @@ public final class STaskProtos {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_rasp_utils_protobuf_TransferResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_rasp_utils_protobuf_ShuffleResponse_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_rasp_utils_protobuf_ShuffleResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_rasp_utils_protobuf_STransferKeyData_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
@@ -6454,45 +6865,43 @@ public final class STaskProtos {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013stask.proto\022\027com.rasp.utils.protobuf\"\255" +
+      "\n\013stask.proto\022\027com.rasp.utils.protobuf\"\272" +
       "\001\n\005STask\022\n\n\002id\030\001 \002(\t\022\r\n\005jobId\030\002 \002(\t\022\024\n\014i" +
-      "nputSplitId\030\003 \002(\005\022\021\n\tclassName\030\004 \002(\t\022:\n\010" +
+      "nputSplitId\030\003 \002(\005\022\021\n\tclassName\030\004 \001(\t\022:\n\010" +
       "taskType\030\005 \002(\0162(.com.rasp.utils.protobuf" +
-      ".STask.STaskType\"$\n\tSTaskType\022\n\n\006MAPPER\020" +
-      "\001\022\013\n\007REDUCER\020\002\"\206\001\n\014SMapResponse\022\n\n\002id\030\001 " +
-      "\002(\t\022A\n\010mapCount\030\003 \003(\0132/.com.rasp.utils.p" +
-      "rotobuf.SMapResponse.SKeyCount\032\'\n\tSKeyCo" +
-      "unt\022\013\n\003key\030\001 \002(\t\022\r\n\005count\030\002 \002(\003\"\235\001\n\021SDat" +
-      "aTransferTask\022\013\n\003key\030\001 \002(\t\022M\n\010location\030\002",
-      " \002(\0132;.com.rasp.utils.protobuf.SDataTran" +
-      "sferTask.SReducerLocation\032,\n\020SReducerLoc" +
-      "ation\022\n\n\002ip\030\001 \002(\t\022\014\n\004port\030\002 \002(\005\"\"\n\020Trans" +
-      "ferResponse\022\016\n\006status\030\001 \001(\t\"\233\001\n\020STransfe" +
-      "rKeyData\022\013\n\003key\030\001 \002(\t\022\014\n\004data\030\002 \001(\014\022E\n\010d" +
-      "ataHost\030\003 \002(\01323.com.rasp.utils.protobuf." +
-      "STransferKeyData.SDataHost\032%\n\tSDataHost\022" +
-      "\n\n\002ip\030\001 \002(\t\022\014\n\004port\030\002 \002(\0052\250\004\n\013TaskServic" +
-      "e\022U\n\010sendTask\022\036.com.rasp.utils.protobuf." +
-      "STask\032).com.rasp.utils.protobuf.Transfer",
-      "Response\022r\n\032initiateTransferDataForKey\022)" +
-      ".com.rasp.utils.protobuf.STransferKeyDat" +
-      "a\032).com.rasp.utils.protobuf.TransferResp" +
-      "onse\022j\n\022transferDataForKey\022).com.rasp.ut" +
-      "ils.protobuf.STransferKeyData\032).com.rasp" +
-      ".utils.protobuf.TransferResponse\022s\n\033term" +
-      "inateTransferDataForKey\022).com.rasp.utils" +
-      ".protobuf.STransferKeyData\032).com.rasp.ut" +
-      "ils.protobuf.TransferResponse\022m\n\024sendDat" +
-      "aTransferTask\022*.com.rasp.utils.protobuf.",
-      "SDataTransferTask\032).com.rasp.utils.proto" +
-      "buf.TransferResponse2\350\001\n\nJobService\022c\n\017s" +
-      "endMapResponse\022%.com.rasp.utils.protobuf" +
-      ".SMapResponse\032).com.rasp.utils.protobuf." +
-      "TransferResponse\022u\n\034shuffleDataTransferC" +
-      "ompleted\022*.com.rasp.utils.protobuf.SData" +
-      "TransferTask\032).com.rasp.utils.protobuf.T" +
-      "ransferResponseB\035\n\013com.rasp.mrB\013STaskPro" +
-      "tos\210\001\001"
+      ".STask.STaskType\"1\n\tSTaskType\022\n\n\006MAPPER\020" +
+      "\001\022\013\n\007REDUCER\020\002\022\013\n\007SHUFFLE\020\003\"\206\001\n\014SMapResp" +
+      "onse\022\n\n\002id\030\001 \002(\t\022A\n\010mapCount\030\003 \003(\0132/.com" +
+      ".rasp.utils.protobuf.SMapResponse.SKeyCo" +
+      "unt\032\'\n\tSKeyCount\022\013\n\003key\030\001 \002(\t\022\r\n\005count\030\002" +
+      " \002(\003\"\235\001\n\021SDataTransferTask\022\013\n\003key\030\001 \002(\t\022",
+      "M\n\010location\030\002 \002(\0132;.com.rasp.utils.proto" +
+      "buf.SDataTransferTask.SReducerLocation\032," +
+      "\n\020SReducerLocation\022\n\n\002ip\030\001 \002(\t\022\014\n\004port\030\002" +
+      " \002(\005\"\"\n\020TransferResponse\022\016\n\006status\030\001 \001(\t" +
+      "\"!\n\017ShuffleResponse\022\016\n\006taskId\030\001 \001(\t\"\233\001\n\020" +
+      "STransferKeyData\022\013\n\003key\030\001 \002(\t\022\014\n\004data\030\002 " +
+      "\001(\014\022E\n\010dataHost\030\003 \002(\01323.com.rasp.utils.p" +
+      "rotobuf.STransferKeyData.SDataHost\032%\n\tSD" +
+      "ataHost\022\n\n\002ip\030\001 \002(\t\022\014\n\004port\030\002 \002(\0052\271\003\n\013Ta" +
+      "skService\022U\n\010sendTask\022\036.com.rasp.utils.p",
+      "rotobuf.STask\032).com.rasp.utils.protobuf." +
+      "TransferResponse\022r\n\032initiateTransferData" +
+      "ForKey\022).com.rasp.utils.protobuf.STransf" +
+      "erKeyData\032).com.rasp.utils.protobuf.Tran" +
+      "sferResponse\022j\n\022transferDataForKey\022).com" +
+      ".rasp.utils.protobuf.STransferKeyData\032)." +
+      "com.rasp.utils.protobuf.TransferResponse" +
+      "\022s\n\033terminateTransferDataForKey\022).com.ra" +
+      "sp.utils.protobuf.STransferKeyData\032).com" +
+      ".rasp.utils.protobuf.TransferResponse2\346\001",
+      "\n\nJobService\022c\n\017sendMapResponse\022%.com.ra" +
+      "sp.utils.protobuf.SMapResponse\032).com.ras" +
+      "p.utils.protobuf.TransferResponse\022s\n\034shu" +
+      "ffleDataTransferCompleted\022(.com.rasp.uti" +
+      "ls.protobuf.ShuffleResponse\032).com.rasp.u" +
+      "tils.protobuf.TransferResponseB\035\n\013com.ra" +
+      "sp.mrB\013STaskProtos\210\001\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -6542,8 +6951,14 @@ public final class STaskProtos {
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_rasp_utils_protobuf_TransferResponse_descriptor,
         new java.lang.String[] { "Status", });
-    internal_static_com_rasp_utils_protobuf_STransferKeyData_descriptor =
+    internal_static_com_rasp_utils_protobuf_ShuffleResponse_descriptor =
       getDescriptor().getMessageTypes().get(4);
+    internal_static_com_rasp_utils_protobuf_ShuffleResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+        internal_static_com_rasp_utils_protobuf_ShuffleResponse_descriptor,
+        new java.lang.String[] { "TaskId", });
+    internal_static_com_rasp_utils_protobuf_STransferKeyData_descriptor =
+      getDescriptor().getMessageTypes().get(5);
     internal_static_com_rasp_utils_protobuf_STransferKeyData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_rasp_utils_protobuf_STransferKeyData_descriptor,

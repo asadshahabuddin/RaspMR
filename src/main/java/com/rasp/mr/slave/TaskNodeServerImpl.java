@@ -51,11 +51,6 @@ public class TaskNodeServerImpl
         configuration.getShuffleSlave().storeDataFor(data, key, service);
     }
 
-    @Override
-    public void sendDataTransferTask(String key, Service service) {
-        // TODO
-    }
-
     public void terminateTransferDataForKey(String key, Service service) {
         configuration.getShuffleSlave().closeDataHandlerFor(key, service);
     }

@@ -11,6 +11,6 @@ import com.rasp.utils.autodiscovery.Service;
  */
 public interface ShuffleMaster {
 
-    void shuffleDataTransferCompleted(String key, Service service);
+    void shuffleDataTransferCompleted(String taskId);
 
 }

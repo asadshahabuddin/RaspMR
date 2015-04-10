@@ -11,10 +11,8 @@ package com.rasp.mr.slave;
 /* Import list */
 import com.rasp.mr.STaskProtos;
 import com.rasp.mr.JobNode;
-import com.rasp.mr.Task;
 import com.rasp.utils.protobuf.ProtoClient;
 import com.google.protobuf.RpcController;
-import com.rasp.fs.GroupingKeyProtos;
 import com.google.protobuf.ServiceException;
 import com.rasp.utils.autodiscovery.Service;
 import com.googlecode.protobuf.pro.duplex.RpcClientChannel;
@@ -59,8 +57,9 @@ public class JobNodeClientImpl implements JobNode{
     }
 
     @Override
-    public void shuffleDataTransferCompleted(String key, Service service) throws ServiceException {
-        
+    public void shuffleDataTransferCompleted(String taskId) throws ServiceException {
+        STaskProtos.ShuffleResponse shuffleResponse = STaskProtos.ShuffleResponse.newBuilder().setTaskId(taskId).build();
+        jobService.shuffleDataTransferCompleted(controller,shuffleResponse);
     }
 
     @Override

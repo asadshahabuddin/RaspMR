@@ -4,13 +4,8 @@ import com.google.protobuf.ByteString;
 import com.google.protobuf.RpcController;
 import com.google.protobuf.ServiceException;
 import com.googlecode.protobuf.pro.duplex.RpcClientChannel;
-import com.rasp.config.MasterConfiguration;
-import com.rasp.mr.STaskProtos;
+import com.rasp.mr.*;
 import com.rasp.utils.protobuf.ProtoClient;
-import com.rasp.mr.MapperTask;
-import com.rasp.mr.ReducerTask;
-import com.rasp.mr.Task;
-import com.rasp.mr.TaskNode;
 import com.rasp.utils.autodiscovery.Service;
 
 /**
@@ -36,47 +31,29 @@ public class TaskNodeClientImpl implements TaskNode {
 
     @Override
     public void sendTask(Task task) {
-        STaskProtos.STask.STaskType sTaskType;
-        String taskClass;
 
-        if(task instanceof MapperTask){
-            sTaskType = STaskProtos.STask.STaskType.MAPPER;
-            taskClass = ((MapperTask) task).getMapperClass().toString();
-        } else {
-            sTaskType = STaskProtos.STask.STaskType.REDUCER;
-            taskClass = ((ReducerTask) task).getReducerClass().toString();
-        }
-
-        STaskProtos.STask sTask = STaskProtos.STask.newBuilder()
-                .setClassName(taskClass)
+        STaskProtos.STask.Builder sTaskBuilder = STaskProtos.STask.newBuilder()
                 .setId(task.getTaskId())
                 .setJobId(task.getJob().getJobId())
-                .setTaskType(sTaskType)
-                .setInputSplitId(task.getTaskInputSplit().getIdx())
-                .build();
+                .setInputSplitId(task.getTaskInputSplit().getIdx());
+
+        if(task instanceof MapperTask){
+            sTaskBuilder.setTaskType(STaskProtos.STask.STaskType.MAPPER);
+            sTaskBuilder.setClassName(MapperTask.class.toString());
+        } else if(task instanceof ShuffleTask){
+            sTaskBuilder.setTaskType(STaskProtos.STask.STaskType.SHUFFLE);
+        } else {
+            sTaskBuilder.setTaskType(STaskProtos.STask.STaskType.REDUCER);
+            sTaskBuilder.setClassName(ReducerTask.class.toString());
+        }
 
         try {
-            taskService.sendTask(controller,sTask);
+            taskService.sendTask(controller,sTaskBuilder.build());
         } catch (ServiceException e) {
             e.printStackTrace();
         }
     }
 
-    @Override
-    public void sendDataTransferTask(String key, Service service)
-        throws ServiceException {
-        STaskProtos.SDataTransferTask.SReducerLocation location =
-                STaskProtos.SDataTransferTask.SReducerLocation.newBuilder()
-                        .setIp(service.getIp())
-                        .setPort(service.getPort()).build();
-
-        STaskProtos.SDataTransferTask task = STaskProtos.SDataTransferTask
-                .newBuilder()
-                .setKey(key)
-                .setLocation(location).build();
-
-        taskService.sendDataTransferTask(controller, task);
-    }
 
     public void initiateDataTransferForKey(String key,Service service) {
         STaskProtos.STransferKeyData.SDataHost sDataHost = STaskProtos.STransferKeyData
@@ -92,7 +69,7 @@ public class TaskNodeClientImpl implements TaskNode {
                 .build();
 
         try {
-            taskService.initiateTransferDataForKey(controller,sTransferKeyData);
+            taskService.initiateTransferDataForKey(controller, sTransferKeyData);
         } catch (ServiceException e) {
             e.printStackTrace();
         }

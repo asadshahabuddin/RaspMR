@@ -43,9 +43,9 @@ public class JobNodeServerImpl implements JobNode{
     }
 
     @Override
-    public void shuffleDataTransferCompleted(String key, Service service) throws ServiceException {
+    public void shuffleDataTransferCompleted(String taskId) throws ServiceException {
         configuration.getJobTracker()
-                .getShuffleMaster().shuffleDataTransferCompleted(key,service);
+                .getShuffleMaster().shuffleDataTransferCompleted(taskId);
     }
 
     @Override

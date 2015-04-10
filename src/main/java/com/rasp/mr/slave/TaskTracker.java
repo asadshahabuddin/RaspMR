@@ -18,11 +18,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class TaskTracker implements com.rasp.mr.TaskTracker{
     private Queue<Task> taskQueue = new LinkedBlockingQueue<>();
-    private Map<String,Task> taskMap;
 
     @Override
     public void submit(Task task){
-        taskMap.put(task.getTaskId(),task);
         taskQueue.add(task);
     }
 
