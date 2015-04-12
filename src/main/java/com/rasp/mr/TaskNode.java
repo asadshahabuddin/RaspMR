@@ -10,6 +10,9 @@
 
 package com.rasp.mr;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import com.google.protobuf.ServiceException;
 import com.rasp.utils.autodiscovery.Service;
 
@@ -28,10 +31,10 @@ public interface TaskNode {
      */
     void sendTask(Task task);
 
-    void initiateDataTransferForKey(String key,Service service);
+    void initiateDataTransferForKey(String key,Service service) throws FileNotFoundException;
 
-    void transferDataForKey(byte[] data, String key, Service service);
+    void transferDataForKey(byte[] data, String key, Service service) throws IOException;
 
-    void terminateTransferDataForKey(String key,Service service);
+    void terminateTransferDataForKey(String key,Service service) throws IOException;
 }
 /* End of TaskNode.java */

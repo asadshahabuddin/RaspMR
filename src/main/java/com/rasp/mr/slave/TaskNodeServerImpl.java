@@ -9,6 +9,9 @@
 package com.rasp.mr.slave;
 
 /* Import list */
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import com.rasp.mr.*;
 import com.rasp.config.Configuration;
 import com.rasp.config.SlaveConfiguration;
@@ -45,28 +48,16 @@ public class TaskNodeServerImpl
 
 
     @Override
-    public void initiateDataTransferForKey(String key, Service service) {
-        try {
-            configuration.getShuffleSlave().createDataHandlerFor(key,service);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    public void initiateDataTransferForKey(String key, Service service) throws FileNotFoundException {
+        configuration.getShuffleSlave().createDataHandlerFor(key,service);
     }
 
     @Override
-    public void transferDataForKey(byte[] data, String key, Service service) {
-        try {
-            configuration.getShuffleSlave().storeDataFor(data, key, service);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void transferDataForKey(byte[] data, String key, Service service) throws IOException {
+        configuration.getShuffleSlave().storeDataFor(data, key, service);
     }
 
-    public void terminateTransferDataForKey(String key, Service service) {
-        try {
-            configuration.getShuffleSlave().closeDataHandlerFor(key, service);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void terminateTransferDataForKey(String key, Service service) throws IOException {
+        configuration.getShuffleSlave().closeDataHandlerFor(key, service);
     }
 }
