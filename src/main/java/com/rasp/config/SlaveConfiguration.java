@@ -35,12 +35,11 @@ public class SlaveConfiguration extends Configuration {
     private Map<Integer,InputSplitImpl> inputSplitMap;
     private TaskTracker taskTracker;
     public static final String INPUT_SPLIT_FILENAME = "split.txt";
-    public ProtoClient protoClient;
+
 
     public SlaveConfiguration()
         throws FileNotFoundException {
         super(Configuration.DATA_NODE_PORT,ServiceType.TASK_TRACKER);
-        protoClient = new ProtoClient();
         inputSplitMap = new HashMap<>();
     }
 
