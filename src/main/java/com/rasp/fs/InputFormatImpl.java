@@ -131,7 +131,7 @@ public class InputFormatImpl
             (2) Write the split to the file system.
             */
             f = new RandomAccessFile(getInputFile(), "r");  /* Random access file object */
-            InputSplit split = splits.get(splitIdx++);        /* The current input split */
+            InputSplit split = splits.get(splitIdx++);      /* The current input split */
             long flen = f.length();                         /* Length of file */
             /* Avoid creation of unnecessary empty splits */
             if (totalBytesRead == flen) {
