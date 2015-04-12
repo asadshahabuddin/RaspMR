@@ -1,9 +1,9 @@
 /**
- * Author : Rahul Madhavan
+ * Author : Rahul Madhavan, Sourabh Suman
  * File   : Job.java
  * Email  : rahulk@ccs.neu.edu
  * Created: Mar 23, 2015
- * Edited : Mar 24, 2015
+ * Edited : Mar 24, 2015, 4/12/15
  */
 
 package com.rasp.mr;
@@ -86,5 +86,8 @@ public interface Job
     Class<? extends Reducer> getReducerClass();
 
     public void cleanup();
+
+
+	List<ShuffleTask> getShuffleTasks();
 
 }
