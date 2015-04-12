@@ -138,7 +138,7 @@ public class JobTrackerImpl implements JobTracker{
 
     private void shuffle(Job job) throws IOException, InterruptedException {
 
-        shuffleMaster.run(job);
+        shuffleMaster.createShuffleTasks(job);
 
     }
 

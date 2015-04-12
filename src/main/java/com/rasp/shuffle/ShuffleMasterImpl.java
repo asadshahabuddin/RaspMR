@@ -36,7 +36,7 @@ public class ShuffleMasterImpl implements ShuffleMaster {
         config = conf;
     }
 
-    public void run(Job job) throws IOException, InterruptedException{
+    public void createShuffleTasks(Job job) throws IOException, InterruptedException{
     	this.job = job;
     	taskMap = new HashMap<String, ShuffleTask>();
     	serviceKeyFreq = getMachineKeyFreq();
