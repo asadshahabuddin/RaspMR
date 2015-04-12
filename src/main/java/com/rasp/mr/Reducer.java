@@ -37,7 +37,7 @@ public interface Reducer<KEY_IN,VALUE_IN,KEY_OUT,VALUE_OUT>
      * @return  A <code>Map<KEY_OUT,List<VALUE_OUT>></code> the user is responsible for defining this map
      *          and filling the appropriate keys and values
      */
-    Map<KEY_OUT,List<VALUE_OUT>> reduce(KEY_IN key,List<VALUE_IN> values);
+    Map<KEY_OUT,List<VALUE_OUT>> reduce(KEY_IN key, List<VALUE_IN> values, ReduceContext context);
 
     /**
      * this function is called once at the end of every reduce task {@link com.rasp.mr.ReducerTask}

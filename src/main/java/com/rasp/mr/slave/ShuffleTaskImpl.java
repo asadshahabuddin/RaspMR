@@ -1,9 +1,9 @@
 /**
- * Author : rahulmadhavan, sourabhsuman
- * File   :
+ * Author : RSA
+ * File   : ShuffleTaskImpl.java
  * Email  : rahulk@ccs.neu.edu
- * Created: 4/9/15
- * Edited : 4/11/15
+ * Created: Apr 9, 2015
+ * Edited : Apr 12, 2015
  */
 
 package com.rasp.mr.slave;
