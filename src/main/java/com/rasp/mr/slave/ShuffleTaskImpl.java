@@ -1,13 +1,3 @@
-package com.rasp.mr.slave;
-
-import com.rasp.fs.InputSplit;
-import com.rasp.mr.*;
-import com.rasp.utils.autodiscovery.Service;
-
-
-import java.io.IOException;
-import java.util.UUID;
-
 /**
  * Author : rahulmadhavan, sourabhsuman
  * File   :
@@ -15,22 +5,34 @@ import java.util.UUID;
  * Created: 4/9/15
  * Edited : 4/11/15
  */
+
+package com.rasp.mr.slave;
+
+import com.rasp.mr.*;
+import java.util.UUID;
+import java.io.IOException;
+import com.rasp.fs.InputSplit;
+import com.rasp.config.Configuration;
+import com.rasp.utils.autodiscovery.Service;
+
 public class ShuffleTaskImpl implements ShuffleTask {
     private String taskId;
     private Job job;
-    private Service service;    
-	private String key;
-	private Service dataTargetService;
-	private boolean complete;
+    private Service service;
+    private String key;
+    private Service dataTargetService;
+    private boolean complete;
+    private Configuration conf;
 
-    public ShuffleTaskImpl(){
+    public ShuffleTaskImpl() {
 
         taskId = UUID.randomUUID().toString();
     }
 
-    public ShuffleTaskImpl(String taskId, Service service){
+    public ShuffleTaskImpl(String taskId, Service service, Configuration conf) {
         this.taskId = taskId;
         this.service = service;
+        this.conf = conf;
     }
 
     @Override
@@ -49,9 +51,12 @@ public class ShuffleTaskImpl implements ShuffleTask {
     }
 
     @Override
-    public boolean execute() throws IllegalAccessException, InstantiationException, InterruptedException, IOException {
+    public boolean execute()
+            throws IllegalAccessException, InstantiationException,
+            InterruptedException, IOException {
+        Service service = conf.getService();
         
-    	return false;
+        return false;
     }
 
     @Override
@@ -61,7 +66,7 @@ public class ShuffleTaskImpl implements ShuffleTask {
 
     @Override
     public void complete() {
-    	complete = true;
+        complete = true;
     }
 
     @Override
@@ -78,11 +83,11 @@ public class ShuffleTaskImpl implements ShuffleTask {
     public Service getService() throws IOException, InterruptedException {
         return service;
     }
-    
+
     @Override
     public void setService(Service service) {
-		this.service = service;
-	}
+        this.service = service;
+    }
 
     @Override
     public InputSplit getTaskInputSplit() {
@@ -94,12 +99,12 @@ public class ShuffleTaskImpl implements ShuffleTask {
     }
 
     @Override
-	public Service getDataTargetService() {
-		return dataTargetService;
-	}
+    public Service getDataTargetService() {
+        return dataTargetService;
+    }
 
     @Override
-	public void setDataTargetService(Service dataTargetService) {
-		this.dataTargetService = dataTargetService;
-	}
+    public void setDataTargetService(Service dataTargetService) {
+        this.dataTargetService = dataTargetService;
+    }
 }

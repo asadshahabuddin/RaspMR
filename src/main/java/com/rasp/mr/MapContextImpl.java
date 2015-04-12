@@ -1,16 +1,12 @@
 /**
  * Author : Pulkit Jain
- * File   : Writable.java
+ * File   : MapContextImpl.java
  * Email  : jain.pul@husky.neu.edu
  * Created: Apr 6, 2015
  * Edited : Apr 6, 2015
  */
 
 package com.rasp.mr;
-
-/* Import list */
-
-import com.rasp.mr.slave.WritableImpl;
 
 import java.io.*;
 import java.util.Map;
@@ -26,7 +22,7 @@ public class MapContextImpl implements MapContext {
     }
 
     public void write(Writable k, Writable v)
-            throws IOException{
+            throws IOException {
         if (v == null) {
             return;
         }
@@ -39,8 +35,7 @@ public class MapContextImpl implements MapContext {
             }
             countMap.put(key, 1L);
             keyMap.put(key, new FileOutputStream(key, true));
-        }
-        else{
+        } else {
             countMap.put(key, countMap.get(key) + 1);
         }
         keyMap.get(key).write(value);
@@ -53,32 +48,6 @@ public class MapContextImpl implements MapContext {
                 entry.getValue().close();
             }
         }
-        //writeHashMap();
-    }
-
-//    public void writeHashMap()
-//            throws IOException {
-//        File dictionaryFile = new File("masterKey");
-//        BufferedWriter writer = new BufferedWriter(new FileWriter(dictionaryFile));
-//        Iterator<String> it = countMap.keySet().iterator();
-//        String header = "Key" + "\t" + "KeyCount" + "\n";
-//        writer.write(header);
-//        while (it.hasNext()){
-//            String key = it.next();
-//            String entryLine = key + "\t" + countMap.get(key) + "\n";
-//            writer.write(entryLine);
-//        }
-//        writer.close();
-//    }
-
-    public static void main(String[] args)
-            throws IOException {
-//        ContextImpl cimpl = new ContextImpl();
-//        cimpl.write(new WritableImpl(1), new WritableImpl("asad"));
-//        cimpl.write(new WritableImpl(2), new WritableImpl("pulkit"));
-//        cimpl.write(new WritableImpl(3), new WritableImpl("pulkit"));
-//        cimpl.write(new WritableImpl(1), new WritableImpl("pulkit"));
-//        cimpl.close();
     }
 
     @Override
