@@ -47,6 +47,8 @@ public class JobScheduler
         else if(!job.isShuffleComplete())
         {
             // TODO
+            jobTracker.getShuffleMaster().run(job);
+
         }
         else if(!job.isReduceComplete())
         {

@@ -1,5 +1,6 @@
 package com.rasp.shuffle;
 
+import com.rasp.mr.Job;
 import com.rasp.utils.autodiscovery.Service;
 
 /**
@@ -12,5 +13,7 @@ import com.rasp.utils.autodiscovery.Service;
 public interface ShuffleMaster {
 
     void shuffleDataTransferCompleted(String taskId);
+
+    void run(Job job);
 
 }

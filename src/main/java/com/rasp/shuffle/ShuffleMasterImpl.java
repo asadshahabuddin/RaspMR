@@ -1,6 +1,7 @@
 package com.rasp.shuffle;
 
 import com.rasp.config.MasterConfiguration;
+import com.rasp.mr.Job;
 import com.rasp.utils.autodiscovery.Service;
 
 import java.util.ArrayList;
@@ -99,5 +100,10 @@ public class ShuffleMasterImpl implements ShuffleMaster {
     @Override
     public synchronized void shuffleDataTransferCompleted(String taskId) {
 
+    }
+
+    @Override
+    public void run(Job job) {
+        //stub to avoid compilation error
     }
 }
