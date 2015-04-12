@@ -34,14 +34,15 @@ public class ShuffleMasterImpl implements ShuffleMaster {
 
     public ShuffleMasterImpl(MasterConfiguration conf){
         config = conf;
+        taskMap = new HashMap<String, ShuffleTask>();
     }
 
     public void run(Job job) throws IOException, InterruptedException{
     	this.job = job;
-    	taskMap = new HashMap<String, ShuffleTask>();
     	serviceKeyFreq = getMachineKeyFreq();
     	HashMap<String, Service> keyWithService = getServicesWithMaxKeyFreq(serviceKeyFreq);
     	triggerMapDataTransferForAll(keyWithService, getAllServices());
+        job.setReduceKeyServiceMap(createReduceKeyServiceMap());
     }    
     
     /**
@@ -168,5 +169,9 @@ public class ShuffleMasterImpl implements ShuffleMaster {
         serviceKeyFreq.clear();
         taskMap = null;
         serviceKeyFreq = null;
+    }
+
+    private Map<String,Service> createReduceKeyServiceMap(){
+        return null;
     }
 }
