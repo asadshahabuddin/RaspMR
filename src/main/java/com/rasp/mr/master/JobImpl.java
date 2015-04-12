@@ -65,7 +65,7 @@ public class JobImpl implements Job {
         return false;
     }
 
-    public boolean isTaskComplete(boolean taskComplete, List<Task> tasks){
+    private boolean isTaskComplete(boolean taskComplete, List<? extends Task> tasks){
     	if(!taskComplete){
             boolean result = true;
             for(Task task: tasks){
@@ -82,26 +82,20 @@ public class JobImpl implements Job {
     
     @Override
     public boolean isMapComplete() {
-    	List<Task> tasks = new ArrayList<Task>();
-    	tasks.addAll(mapperTasks);
-        mapComplete = isTaskComplete(mapComplete, tasks);
+        mapComplete = isTaskComplete(mapComplete, mapperTasks);
         return mapComplete;
     }
 
 
     @Override
     public boolean isShuffleComplete() {
-    	List<Task> tasks = new ArrayList<Task>();
-    	tasks.addAll(shuffleTasks);
-        shuffleComplete = isTaskComplete(mapComplete, tasks);
+        shuffleComplete = isTaskComplete(shuffleComplete, shuffleTasks);
         return shuffleComplete;
     }
 
     @Override
     public boolean isReduceComplete() {
-    	List<Task> tasks = new ArrayList<Task>();
-    	tasks.addAll(reducerTasks);
-    	reduceComplete = isTaskComplete(reduceComplete, tasks);
+    	reduceComplete = isTaskComplete(reduceComplete, reducerTasks);
         return reduceComplete;
     }
 
@@ -178,10 +172,13 @@ public class JobImpl implements Job {
     public void cleanup() {
         mapperTasks.clear();
         reducerTasks.clear();
+        shuffleTasks.clear();
         reduceKeyServiceMap.clear();
 
         mapperTasks = null;
         reducerTasks = null;
+        shuffleTasks = null;
         reduceKeyServiceMap = null;
+
     }
 }
