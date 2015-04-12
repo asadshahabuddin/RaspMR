@@ -3,6 +3,7 @@ package com.rasp.mr.master;
 import com.rasp.interfaces.*;
 import com.rasp.mr.*;
 import com.rasp.utils.autodiscovery.Service;
+import com.rasp.mr.slave.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,11 +11,11 @@ import java.util.Map;
 import java.util.UUID;
 
 /**
- * Author : rahulmadhavan
+ * Author : Rahul Madhavan, Sourabh Suman
  * File   :
  * Email  : rahulk@ccs.neu.edu
  * Created: 4/4/15
- * Edited :
+ * Edited : 4/12/15
  */
 public class JobImpl implements Job {
 
@@ -64,31 +65,43 @@ public class JobImpl implements Job {
         return false;
     }
 
-
-    @Override
-    public boolean isMapComplete() {
-        if(!mapComplete){
+    public boolean isTaskComplete(boolean taskComplete, List<Task> tasks){
+    	if(!taskComplete){
             boolean result = true;
-            for(MapperTask mapperTask: mapperTasks){
-                if(!mapperTask.isCompleted()){
+            for(Task task: tasks){
+                if(!task.isCompleted()){
                     result = false;
                     break;
                 }
             }
-            if(result && mapperTasks.size() > 0)
-                mapComplete = true;
+            if(result && tasks.size() > 0)
+            	taskComplete = true;
         }
+        return taskComplete;    	
+    }
+    
+    @Override
+    public boolean isMapComplete() {
+    	List<Task> tasks = new ArrayList<Task>();
+    	tasks.addAll(mapperTasks);
+        mapComplete = isTaskComplete(mapComplete, tasks);
         return mapComplete;
     }
 
 
     @Override
     public boolean isShuffleComplete() {
+    	/*List<Task> tasks = new ArrayList<Task>();
+    	tasks.addAll(shuf);
+        shuffleComplete = isTaskComplete(mapComplete, tasks);*/
         return shuffleComplete;
     }
 
     @Override
     public boolean isReduceComplete() {
+    	List<Task> tasks = new ArrayList<Task>();
+    	tasks.addAll(reducerTasks);
+    	reduceComplete = isTaskComplete(reduceComplete, tasks);
         return reduceComplete;
     }
 
