@@ -37,7 +37,7 @@ public class ShuffleMasterImpl implements ShuffleMaster {
         taskMap = new HashMap<String, ShuffleTask>();
     }
 
-    public void run(Job job) throws IOException, InterruptedException{
+    public void createShuffleTasks(Job job) throws IOException, InterruptedException{
     	this.job = job;
     	serviceKeyFreq = getMachineKeyFreq();
     	HashMap<String, Service> keyWithService = getServicesWithMaxKeyFreq(serviceKeyFreq);
