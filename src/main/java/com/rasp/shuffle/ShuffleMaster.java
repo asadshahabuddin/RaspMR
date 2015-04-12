@@ -1,16 +1,20 @@
 package com.rasp.shuffle;
 
-import com.rasp.utils.autodiscovery.Service;
+import java.io.IOException;
+
+import com.rasp.mr.Job;
 
 /**
- * Author : rahulmadhavan
+ * Author : rahulmadhavan, sourabhsuman
  * File   :
  * Email  : rahulk@ccs.neu.edu
  * Created: 4/9/15
- * Edited :
+ * Edited : 4/11/2015
  */
 public interface ShuffleMaster {
 
     void shuffleDataTransferCompleted(String taskId);
 
+    void run(Job job) throws IOException, InterruptedException;
+    
 }

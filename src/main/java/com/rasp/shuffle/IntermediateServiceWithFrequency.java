@@ -2,10 +2,10 @@ package com.rasp.shuffle;
 
 import com.rasp.utils.autodiscovery.Service;
 
-import java.math.BigInteger;
-
 /**
  * Created by Sourabh on 4/7/2015.
+ * Class to hold intermediate data while processing shuffle.
+ * It stores machine name and a frequency count.
  */
 public class IntermediateServiceWithFrequency {
 

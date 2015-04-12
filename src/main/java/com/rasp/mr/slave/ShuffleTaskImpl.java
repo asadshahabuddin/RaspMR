@@ -9,17 +9,19 @@ import java.io.IOException;
 import java.util.UUID;
 
 /**
- * Author : rahulmadhavan
+ * Author : rahulmadhavan, sourabhsuman
  * File   :
  * Email  : rahulk@ccs.neu.edu
  * Created: 4/9/15
- * Edited :
+ * Edited : 4/11/15
  */
 public class ShuffleTaskImpl implements ShuffleTask {
     private String taskId;
     private Job job;
-    private Service service;
-    private String key;
+    private Service service;    
+	private String key;
+	private Service dataTargetService;
+	private boolean complete;
 
     public ShuffleTaskImpl(){
 
@@ -48,7 +50,8 @@ public class ShuffleTaskImpl implements ShuffleTask {
 
     @Override
     public boolean execute() throws IllegalAccessException, InstantiationException, InterruptedException, IOException {
-        return false;
+        
+    	return false;
     }
 
     @Override
@@ -58,12 +61,12 @@ public class ShuffleTaskImpl implements ShuffleTask {
 
     @Override
     public void complete() {
-
+    	complete = true;
     }
 
     @Override
     public boolean isCompleted() {
-        return false;
+        return complete;
     }
 
     @Override
@@ -75,6 +78,11 @@ public class ShuffleTaskImpl implements ShuffleTask {
     public Service getService() throws IOException, InterruptedException {
         return service;
     }
+    
+    @Override
+    public void setService(Service service) {
+		this.service = service;
+	}
 
     @Override
     public InputSplit getTaskInputSplit() {
@@ -84,4 +92,14 @@ public class ShuffleTaskImpl implements ShuffleTask {
     @Override
     public void setTaskInputSplit(InputSplit inputSplit) {
     }
+
+    @Override
+	public Service getDataTargetService() {
+		return dataTargetService;
+	}
+
+    @Override
+	public void setDataTargetService(Service dataTargetService) {
+		this.dataTargetService = dataTargetService;
+	}
 }
