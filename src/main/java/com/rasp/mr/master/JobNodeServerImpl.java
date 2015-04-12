@@ -23,7 +23,6 @@ import com.rasp.utils.autodiscovery.ServiceFactory;
 
 public class JobNodeServerImpl implements JobNode{
     private Service service;
-    private FileOutputStream f;
     private MasterConfiguration configuration;
 
 

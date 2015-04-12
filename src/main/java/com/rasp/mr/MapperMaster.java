@@ -26,4 +26,7 @@ public interface MapperMaster {
      */
     void completeMapTask(String taskId, Map<String, Long> keyCount);
 
+
+    void cleanup(Job job);
+
 }

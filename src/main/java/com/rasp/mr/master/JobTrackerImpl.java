@@ -80,6 +80,11 @@ public class JobTrackerImpl implements JobTracker{
 
     @Override
     public void cleanup(Job job) {
+        mapperMaster.cleanup(job);
+        shuffleMaster.cleanup(job);
+        reducerMaster.cleanup(job);
+
+        jobMap.remove(job.getJobId());
 
     }
 
@@ -103,4 +108,6 @@ public class JobTrackerImpl implements JobTracker{
     public void shuffle(Job job) throws IOException, InterruptedException {
         shuffleMaster.run(job);
     }
+
+
 }

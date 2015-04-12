@@ -29,4 +29,8 @@ public class ReducerMasterImpl implements ReducerMaster{
 
     }
 
+    @Override
+    public void cleanup(Job job) {
+
+    }
 }

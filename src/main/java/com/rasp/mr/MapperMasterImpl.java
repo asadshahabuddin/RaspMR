@@ -65,4 +65,10 @@ public class MapperMasterImpl  implements MapperMaster{
 
     }
 
+    @Override
+    public void cleanup(Job job) {
+        for(MapperTask task :job.getMapTasks()){
+            taskMap.remove(task.getTaskId());
+        }
+    }
 }

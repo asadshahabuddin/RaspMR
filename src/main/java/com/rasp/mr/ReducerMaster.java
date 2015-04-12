@@ -26,4 +26,6 @@ public interface ReducerMaster {
      */
     void completeReduceTask(String taskId);
 
+    void cleanup(Job job);
+
 }
