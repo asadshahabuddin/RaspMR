@@ -32,26 +32,7 @@ public class JobScheduler
         	return false;
         }
         
-        if(!job.isMapComplete()){
-
-            jobTracker.map(job);
-
-        }
-        else if(!job.isShuffleComplete()){
-
-            jobTracker.shuffle(job);
-
-
-        }
-        else if(!job.isReduceComplete()){
-
-            jobTracker.reduce(job);
-        }
-        else{
-            //do cleanup
-            jobTracker.cleanup(job);
-
-        }
+        jobTracker.execute(job);
 
         return true;
     }

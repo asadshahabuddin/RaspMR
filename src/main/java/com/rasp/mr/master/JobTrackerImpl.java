@@ -80,7 +80,25 @@ public class JobTrackerImpl implements JobTracker{
     }
 
     @Override
-    public void cleanup(Job job) {
+    public void execute(Job job) throws IOException, InterruptedException {
+
+        if(!job.isMapComplete()){
+
+            this.map(job);
+        }else if(!job.isShuffleComplete()){
+
+            this.shuffle(job);
+        }else if(!job.isReduceComplete()){
+
+            this.reduce(job);
+        }else{
+
+            this.cleanup(job);
+        }
+    }
+
+    private void cleanup(Job job) {
+
         mapperMaster.cleanup(job);
         shuffleMaster.cleanup(job);
         reducerMaster.cleanup(job);
@@ -96,8 +114,8 @@ public class JobTrackerImpl implements JobTracker{
 
     }
 
-    @Override
-    public void map(Job job) throws IOException, InterruptedException {
+
+    private void map(Job job) throws IOException, InterruptedException {
 
         mapperMaster.createMapperTasksForJob(job);
 
@@ -107,8 +125,7 @@ public class JobTrackerImpl implements JobTracker{
         }
     }
 
-    @Override
-    public void reduce(Job job) throws IOException, InterruptedException {
+    private void reduce(Job job) throws IOException, InterruptedException {
 
         reducerMaster.createReducerTasksForJob(job);
 
@@ -118,8 +135,8 @@ public class JobTrackerImpl implements JobTracker{
         }
     }
 
-    @Override
-    public void shuffle(Job job) throws IOException, InterruptedException {
+
+    private void shuffle(Job job) throws IOException, InterruptedException {
 
         shuffleMaster.run(job);
 

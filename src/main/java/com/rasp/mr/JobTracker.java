@@ -54,11 +54,5 @@ public interface JobTracker
 
     ReducerMaster getReducerMaster();
 
-    void cleanup(Job job);
-
-    void map(Job job) throws IOException, InterruptedException;
-
-    void reduce(Job job) throws IOException, InterruptedException;
-
-    void shuffle(Job job) throws IOException, InterruptedException;
+    void execute(Job job) throws IOException, InterruptedException;
 }
