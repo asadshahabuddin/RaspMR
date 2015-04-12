@@ -31,9 +31,9 @@ public class TaskBlockingService
     }
 
     @Override
-    public STaskProtos.TransferResponse sendTask(RpcController controller, STaskProtos.STask sTask) throws ServiceException {
+    public STaskProtos.STransferResponse sendTask(RpcController controller, STaskProtos.STask sTask) throws ServiceException {
         taskNode.sendTask(sTaskToTask(sTask));
-        return STaskProtos.TransferResponse.newBuilder().setStatus("OK").build();
+        return STaskProtos.STransferResponse.newBuilder().setStatus("OK").build();
     }
 
     private Task sTaskToTask(STaskProtos.STask sTask) {
@@ -58,33 +58,33 @@ public class TaskBlockingService
     }
 
     @Override
-    public STaskProtos.TransferResponse initiateTransferDataForKey(RpcController controller, STaskProtos.STransferKeyData request) throws ServiceException {
+    public STaskProtos.STransferResponse initiateTransferDataForKey(RpcController controller, STaskProtos.STransferKeyData request) throws ServiceException {
         Service service = ServiceFactory.
                 createService(ServiceType.TASK_TRACKER,
                         request.getDataHost().getIp(),
                         request.getDataHost().getPort());
         taskNode.initiateDataTransferForKey(request.getKey(), service);
-        return STaskProtos.TransferResponse.newBuilder().setStatus("OK").build();
+        return STaskProtos.STransferResponse.newBuilder().setStatus("OK").build();
     }
 
     @Override
-    public STaskProtos.TransferResponse transferDataForKey(RpcController controller, STaskProtos.STransferKeyData request) throws ServiceException {
+    public STaskProtos.STransferResponse transferDataForKey(RpcController controller, STaskProtos.STransferKeyData request) throws ServiceException {
         Service service = ServiceFactory.
                 createService(ServiceType.TASK_TRACKER,
                         request.getDataHost().getIp(),
                         request.getDataHost().getPort());
         taskNode.transferDataForKey(request.getData().toByteArray(), request.getKey(), service);
-        return STaskProtos.TransferResponse.newBuilder().setStatus("OK").build();
+        return STaskProtos.STransferResponse.newBuilder().setStatus("OK").build();
     }
 
     @Override
-    public STaskProtos.TransferResponse terminateTransferDataForKey(RpcController controller, STaskProtos.STransferKeyData request) throws ServiceException {
+    public STaskProtos.STransferResponse terminateTransferDataForKey(RpcController controller, STaskProtos.STransferKeyData request) throws ServiceException {
         Service service = ServiceFactory.
                 createService(ServiceType.TASK_TRACKER,
                         request.getDataHost().getIp(),
                         request.getDataHost().getPort());
         taskNode.terminateTransferDataForKey(request.getKey(), service);
-        return STaskProtos.TransferResponse.newBuilder().setStatus("OK").build();
+        return STaskProtos.STransferResponse.newBuilder().setStatus("OK").build();
     }
 
 

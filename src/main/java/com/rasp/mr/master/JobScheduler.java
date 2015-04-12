@@ -32,33 +32,27 @@ public class JobScheduler
         	return false;
         }
         
-        if(!job.isMapComplete())
-        {
-            jobTracker.createMapperTasksForJob(job);
-            /*
-            (1) Send job tasks to other machines.
-            (2) Sending should probably be done by the job tracker.
-             */
-            for(MapperTask task : job.getMapTasks())
-            {
-                jobTracker.sendTask(task);
-            }
-        }
-        else if(!job.isShuffleComplete())
-        {
-            // TODO
-            jobTracker.getShuffleMaster().run(job);
+        if(!job.isMapComplete()){
+
+            jobTracker.map(job);
 
         }
-        else if(!job.isReduceComplete())
-        {
-            jobTracker.createReducerTasksForJob(job);
+        else if(!job.isShuffleComplete()){
+
+            jobTracker.shuffle(job);
+
+
         }
-        else
-        {
-        	// TODO
+        else if(!job.isReduceComplete()){
+
+            jobTracker.reduce(job);
         }
-        
+        else{
+            //do cleanup
+            jobTracker.cleanup(job);
+
+        }
+
         return true;
     }
 

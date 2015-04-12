@@ -32,9 +32,9 @@ public class JobNodeBlockingService implements STaskProtos.JobService.BlockingIn
     }
 
     @Override
-    public STaskProtos.TransferResponse sendMapResponse(RpcController controller, STaskProtos.SMapResponse request) throws ServiceException {
+    public STaskProtos.STransferResponse sendMapResponse(RpcController controller, STaskProtos.SMapResponse request) throws ServiceException {
         jobNode.mapCompleted(request.getId(),getKeyCount(request.getMapCountList()));
-        return STaskProtos.TransferResponse.newBuilder().setStatus("OK").build();
+        return STaskProtos.STransferResponse.newBuilder().setStatus("OK").build();
     }
 
     private Map<String,Long> getKeyCount(List<STaskProtos.SMapResponse.SKeyCount> sKeyCountList){
@@ -46,10 +46,15 @@ public class JobNodeBlockingService implements STaskProtos.JobService.BlockingIn
     }
 
     @Override
-    public STaskProtos.TransferResponse shuffleDataTransferCompleted(RpcController controller, STaskProtos.ShuffleResponse request) throws ServiceException {
+    public STaskProtos.STransferResponse shuffleDataTransferCompleted(RpcController controller, STaskProtos.SShuffleResponse request) throws ServiceException {
         jobNode.shuffleDataTransferCompleted(request.getTaskId());
-        return STaskProtos.TransferResponse.newBuilder().setStatus("OK").build();
+        return STaskProtos.STransferResponse.newBuilder().setStatus("OK").build();
     }
 
+    @Override
+    public STaskProtos.STransferResponse reduceCompleted(RpcController controller, STaskProtos.SReduceResponse request) throws ServiceException {
+        jobNode.shuffleDataTransferCompleted(request.getTaskId());
+        return STaskProtos.STransferResponse.newBuilder().setStatus("OK").build();
+    }
 }
 /* End of JobNodeBlockingService.java */

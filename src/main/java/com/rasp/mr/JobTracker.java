@@ -39,27 +39,6 @@ public interface JobTracker
     Job nextJob();
 
     /**
-     * Create map tasks for the specified job.
-     * @param job
-     *            The job to work on.
-     */
-    void createMapperTasksForJob(Job job);
-
-    /**
-     * Create reduce tasks for the specified job.
-     * @param job
-     *            The job to work on.
-     */
-    void createReducerTasksForJob(Job job);
-
-    /**
-     * Mark the map task as complete.
-     * @param taskId
-     *            Unique ID of the a task.
-     */
-    void completeMapTask(String taskId, Map<String, Long> keyCount);
-
-    /**
      * Send the task to a worker node for execution. 
      * @param task
      *            The task to execute on a worker node.
@@ -69,5 +48,17 @@ public interface JobTracker
     void sendTask(Task task) throws IOException, InterruptedException;
 
 
+    MapperMaster getMapperMaster();
+
     ShuffleMaster getShuffleMaster();
+
+    ReducerMaster getReducerMaster();
+
+    void cleanup(Job job);
+
+    void map(Job job) throws IOException, InterruptedException;
+
+    void reduce(Job job);
+
+    void shuffle(Job job) throws IOException, InterruptedException;
 }

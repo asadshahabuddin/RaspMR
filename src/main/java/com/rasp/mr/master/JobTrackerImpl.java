@@ -28,17 +28,19 @@ public class JobTrackerImpl implements JobTracker{
 
     MasterConfiguration conf;
     Map<String, Job> jobMap;
-    Map<String, Task> taskMap;
     LinkedBlockingQueue<Job> jobQueue;
     ShuffleMaster shuffleMaster;
+    ReducerMaster reducerMaster;
+    MapperMaster mapperMaster;
 
     public JobTrackerImpl(MasterConfiguration conf)
     {
     	this.conf = conf;
     	jobMap    = new HashMap<String, Job>();
-    	taskMap   = new HashMap<String, Task>();
     	jobQueue  = new LinkedBlockingQueue<Job>();
         shuffleMaster = new ShuffleMasterImpl(this.conf);
+        reducerMaster = new ReducerMasterImpl(this.conf);
+        mapperMaster = new MapperMasterImpl(this.conf);
     }
 
     @Override
@@ -55,54 +57,6 @@ public class JobTrackerImpl implements JobTracker{
     }
 
     @Override
-    public void createMapperTasksForJob(Job job)
-    {
-        List<MapperTask> taskList = new ArrayList<>();
-        InputFormatImpl inputFormat = conf.getDataMaster().getInputFormat(job.getInputPath());
-        
-        for(InputSplit inputSplit : inputFormat.getSplits())
-        {
-            MapperTask mapperTask = new MapperTaskImpl();
-            mapperTask.setTaskInputSplit(inputSplit);
-            mapperTask.setJob(job);
-            mapperTask.setMapperClass(job.getMapperClass());
-            taskList.add(mapperTask);
-            taskMap.put(mapperTask.getTaskId(),mapperTask);
-        }
-        job.setMapTasks(taskList);
-    }
-
-    @Override
-    public void createReducerTasksForJob(Job job)
-    {
-    	// TODO
-    }
-
-    @Override
-    public synchronized void completeMapTask(String taskId, Map<String, Long> keyCount)
-    {
-        Task task = taskMap.get(taskId);
-        Job job = task.getJob();
-
-        if(task instanceof MapperTask){
-
-            task.complete();
-            for (String key :keyCount.keySet()){
-                System.out.println("MAP ::    key   ::"+key+"::    Value   ::"+keyCount.get(key));
-            }
-
-            ((MapperTask) task).getMapContext().setKeyCountMap(keyCount);
-            if(job.isMapComplete()){
-                jobQueue.add(job);
-            }
-        }
-        else
-        {
-            throw new RuntimeException(" [error] Type of task passed should be MapperTask");
-        }
-    }
-
-    @Override
     public void sendTask(Task task)
 		throws IOException, InterruptedException
     {
@@ -112,5 +66,41 @@ public class JobTrackerImpl implements JobTracker{
     @Override
     public ShuffleMaster getShuffleMaster() {
         return shuffleMaster;
+    }
+
+    @Override
+    public MapperMaster getMapperMaster() {
+        return mapperMaster;
+    }
+
+    @Override
+    public ReducerMaster getReducerMaster() {
+        return reducerMaster;
+    }
+
+    @Override
+    public void cleanup(Job job) {
+
+    }
+
+    @Override
+    public void map(Job job) throws IOException, InterruptedException {
+
+        mapperMaster.createMapperTasksForJob(job);
+
+        for(MapperTask task : job.getMapTasks())
+        {
+            sendTask(task);
+        }
+    }
+
+    @Override
+    public void reduce(Job job) {
+        reducerMaster.createReducerTasksForJob(job);
+    }
+
+    @Override
+    public void shuffle(Job job) throws IOException, InterruptedException {
+        shuffleMaster.run(job);
     }
 }

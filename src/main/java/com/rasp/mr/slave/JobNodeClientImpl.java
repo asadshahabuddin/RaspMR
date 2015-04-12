@@ -58,8 +58,13 @@ public class JobNodeClientImpl implements JobNode{
 
     @Override
     public void shuffleDataTransferCompleted(String taskId) throws ServiceException {
-        STaskProtos.ShuffleResponse shuffleResponse = STaskProtos.ShuffleResponse.newBuilder().setTaskId(taskId).build();
+        STaskProtos.SShuffleResponse shuffleResponse = STaskProtos.SShuffleResponse.newBuilder().setTaskId(taskId).build();
         jobService.shuffleDataTransferCompleted(controller,shuffleResponse);
+    }
+
+    @Override
+    public void reduceCompleted(String taskId) throws ServiceException {
+
     }
 
     @Override
