@@ -9,16 +9,14 @@
 package com.rasp.mr.master;
 
 /* Import list */
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Map;
-import java.util.List;
 import java.util.HashMap;
 import java.io.IOException;
-import java.util.ArrayList;
-import com.rasp.fs.InputFormatImpl;
 import com.rasp.mr.*;
-import com.rasp.fs.InputSplit;
 import com.rasp.config.MasterConfiguration;
-import com.rasp.mr.slave.MapperTaskImpl;
 import com.rasp.shuffle.ShuffleMaster;
 import com.rasp.shuffle.ShuffleMasterImpl;
 
@@ -28,6 +26,8 @@ public class JobTrackerImpl implements JobTracker{
 
     MasterConfiguration conf;
     Map<String, Job> jobMap;
+    Map<String,InputStream> completedJobMap;
+
     LinkedBlockingQueue<Job> jobQueue;
     ShuffleMaster shuffleMaster;
     ReducerMaster reducerMaster;
@@ -48,6 +48,7 @@ public class JobTrackerImpl implements JobTracker{
     {
         jobMap.put(job.getJobId(), job);
         jobQueue.add(job);
+
     }
 
     @Override
@@ -79,17 +80,42 @@ public class JobTrackerImpl implements JobTracker{
     }
 
     @Override
-    public void cleanup(Job job) {
+    public void execute(Job job) throws IOException, InterruptedException {
+
+        if(!job.isMapComplete()){
+
+            this.map(job);
+        }else if(!job.isShuffleComplete()){
+
+            this.shuffle(job);
+        }else if(!job.isReduceComplete()){
+
+            this.reduce(job);
+        }else{
+
+            this.cleanup(job);
+        }
+    }
+
+    private void cleanup(Job job) {
+
         mapperMaster.cleanup(job);
         shuffleMaster.cleanup(job);
         reducerMaster.cleanup(job);
-
         jobMap.remove(job.getJobId());
+
+        //TODO persist keyToServiceMap to fileSystem
+        try {
+            completedJobMap.put(job.getJobId(),new FileInputStream(job.getJobId()));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        job.cleanup();
 
     }
 
-    @Override
-    public void map(Job job) throws IOException, InterruptedException {
+
+    private void map(Job job) throws IOException, InterruptedException {
 
         mapperMaster.createMapperTasksForJob(job);
 
@@ -99,14 +125,21 @@ public class JobTrackerImpl implements JobTracker{
         }
     }
 
-    @Override
-    public void reduce(Job job) {
+    private void reduce(Job job) throws IOException, InterruptedException {
+
         reducerMaster.createReducerTasksForJob(job);
+
+        for(ReducerTask task : job.getReduceTasks())
+        {
+            sendTask(task);
+        }
     }
 
-    @Override
-    public void shuffle(Job job) throws IOException, InterruptedException {
-        shuffleMaster.run(job);
+
+    private void shuffle(Job job) throws IOException, InterruptedException {
+
+        shuffleMaster.createShuffleTasks(job);
+
     }
 
 

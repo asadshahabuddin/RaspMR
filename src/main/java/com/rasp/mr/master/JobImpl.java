@@ -2,23 +2,24 @@ package com.rasp.mr.master;
 
 import com.rasp.interfaces.*;
 import com.rasp.mr.*;
+import com.rasp.utils.autodiscovery.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
- * Author : rahulmadhavan
+ * Author : Rahul Madhavan, Sourabh Suman
  * File   :
  * Email  : rahulk@ccs.neu.edu
  * Created: 4/4/15
- * Edited :
+ * Edited : 4/12/15
  */
 public class JobImpl implements Job {
 
     private String jobId;
     private String inputPath;
-    private String outputPath;
     private Class<? extends Mapper> mapperClass;
     private Class<? extends Reducer> reducerClass;
     private boolean mapComplete;
@@ -26,6 +27,8 @@ public class JobImpl implements Job {
     private boolean reduceComplete;
     private List<MapperTask> mapperTasks;
     private List<ReducerTask> reducerTasks;
+    private List<ShuffleTask> shuffleTasks;
+    private Map<String,Service> reduceKeyServiceMap;
 
 
     public JobImpl(){
@@ -40,11 +43,6 @@ public class JobImpl implements Job {
     @Override
     public void setInputPath(String path) {
         this.inputPath = path;
-    }
-
-    @Override
-    public void setOutputPath(String path) {
-        this.outputPath = path;
     }
 
     @Override
@@ -67,31 +65,37 @@ public class JobImpl implements Job {
         return false;
     }
 
-
-    @Override
-    public boolean isMapComplete() {
-        if(!mapComplete){
+    private boolean isTaskComplete(boolean taskComplete, List<? extends Task> tasks){
+    	if(!taskComplete){
             boolean result = true;
-            for(MapperTask mapperTask: mapperTasks){
-                if(!mapperTask.isCompleted()){
+            for(Task task: tasks){
+                if(!task.isCompleted()){
                     result = false;
                     break;
                 }
             }
-            if(result && mapperTasks.size() > 0)
-                mapComplete = true;
+            if(result && tasks.size() > 0)
+            	taskComplete = true;
         }
+        return taskComplete;    	
+    }
+    
+    @Override
+    public boolean isMapComplete() {
+        mapComplete = isTaskComplete(mapComplete, mapperTasks);
         return mapComplete;
     }
 
 
     @Override
     public boolean isShuffleComplete() {
+        shuffleComplete = isTaskComplete(shuffleComplete, shuffleTasks);
         return shuffleComplete;
     }
 
     @Override
     public boolean isReduceComplete() {
+    	reduceComplete = isTaskComplete(reduceComplete, reducerTasks);
         return reduceComplete;
     }
 
@@ -134,6 +138,11 @@ public class JobImpl implements Job {
     public List<ReducerTask> getReduceTasks() {
         return reducerTasks;
     }
+    
+    @Override
+    public List<ShuffleTask> getShuffleTasks() {
+        return shuffleTasks;
+    }
 
     public String getJobId() {
         return jobId;
@@ -147,5 +156,29 @@ public class JobImpl implements Job {
     @Override
     public Class<? extends Reducer> getReducerClass() {
         return reducerClass;
+    }
+
+    @Override
+    public Map<String, Service> getReduceKeyServiceMap() {
+        return reduceKeyServiceMap;
+    }
+
+    @Override
+    public void setReduceKeyServiceMap(Map<String, Service> keyServiceMap) {
+        this.reduceKeyServiceMap = keyServiceMap;
+    }
+
+    @Override
+    public void cleanup() {
+        mapperTasks.clear();
+        reducerTasks.clear();
+        shuffleTasks.clear();
+        reduceKeyServiceMap.clear();
+
+        mapperTasks = null;
+        reducerTasks = null;
+        shuffleTasks = null;
+        reduceKeyServiceMap = null;
+
     }
 }

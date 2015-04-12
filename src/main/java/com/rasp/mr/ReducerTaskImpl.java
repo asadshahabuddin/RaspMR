@@ -27,16 +27,20 @@ public class ReducerTaskImpl
     private String key;
     private InputSplit inputSplit;
     private boolean complete;
+    private Service service;
 
-    public ReducerTaskImpl()
+
+    public ReducerTaskImpl(Service service)
     {
         taskId = UUID.randomUUID().toString();
+        this.service = service;
         // reduceContext = new ReduceContextImpl();
     }
 
-    public ReducerTaskImpl(String taskId)
+    public ReducerTaskImpl(String taskId, Service service)
     {
         this.taskId = taskId;
+        this.service = service;
         // reduceContext = new ReduceContextImpl();
     }
 
@@ -120,12 +124,11 @@ public class ReducerTaskImpl
         return complete;
     }
 
-    @Override
-    public Service getService()
-        throws IOException, InterruptedException {
-        return ServiceFactory.createService(
-                ServiceType.TASK_TRACKER,
-                inputSplit.getLocation(),
-                Configuration.TASK_NODE_PORT);
+    public Service getService() {
+        return service;
+    }
+
+    public void setService(Service service) {
+        this.service = service;
     }
 }

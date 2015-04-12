@@ -20,6 +20,9 @@ import com.rasp.utils.autodiscovery.Service;
 import com.rasp.utils.autodiscovery.ServiceFactory;
 import com.rasp.utils.autodiscovery.ServiceType;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class TaskBlockingService
     implements STaskProtos.TaskService.BlockingInterface {
     private TaskNode taskNode;
@@ -63,7 +66,12 @@ public class TaskBlockingService
                 createService(ServiceType.TASK_TRACKER,
                         request.getDataHost().getIp(),
                         request.getDataHost().getPort());
-        taskNode.initiateDataTransferForKey(request.getKey(), service);
+
+        try {
+            taskNode.initiateDataTransferForKey(request.getKey(), service);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         return STaskProtos.STransferResponse.newBuilder().setStatus("OK").build();
     }
 
@@ -73,7 +81,11 @@ public class TaskBlockingService
                 createService(ServiceType.TASK_TRACKER,
                         request.getDataHost().getIp(),
                         request.getDataHost().getPort());
-        taskNode.transferDataForKey(request.getData().toByteArray(), request.getKey(), service);
+        try {
+            taskNode.transferDataForKey(request.getData().toByteArray(), request.getKey(), service);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return STaskProtos.STransferResponse.newBuilder().setStatus("OK").build();
     }
 
@@ -83,7 +95,11 @@ public class TaskBlockingService
                 createService(ServiceType.TASK_TRACKER,
                         request.getDataHost().getIp(),
                         request.getDataHost().getPort());
-        taskNode.terminateTransferDataForKey(request.getKey(), service);
+        try {
+            taskNode.terminateTransferDataForKey(request.getKey(), service);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return STaskProtos.STransferResponse.newBuilder().setStatus("OK").build();
     }
 
