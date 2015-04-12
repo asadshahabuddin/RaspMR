@@ -20,7 +20,7 @@ import com.googlecode.protobuf.pro.duplex.RpcClientChannel;
 import java.util.Map;
 
 public class JobNodeClientImpl implements JobNode{
-    private ProtoClient client;
+
     private Service service;
     private STaskProtos.JobService.BlockingInterface jobService;
     private RpcController controller;
@@ -34,7 +34,6 @@ public class JobNodeClientImpl implements JobNode{
      */
     public JobNodeClientImpl(ProtoClient client, Service service)
     {
-        this.client  = client;
         this.service = service;
         RpcClientChannel channel = client.getConnection(service.getIp(), service.getPort());
         jobService = STaskProtos.JobService.newBlockingStub(channel);
@@ -64,7 +63,8 @@ public class JobNodeClientImpl implements JobNode{
 
     @Override
     public void reduceCompleted(String taskId) throws ServiceException {
-
+        STaskProtos.SReduceResponse reduceResponse = STaskProtos.SReduceResponse.newBuilder().setTaskId(taskId).build();
+        jobService.reduceCompleted(controller,reduceResponse);
     }
 
     @Override

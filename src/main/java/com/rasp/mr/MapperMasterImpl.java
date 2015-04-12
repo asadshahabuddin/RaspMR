@@ -5,7 +5,6 @@ import com.rasp.fs.InputFormatImpl;
 import com.rasp.fs.InputSplit;
 import com.rasp.mr.slave.MapperTaskImpl;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -67,8 +66,7 @@ public class MapperMasterImpl  implements MapperMaster{
 
     @Override
     public void cleanup(Job job) {
-        for(MapperTask task :job.getMapTasks()){
-            taskMap.remove(task.getTaskId());
-        }
+        taskMap.clear();
+        taskMap = null;
     }
 }

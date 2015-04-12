@@ -16,6 +16,9 @@ import com.rasp.utils.autodiscovery.Service;
 import com.rasp.utils.autodiscovery.ServiceType;
 import com.rasp.utils.autodiscovery.ServiceFactory;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 public class TaskNodeServerImpl
     implements TaskNode {
     private Service service;
@@ -43,15 +46,27 @@ public class TaskNodeServerImpl
 
     @Override
     public void initiateDataTransferForKey(String key, Service service) {
-        configuration.getShuffleSlave().createDataHandlerFor(key,service);
+        try {
+            configuration.getShuffleSlave().createDataHandlerFor(key,service);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void transferDataForKey(byte[] data, String key, Service service) {
-        configuration.getShuffleSlave().storeDataFor(data, key, service);
+        try {
+            configuration.getShuffleSlave().storeDataFor(data, key, service);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void terminateTransferDataForKey(String key, Service service) {
-        configuration.getShuffleSlave().closeDataHandlerFor(key, service);
+        try {
+            configuration.getShuffleSlave().closeDataHandlerFor(key, service);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

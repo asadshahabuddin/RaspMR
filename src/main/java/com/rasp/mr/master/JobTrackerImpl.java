@@ -9,16 +9,14 @@
 package com.rasp.mr.master;
 
 /* Import list */
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Map;
-import java.util.List;
 import java.util.HashMap;
 import java.io.IOException;
-import java.util.ArrayList;
-import com.rasp.fs.InputFormatImpl;
 import com.rasp.mr.*;
-import com.rasp.fs.InputSplit;
 import com.rasp.config.MasterConfiguration;
-import com.rasp.mr.slave.MapperTaskImpl;
 import com.rasp.shuffle.ShuffleMaster;
 import com.rasp.shuffle.ShuffleMasterImpl;
 
@@ -28,6 +26,8 @@ public class JobTrackerImpl implements JobTracker{
 
     MasterConfiguration conf;
     Map<String, Job> jobMap;
+    Map<String,InputStream> completedJobMap;
+
     LinkedBlockingQueue<Job> jobQueue;
     ShuffleMaster shuffleMaster;
     ReducerMaster reducerMaster;
@@ -48,6 +48,7 @@ public class JobTrackerImpl implements JobTracker{
     {
         jobMap.put(job.getJobId(), job);
         jobQueue.add(job);
+
     }
 
     @Override
@@ -83,8 +84,15 @@ public class JobTrackerImpl implements JobTracker{
         mapperMaster.cleanup(job);
         shuffleMaster.cleanup(job);
         reducerMaster.cleanup(job);
-
         jobMap.remove(job.getJobId());
+
+        //TODO persist keyToServiceMap to fileSystem
+        try {
+            completedJobMap.put(job.getJobId(),new FileInputStream(job.getJobId()));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        job.cleanup();
 
     }
 
@@ -100,13 +108,21 @@ public class JobTrackerImpl implements JobTracker{
     }
 
     @Override
-    public void reduce(Job job) {
+    public void reduce(Job job) throws IOException, InterruptedException {
+
         reducerMaster.createReducerTasksForJob(job);
+
+        for(ReducerTask task : job.getReduceTasks())
+        {
+            sendTask(task);
+        }
     }
 
     @Override
     public void shuffle(Job job) throws IOException, InterruptedException {
+
         shuffleMaster.run(job);
+
     }
 
 

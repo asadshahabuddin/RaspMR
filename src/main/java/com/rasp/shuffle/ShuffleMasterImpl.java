@@ -164,6 +164,9 @@ public class ShuffleMasterImpl implements ShuffleMaster {
 
     @Override
     public void cleanup(Job job) {
-
+        taskMap.clear();
+        serviceKeyFreq.clear();
+        taskMap = null;
+        serviceKeyFreq = null;
     }
 }

@@ -2,9 +2,11 @@ package com.rasp.mr.master;
 
 import com.rasp.interfaces.*;
 import com.rasp.mr.*;
+import com.rasp.utils.autodiscovery.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -18,7 +20,6 @@ public class JobImpl implements Job {
 
     private String jobId;
     private String inputPath;
-    private String outputPath;
     private Class<? extends Mapper> mapperClass;
     private Class<? extends Reducer> reducerClass;
     private boolean mapComplete;
@@ -26,6 +27,7 @@ public class JobImpl implements Job {
     private boolean reduceComplete;
     private List<MapperTask> mapperTasks;
     private List<ReducerTask> reducerTasks;
+    private Map<String,Service> reduceKeyServiceMap;
 
 
     public JobImpl(){
@@ -40,11 +42,6 @@ public class JobImpl implements Job {
     @Override
     public void setInputPath(String path) {
         this.inputPath = path;
-    }
-
-    @Override
-    public void setOutputPath(String path) {
-        this.outputPath = path;
     }
 
     @Override
@@ -147,5 +144,26 @@ public class JobImpl implements Job {
     @Override
     public Class<? extends Reducer> getReducerClass() {
         return reducerClass;
+    }
+
+    @Override
+    public Map<String, Service> getReduceKeyServiceMap() {
+        return reduceKeyServiceMap;
+    }
+
+    @Override
+    public void setReduceKeyServiceMap(Map<String, Service> keyServiceMap) {
+        this.reduceKeyServiceMap = keyServiceMap;
+    }
+
+    @Override
+    public void cleanup() {
+        mapperTasks.clear();
+        reducerTasks.clear();
+        reduceKeyServiceMap.clear();
+
+        mapperTasks = null;
+        reducerTasks = null;
+        reduceKeyServiceMap = null;
     }
 }

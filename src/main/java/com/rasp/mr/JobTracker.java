@@ -58,7 +58,7 @@ public interface JobTracker
 
     void map(Job job) throws IOException, InterruptedException;
 
-    void reduce(Job job);
+    void reduce(Job job) throws IOException, InterruptedException;
 
     void shuffle(Job job) throws IOException, InterruptedException;
 }
