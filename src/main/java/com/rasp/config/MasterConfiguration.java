@@ -25,8 +25,8 @@ import com.rasp.utils.autodiscovery.ServiceType;
 
 public class MasterConfiguration extends Configuration {
     private Map<String,DataNode> dataNodeMap;
-    private Map<String,TaskNode> taskNodeMap;
-    private ProtoClient protoClient;
+
+
     private DataMaster dataMaster;
     private JobTracker jobTracker;
     private JobScheduler jobScheduler;
@@ -34,9 +34,7 @@ public class MasterConfiguration extends Configuration {
 
     public MasterConfiguration(int portNo, ServiceType serviceType) {
         super(portNo,serviceType);
-        protoClient = new ProtoClient();
         dataNodeMap = new HashMap<>();
-        taskNodeMap = new HashMap<>();
     }
 
     public DataNode getDataNode(Service service) {
@@ -51,17 +49,6 @@ public class MasterConfiguration extends Configuration {
         }
     }
 
-    public TaskNode getTaskNode(Service service) {
-        if(service.getServiceType() == ServiceType.TASK_TRACKER){
-            String key = service.getIp()+ ":" + service.getPort();
-            if(!taskNodeMap.containsKey(key)) {
-                taskNodeMap.put(key,new TaskNodeClientImpl(protoClient,service));
-            }
-            return taskNodeMap.get(key);
-        } else {
-            throw new IllegalArgumentException("Service should be a slave: argument service is for master");
-        }
-    }
 
     public DataMaster getDataMaster() {
         return dataMaster;
