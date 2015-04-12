@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Author : rahulmadhavan
+ * Author : Rahul Madhavan, Sourabh Suman
  * File   :
  * Email  : rahulk@ccs.neu.edu
  * Created: 4/4/15
- * Edited :
+ * Edited : 4/12/15
  */
 public class JobImpl implements Job {
 
