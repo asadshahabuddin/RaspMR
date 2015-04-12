@@ -7,15 +7,16 @@
  */
 
 package com.rasp.mr;
-import java.util.UUID;
-import java.io.IOException;
 
-import com.rasp.config.Configuration;
+import java.util.UUID;
+import java.io.FileReader;
+import java.io.IOException;
+import com.rasp.fs.Iterable;
 import com.rasp.fs.InputSplit;
-import com.rasp.fs.RecordReaderImpl;
+import com.rasp.config.Configuration;
 import com.rasp.utils.autodiscovery.Service;
-import com.rasp.utils.autodiscovery.ServiceFactory;
 import com.rasp.utils.autodiscovery.ServiceType;
+import com.rasp.utils.autodiscovery.ServiceFactory;
 
 public class ReducerTaskImpl
     implements ReducerTask {
@@ -23,6 +24,7 @@ public class ReducerTaskImpl
     private ReduceContext reduceContext;
     private Class<? extends Reducer> reducerClass;
     private Job job;
+    private String key;
     private InputSplit inputSplit;
     private boolean complete;
 
@@ -65,6 +67,16 @@ public class ReducerTaskImpl
     }
 
     @Override
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    @Override
+    public String getKey() {
+        return key;
+    }
+
+    @Override
     public void setTaskInputSplit(InputSplit inputSplit) {
         this.inputSplit = inputSplit;
     }
@@ -84,19 +96,15 @@ public class ReducerTaskImpl
         }
 
 		/*
-		(1) Initialize a reader object
-		(2) Call map function successively for each key-value pair
-		(3) Perform cleanup
+		(1) Initialize an iterator.
+		(2) Call reduce function successively for each key-value pair.
+		(3) Perform cleanup.
 		*/
-        RecordReaderImpl reader = new RecordReaderImpl();
-        reader.initialize(inputSplit);
+        Iterable iterable = new Iterable(new FileReader(inputSplit.getLocation()));
         reducer.setup();
-        while(reader.nextKeyValue())
-        {
-            // reducer.reduce(reader.getCurrentKey(), reader.getCurrentValue(), reduceContext);
-        }
+        reducer.reduce(key, iterable, reduceContext);
         reduceContext.close();
-        reader.close();
+        iterable.close();
         reducer.cleanup();
 
         return complete = true;

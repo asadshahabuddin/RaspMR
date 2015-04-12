@@ -29,5 +29,17 @@ public interface ReducerTask extends Task
      */
     Class<? extends Reducer> getReducerClass();
 
+    /**
+     * Set the key.
+     * @param key
+     *            The key.
+     */
+    void setKey(String key);
 
+    /**
+     * Get the key.
+     * @return
+     *            The key.
+     */
+    String getKey();
 }
