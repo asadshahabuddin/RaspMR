@@ -39,13 +39,19 @@ message SDataTransferTask {
     }
 }
 
-message TransferResponse {
+message STransferResponse {
     optional string status = 1;
 }
 
-message ShuffleResponse {
+message SShuffleResponse {
     optional string taskId = 1;
 }
+
+
+message SReduceResponse {
+    optional string taskId = 1;
+}
+
 
 
 message STransferKeyData{
@@ -62,15 +68,16 @@ message STransferKeyData{
 
 service TaskService {
 
-    rpc sendTask(STask) returns (TransferResponse);
+    rpc sendTask(STask) returns (STransferResponse);
 
-    rpc initiateTransferDataForKey(STransferKeyData) returns (TransferResponse);
-    rpc transferDataForKey(STransferKeyData) returns (TransferResponse);
-    rpc terminateTransferDataForKey(STransferKeyData) returns (TransferResponse);
+    rpc initiateTransferDataForKey(STransferKeyData) returns (STransferResponse);
+    rpc transferDataForKey(STransferKeyData) returns (STransferResponse);
+    rpc terminateTransferDataForKey(STransferKeyData) returns (STransferResponse);
 
 }
 
 service JobService {
-    rpc sendMapResponse(SMapResponse) returns (TransferResponse);
-    rpc shuffleDataTransferCompleted(ShuffleResponse) returns (TransferResponse);
+    rpc sendMapResponse(SMapResponse) returns (STransferResponse);
+    rpc shuffleDataTransferCompleted(SShuffleResponse) returns (STransferResponse);
+    rpc reduceCompleted(SReduceResponse) returns (STransferResponse);
 }

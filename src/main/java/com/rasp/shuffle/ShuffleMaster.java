@@ -16,5 +16,6 @@ public interface ShuffleMaster {
     void shuffleDataTransferCompleted(String taskId);
 
     void run(Job job) throws IOException, InterruptedException;
-    
+
+    void cleanup(Job job);
 }

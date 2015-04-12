@@ -23,7 +23,6 @@ import com.rasp.utils.autodiscovery.ServiceFactory;
 
 public class JobNodeServerImpl implements JobNode{
     private Service service;
-    private FileOutputStream f;
     private MasterConfiguration configuration;
 
 
@@ -39,7 +38,7 @@ public class JobNodeServerImpl implements JobNode{
     @Override
     public void mapCompleted(String taskId, Map<String, Long> keyCount) throws ServiceException {
 
-        configuration.getJobTracker().completeMapTask(taskId,keyCount);
+        configuration.getJobTracker().getMapperMaster().completeMapTask(taskId,keyCount);
     }
 
     @Override
@@ -47,6 +46,13 @@ public class JobNodeServerImpl implements JobNode{
         configuration.getJobTracker()
                 .getShuffleMaster().shuffleDataTransferCompleted(taskId);
     }
+
+    @Override
+    public void reduceCompleted(String taskId) throws ServiceException {
+        configuration.getJobTracker()
+                .getReducerMaster().completeReduceTask(taskId);
+    }
+
 
     @Override
     public Service getService() {

@@ -22,6 +22,8 @@ public interface JobNode
 
     public void shuffleDataTransferCompleted(String taskId) throws ServiceException;
 
+    public void reduceCompleted(String taskId) throws ServiceException;
+
     public Service getService();
 
 }

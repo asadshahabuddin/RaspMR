@@ -161,4 +161,9 @@ public class ShuffleMasterImpl implements ShuffleMaster {
     		config.getJobTracker().submit(job);
     	}
     }
+
+    @Override
+    public void cleanup(Job job) {
+
+    }
 }
