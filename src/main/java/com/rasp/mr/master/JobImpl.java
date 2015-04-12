@@ -3,7 +3,6 @@ package com.rasp.mr.master;
 import com.rasp.interfaces.*;
 import com.rasp.mr.*;
 import com.rasp.utils.autodiscovery.Service;
-import com.rasp.mr.slave.TaskType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +27,7 @@ public class JobImpl implements Job {
     private boolean reduceComplete;
     private List<MapperTask> mapperTasks;
     private List<ReducerTask> reducerTasks;
+    private List<ShuffleTask> shuffleTasks;
     private Map<String,Service> reduceKeyServiceMap;
 
 
@@ -91,9 +91,9 @@ public class JobImpl implements Job {
 
     @Override
     public boolean isShuffleComplete() {
-    	/*List<Task> tasks = new ArrayList<Task>();
-    	tasks.addAll(shuf);
-        shuffleComplete = isTaskComplete(mapComplete, tasks);*/
+    	List<Task> tasks = new ArrayList<Task>();
+    	tasks.addAll(shuffleTasks);
+        shuffleComplete = isTaskComplete(mapComplete, tasks);
         return shuffleComplete;
     }
 
@@ -143,6 +143,11 @@ public class JobImpl implements Job {
     @Override
     public List<ReducerTask> getReduceTasks() {
         return reducerTasks;
+    }
+    
+    @Override
+    public List<ShuffleTask> getShuffleTasks() {
+        return shuffleTasks;
     }
 
     public String getJobId() {
