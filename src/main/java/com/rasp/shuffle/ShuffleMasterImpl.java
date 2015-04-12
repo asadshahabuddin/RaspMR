@@ -158,6 +158,7 @@ public class ShuffleMasterImpl implements ShuffleMaster {
     public synchronized void shuffleDataTransferCompleted(String taskId) {
     	ShuffleTask task = taskMap.get(taskId);
     	task.complete();
+        Job job = task.getJob();
     	if (job.isShuffleComplete()){
     		config.getJobTracker().submit(job);
     	}
