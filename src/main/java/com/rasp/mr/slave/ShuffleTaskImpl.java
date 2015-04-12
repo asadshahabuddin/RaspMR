@@ -58,7 +58,7 @@ public class ShuffleTaskImpl implements ShuffleTask {
     public boolean execute()
         throws IllegalAccessException, InstantiationException,
                InterruptedException, IOException {
-        TaskNode node = conf.getTaskNode(service);
+        TaskNode node = conf.getTaskNode(dataTargetService);
         /* Check if the node exists and is set */
         if(node == null) {
             return false;
@@ -78,7 +78,7 @@ public class ShuffleTaskImpl implements ShuffleTask {
         */
         int bytesRead = 0;
         byte[] b = null;
-        node.initiateDataTransferForKey(key, service);
+        node.initiateDataTransferForKey(key, dataTargetService);
 
         while (bytesRead < flen) {
             int size = BUFFER_SIZE;
@@ -96,10 +96,10 @@ public class ShuffleTaskImpl implements ShuffleTask {
             f.seek(bytesRead);
             b = new byte[size];
             f.read(b, 0, size);
-            node.transferDataForKey(b, key, service);
+            node.transferDataForKey(b, key, dataTargetService);
             bytesRead += size;
         }
-        node.terminateTransferDataForKey(key, service);
+        node.terminateTransferDataForKey(key, dataTargetService);
 
         return true;
     }
