@@ -9,11 +9,11 @@ import com.rasp.utils.protobuf.ProtoClient;
 import com.rasp.utils.autodiscovery.Service;
 
 /**
- * Author : rahulmadhavan
+ * Author : rahulmadhavan, sourabhsuman
  * File   :
  * Email  : rahulk@ccs.neu.edu
  * Created: 4/4/15
- * Edited :
+ * Edited : 4/11/15
  */
 public class TaskNodeClientImpl implements TaskNode {
     private ProtoClient protoClient;
@@ -42,6 +42,7 @@ public class TaskNodeClientImpl implements TaskNode {
             sTaskBuilder.setClassName(MapperTask.class.toString());
         } else if(task instanceof ShuffleTask){
             sTaskBuilder.setTaskType(STaskProtos.STask.STaskType.SHUFFLE);
+            sTaskBuilder.setClassName(ShuffleTask.class.toString());
         } else {
             sTaskBuilder.setTaskType(STaskProtos.STask.STaskType.REDUCER);
             sTaskBuilder.setClassName(ReducerTask.class.toString());

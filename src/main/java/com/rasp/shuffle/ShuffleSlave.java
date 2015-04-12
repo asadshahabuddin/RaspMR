@@ -17,6 +17,4 @@ public interface ShuffleSlave {
 
     void closeDataHandlerFor(String key, Service service);
 
-
-
 }
