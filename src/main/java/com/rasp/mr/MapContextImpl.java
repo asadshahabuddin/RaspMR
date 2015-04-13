@@ -34,7 +34,7 @@ public class MapContextImpl implements MapContext {
                 file.delete();
             }
             countMap.put(key, 1L);
-            keyMap.put(key, new FileOutputStream(key, true));
+            keyMap.put(key, new FileOutputStream(key + "-mout", true));
         } else {
             countMap.put(key, countMap.get(key) + 1);
         }

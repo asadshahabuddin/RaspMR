@@ -8,32 +8,38 @@
 
 package com.rasp.fs;
 
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.util.Iterator;
-import java.io.BufferedReader;
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 public class Iterable
     implements Iterator {
+    private ArrayList<File> fileList;
     private BufferedReader reader;
+    private int fileIdx;
     private String cachedLine;
     private boolean finished;
 
     /**
      * Constructor
-     * @param reader
-     *            Reader object for the input file.
+     * @param key
+     *            The prefix to the names of all relevant files.
      */
-    public Iterable(Reader reader) {
-        if(reader == null) {
-            throw new IllegalArgumentException("  [error] Reader object cannot be null");
+    public Iterable(String key)
+        throws FileNotFoundException {
+        String dirName = System.getProperty("user.dir");
+        File[] files = new File(dirName).listFiles();
+
+        for(File file : files) {
+            if(file.toString().contains(key)) {
+                fileList.add(file);
+            }
         }
-        if(reader instanceof BufferedReader) {
-            this.reader = (BufferedReader) reader;
-        } else {
-            this.reader = new BufferedReader(reader);
+        if(fileList.size() == 0) {
+            throw new IllegalArgumentException("  [error] No files detected for key '" + key + "'");
         }
+        reader = new BufferedReader(new FileReader(fileList.get(fileIdx++)));
     }
 
     @Override
@@ -46,8 +52,14 @@ public class Iterable
             try {
                 cachedLine = reader.readLine();
                 if(cachedLine == null) {
-                    close();
-                    return false;
+                    if(fileIdx == fileList.size()) {
+                        close();
+                        return false;
+                    } else {
+                        reader.close();
+                        reader = new BufferedReader(new FileReader(fileList.get(fileIdx++)));
+                        return hasNext();
+                    }
                 } else {
                     return true;
                 }
@@ -75,10 +87,10 @@ public class Iterable
 
     public void close() {
         cachedLine = null;
-        finished   = true;
+        finished = true;
         try {
             reader.close();
-        } catch(IOException ioe) {
+        } catch (IOException ioe) {
             throw new IllegalStateException(ioe.toString());
         }
     }

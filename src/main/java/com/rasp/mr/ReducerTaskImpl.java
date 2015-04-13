@@ -13,10 +13,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import com.rasp.fs.Iterable;
 import com.rasp.fs.InputSplit;
-import com.rasp.config.Configuration;
 import com.rasp.utils.autodiscovery.Service;
-import com.rasp.utils.autodiscovery.ServiceType;
-import com.rasp.utils.autodiscovery.ServiceFactory;
 
 public class ReducerTaskImpl
     implements ReducerTask {
@@ -25,23 +22,21 @@ public class ReducerTaskImpl
     private Class<? extends Reducer> reducerClass;
     private Job job;
     private String key;
-    private InputSplit inputSplit;
     private boolean complete;
     private Service service;
-
 
     public ReducerTaskImpl(Service service)
     {
         taskId = UUID.randomUUID().toString();
         this.service = service;
-        // reduceContext = new ReduceContextImpl();
+        reduceContext = new ReduceContextImpl();
     }
 
     public ReducerTaskImpl(String taskId, Service service)
     {
         this.taskId = taskId;
         this.service = service;
-        // reduceContext = new ReduceContextImpl();
+        reduceContext = new ReduceContextImpl();
     }
 
     @Override
@@ -82,12 +77,14 @@ public class ReducerTaskImpl
 
     @Override
     public void setTaskInputSplit(InputSplit inputSplit) {
-        this.inputSplit = inputSplit;
+        throw new UnsupportedOperationException("  [error] " +
+                "This operation is not supported for a reducer task");
     }
 
     @Override
     public InputSplit getTaskInputSplit() {
-        return inputSplit;
+        throw new UnsupportedOperationException("  [error] " +
+                "This operation is not supported for a reducer task");
     }
 
     @Override
@@ -104,7 +101,7 @@ public class ReducerTaskImpl
 		(2) Call reduce function successively for each key-value pair.
 		(3) Perform cleanup.
 		*/
-        Iterable iterable = new Iterable(new FileReader(inputSplit.getLocation()));
+        Iterable iterable = new Iterable(key);
         reducer.setup();
         reducer.reduce(key, iterable, reduceContext);
         reduceContext.close();
@@ -124,11 +121,11 @@ public class ReducerTaskImpl
         return complete;
     }
 
-    public Service getService() {
-        return service;
-    }
-
     public void setService(Service service) {
         this.service = service;
+    }
+
+    public Service getService() {
+        return service;
     }
 }
