@@ -90,4 +90,7 @@ public interface Job
 
 	List<ShuffleTask> getShuffleTasks();
 
+
+	void setShuffleTasks(List<ShuffleTask> shuffleTasks);
+
 }
