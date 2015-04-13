@@ -31,6 +31,7 @@ public class Iterable
         String dirName = System.getProperty("user.dir");
         File[] files = new File(dirName).listFiles();
 
+        fileList = new ArrayList<File>();
         for(File file : files) {
             if(file.toString().contains(key)) {
                 fileList.add(file);
