@@ -9,6 +9,8 @@
 package com.rasp.mr;
 
 /* Import list */
+import com.google.protobuf.ServiceException;
+
 import java.io.IOException;
 
 public interface TaskScheduler
@@ -23,6 +25,6 @@ public interface TaskScheduler
      * @throws IOException
      */
     public boolean schedule()
-		throws IllegalAccessException, InstantiationException,
-			   InterruptedException,   IOException;
+            throws IllegalAccessException, InstantiationException,
+            InterruptedException, IOException, ServiceException;
 }

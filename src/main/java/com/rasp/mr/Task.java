@@ -9,6 +9,7 @@
 package com.rasp.mr;
 
 /* Import list */
+import com.google.protobuf.ServiceException;
 import com.rasp.fs.InputSplit;
 import com.rasp.utils.autodiscovery.Service;
 
@@ -47,8 +48,8 @@ public interface Task {
      * @return true if the task runs appropriately
      */
     boolean execute()
-    	throws IllegalAccessException, InstantiationException,
-               InterruptedException,   IOException;
+            throws IllegalAccessException, InstantiationException,
+            InterruptedException, IOException, ServiceException;
 
     String getTaskId();
 
