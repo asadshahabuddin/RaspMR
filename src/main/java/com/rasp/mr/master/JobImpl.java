@@ -130,6 +130,11 @@ public class JobImpl implements Job {
     }
 
     @Override
+    public void setShuffleTasks(List<ShuffleTask> shuffleTasks) {
+        this.shuffleTasks = shuffleTasks;
+    }
+    
+    @Override
     public List<MapperTask> getMapTasks() {
         return mapperTasks;
     }

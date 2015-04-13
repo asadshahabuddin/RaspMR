@@ -71,6 +71,34 @@ public final class STaskProtos {
      * <code>required .com.rasp.utils.protobuf.STask.STaskType taskType = 5;</code>
      */
     com.rasp.mr.STaskProtos.STask.STaskType getTaskType();
+
+    /**
+     * <code>optional string ip = 6;</code>
+     */
+    boolean hasIp();
+    /**
+     * <code>optional string ip = 6;</code>
+     */
+    java.lang.String getIp();
+    /**
+     * <code>optional string ip = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getIpBytes();
+
+    /**
+     * <code>optional string key = 7;</code>
+     */
+    boolean hasKey();
+    /**
+     * <code>optional string key = 7;</code>
+     */
+    java.lang.String getKey();
+    /**
+     * <code>optional string key = 7;</code>
+     */
+    com.google.protobuf.ByteString
+        getKeyBytes();
   }
   /**
    * Protobuf type {@code com.rasp.utils.protobuf.STask}
@@ -156,6 +184,18 @@ public final class STaskProtos {
                 bitField0_ |= 0x00000010;
                 taskType_ = value;
               }
+              break;
+            }
+            case 50: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000020;
+              ip_ = bs;
+              break;
+            }
+            case 58: {
+              com.google.protobuf.ByteString bs = input.readBytes();
+              bitField0_ |= 0x00000040;
+              key_ = bs;
               break;
             }
           }
@@ -445,12 +485,98 @@ public final class STaskProtos {
       return taskType_;
     }
 
+    public static final int IP_FIELD_NUMBER = 6;
+    private java.lang.Object ip_;
+    /**
+     * <code>optional string ip = 6;</code>
+     */
+    public boolean hasIp() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    /**
+     * <code>optional string ip = 6;</code>
+     */
+    public java.lang.String getIp() {
+      java.lang.Object ref = ip_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          ip_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string ip = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIpBytes() {
+      java.lang.Object ref = ip_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        ip_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int KEY_FIELD_NUMBER = 7;
+    private java.lang.Object key_;
+    /**
+     * <code>optional string key = 7;</code>
+     */
+    public boolean hasKey() {
+      return ((bitField0_ & 0x00000040) == 0x00000040);
+    }
+    /**
+     * <code>optional string key = 7;</code>
+     */
+    public java.lang.String getKey() {
+      java.lang.Object ref = key_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          key_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string key = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+        getKeyBytes() {
+      java.lang.Object ref = key_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        key_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private void initFields() {
       id_ = "";
       jobId_ = "";
       inputSplitId_ = 0;
       className_ = "";
       taskType_ = com.rasp.mr.STaskProtos.STask.STaskType.MAPPER;
+      ip_ = "";
+      key_ = "";
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -496,6 +622,12 @@ public final class STaskProtos {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         output.writeEnum(5, taskType_.getNumber());
       }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(6, getIpBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        output.writeBytes(7, getKeyBytes());
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -524,6 +656,14 @@ public final class STaskProtos {
       if (((bitField0_ & 0x00000010) == 0x00000010)) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(5, taskType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, getIpBytes());
+      }
+      if (((bitField0_ & 0x00000040) == 0x00000040)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, getKeyBytes());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -652,6 +792,10 @@ public final class STaskProtos {
         bitField0_ = (bitField0_ & ~0x00000008);
         taskType_ = com.rasp.mr.STaskProtos.STask.STaskType.MAPPER;
         bitField0_ = (bitField0_ & ~0x00000010);
+        ip_ = "";
+        bitField0_ = (bitField0_ & ~0x00000020);
+        key_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
 
@@ -700,6 +844,14 @@ public final class STaskProtos {
           to_bitField0_ |= 0x00000010;
         }
         result.taskType_ = taskType_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.ip_ = ip_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000040;
+        }
+        result.key_ = key_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -736,6 +888,16 @@ public final class STaskProtos {
         }
         if (other.hasTaskType()) {
           setTaskType(other.getTaskType());
+        }
+        if (other.hasIp()) {
+          bitField0_ |= 0x00000020;
+          ip_ = other.ip_;
+          onChanged();
+        }
+        if (other.hasKey()) {
+          bitField0_ |= 0x00000040;
+          key_ = other.key_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1071,6 +1233,158 @@ public final class STaskProtos {
       public Builder clearTaskType() {
         bitField0_ = (bitField0_ & ~0x00000010);
         taskType_ = com.rasp.mr.STaskProtos.STask.STaskType.MAPPER;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object ip_ = "";
+      /**
+       * <code>optional string ip = 6;</code>
+       */
+      public boolean hasIp() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      /**
+       * <code>optional string ip = 6;</code>
+       */
+      public java.lang.String getIp() {
+        java.lang.Object ref = ip_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            ip_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string ip = 6;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIpBytes() {
+        java.lang.Object ref = ip_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          ip_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string ip = 6;</code>
+       */
+      public Builder setIp(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        ip_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string ip = 6;</code>
+       */
+      public Builder clearIp() {
+        bitField0_ = (bitField0_ & ~0x00000020);
+        ip_ = getDefaultInstance().getIp();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string ip = 6;</code>
+       */
+      public Builder setIpBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000020;
+        ip_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object key_ = "";
+      /**
+       * <code>optional string key = 7;</code>
+       */
+      public boolean hasKey() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      /**
+       * <code>optional string key = 7;</code>
+       */
+      public java.lang.String getKey() {
+        java.lang.Object ref = key_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
+            key_ = s;
+          }
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string key = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+          getKeyBytes() {
+        java.lang.Object ref = key_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          key_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string key = 7;</code>
+       */
+      public Builder setKey(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        key_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string key = 7;</code>
+       */
+      public Builder clearKey() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        key_ = getDefaultInstance().getKey();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string key = 7;</code>
+       */
+      public Builder setKeyBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        key_ = value;
         onChanged();
         return this;
       }
@@ -7417,47 +7731,47 @@ public final class STaskProtos {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\013stask.proto\022\027com.rasp.utils.protobuf\"\272" +
+      "\n\013stask.proto\022\027com.rasp.utils.protobuf\"\323" +
       "\001\n\005STask\022\n\n\002id\030\001 \002(\t\022\r\n\005jobId\030\002 \002(\t\022\024\n\014i" +
       "nputSplitId\030\003 \002(\005\022\021\n\tclassName\030\004 \001(\t\022:\n\010" +
       "taskType\030\005 \002(\0162(.com.rasp.utils.protobuf" +
-      ".STask.STaskType\"1\n\tSTaskType\022\n\n\006MAPPER\020" +
-      "\001\022\013\n\007REDUCER\020\002\022\013\n\007SHUFFLE\020\003\"\206\001\n\014SMapResp" +
-      "onse\022\n\n\002id\030\001 \002(\t\022A\n\010mapCount\030\003 \003(\0132/.com" +
-      ".rasp.utils.protobuf.SMapResponse.SKeyCo" +
-      "unt\032\'\n\tSKeyCount\022\013\n\003key\030\001 \002(\t\022\r\n\005count\030\002" +
-      " \002(\003\"\235\001\n\021SDataTransferTask\022\013\n\003key\030\001 \002(\t\022",
-      "M\n\010location\030\002 \002(\0132;.com.rasp.utils.proto" +
-      "buf.SDataTransferTask.SReducerLocation\032," +
-      "\n\020SReducerLocation\022\n\n\002ip\030\001 \002(\t\022\014\n\004port\030\002" +
-      " \002(\005\"#\n\021STransferResponse\022\016\n\006status\030\001 \001(" +
-      "\t\"\"\n\020SShuffleResponse\022\016\n\006taskId\030\001 \001(\t\"!\n" +
-      "\017SReduceResponse\022\016\n\006taskId\030\001 \001(\t\"\233\001\n\020STr" +
-      "ansferKeyData\022\013\n\003key\030\001 \002(\t\022\014\n\004data\030\002 \001(\014" +
-      "\022E\n\010dataHost\030\003 \002(\01323.com.rasp.utils.prot" +
-      "obuf.STransferKeyData.SDataHost\032%\n\tSData" +
-      "Host\022\n\n\002ip\030\001 \002(\t\022\014\n\004port\030\002 \002(\0052\275\003\n\013TaskS",
-      "ervice\022V\n\010sendTask\022\036.com.rasp.utils.prot" +
-      "obuf.STask\032*.com.rasp.utils.protobuf.STr" +
-      "ansferResponse\022s\n\032initiateTransferDataFo" +
-      "rKey\022).com.rasp.utils.protobuf.STransfer" +
-      "KeyData\032*.com.rasp.utils.protobuf.STrans" +
-      "ferResponse\022k\n\022transferDataForKey\022).com." +
-      "rasp.utils.protobuf.STransferKeyData\032*.c" +
-      "om.rasp.utils.protobuf.STransferResponse" +
-      "\022t\n\033terminateTransferDataForKey\022).com.ra" +
-      "sp.utils.protobuf.STransferKeyData\032*.com",
-      ".rasp.utils.protobuf.STransferResponse2\322" +
-      "\002\n\nJobService\022d\n\017sendMapResponse\022%.com.r" +
-      "asp.utils.protobuf.SMapResponse\032*.com.ra" +
-      "sp.utils.protobuf.STransferResponse\022u\n\034s" +
-      "huffleDataTransferCompleted\022).com.rasp.u" +
-      "tils.protobuf.SShuffleResponse\032*.com.ras" +
-      "p.utils.protobuf.STransferResponse\022g\n\017re" +
-      "duceCompleted\022(.com.rasp.utils.protobuf." +
-      "SReduceResponse\032*.com.rasp.utils.protobu" +
-      "f.STransferResponseB\035\n\013com.rasp.mrB\013STas",
-      "kProtos\210\001\001"
+      ".STask.STaskType\022\n\n\002ip\030\006 \001(\t\022\013\n\003key\030\007 \001(" +
+      "\t\"1\n\tSTaskType\022\n\n\006MAPPER\020\001\022\013\n\007REDUCER\020\002\022" +
+      "\013\n\007SHUFFLE\020\003\"\206\001\n\014SMapResponse\022\n\n\002id\030\001 \002(" +
+      "\t\022A\n\010mapCount\030\003 \003(\0132/.com.rasp.utils.pro" +
+      "tobuf.SMapResponse.SKeyCount\032\'\n\tSKeyCoun" +
+      "t\022\013\n\003key\030\001 \002(\t\022\r\n\005count\030\002 \002(\003\"\235\001\n\021SDataT",
+      "ransferTask\022\013\n\003key\030\001 \002(\t\022M\n\010location\030\002 \002" +
+      "(\0132;.com.rasp.utils.protobuf.SDataTransf" +
+      "erTask.SReducerLocation\032,\n\020SReducerLocat" +
+      "ion\022\n\n\002ip\030\001 \002(\t\022\014\n\004port\030\002 \002(\005\"#\n\021STransf" +
+      "erResponse\022\016\n\006status\030\001 \001(\t\"\"\n\020SShuffleRe" +
+      "sponse\022\016\n\006taskId\030\001 \001(\t\"!\n\017SReduceRespons" +
+      "e\022\016\n\006taskId\030\001 \001(\t\"\233\001\n\020STransferKeyData\022\013" +
+      "\n\003key\030\001 \002(\t\022\014\n\004data\030\002 \001(\014\022E\n\010dataHost\030\003 " +
+      "\002(\01323.com.rasp.utils.protobuf.STransferK" +
+      "eyData.SDataHost\032%\n\tSDataHost\022\n\n\002ip\030\001 \002(",
+      "\t\022\014\n\004port\030\002 \002(\0052\275\003\n\013TaskService\022V\n\010sendT" +
+      "ask\022\036.com.rasp.utils.protobuf.STask\032*.co" +
+      "m.rasp.utils.protobuf.STransferResponse\022" +
+      "s\n\032initiateTransferDataForKey\022).com.rasp" +
+      ".utils.protobuf.STransferKeyData\032*.com.r" +
+      "asp.utils.protobuf.STransferResponse\022k\n\022" +
+      "transferDataForKey\022).com.rasp.utils.prot" +
+      "obuf.STransferKeyData\032*.com.rasp.utils.p" +
+      "rotobuf.STransferResponse\022t\n\033terminateTr" +
+      "ansferDataForKey\022).com.rasp.utils.protob",
+      "uf.STransferKeyData\032*.com.rasp.utils.pro" +
+      "tobuf.STransferResponse2\322\002\n\nJobService\022d" +
+      "\n\017sendMapResponse\022%.com.rasp.utils.proto" +
+      "buf.SMapResponse\032*.com.rasp.utils.protob" +
+      "uf.STransferResponse\022u\n\034shuffleDataTrans" +
+      "ferCompleted\022).com.rasp.utils.protobuf.S" +
+      "ShuffleResponse\032*.com.rasp.utils.protobu" +
+      "f.STransferResponse\022g\n\017reduceCompleted\022(" +
+      ".com.rasp.utils.protobuf.SReduceResponse" +
+      "\032*.com.rasp.utils.protobuf.STransferResp",
+      "onseB\035\n\013com.rasp.mrB\013STaskProtos\210\001\001"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7476,7 +7790,7 @@ public final class STaskProtos {
     internal_static_com_rasp_utils_protobuf_STask_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_rasp_utils_protobuf_STask_descriptor,
-        new java.lang.String[] { "Id", "JobId", "InputSplitId", "ClassName", "TaskType", });
+        new java.lang.String[] { "Id", "JobId", "InputSplitId", "ClassName", "TaskType", "Ip", "Key", });
     internal_static_com_rasp_utils_protobuf_SMapResponse_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_com_rasp_utils_protobuf_SMapResponse_fieldAccessorTable = new

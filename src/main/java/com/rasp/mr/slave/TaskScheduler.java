@@ -32,9 +32,9 @@ public class TaskScheduler implements com.rasp.mr.TaskScheduler, Runnable{
 
     @Override
     public boolean schedule()
-		throws IllegalAccessException, InstantiationException,
-			   InterruptedException,   IOException
-    {
+            throws IllegalAccessException, InstantiationException,
+            InterruptedException, IOException, ServiceException {
+
     	Task task = taskTracker.nextTask();
     	if(task == null)
     	{
@@ -108,7 +108,9 @@ public class TaskScheduler implements com.rasp.mr.TaskScheduler, Runnable{
 		catch(IllegalAccessException iae)
 		{
 			iae.printStackTrace();
-		}
-	}
+		} catch (ServiceException e) {
+            e.printStackTrace();
+        }
+    }
 }
 /* End of TaskScheduler.java */

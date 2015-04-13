@@ -34,18 +34,20 @@ public class TaskNodeClientImpl implements TaskNode {
 
         STaskProtos.STask.Builder sTaskBuilder = STaskProtos.STask.newBuilder()
                 .setId(task.getTaskId())
-                .setJobId(task.getJob().getJobId())
-                .setInputSplitId(task.getTaskInputSplit().getIdx());
+                .setJobId(task.getJob().getJobId());
 
         if(task instanceof MapperTask){
             sTaskBuilder.setTaskType(STaskProtos.STask.STaskType.MAPPER);
-            sTaskBuilder.setClassName(MapperTask.class.toString());
+            sTaskBuilder.setClassName(((MapperTask) task).getMapperClass().toString());
+            sTaskBuilder.setInputSplitId(((MapperTask) task).getTaskInputSplit().getIdx());
         } else if(task instanceof ShuffleTask){
             sTaskBuilder.setTaskType(STaskProtos.STask.STaskType.SHUFFLE);
-            sTaskBuilder.setClassName(ShuffleTask.class.toString());
+            sTaskBuilder.setKey(((ShuffleTask) task).getKey());
+            sTaskBuilder.setIp(((ShuffleTask) task).getDataTargetService().getIp());
         } else {
             sTaskBuilder.setTaskType(STaskProtos.STask.STaskType.REDUCER);
-            sTaskBuilder.setClassName(ReducerTask.class.toString());
+            sTaskBuilder.setKey(((ReducerTask) task).getKey());
+            sTaskBuilder.setClassName(((ReducerTask) task).getReducerClass().toString());
         }
 
         try {

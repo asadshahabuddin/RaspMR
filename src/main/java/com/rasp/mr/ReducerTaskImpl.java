@@ -9,10 +9,11 @@
 package com.rasp.mr;
 
 import java.util.UUID;
-import java.io.FileReader;
 import java.io.IOException;
 import com.rasp.fs.Iterable;
 import com.rasp.fs.InputSplit;
+import com.rasp.config.SlaveConfiguration;
+import com.google.protobuf.ServiceException;
 import com.rasp.utils.autodiscovery.Service;
 
 public class ReducerTaskImpl
@@ -24,19 +25,19 @@ public class ReducerTaskImpl
     private String key;
     private boolean complete;
     private Service service;
+    private SlaveConfiguration conf;
 
-    public ReducerTaskImpl(Service service)
-    {
+    public ReducerTaskImpl(Service service) {
         taskId = UUID.randomUUID().toString();
         this.service = service;
         reduceContext = new ReduceContextImpl();
     }
 
-    public ReducerTaskImpl(String taskId, Service service)
-    {
+    public ReducerTaskImpl(String taskId, Service service, SlaveConfiguration conf) {
         this.taskId = taskId;
         this.service = service;
         reduceContext = new ReduceContextImpl();
+        this.conf = conf;
     }
 
     @Override
@@ -89,8 +90,9 @@ public class ReducerTaskImpl
 
     @Override
     public boolean execute()
-        throws IllegalAccessException, InstantiationException,
-               InterruptedException, IOException {
+            throws IllegalAccessException, InstantiationException,
+            InterruptedException, IOException, ServiceException {
+        JobNode node = conf.getJobNode();
         Reducer reducer = reducerClass.newInstance();
         if(reducer == null){
             return false;
@@ -107,7 +109,7 @@ public class ReducerTaskImpl
         reduceContext.close();
         iterable.close();
         reducer.cleanup();
-
+        node.reduceCompleted(taskId);
         return complete = true;
     }
 

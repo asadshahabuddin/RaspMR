@@ -10,6 +10,8 @@ message STask {
     required int32  inputSplitId = 3;
     optional string className    = 4;
     required STaskType taskType  = 5;
+    optional string ip    = 6;
+    optional string key    = 7;
 
     enum STaskType {
         MAPPER  = 1;

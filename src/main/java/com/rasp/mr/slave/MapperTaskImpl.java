@@ -30,6 +30,7 @@ public class MapperTaskImpl implements com.rasp.mr.MapperTask{
 	private Class<? extends Mapper> mapperClass;
 	private boolean complete;
     private MapContext mapContext;
+    private Service service;
 
     public MapperTaskImpl()
     {
@@ -38,9 +39,10 @@ public class MapperTaskImpl implements com.rasp.mr.MapperTask{
 
     }
 
-    public MapperTaskImpl(String taskId)
+    public MapperTaskImpl(String taskId, Service service)
     {
         this.taskId = taskId;
+        this.service = service;
         mapContext = new MapContextImpl();
     }
     

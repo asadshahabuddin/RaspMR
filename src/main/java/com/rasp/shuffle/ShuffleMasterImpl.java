@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.hadoop.mapred.JobQueueInfo;
-
 import com.rasp.config.MasterConfiguration;
 import com.rasp.mr.Job;
 import com.rasp.mr.MapperTask;
@@ -17,16 +15,16 @@ import com.rasp.utils.autodiscovery.Service;
 
 /**
  * Author : Sourabh Suman, Shivastuti Koul, Rahul Madhavan
- * File   :
+ * File   : 
  * Email  : sourabhs@ccs.neu.edu
  * Created: 4/7/15
  * Edited : 4/11/15
  */
 public class ShuffleMasterImpl implements ShuffleMaster {
 
-    MasterConfiguration config;
-    HashMap<Service, Map<String, Long>> serviceKeyFreq;
-    Map<String, ShuffleTask> taskMap;
+    private MasterConfiguration config;
+    private HashMap<Service, Map<String, Long>> serviceKeyFreq;
+    private Map<String, ShuffleTask> taskMap;
 
     // Threshold for number of reducers/keys to be used on one machine
     //static final int THRESHOLD = 10;    
@@ -35,27 +33,19 @@ public class ShuffleMasterImpl implements ShuffleMaster {
         config = conf;
         taskMap = new HashMap<>();
     }
-
+    
+    /** 
+     * Creates shuffle tasks for all keys/machines
+     * @param job which calls this method
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public void createShuffleTasks(Job job) throws IOException, InterruptedException{
     	serviceKeyFreq = getMachineKeyFreq(job);
     	HashMap<String, Service> keyWithService = getServicesWithMaxKeyFreq(serviceKeyFreq);
-    	triggerMapDataTransferForAll(job,keyWithService, getAllServices(job));
-        job.setReduceKeyServiceMap(createReduceKeyServiceMap());
-    }    
-    
-    /**
-     * get all machines associated with this job
-     * @param job
-     * @return 
-     * @throws InterruptedException 
-     * @throws IOException 
-     */
-    List<Service> getAllServices(Job job) throws IOException, InterruptedException{
-    	List<Service> services = new ArrayList<Service>();
-    	for (MapperTask task : job.getMapTasks()){
-    		services.add(task.getService());
-    	}
-    	return services;
+    	triggerMapDataTransferForAll(job,keyWithService);
+        job.setReduceKeyServiceMap(keyWithService);
+        job.setShuffleTasks(new ArrayList<ShuffleTask>(taskMap.values()));
     }
     
     /**
@@ -64,10 +54,10 @@ public class ShuffleMasterImpl implements ShuffleMaster {
      * @throws InterruptedException 
      * @throws IOException 
      */
-    HashMap<Service, Map<String, Long>> getMachineKeyFreq(Job job) throws IOException, InterruptedException{
+    private HashMap<Service, Map<String, Long>> getMachineKeyFreq(Job job) throws IOException, InterruptedException{
     	HashMap<Service, Map<String, Long>> map = new HashMap<Service, Map<String, Long>>();    	
     	
-    	// for each task, get the machines and key, frequencies and save to var data
+    	// for each task, get the machines and key, frequencies
     	for (MapperTask task : job.getMapTasks()){
     		Service service = task.getService();
     		Map<String, Long> keyCountMap = task.getMapContext().getKeyCountMap();
@@ -79,7 +69,7 @@ public class ShuffleMasterImpl implements ShuffleMaster {
     /**
      * Method to retrieve Key, ServiceName pairs for machines with max frequency of each key
       */
-    HashMap<String, Service> getServicesWithMaxKeyFreq(HashMap<Service, Map<String, Long>> data){
+    private HashMap<String, Service> getServicesWithMaxKeyFreq(HashMap<Service, Map<String, Long>> data){
         HashMap<String, IntermediateServiceWithFrequency> interimOutput = new HashMap<String, IntermediateServiceWithFrequency>();
 
         for (Service service : data.keySet()){
@@ -111,13 +101,25 @@ public class ShuffleMasterImpl implements ShuffleMaster {
      * direct slaves to transfer map output data for each key to the slave with max frequency of that key
      *
      */
-    void triggerMapDataTransferForAll(Job job, HashMap<String, Service> keyService, List<Service> machines){
+    private void triggerMapDataTransferForAll(Job job, HashMap<String, Service> keyService) throws InterruptedException, IOException{
         // send msg to each machine to transfer map data for each key to the machine which has the max freq for that key
 
         for (String key : keyService.keySet()){
-            triggerMapDataTransferForKey(job, key, keyService.get(key), machines);
+            triggerMapDataTransferForKey(job, key, keyService.get(key), getServicesForKey(job, key));
         }
 
+    }
+    
+    private List<Service> getServicesForKey(Job job, String key) throws InterruptedException, IOException{
+    	List<Service> services = new ArrayList<Service>();
+    	for (MapperTask task : job.getMapTasks()){
+    		Service service = task.getService();
+    		Map<String, Long> keyCountMap = task.getMapContext().getKeyCountMap();
+    		if(keyCountMap.get(key)!=null){
+    			services.add(service);
+    		}
+    	}
+    	return services;
     }
 
     // direct all slaves to transfer map output data for given one key to the given slave with max frequency of that key
@@ -169,8 +171,5 @@ public class ShuffleMasterImpl implements ShuffleMaster {
         taskMap = null;
         serviceKeyFreq = null;
     }
-
-    private Map<String,Service> createReduceKeyServiceMap(){
-        return null;
-    }
+    
 }
