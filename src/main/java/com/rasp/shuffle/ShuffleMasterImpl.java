@@ -133,7 +133,7 @@ public class ShuffleMasterImpl implements ShuffleMaster {
     // direct one slave to send map output data for given key to given target machine with max frequency
     void triggerMapDataTransferForKeyOnMachine(Job job, String key, Service keyMachine, Service sourceMachine){
     	//create task for each
-    	if (keyMachine!=sourceMachine){ 
+    	if (!keyMachine.getIp().equalsIgnoreCase(sourceMachine.getIp())){
         	ShuffleTask task = createShuffleTask(job, key, keyMachine, sourceMachine);
         	taskMap.put(task.getTaskId(), task);
     	}
@@ -160,11 +160,14 @@ public class ShuffleMasterImpl implements ShuffleMaster {
     	ShuffleTask task = taskMap.get(taskId);
     	task.complete();
         System.out.println("Shuffle Task Completed : " + taskId);
-
         Job job = task.getJob();
-    	if (job.isShuffleComplete()){
-    		config.getJobTracker().submit(job);
-    	}
+        onShuffleComplete(job);
+    }
+
+    public void onShuffleComplete(Job job){
+        if (job.isShuffleComplete()){
+            config.getJobTracker().submit(job);
+        }
     }
 
     @Override

@@ -17,5 +17,7 @@ public interface ShuffleMaster {
 
     void createShuffleTasks(Job job) throws IOException, InterruptedException;
 
+    public void onShuffleComplete(Job job);
+
     void cleanup(Job job);
 }
