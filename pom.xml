@@ -107,6 +107,11 @@
                     <manifest>
                         <mainClass>com.rasp.driver.MasterDriver</mainClass>
                     </manifest>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.rasp.driver.SlaveDriver</mainClass>
+                        </manifest>
+                    </archive>
                 </archive>
             </configuration>
 
