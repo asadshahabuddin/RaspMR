@@ -32,9 +32,7 @@ import com.rasp.utils.protobuf.ProtoServer;
 
 public class MasterDriver {
     /* Constant(s) */
-    private static final String INPUT_PATH =
-            "/Users/rahulmadhavan/Documents/developer/ms/parallel/assignments/a3/a3data/test";
-
+    
     public static void main(String[] args) throws IOException {
         MasterConfiguration configuration = new MasterConfiguration(9292, ServiceType.JOB_TRACKER);
         DataMaster dataMaster = new DataMasterImpl(configuration);
@@ -61,13 +59,13 @@ public class MasterDriver {
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
             Job job = new JobImpl();
-            job.setInputPath(INPUT_PATH);
+            job.setInputPath(args[0]);
             job.setMapper(TestMapper.class);
             job.setReducer(TestReducer.class);
 
             if(input.equalsIgnoreCase("send")) {
                 try {
-                    dataMaster.splitAndSend(INPUT_PATH);
+                    dataMaster.splitAndSend(args[0]);
                     jobTracker.submit(job);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
