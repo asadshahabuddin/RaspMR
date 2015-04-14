@@ -8,7 +8,6 @@
 
 package com.rasp.mr.slave;
 
-import com.google.protobuf.ByteString;
 import com.google.protobuf.RpcController;
 import com.google.protobuf.ServiceException;
 import com.rasp.config.Configuration;
@@ -39,11 +38,15 @@ public class TaskBlockingService
 
     @Override
     public STaskProtos.STransferResponse sendTask(RpcController controller, STaskProtos.STask sTask) throws ServiceException {
-        taskNode.sendTask(sTaskToTask(sTask));
+        try {
+            taskNode.sendTask(sTaskToTask(sTask));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return STaskProtos.STransferResponse.newBuilder().setStatus("OK").build();
     }
 
-    private Task sTaskToTask(STaskProtos.STask sTask) {
+    private Task sTaskToTask(STaskProtos.STask sTask) throws IOException {
         Task task;
         if (sTask.getTaskType() == STaskProtos.STask.STaskType.MAPPER) {
             MapperTaskImpl mTask = new MapperTaskImpl(sTask.getId(),service);
@@ -66,8 +69,13 @@ public class TaskBlockingService
             task = shuffleTask;
 
         }else{
-            ReducerTask reducerTask = new ReducerTaskImpl(sTask.getId(),service,configuration);
-            reducerTask.setKey(sTask.getKey());
+            ReducerTask reducerTask = new ReducerTaskImpl(sTask.getId(),service,configuration,sTask.getKey());
+            try {
+                String className = sTask.getClassName().split(" ")[1];
+                reducerTask.setReducerClass((Class<? extends Reducer>) Class.forName(className));
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
             task = reducerTask;
         }
         return task;

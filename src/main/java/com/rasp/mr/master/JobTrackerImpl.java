@@ -83,16 +83,16 @@ public class JobTrackerImpl implements JobTracker{
     public void execute(Job job) throws IOException, InterruptedException {
 
         if(!job.isMapComplete()){
-
+            System.out.println("map is not complete");
             this.map(job);
         }else if(!job.isShuffleComplete()){
-
+            System.out.println("shuffle is not complete");
             this.shuffle(job);
         }else if(!job.isReduceComplete()){
-
+            System.out.println("reduce is not complete");
             this.reduce(job);
         }else{
-
+            System.out.println("about to begin cleanup");
             this.cleanup(job);
         }
     }
@@ -139,6 +139,11 @@ public class JobTrackerImpl implements JobTracker{
     private void shuffle(Job job) throws IOException, InterruptedException {
 
         shuffleMaster.createShuffleTasks(job);
+
+        for(ShuffleTask task : job.getShuffleTasks())
+        {
+            sendTask(task);
+        }
 
     }
 

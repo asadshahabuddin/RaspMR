@@ -81,11 +81,19 @@ public class TaskNodeClientImpl implements TaskNode {
 
     @Override
     public void transferDataForKey(byte[] data, String key,Service service) {
-        STaskProtos.STransferKeyData sTransferKeyData = STaskProtos.
-                STransferKeyData.newBuilder()
+        STaskProtos.STransferKeyData.SDataHost sDataHost = STaskProtos.STransferKeyData
+                .SDataHost
+                .newBuilder()
+                .setIp(service.getIp())
+                .setPort(service.getPort())
+                .build();
+        STaskProtos.STransferKeyData sTransferKeyData = STaskProtos.STransferKeyData
+                .newBuilder()
                 .setKey(key)
                 .setData(ByteString.copyFrom(data))
+                .setDataHost(sDataHost)
                 .build();
+
 
         try {
             taskService.transferDataForKey(controller, sTransferKeyData);
@@ -97,7 +105,18 @@ public class TaskNodeClientImpl implements TaskNode {
 
     @Override
     public void terminateTransferDataForKey(String key,Service service) {
-        STaskProtos.STransferKeyData sTransferKeyData = STaskProtos.STransferKeyData.newBuilder().setKey(key).build();
+        STaskProtos.STransferKeyData.SDataHost sDataHost = STaskProtos.STransferKeyData
+                .SDataHost
+                .newBuilder()
+                .setIp(service.getIp())
+                .setPort(service.getPort())
+                .build();
+        STaskProtos.STransferKeyData sTransferKeyData = STaskProtos.STransferKeyData
+                .newBuilder()
+                .setKey(key)
+                .setDataHost(sDataHost)
+                .build();
+
         try {
             taskService.terminateTransferDataForKey(controller, sTransferKeyData);
         } catch (ServiceException e) {

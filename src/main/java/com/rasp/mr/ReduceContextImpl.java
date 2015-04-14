@@ -1,5 +1,5 @@
 /**
- * Author : Pulkit Jain
+ * Author : Pulkit Jain, Rahul Madhavan
  * File   : ReduceContextImpl.java
  * Email  : jain.pul@husky.neu.edu
  * Created: Apr 12, 2015
@@ -17,6 +17,15 @@ public class ReduceContextImpl implements ReduceContext {
     FileOutputStream fop = null;
     FileInputStream fin = null;
 
+    public ReduceContextImpl(String key) throws IOException {
+        String fileName = key + "-rout";
+        File file = new File(fileName);
+        if(!file.exists()){
+            file.createNewFile();
+        }
+        this.fop = new FileOutputStream(fileName , true);
+    }
+
     @Override
     public void write(Writable k, Writable v) throws IOException {
 
@@ -26,12 +35,7 @@ public class ReduceContextImpl implements ReduceContext {
             return;
         }
         String key = String.valueOf(k.getObj());
-        byte[] value = (String.valueOf(v.getObj()) + "\n").getBytes();
-        File file = new File(String.valueOf(key) + "-rout");
-        if(!file.exists())
-        {
-            file.createNewFile();
-        }
+        byte[] value = (key +  " : " + String.valueOf(v.getObj()) + "\n").getBytes();
         fop.write(value);
     }
 

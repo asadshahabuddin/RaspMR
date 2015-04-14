@@ -45,7 +45,8 @@ public class ShuffleMasterImpl implements ShuffleMaster {
     	HashMap<String, Service> keyWithService = getServicesWithMaxKeyFreq(serviceKeyFreq);
     	triggerMapDataTransferForAll(job,keyWithService);
         job.setReduceKeyServiceMap(keyWithService);
-        job.setShuffleTasks(new ArrayList<ShuffleTask>(taskMap.values()));
+        System.out.println("Shuffle tasks count : " + taskMap.values().size());
+        job.setShuffleTasks(new ArrayList<>(taskMap.values()));
     }
     
     /**
@@ -158,6 +159,8 @@ public class ShuffleMasterImpl implements ShuffleMaster {
     public synchronized void shuffleDataTransferCompleted(String taskId) {
     	ShuffleTask task = taskMap.get(taskId);
     	task.complete();
+        System.out.println("Shuffle Task Completed : " + taskId);
+
         Job job = task.getJob();
     	if (job.isShuffleComplete()){
     		config.getJobTracker().submit(job);

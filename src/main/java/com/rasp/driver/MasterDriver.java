@@ -26,6 +26,7 @@ import com.rasp.mr.slave.TaskBlockingService;
 import com.rasp.mr.slave.TestMapper;
 import com.rasp.fs.master.DataMasterImpl;
 import com.rasp.config.MasterConfiguration;
+import com.rasp.mr.slave.TestReducer;
 import com.rasp.utils.autodiscovery.ServiceType;
 import com.rasp.utils.protobuf.ProtoServer;
 
@@ -62,6 +63,7 @@ public class MasterDriver {
             Job job = new JobImpl();
             job.setInputPath(INPUT_PATH);
             job.setMapper(TestMapper.class);
+            job.setReducer(TestReducer.class);
 
             if(input.equalsIgnoreCase("send")) {
                 try {

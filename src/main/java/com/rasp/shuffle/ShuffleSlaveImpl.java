@@ -20,11 +20,11 @@ import com.rasp.utils.autodiscovery.Service;
 public class ShuffleSlaveImpl implements ShuffleSlave {
 
     SlaveConfiguration config;
-    Service service;    
     HashMap<String, FileOutputStream> files;
     
     public ShuffleSlaveImpl(SlaveConfiguration conf){
         config = conf;
+        files = new HashMap<>();
     }
 
     @Override

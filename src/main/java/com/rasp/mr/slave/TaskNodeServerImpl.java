@@ -42,7 +42,7 @@ public class TaskNodeServerImpl
 
     @Override
     public void sendTask(Task task) {
-        System.out.println("task " + task.getTaskId() + " : input split : "+ task.getTaskInputSplit().getIdx());
+        System.out.println("task " + task.getTaskId() + " : task Type : "+ task.getClass());
         configuration.getTaskTracker().submit(task);
     }
 

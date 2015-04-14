@@ -7,7 +7,7 @@ option java_generic_services = true;
 message STask {
     required string id           = 1;
     required string jobId        = 2;
-    required int32  inputSplitId = 3;
+    optional int32  inputSplitId = 3;
     optional string className    = 4;
     required STaskType taskType  = 5;
     optional string ip    = 6;
@@ -59,7 +59,7 @@ message SReduceResponse {
 message STransferKeyData{
     required string key = 1;
     optional bytes data = 2;
-    required SDataHost dataHost = 3;
+    optional SDataHost dataHost = 3;
 
 
     message SDataHost {

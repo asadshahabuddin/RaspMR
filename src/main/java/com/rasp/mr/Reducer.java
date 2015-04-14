@@ -17,12 +17,8 @@ import com.rasp.fs.Iterable;
  * Reducer is a simplified version of Hadoop Map Reduce Reducer
  *
  *
- * @param <KEY_IN>  Type of the key that will be input to the reduce function
- * @param <VALUE_IN> Type of the value that will be input to the reduce function
- * @param <KEY_OUT> Type of the key that will be emitted by reduce function
- * @param <VALUE_OUT> Type of the value that will be emitted by the reduce function
  */
-public interface Reducer<KEY_IN,VALUE_IN,KEY_OUT,VALUE_OUT>
+public interface Reducer
 {
     /**
      * this function is called once at the beginning of every reduce task {@link com.rasp.mr.ReducerTask}
@@ -38,7 +34,7 @@ public interface Reducer<KEY_IN,VALUE_IN,KEY_OUT,VALUE_OUT>
      * @return  A <code>Map<KEY_OUT,List<VALUE_OUT>></code> the user is responsible for defining this map
      *          and filling the appropriate keys and values
      */
-    Map<KEY_OUT,List<VALUE_OUT>> reduce(KEY_IN key, Iterable values, ReduceContext context);
+    void reduce(Writable key, Iterable values, ReduceContext context);
 
     /**
      * this function is called once at the end of every reduce task {@link com.rasp.mr.ReducerTask}

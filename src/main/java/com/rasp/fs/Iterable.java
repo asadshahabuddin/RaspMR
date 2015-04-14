@@ -8,13 +8,16 @@
 
 package com.rasp.fs;
 
+import com.rasp.mr.Writable;
+import com.rasp.mr.slave.WritableImpl;
+
 import java.io.*;
 import java.util.Iterator;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 public class Iterable
-    implements Iterator {
+    implements Iterator<Writable> {
     private ArrayList<File> fileList;
     private BufferedReader reader;
     private int fileIdx;
@@ -29,13 +32,20 @@ public class Iterable
     public Iterable(String key)
         throws FileNotFoundException {
         String dirName = System.getProperty("user.dir");
+        System.out.println("dir - name : " + dirName);
         File[] files = new File(dirName).listFiles();
-
+        System.out.println("no of files in dir : " + files.length);
         fileList = new ArrayList<File>();
         for(File file : files) {
-            if(file.toString().contains(key)) {
-                fileList.add(file);
+            if(file == null){
+                System.out.println("file is null");
+            }else{
+                String name = file.getName();
+                if(name.contains(key)) {
+                    fileList.add(file);
+                }
             }
+
         }
         if(fileList.size() == 0) {
             throw new IllegalArgumentException("  [error] No files detected for key '" + key + "'");
@@ -72,13 +82,13 @@ public class Iterable
     }
 
     @Override
-    public Object next() {
+    public Writable next() {
         if(!hasNext()) {
             throw new NoSuchElementException("  [error] Reached EOF");
         }
         String curLine = cachedLine;
         cachedLine = null;
-        return curLine;
+        return new WritableImpl(curLine);
     }
 
     @Override

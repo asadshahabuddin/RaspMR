@@ -37,6 +37,7 @@ public class JobImpl implements Job {
         reduceComplete = false;
         jobId = UUID.randomUUID().toString();
         mapperTasks = new ArrayList<>();
+        shuffleTasks = new ArrayList<>();
         reducerTasks = new ArrayList<>();
     }
 

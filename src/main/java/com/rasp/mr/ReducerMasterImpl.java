@@ -33,6 +33,7 @@ public class ReducerMasterImpl implements ReducerMaster{
             Service service = job.getReduceKeyServiceMap().get(key);
             ReducerTask reducerTask = new ReducerTaskImpl(service);
             reducerTask.setJob(job);
+            reducerTask.setKey(key);
             reducerTask.setReducerClass(job.getReducerClass());
             reducerTaskMap.put(reducerTask.getTaskId(),reducerTask);
             taskList.add(reducerTask);
@@ -46,6 +47,7 @@ public class ReducerMasterImpl implements ReducerMaster{
         ReducerTask task = reducerTaskMap.get(taskId);
         Job job = task.getJob();
         task.complete();
+        System.out.println("Reduce Task Completed : " + taskId);
         if(job.isReduceComplete()){
             configuration.getJobTracker().submit(job);
         }

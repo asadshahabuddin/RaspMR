@@ -61,7 +61,14 @@ public class TaskScheduler implements com.rasp.mr.TaskScheduler, Runnable{
             }
 
         }else if(task instanceof ReducerTask){
+            task.execute();
+            try {
+                configuration.getJobNode().
+                        reduceCompleted(task.getTaskId());
 
+            } catch (ServiceException e) {
+                e.printStackTrace();
+            }
         }else{
             throw new RuntimeException("unknown task type given to task scheduler: "+task.getClass());
         }

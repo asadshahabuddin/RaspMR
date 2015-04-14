@@ -41,11 +41,11 @@ public final class STaskProtos {
         getJobIdBytes();
 
     /**
-     * <code>required int32 inputSplitId = 3;</code>
+     * <code>optional int32 inputSplitId = 3;</code>
      */
     boolean hasInputSplitId();
     /**
-     * <code>required int32 inputSplitId = 3;</code>
+     * <code>optional int32 inputSplitId = 3;</code>
      */
     int getInputSplitId();
 
@@ -416,13 +416,13 @@ public final class STaskProtos {
     public static final int INPUTSPLITID_FIELD_NUMBER = 3;
     private int inputSplitId_;
     /**
-     * <code>required int32 inputSplitId = 3;</code>
+     * <code>optional int32 inputSplitId = 3;</code>
      */
     public boolean hasInputSplitId() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>required int32 inputSplitId = 3;</code>
+     * <code>optional int32 inputSplitId = 3;</code>
      */
     public int getInputSplitId() {
       return inputSplitId_;
@@ -589,10 +589,6 @@ public final class STaskProtos {
         return false;
       }
       if (!hasJobId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasInputSplitId()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -912,10 +908,6 @@ public final class STaskProtos {
           
           return false;
         }
-        if (!hasInputSplitId()) {
-          
-          return false;
-        }
         if (!hasTaskType()) {
           
           return false;
@@ -1096,19 +1088,19 @@ public final class STaskProtos {
 
       private int inputSplitId_ ;
       /**
-       * <code>required int32 inputSplitId = 3;</code>
+       * <code>optional int32 inputSplitId = 3;</code>
        */
       public boolean hasInputSplitId() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>required int32 inputSplitId = 3;</code>
+       * <code>optional int32 inputSplitId = 3;</code>
        */
       public int getInputSplitId() {
         return inputSplitId_;
       }
       /**
-       * <code>required int32 inputSplitId = 3;</code>
+       * <code>optional int32 inputSplitId = 3;</code>
        */
       public Builder setInputSplitId(int value) {
         bitField0_ |= 0x00000004;
@@ -1117,7 +1109,7 @@ public final class STaskProtos {
         return this;
       }
       /**
-       * <code>required int32 inputSplitId = 3;</code>
+       * <code>optional int32 inputSplitId = 3;</code>
        */
       public Builder clearInputSplitId() {
         bitField0_ = (bitField0_ & ~0x00000004);
@@ -5541,15 +5533,15 @@ public final class STaskProtos {
     com.google.protobuf.ByteString getData();
 
     /**
-     * <code>required .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
+     * <code>optional .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
      */
     boolean hasDataHost();
     /**
-     * <code>required .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
+     * <code>optional .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
      */
     com.rasp.mr.STaskProtos.STransferKeyData.SDataHost getDataHost();
     /**
-     * <code>required .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
+     * <code>optional .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
      */
     com.rasp.mr.STaskProtos.STransferKeyData.SDataHostOrBuilder getDataHostOrBuilder();
   }
@@ -6299,19 +6291,19 @@ public final class STaskProtos {
     public static final int DATAHOST_FIELD_NUMBER = 3;
     private com.rasp.mr.STaskProtos.STransferKeyData.SDataHost dataHost_;
     /**
-     * <code>required .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
+     * <code>optional .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
      */
     public boolean hasDataHost() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
     /**
-     * <code>required .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
+     * <code>optional .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
      */
     public com.rasp.mr.STaskProtos.STransferKeyData.SDataHost getDataHost() {
       return dataHost_;
     }
     /**
-     * <code>required .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
+     * <code>optional .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
      */
     public com.rasp.mr.STaskProtos.STransferKeyData.SDataHostOrBuilder getDataHostOrBuilder() {
       return dataHost_;
@@ -6332,13 +6324,11 @@ public final class STaskProtos {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasDataHost()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!getDataHost().isInitialized()) {
-        memoizedIsInitialized = 0;
-        return false;
+      if (hasDataHost()) {
+        if (!getDataHost().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
       }
       memoizedIsInitialized = 1;
       return true;
@@ -6585,13 +6575,11 @@ public final class STaskProtos {
           
           return false;
         }
-        if (!hasDataHost()) {
-          
-          return false;
-        }
-        if (!getDataHost().isInitialized()) {
-          
-          return false;
+        if (hasDataHost()) {
+          if (!getDataHost().isInitialized()) {
+            
+            return false;
+          }
         }
         return true;
       }
@@ -6730,13 +6718,13 @@ public final class STaskProtos {
       private com.google.protobuf.SingleFieldBuilder<
           com.rasp.mr.STaskProtos.STransferKeyData.SDataHost, com.rasp.mr.STaskProtos.STransferKeyData.SDataHost.Builder, com.rasp.mr.STaskProtos.STransferKeyData.SDataHostOrBuilder> dataHostBuilder_;
       /**
-       * <code>required .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
+       * <code>optional .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
        */
       public boolean hasDataHost() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
       /**
-       * <code>required .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
+       * <code>optional .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
        */
       public com.rasp.mr.STaskProtos.STransferKeyData.SDataHost getDataHost() {
         if (dataHostBuilder_ == null) {
@@ -6746,7 +6734,7 @@ public final class STaskProtos {
         }
       }
       /**
-       * <code>required .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
+       * <code>optional .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
        */
       public Builder setDataHost(com.rasp.mr.STaskProtos.STransferKeyData.SDataHost value) {
         if (dataHostBuilder_ == null) {
@@ -6762,7 +6750,7 @@ public final class STaskProtos {
         return this;
       }
       /**
-       * <code>required .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
+       * <code>optional .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
        */
       public Builder setDataHost(
           com.rasp.mr.STaskProtos.STransferKeyData.SDataHost.Builder builderForValue) {
@@ -6776,7 +6764,7 @@ public final class STaskProtos {
         return this;
       }
       /**
-       * <code>required .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
+       * <code>optional .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
        */
       public Builder mergeDataHost(com.rasp.mr.STaskProtos.STransferKeyData.SDataHost value) {
         if (dataHostBuilder_ == null) {
@@ -6795,7 +6783,7 @@ public final class STaskProtos {
         return this;
       }
       /**
-       * <code>required .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
+       * <code>optional .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
        */
       public Builder clearDataHost() {
         if (dataHostBuilder_ == null) {
@@ -6808,7 +6796,7 @@ public final class STaskProtos {
         return this;
       }
       /**
-       * <code>required .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
+       * <code>optional .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
        */
       public com.rasp.mr.STaskProtos.STransferKeyData.SDataHost.Builder getDataHostBuilder() {
         bitField0_ |= 0x00000004;
@@ -6816,7 +6804,7 @@ public final class STaskProtos {
         return getDataHostFieldBuilder().getBuilder();
       }
       /**
-       * <code>required .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
+       * <code>optional .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
        */
       public com.rasp.mr.STaskProtos.STransferKeyData.SDataHostOrBuilder getDataHostOrBuilder() {
         if (dataHostBuilder_ != null) {
@@ -6826,7 +6814,7 @@ public final class STaskProtos {
         }
       }
       /**
-       * <code>required .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
+       * <code>optional .com.rasp.utils.protobuf.STransferKeyData.SDataHost dataHost = 3;</code>
        */
       private com.google.protobuf.SingleFieldBuilder<
           com.rasp.mr.STaskProtos.STransferKeyData.SDataHost, com.rasp.mr.STaskProtos.STransferKeyData.SDataHost.Builder, com.rasp.mr.STaskProtos.STransferKeyData.SDataHostOrBuilder> 
@@ -7733,7 +7721,7 @@ public final class STaskProtos {
     java.lang.String[] descriptorData = {
       "\n\013stask.proto\022\027com.rasp.utils.protobuf\"\323" +
       "\001\n\005STask\022\n\n\002id\030\001 \002(\t\022\r\n\005jobId\030\002 \002(\t\022\024\n\014i" +
-      "nputSplitId\030\003 \002(\005\022\021\n\tclassName\030\004 \001(\t\022:\n\010" +
+      "nputSplitId\030\003 \001(\005\022\021\n\tclassName\030\004 \001(\t\022:\n\010" +
       "taskType\030\005 \002(\0162(.com.rasp.utils.protobuf" +
       ".STask.STaskType\022\n\n\002ip\030\006 \001(\t\022\013\n\003key\030\007 \001(" +
       "\t\"1\n\tSTaskType\022\n\n\006MAPPER\020\001\022\013\n\007REDUCER\020\002\022" +
@@ -7749,7 +7737,7 @@ public final class STaskProtos {
       "sponse\022\016\n\006taskId\030\001 \001(\t\"!\n\017SReduceRespons" +
       "e\022\016\n\006taskId\030\001 \001(\t\"\233\001\n\020STransferKeyData\022\013" +
       "\n\003key\030\001 \002(\t\022\014\n\004data\030\002 \001(\014\022E\n\010dataHost\030\003 " +
-      "\002(\01323.com.rasp.utils.protobuf.STransferK" +
+      "\001(\01323.com.rasp.utils.protobuf.STransferK" +
       "eyData.SDataHost\032%\n\tSDataHost\022\n\n\002ip\030\001 \002(",
       "\t\022\014\n\004port\030\002 \002(\0052\275\003\n\013TaskService\022V\n\010sendT" +
       "ask\022\036.com.rasp.utils.protobuf.STask\032*.co" +
