@@ -53,7 +53,7 @@ public class JobNodeBlockingService implements STaskProtos.JobService.BlockingIn
 
     @Override
     public STaskProtos.STransferResponse reduceCompleted(RpcController controller, STaskProtos.SReduceResponse request) throws ServiceException {
-        jobNode.shuffleDataTransferCompleted(request.getTaskId());
+        jobNode.reduceCompleted(request.getTaskId());
         return STaskProtos.STransferResponse.newBuilder().setStatus("OK").build();
     }
 }

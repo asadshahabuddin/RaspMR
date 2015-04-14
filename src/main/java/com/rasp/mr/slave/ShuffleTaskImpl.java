@@ -64,7 +64,7 @@ public class ShuffleTaskImpl implements ShuffleTask {
             return false;
         }
 
-        RandomAccessFile f = new RandomAccessFile(key + "-mout", "r");
+        RandomAccessFile f = new RandomAccessFile(key + "_mout", "r");
         long flen = f.length();    /* Length of file */
         /* Check if the file has some content */
         if (flen == 0) {

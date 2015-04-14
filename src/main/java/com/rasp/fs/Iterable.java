@@ -41,7 +41,7 @@ public class Iterable
                 System.out.println("file is null");
             }else{
                 String name = file.getName();
-                if(name.contains(key)) {
+                if(name.contains(key + "_") &&  !name.contains("rout")){
                     fileList.add(file);
                 }
             }

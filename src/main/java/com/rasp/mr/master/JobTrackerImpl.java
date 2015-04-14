@@ -9,12 +9,10 @@
 package com.rasp.mr.master;
 
 /* Import list */
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Map;
 import java.util.HashMap;
-import java.io.IOException;
+
 import com.rasp.mr.*;
 import com.rasp.config.MasterConfiguration;
 import com.rasp.shuffle.ShuffleMaster;
@@ -41,6 +39,7 @@ public class JobTrackerImpl implements JobTracker{
         shuffleMaster = new ShuffleMasterImpl(this.conf);
         reducerMaster = new ReducerMasterImpl(this.conf);
         mapperMaster = new MapperMasterImpl(this.conf);
+        completedJobMap = new HashMap<>();
     }
 
     @Override
@@ -105,11 +104,11 @@ public class JobTrackerImpl implements JobTracker{
         jobMap.remove(job.getJobId());
 
         //TODO persist keyToServiceMap to fileSystem
-        try {
-            completedJobMap.put(job.getJobId(),new FileInputStream(job.getJobId()));
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            //completedJobMap.put(job.getJobId(),new FileInputStream(job.getJobId()));
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
         job.cleanup();
 
     }

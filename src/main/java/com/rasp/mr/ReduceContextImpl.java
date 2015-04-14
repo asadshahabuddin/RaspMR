@@ -18,7 +18,7 @@ public class ReduceContextImpl implements ReduceContext {
     FileInputStream fin = null;
 
     public ReduceContextImpl(String key) throws IOException {
-        String fileName = key + "-rout";
+        String fileName = key + "_rout";
         File file = new File(fileName);
         if(!file.exists()){
             file.createNewFile();
