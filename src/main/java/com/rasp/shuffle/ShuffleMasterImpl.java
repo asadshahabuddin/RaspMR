@@ -161,10 +161,10 @@ public class ShuffleMasterImpl implements ShuffleMaster {
     	task.complete();
         System.out.println("Shuffle Task Completed : " + taskId);
         Job job = task.getJob();
-        onShuffleComplete(job);
+        checkShuffleComplete(job);
     }
 
-    public void onShuffleComplete(Job job){
+    public void checkShuffleComplete(Job job){
         if (job.isShuffleComplete()){
             config.getJobTracker().submit(job);
         }

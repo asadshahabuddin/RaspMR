@@ -29,4 +29,6 @@ public interface MapperMaster {
 
     void cleanup(Job job);
 
+    void checkMapComplete(Job job);
+
 }

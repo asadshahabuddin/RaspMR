@@ -141,7 +141,7 @@ public class JobTrackerImpl implements JobTracker{
 
         if(job.getShuffleTasks().size() == 0){
             job.shuffleComplete();
-            shuffleMaster.onShuffleComplete(job);
+            shuffleMaster.checkShuffleComplete(job);
         }else{
             for(ShuffleTask task : job.getShuffleTasks())
             {

@@ -57,11 +57,16 @@ public class MapperMasterImpl  implements MapperMaster{
             System.out.println("MAP ::    key   ::"+key+"::    Value   ::"+keyCount.get(key));
         }
         task.getMapContext().setKeyCountMap(keyCount);
+        checkMapComplete(job);
 
+
+    }
+
+    @Override
+    public void checkMapComplete(Job job) {
         if(job.isMapComplete()){
             configuration.getJobTracker().submit(job);
         }
-
     }
 
     @Override

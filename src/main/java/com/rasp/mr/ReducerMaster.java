@@ -28,4 +28,6 @@ public interface ReducerMaster {
 
     void cleanup(Job job);
 
+    void checkReduceComplete(Job job);
+
 }

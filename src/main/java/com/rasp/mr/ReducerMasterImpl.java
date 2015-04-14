@@ -48,14 +48,19 @@ public class ReducerMasterImpl implements ReducerMaster{
         Job job = task.getJob();
         task.complete();
         System.out.println("Reduce Task Completed : " + taskId);
-        if(job.isReduceComplete()){
-            configuration.getJobTracker().submit(job);
-        }
+        checkReduceComplete(job);
     }
 
     @Override
     public void cleanup(Job job) {
         reducerTaskMap.clear();
         reducerTaskMap = null;
+    }
+
+    @Override
+    public void checkReduceComplete(Job job) {
+        if(job.isReduceComplete()){
+            configuration.getJobTracker().submit(job);
+        }
     }
 }
