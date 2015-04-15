@@ -22,7 +22,7 @@ public class RecordReaderImpl
     @Override
     public void initialize(InputSplit inputSplit)
         throws IOException, InterruptedException {
-        key = 0;
+        key = inputSplit.getOffset();
         offset = 0;
         value = "";
         f = new RandomAccessFile(inputSplit.getLocation(), "r");

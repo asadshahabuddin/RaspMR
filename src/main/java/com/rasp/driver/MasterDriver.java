@@ -61,13 +61,13 @@ public class MasterDriver {
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
             Job job = new JobImpl();
-            job.setInputPath(INPUT_PATH);
+            job.setInputPath(args[0]);
             job.setMapper(TestMapper.class);
             job.setReducer(TestReducer.class);
 
             if(input.equalsIgnoreCase("send")) {
                 try {
-                    dataMaster.splitAndSend(INPUT_PATH);
+                    dataMaster.splitAndSend(args[0]);
                     jobTracker.submit(job);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
