@@ -32,9 +32,7 @@ import com.rasp.utils.protobuf.ProtoServer;
 
 public class MasterDriver {
     /* Constant(s) */
-    private static final String INPUT_PATH =
-            "/Users/rahulmadhavan/Documents/developer/ms/parallel/assignments/a3/a3data/test";
-
+    
     public static void main(String[] args) throws IOException {
         MasterConfiguration configuration = new MasterConfiguration(9292, ServiceType.JOB_TRACKER);
         DataMaster dataMaster = new DataMasterImpl(configuration);
