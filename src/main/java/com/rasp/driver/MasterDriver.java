@@ -56,27 +56,32 @@ public class MasterDriver {
         BlockingService js = STaskProtos.JobService.newReflectiveBlockingService(jobService);
         ProtoServer.startServer(configuration.getJobServer().getService(), js);
 
+        JobFactoryRegistry.register(TestJobFactory.class);
+
         while(true) {
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();
-            Job job = new JobImpl();
-            job.setInputPath(args[0]);
-            job.setMapper(TestMapper.class);
-            job.setReducer(TestReducer.class);
+            String [] inputWords = input.trim().split(" ");
 
-            if(input.equalsIgnoreCase("send")) {
-                try {
-                    dataMaster.splitAndSend(args[0]);
-                    jobTracker.submit(job);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+            if(inputWords.length > 0){
+                String firstWord = inputWords[0];
+                if(firstWord.equalsIgnoreCase("run")) {
+                    if(inputWords.length == 3){
+                        try {
+                            dataMaster.splitAndSend(inputWords[2]);
+                            jobTracker.submit(JobFactoryRegistry.createJob(inputWords[1],inputWords[2]));
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }else{
+                        System.out.println("run JobType inputFile");
+                    }
+                } else if(firstWord.equalsIgnoreCase("exit")) {
+                    System.exit(0);
+                } else {
+                    System.out.println("I am too dumb to figure what you are trying to say");
                 }
-            } else if(input.equalsIgnoreCase("exit")) {
-                System.exit(0);
-            } else {
-                if(!input.trim().equalsIgnoreCase("\n")) {
-                    System.out.println("meh...");
-                }
+
             }
         }
     }
