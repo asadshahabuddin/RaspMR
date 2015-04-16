@@ -31,6 +31,7 @@ public class MasterConfiguration extends Configuration {
     private JobTracker jobTracker;
     private JobScheduler jobScheduler;
     private JobNode jobServer;
+    private boolean cleanup;
 
     public MasterConfiguration(int portNo, ServiceType serviceType) {
         super(portNo,serviceType);
@@ -80,6 +81,14 @@ public class MasterConfiguration extends Configuration {
 
     public void setJobServer(JobNode jobServer) {
         this.jobServer = jobServer;
+    }
+
+    public void setCleanup(boolean cleanup) {
+        this.cleanup = cleanup;
+    }
+
+    public boolean isCleanup() {
+        return cleanup;
     }
 }
 /* End of MasterConfiguration.java */

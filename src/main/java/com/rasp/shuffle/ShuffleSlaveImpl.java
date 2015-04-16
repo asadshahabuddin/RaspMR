@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import com.rasp.config.SlaveConfiguration;
+import com.rasp.mr.master.JobImpl;
 import com.rasp.utils.autodiscovery.Service;
+import com.rasp.utils.file.FSHelpers;
 
 /**
  * Author : Sourabh Suman, Rahul Madhavan
@@ -28,22 +30,17 @@ public class ShuffleSlaveImpl implements ShuffleSlave {
     }
 
     @Override
-    public void createDataHandlerFor(String key, Service service) throws FileNotFoundException{
+    public void createDataHandlerFor(String key, String jobId, Service service) throws IOException {
         //create a key K using key and service data
         //create a file for K
     	String filename = getFileNameFromKeyService(key, service);
-    	File f = new File(filename);    	
-    	
     	if (!files.containsKey(filename)){
-    		if (f.exists()){
-        		f.delete();
-        	}
-    		files.put(filename, new FileOutputStream(filename, true));    		
+    		files.put(filename, FSHelpers.deleteAndCreateFile(new JobImpl(jobId),filename,true));
     	}    	    	
     }
 
     @Override
-    public void storeDataFor(byte[] data, String key, Service service) throws IOException {
+    public void storeDataFor(byte[] data, String key, String jobId, Service service) throws IOException {
         //create a key K using key and service data
         //fetch the file for K and append data to it
     	FileOutputStream file = files.get(getFileNameFromKeyService(key, service));
@@ -52,7 +49,7 @@ public class ShuffleSlaveImpl implements ShuffleSlave {
     }
 
     @Override
-    public void closeDataHandlerFor(String key, Service service) throws IOException {
+    public void closeDataHandlerFor(String key, String jobId, Service service) throws IOException {
         //create a key using key and service data
         //fetch the file for K and close it
     	String filename = getFileNameFromKeyService(key, service);

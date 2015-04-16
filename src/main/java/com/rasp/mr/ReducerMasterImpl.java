@@ -18,11 +18,11 @@ import java.util.Map;
 public class ReducerMasterImpl implements ReducerMaster{
 
     private MasterConfiguration configuration;
-    private Map<String, ReducerTask> reducerTaskMap;
+    private Map<String, ReducerTask> taskMap;
 
     public ReducerMasterImpl(MasterConfiguration configuration) {
         this.configuration = configuration;
-        this.reducerTaskMap = new HashMap<>();
+        this.taskMap = new HashMap<>();
     }
 
     @Override
@@ -31,11 +31,10 @@ public class ReducerMasterImpl implements ReducerMaster{
 
         for(String key : job.getReduceKeyServiceMap().keySet()){
             Service service = job.getReduceKeyServiceMap().get(key);
-            ReducerTask reducerTask = new ReducerTaskImpl(service);
-            reducerTask.setJob(job);
+            ReducerTask reducerTask = new ReducerTaskImpl(job,service);
             reducerTask.setKey(key);
             reducerTask.setReducerClass(job.getReducerClass());
-            reducerTaskMap.put(reducerTask.getTaskId(),reducerTask);
+            taskMap.put(reducerTask.getTaskId(), reducerTask);
             taskList.add(reducerTask);
         }
 
@@ -44,7 +43,7 @@ public class ReducerMasterImpl implements ReducerMaster{
 
     @Override
     synchronized public void completeReduceTask(String taskId) {
-        ReducerTask task = reducerTaskMap.get(taskId);
+        ReducerTask task = taskMap.get(taskId);
         Job job = task.getJob();
         task.complete();
         System.out.println("Reduce Task Completed : " + taskId);
@@ -53,8 +52,9 @@ public class ReducerMasterImpl implements ReducerMaster{
 
     @Override
     public void cleanup(Job job) {
-        reducerTaskMap.clear();
-        reducerTaskMap = null;
+        for(ReducerTask reducerTask : job.getReduceTasks()){
+            taskMap.remove(reducerTask.getTaskId());
+        }
     }
 
     @Override

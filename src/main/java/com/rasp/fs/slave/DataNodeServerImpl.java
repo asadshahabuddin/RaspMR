@@ -20,6 +20,7 @@ import com.rasp.config.SlaveConfiguration;
 import com.rasp.utils.autodiscovery.Service;
 import com.rasp.utils.autodiscovery.ServiceType;
 import com.rasp.utils.autodiscovery.ServiceFactory;
+import com.rasp.utils.file.FSHelpers;
 
 public class DataNodeServerImpl
     implements DataNode {
@@ -32,21 +33,6 @@ public class DataNodeServerImpl
                         ServiceType.TASK_TRACKER,
                         Configuration.DATA_NODE_PORT);
         this.configuration = configuration;
-    }
-    
-    /**
-     * Create a file output stream
-     * @return
-     *            The file output stream with append enabled.
-     * @throws FileNotFoundException
-     */
-    public FileOutputStream createDataStream()
-        throws FileNotFoundException {
-    	File f = new File(SlaveConfiguration.INPUT_SPLIT_FILENAME);
-    	if(f.exists()) {
-    		f.delete();
-    	}
-    	return new FileOutputStream(SlaveConfiguration.INPUT_SPLIT_FILENAME, true);
     }
 
     @Override
@@ -61,8 +47,8 @@ public class DataNodeServerImpl
 
     @Override
     public void storeInputSplit(InputSplitImpl inputSplit)
-        throws IOException {
-        f = createDataStream();
+            throws IOException, InterruptedException {
+        f = FSHelpers.deleteAndCreateFile(inputSplit.getLocation(),true);
         configuration.addInputSplit(inputSplit);
     }
 

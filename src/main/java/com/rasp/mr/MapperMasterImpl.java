@@ -4,11 +4,10 @@ import com.rasp.config.MasterConfiguration;
 import com.rasp.fs.InputFormatImpl;
 import com.rasp.fs.InputSplit;
 import com.rasp.mr.slave.MapperTaskImpl;
+import com.rasp.utils.autodiscovery.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * Author : rahulmadhavan
@@ -33,12 +32,12 @@ public class MapperMasterImpl  implements MapperMaster{
     {
         List<MapperTask> taskList = new ArrayList<>();
         InputFormatImpl inputFormat = configuration.getDataMaster().getInputFormat(job.getInputPath());
+        System.out.println("Input Splits count  "+ inputFormat.getSplits().size());
 
         for(InputSplit inputSplit : inputFormat.getSplits()){
 
-            MapperTask mapperTask = new MapperTaskImpl();
+            MapperTask mapperTask = new MapperTaskImpl(job);
             mapperTask.setTaskInputSplit(inputSplit);
-            mapperTask.setJob(job);
             mapperTask.setMapperClass(job.getMapperClass());
             taskList.add(mapperTask);
             taskMap.put(mapperTask.getTaskId(),mapperTask);
@@ -62,16 +61,36 @@ public class MapperMasterImpl  implements MapperMaster{
 
     }
 
-    @Override
     public void checkMapComplete(Job job) {
         if(job.isMapComplete()){
             configuration.getJobTracker().submit(job);
         }
     }
 
+
+    private Collection<Service> getServicesWithMapData(Job job) {
+        Map<String,Service> serviceMap = new HashMap<>();
+        for(MapperTask mapperTask : job.getMapTasks()){
+            try {
+                serviceMap.put(mapperTask.getService().getIp(),mapperTask.getService());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        return serviceMap.values();
+    }
+
     @Override
     public void cleanup(Job job) {
-        taskMap.clear();
-        taskMap = null;
+        if(configuration.isCleanup()){
+            for(Service service: getServicesWithMapData(job)){
+                configuration.getTaskNode(service).cleanup(job);
+            }
+        }
+        for(MapperTask mapperTask : job.getMapTasks()){
+            taskMap.remove(mapperTask.getTaskId());
+        }
     }
 }

@@ -20,6 +20,10 @@ message STask {
     }
 }
 
+message SJob{
+    required string jobId        = 1;
+}
+
 message SMapResponse {
     required string id = 1;
 
@@ -60,6 +64,7 @@ message STransferKeyData{
     required string key = 1;
     optional bytes data = 2;
     optional SDataHost dataHost = 3;
+    optional string jobId = 4;
 
 
     message SDataHost {
@@ -75,6 +80,7 @@ service TaskService {
     rpc initiateTransferDataForKey(STransferKeyData) returns (STransferResponse);
     rpc transferDataForKey(STransferKeyData) returns (STransferResponse);
     rpc terminateTransferDataForKey(STransferKeyData) returns (STransferResponse);
+    rpc cleanup(SJob) returns (STransferResponse);
 
 }
 

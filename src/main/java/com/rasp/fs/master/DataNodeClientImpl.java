@@ -43,6 +43,7 @@ public class DataNodeClientImpl implements DataNode {
                                                     .setLocation(inputSplit.getLocation())
                                                     .setOffset(inputSplit.getOffset())
                                                     .setLength(inputSplit.getLength())
+                                                    .setInputFormatId(inputSplit.getInputFormatId())
                                                     .build();
         try {
             transferService.sendInputSplit(controller,sInputSplit);

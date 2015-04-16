@@ -14,10 +14,10 @@ import com.rasp.utils.autodiscovery.Service;
  */
 public interface ShuffleSlave {
 
-    void createDataHandlerFor(String key, Service service) throws FileNotFoundException;
+    void createDataHandlerFor(String key, String jobId, Service service) throws IOException;
 
-    void storeDataFor(byte[] data, String key, Service service) throws IOException;
+    void storeDataFor(byte[] data, String key, String jobId, Service service) throws IOException;
 
-    void closeDataHandlerFor(String key, Service service) throws IOException;
+    void closeDataHandlerFor(String key, String jobId, Service service) throws IOException;
 
 }

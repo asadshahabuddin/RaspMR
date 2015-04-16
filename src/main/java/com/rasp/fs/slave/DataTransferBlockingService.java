@@ -16,6 +16,7 @@ import com.rasp.fs.SInputSplitProtos;
 import com.google.protobuf.RpcController;
 import com.rasp.config.SlaveConfiguration;
 import com.google.protobuf.ServiceException;
+import com.rasp.utils.file.FSHelpers;
 
 public class DataTransferBlockingService
     implements SInputSplitProtos.DataTransferService.BlockingInterface {
@@ -29,10 +30,13 @@ public class DataTransferBlockingService
     public SInputSplitProtos.TransferResponse sendInputSplit(RpcController controller,
                                                             SInputSplitProtos.SInputSplit request) {
         try {
+
             dataNode.storeInputSplit(new InputSplitImpl(request.getIdx(),
-                                                        request.getOffset(),
-                                                        request.getLength(),
-                                                        SlaveConfiguration.INPUT_SPLIT_FILENAME));
+                    request.getOffset(),
+                    request.getLength(),
+                    request.getInputFormatId()+"_"+request.getIdx(),
+                    request.getInputFormatId()));
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (IOException e) {

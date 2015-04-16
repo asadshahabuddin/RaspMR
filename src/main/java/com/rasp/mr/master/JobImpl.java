@@ -41,6 +41,10 @@ public class JobImpl implements Job {
         reducerTasks = new ArrayList<>();
     }
 
+    public JobImpl(String jobId){
+        this.jobId = jobId;
+    }
+
     @Override
     public void setInputPath(String path) {
         this.inputPath = path;

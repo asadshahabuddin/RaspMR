@@ -29,17 +29,19 @@ public class ReducerTaskImpl
     private Service service;
     private SlaveConfiguration conf;
 
-    public ReducerTaskImpl(Service service) {
+    public ReducerTaskImpl(Job job, Service service) {
         taskId = UUID.randomUUID().toString();
         this.service = service;
+        this.job = job;
     }
 
-    public ReducerTaskImpl(String taskId, Service service, SlaveConfiguration conf, String key) throws IOException {
+    public ReducerTaskImpl(String taskId, Job job, Service service, SlaveConfiguration conf, String key) throws IOException {
         this.taskId = taskId;
         this.service = service;
         this.key = key;
-        reduceContext = new ReduceContextImpl(key);
+        reduceContext = new ReduceContextImpl(key,job);
         this.conf = conf;
+        this.job = job;
     }
 
     @Override
@@ -106,7 +108,7 @@ public class ReducerTaskImpl
 		(2) Call reduce function successively for each key-value pair.
 		(3) Perform cleanup.
 		*/
-        Iterable iterable = new Iterable(key);
+        Iterable iterable = new Iterable(key,job);
         reducer.setup();
         reducer.reduce(new WritableImpl(key), iterable, reduceContext);
         reduceContext.close();

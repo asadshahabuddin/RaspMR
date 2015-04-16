@@ -15,6 +15,7 @@ import com.rasp.fs.InputSplit;
 import java.io.RandomAccessFile;
 import com.rasp.config.Configuration;
 import com.rasp.utils.autodiscovery.Service;
+import com.rasp.utils.file.FSHelpers;
 
 public class ShuffleTaskImpl implements ShuffleTask {
     /* Constant(s) */
@@ -28,15 +29,16 @@ public class ShuffleTaskImpl implements ShuffleTask {
     private boolean complete;
     private Configuration conf;
 
-    public ShuffleTaskImpl() {
-
+    public ShuffleTaskImpl(Job job) {
         taskId = UUID.randomUUID().toString();
+        this.job = job;
     }
 
-    public ShuffleTaskImpl(String taskId, Service service, Configuration conf) {
+    public ShuffleTaskImpl(String taskId, Job job, Service service, Configuration conf) {
         this.taskId = taskId;
         this.service = service;
         this.conf = conf;
+        this.job = job;
     }
 
     @Override
@@ -64,7 +66,7 @@ public class ShuffleTaskImpl implements ShuffleTask {
             return false;
         }
 
-        RandomAccessFile f = new RandomAccessFile(key + "_mout", "r");
+        RandomAccessFile f = FSHelpers.openFile(job,key + "_mout", "r");
         long flen = f.length();    /* Length of file */
         /* Check if the file has some content */
         if (flen == 0) {
@@ -78,7 +80,7 @@ public class ShuffleTaskImpl implements ShuffleTask {
         */
         int bytesRead = 0;
         byte[] b = null;
-        node.initiateDataTransferForKey(key, dataTargetService);
+        node.initiateDataTransferForKey(key, job.getJobId(),dataTargetService);
 
         while (bytesRead < flen) {
             int size = BUFFER_SIZE;
@@ -96,10 +98,10 @@ public class ShuffleTaskImpl implements ShuffleTask {
             f.seek(bytesRead);
             b = new byte[size];
             f.read(b, 0, size);
-            node.transferDataForKey(b, key, dataTargetService);
+            node.transferDataForKey(b, key, job.getJobId(), dataTargetService);
             bytesRead += size;
         }
-        node.terminateTransferDataForKey(key, dataTargetService);
+        node.terminateTransferDataForKey(key, job.getJobId(), dataTargetService);
 
         return true;
     }

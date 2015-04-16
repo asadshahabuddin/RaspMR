@@ -13,6 +13,7 @@ import java.io.IOException;
 
 public class InputSplitImpl
     implements InputSplit {
+    private String inputFormatId;
     private int idx;
     private long offset;
     private long length;
@@ -27,7 +28,8 @@ public class InputSplitImpl
      * @param location
      *            Node name where the split would be local. 
      */
-    public InputSplitImpl(int idx, long offset, long length, String location) {
+    public InputSplitImpl(int idx, long offset, long length, String location, String inputFormatId) {
+        this.inputFormatId = inputFormatId;
         this.idx      = idx;
         this.offset   = offset;
         this.length   = length;
@@ -101,6 +103,10 @@ public class InputSplitImpl
     public String getLocation()
         throws IOException, InterruptedException {
         return location;
+    }
+
+    public String getInputFormatId() {
+        return inputFormatId;
     }
 }
 /* End of InputSplitImpl.java */

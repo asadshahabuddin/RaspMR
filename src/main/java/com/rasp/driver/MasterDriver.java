@@ -45,6 +45,7 @@ public class MasterDriver {
         configuration.setJobTracker(jobTracker);
         configuration.setJobScheduler(jobScheduler);
         configuration.setJobServer(jobServer);
+        configuration.setCleanup(false);
 
         Thread jobSchedulerThread = new Thread(jobScheduler);
         jobSchedulerThread.start();

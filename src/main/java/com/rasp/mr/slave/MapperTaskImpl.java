@@ -32,18 +32,20 @@ public class MapperTaskImpl implements com.rasp.mr.MapperTask{
     private MapContext mapContext;
     private Service service;
 
-    public MapperTaskImpl()
+    public MapperTaskImpl(Job job)
     {
         taskId = UUID.randomUUID().toString();
-        mapContext = new MapContextImpl();
+        mapContext = new MapContextImpl(job);
+        this.job = job;
 
     }
 
-    public MapperTaskImpl(String taskId, Service service)
+    public MapperTaskImpl(String taskId, Job job,Service service)
     {
         this.taskId = taskId;
         this.service = service;
-        mapContext = new MapContextImpl();
+        this.job = job;
+        mapContext = new MapContextImpl(job);
     }
     
     @Override
@@ -91,10 +93,8 @@ public class MapperTaskImpl implements com.rasp.mr.MapperTask{
 	@Override
 	public boolean execute() throws IllegalAccessException, InstantiationException, InterruptedException, IOException{
 
-		Mapper mapper = mapperClass.newInstance();
-		if(mapper == null){
-			return false;
-		}
+        System.out.println("executing for : "+taskId);
+        Mapper mapper = mapperClass.newInstance();
 		
 		/*
 		(1) Initialize a reader object
@@ -104,8 +104,7 @@ public class MapperTaskImpl implements com.rasp.mr.MapperTask{
 		RecordReaderImpl reader = new RecordReaderImpl();
 		reader.initialize(inputSplit);
 		mapper.setup();
-		while(reader.nextKeyValue())
-		{
+		while(reader.nextKeyValue()){
 			mapper.map(reader.getCurrentKey(), reader.getCurrentValue(), mapContext);
 		}
         mapContext.close();

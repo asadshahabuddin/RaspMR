@@ -9,6 +9,8 @@
 package com.rasp.fs;
 
 /* Import list */
+import com.rasp.utils.file.FSHelpers;
+
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
@@ -25,7 +27,7 @@ public class RecordReaderImpl
         key = inputSplit.getOffset();
         offset = 0;
         value = "";
-        f = new RandomAccessFile(inputSplit.getLocation(), "r");
+        f = new RandomAccessFile(FSHelpers.createFSFilePath(inputSplit.getLocation()), "r");
     }
 
     @Override
@@ -34,7 +36,6 @@ public class RecordReaderImpl
         if(offset >= f.length()) {
             return false;
         }
-        
         f.seek(offset);
         key++;
         value = f.readLine();

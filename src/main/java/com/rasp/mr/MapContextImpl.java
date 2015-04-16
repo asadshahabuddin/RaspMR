@@ -8,6 +8,8 @@
 
 package com.rasp.mr;
 
+import com.rasp.utils.file.FSHelpers;
+
 import java.io.*;
 import java.util.Map;
 import java.util.HashMap;
@@ -15,10 +17,12 @@ import java.util.HashMap;
 public class MapContextImpl implements MapContext {
     HashMap<String, FileOutputStream> keyMap;
     Map<String, Long> countMap;
+    Job job;
 
-    public MapContextImpl() {
+    public MapContextImpl(Job job) {
         keyMap = new HashMap<String, FileOutputStream>();
         countMap = new HashMap<String, Long>();
+        this.job = job;
     }
 
     public void write(Writable k, Writable v)
@@ -26,15 +30,14 @@ public class MapContextImpl implements MapContext {
         if (v == null) {
             return;
         }
+
         String key = String.valueOf(k.getObj());
+        String fileName = key + "_mout";
         byte[] value = (String.valueOf(v.getObj()) + "\n").getBytes();
-        File file = new File(String.valueOf(key));
+
         if (!keyMap.containsKey(key)) {
-            if (file.exists()) {
-                file.delete();
-            }
             countMap.put(key, 1L);
-            keyMap.put(key, new FileOutputStream(key + "_mout", true));
+            keyMap.put(key, FSHelpers.deleteAndCreateFile(job, fileName, true));
         } else {
             countMap.put(key, countMap.get(key) + 1);
         }

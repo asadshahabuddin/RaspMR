@@ -11,19 +11,19 @@ package com.rasp.mr;
 import java.io.*;
 import java.util.Map;
 import java.util.HashMap;
+
+import com.rasp.utils.file.FSHelpers;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class ReduceContextImpl implements ReduceContext {
     FileOutputStream fop = null;
     FileInputStream fin = null;
+    Job job;
 
-    public ReduceContextImpl(String key) throws IOException {
+    public ReduceContextImpl(String key, Job job) throws IOException {
         String fileName = key + "_rout";
-        File file = new File(fileName);
-        if(!file.exists()){
-            file.createNewFile();
-        }
-        this.fop = new FileOutputStream(fileName , true);
+        this.job = job;
+        this.fop = FSHelpers.deleteAndCreateFile(job,fileName,true);
     }
 
     @Override

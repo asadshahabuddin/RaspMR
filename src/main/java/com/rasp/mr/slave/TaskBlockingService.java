@@ -13,6 +13,7 @@ import com.google.protobuf.ServiceException;
 import com.rasp.config.Configuration;
 import com.rasp.config.SlaveConfiguration;
 import com.rasp.mr.*;
+import com.rasp.mr.master.JobImpl;
 import com.rasp.utils.autodiscovery.Service;
 import com.rasp.utils.autodiscovery.ServiceFactory;
 import com.rasp.utils.autodiscovery.ServiceType;
@@ -48,8 +49,9 @@ public class TaskBlockingService
 
     private Task sTaskToTask(STaskProtos.STask sTask) throws IOException {
         Task task;
+        Job job = new JobImpl(sTask.getJobId());
         if (sTask.getTaskType() == STaskProtos.STask.STaskType.MAPPER) {
-            MapperTaskImpl mTask = new MapperTaskImpl(sTask.getId(),service);
+            MapperTaskImpl mTask = new MapperTaskImpl(sTask.getId(),job,service);
             mTask.setTaskInputSplit(configuration.getInputSplit(sTask.getInputSplitId()));
             try {
                 String className = sTask.getClassName().split(" ")[1];
@@ -63,13 +65,13 @@ public class TaskBlockingService
         } else if (sTask.getTaskType() == STaskProtos.STask.STaskType.SHUFFLE) {
             // initialize shuffle task
             Service dataService = ServiceFactory.createService(ServiceType.TASK_TRACKER,sTask.getIp(),Configuration.TASK_NODE_PORT);
-            ShuffleTask shuffleTask = new ShuffleTaskImpl(sTask.getId(),service,configuration);
+            ShuffleTask shuffleTask = new ShuffleTaskImpl(sTask.getId(), job, service,configuration);
             shuffleTask.setKey(sTask.getKey());
             shuffleTask.setDataTargetService(dataService);
             task = shuffleTask;
 
         }else{
-            ReducerTask reducerTask = new ReducerTaskImpl(sTask.getId(),service,configuration,sTask.getKey());
+            ReducerTask reducerTask = new ReducerTaskImpl(sTask.getId(), job, service,configuration,sTask.getKey());
             try {
                 String className = sTask.getClassName().split(" ")[1];
                 reducerTask.setReducerClass((Class<? extends Reducer>) Class.forName(className));
@@ -89,8 +91,8 @@ public class TaskBlockingService
                         request.getDataHost().getPort());
 
         try {
-            taskNode.initiateDataTransferForKey(request.getKey(), service);
-        } catch (FileNotFoundException e) {
+            taskNode.initiateDataTransferForKey(request.getKey(), request.getJobId(), service);
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return STaskProtos.STransferResponse.newBuilder().setStatus("OK").build();
@@ -103,7 +105,7 @@ public class TaskBlockingService
                         request.getDataHost().getIp(),
                         request.getDataHost().getPort());
         try {
-            taskNode.transferDataForKey(request.getData().toByteArray(), request.getKey(), service);
+            taskNode.transferDataForKey(request.getData().toByteArray(), request.getKey(), request.getJobId(), service);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -117,7 +119,7 @@ public class TaskBlockingService
                         request.getDataHost().getIp(),
                         request.getDataHost().getPort());
         try {
-            taskNode.terminateTransferDataForKey(request.getKey(), service);
+            taskNode.terminateTransferDataForKey(request.getKey(), request.getJobId(), service);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -125,4 +127,9 @@ public class TaskBlockingService
     }
 
 
+    @Override
+    public STaskProtos.STransferResponse cleanup(RpcController controller, STaskProtos.SJob request) throws ServiceException {
+        taskNode.cleanup(new JobImpl(request.getJobId()));
+        return STaskProtos.STransferResponse.newBuilder().setStatus("OK").build();
+    }
 }

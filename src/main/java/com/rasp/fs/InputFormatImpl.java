@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.UUID;
 
 public class InputFormatImpl
     extends InputFormat {
@@ -25,7 +26,7 @@ public class InputFormatImpl
     private static int splitIdx;
     private int totalBytesRead;
     private int shift = 0;
-
+    private String id;
     /**
      * Default constructor
      */
@@ -39,6 +40,7 @@ public class InputFormatImpl
     public InputFormatImpl(String inputFile, int workerCount)
         throws InterruptedException, IOException {
         super.setInputFile(inputFile);
+        id = UUID.randomUUID().toString();
         this.workerCount = workerCount;
         splitIdx = 0;
         totalBytesRead = 0;
@@ -93,7 +95,7 @@ public class InputFormatImpl
         splits = new ArrayList<InputSplit>();
         long l = blockSize(workerCount);
         for (int i = 0; i < workerCount; i++) {
-            splits.add(new InputSplitImpl(i, offset(l, i), l, ""));
+            splits.add(new InputSplitImpl(i, offset(l, i), l, "",id));
         }
     }
 

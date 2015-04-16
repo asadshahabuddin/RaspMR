@@ -9,6 +9,7 @@ message SInputSplit {
     required int64 offset = 2;
     required int64 length = 3;
     required string location = 4;
+    optional string inputFormatId = 5;
 }
 
 message SInputChunk {

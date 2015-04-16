@@ -58,7 +58,7 @@ public class TaskNodeClientImpl implements TaskNode {
     }
 
 
-    public void initiateDataTransferForKey(String key,Service service) {
+    public void initiateDataTransferForKey(String key, String jobId, Service service) {
         STaskProtos.STransferKeyData.SDataHost sDataHost = STaskProtos.STransferKeyData
                 .SDataHost
                 .newBuilder()
@@ -80,7 +80,7 @@ public class TaskNodeClientImpl implements TaskNode {
     }
 
     @Override
-    public void transferDataForKey(byte[] data, String key,Service service) {
+    public void transferDataForKey(byte[] data, String jobId, String key,Service service) {
         STaskProtos.STransferKeyData.SDataHost sDataHost = STaskProtos.STransferKeyData
                 .SDataHost
                 .newBuilder()
@@ -104,7 +104,7 @@ public class TaskNodeClientImpl implements TaskNode {
     }
 
     @Override
-    public void terminateTransferDataForKey(String key,Service service) {
+    public void terminateTransferDataForKey(String key, String jobId, Service service) {
         STaskProtos.STransferKeyData.SDataHost sDataHost = STaskProtos.STransferKeyData
                 .SDataHost
                 .newBuilder()
@@ -119,6 +119,15 @@ public class TaskNodeClientImpl implements TaskNode {
 
         try {
             taskService.terminateTransferDataForKey(controller, sTransferKeyData);
+        } catch (ServiceException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void cleanup(Job job) {
+        try {
+            taskService.cleanup(controller, STaskProtos.SJob.newBuilder().setJobId(job.getJobId()).build());
         } catch (ServiceException e) {
             e.printStackTrace();
         }

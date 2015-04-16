@@ -18,6 +18,7 @@ import com.rasp.config.SlaveConfiguration;
 import com.rasp.utils.autodiscovery.Service;
 import com.rasp.utils.autodiscovery.ServiceType;
 import com.rasp.utils.autodiscovery.ServiceFactory;
+import com.rasp.utils.file.FSHelpers;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -48,16 +49,21 @@ public class TaskNodeServerImpl
 
 
     @Override
-    public void initiateDataTransferForKey(String key, Service service) throws FileNotFoundException {
-        configuration.getShuffleSlave().createDataHandlerFor(key,service);
+    public void initiateDataTransferForKey(String key, String jobId, Service service) throws IOException {
+        configuration.getShuffleSlave().createDataHandlerFor(key, jobId,service);
     }
 
     @Override
-    public void transferDataForKey(byte[] data, String key, Service service) throws IOException {
-        configuration.getShuffleSlave().storeDataFor(data, key, service);
+    public void transferDataForKey(byte[] data, String key, String jobId, Service service) throws IOException {
+        configuration.getShuffleSlave().storeDataFor(data, key, jobId, service);
     }
 
-    public void terminateTransferDataForKey(String key, Service service) throws IOException {
-        configuration.getShuffleSlave().closeDataHandlerFor(key, service);
+    public void terminateTransferDataForKey(String key, String jobId, Service service) throws IOException {
+        configuration.getShuffleSlave().closeDataHandlerFor(key, jobId,service);
+    }
+
+    @Override
+    public void cleanup(Job job) {
+        FSHelpers.deleteFilesForJob(job);
     }
 }

@@ -8,17 +8,20 @@
 
 package com.rasp.fs;
 
+import com.rasp.mr.Job;
 import com.rasp.mr.Writable;
 import com.rasp.mr.slave.WritableImpl;
+import com.rasp.utils.file.FSHelpers;
 
 import java.io.*;
 import java.util.Iterator;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 public class Iterable
     implements Iterator<Writable> {
-    private ArrayList<File> fileList;
+    private List<File> fileList;
     private BufferedReader reader;
     private int fileIdx;
     private String cachedLine;
@@ -29,24 +32,11 @@ public class Iterable
      * @param key
      *            The prefix to the names of all relevant files.
      */
-    public Iterable(String key)
+    public Iterable(String key, Job job)
         throws FileNotFoundException {
         String dirName = System.getProperty("user.dir");
         System.out.println("dir - name : " + dirName);
-        File[] files = new File(dirName).listFiles();
-        System.out.println("no of files in dir : " + files.length);
-        fileList = new ArrayList<File>();
-        for(File file : files) {
-            if(file == null){
-                System.out.println("file is null");
-            }else{
-                String name = file.getName();
-                if(name.contains(key + "_") &&  !name.contains("rout")){
-                    fileList.add(file);
-                }
-            }
-
-        }
+        fileList = FSHelpers.getFilesFor(key,job);
         if(fileList.size() == 0) {
             throw new IllegalArgumentException("  [error] No files detected for key '" + key + "'");
         }

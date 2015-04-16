@@ -53,8 +53,8 @@ public class DataMasterImpl implements DataMaster {
     public void splitAndSend(String inputFile)
         throws IOException, InterruptedException {
         List<Service> services = configuration.getDiscoverer().getServices(ServiceType.TASK_TRACKER);
-        InputFormatImpl inputFormat = createInputFormat(inputFile, services.size());
         if (!inputFileMap.containsKey(inputFile)) {
+            InputFormatImpl inputFormat = createInputFormat(inputFile, services.size());
             inputFileMap.put(inputFile, new InputFormatMetaData(inputFormat));
         }
 

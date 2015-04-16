@@ -1,6 +1,10 @@
 package com.rasp.mr;
 
+import com.rasp.utils.autodiscovery.Service;
+
 import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,5 +34,6 @@ public interface MapperMaster {
     void cleanup(Job job);
 
     void checkMapComplete(Job job);
+
 
 }

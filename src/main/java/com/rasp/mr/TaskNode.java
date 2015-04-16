@@ -31,10 +31,12 @@ public interface TaskNode {
      */
     void sendTask(Task task);
 
-    void initiateDataTransferForKey(String key,Service service) throws FileNotFoundException;
+    void initiateDataTransferForKey(String key, String jobId,Service service) throws IOException;
 
-    void transferDataForKey(byte[] data, String key, Service service) throws IOException;
+    void transferDataForKey(byte[] data, String key, String jobId, Service service) throws IOException;
 
-    void terminateTransferDataForKey(String key,Service service) throws IOException;
+    void terminateTransferDataForKey(String key, String jobId, Service service) throws IOException;
+
+    void cleanup(Job job);
 }
 /* End of TaskNode.java */
