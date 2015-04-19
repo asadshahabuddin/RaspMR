@@ -9,6 +9,7 @@
 package com.rasp.config;
 
 /* Import list */
+import java.io.FileNotFoundException;
 import java.net.InetAddress;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +37,7 @@ public class Configuration {
     private Service service;
     private Map<String,TaskNode> taskNodeMap;
 
-    public Configuration(int portNo, ServiceType serviceType) {
+    public Configuration(int portNo, ServiceType serviceType) throws FileNotFoundException {
         protoClient = new ProtoClient();
         taskNodeMap = new HashMap<>();
         hz1 = HazelCastServicePublisher.publishService(ServiceFactory.createService(serviceType, portNo));

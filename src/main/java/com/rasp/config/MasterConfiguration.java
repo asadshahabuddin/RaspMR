@@ -9,6 +9,7 @@
 package com.rasp.config;
 
 /* Import list */
+import java.io.FileNotFoundException;
 import java.util.Map;
 import java.util.HashMap;
 import com.rasp.fs.DataNode;
@@ -33,7 +34,7 @@ public class MasterConfiguration extends Configuration {
     private JobNode jobServer;
     private boolean cleanup;
 
-    public MasterConfiguration(int portNo, ServiceType serviceType) {
+    public MasterConfiguration(int portNo, ServiceType serviceType) throws FileNotFoundException {
         super(portNo,serviceType);
         dataNodeMap = new HashMap<>();
     }

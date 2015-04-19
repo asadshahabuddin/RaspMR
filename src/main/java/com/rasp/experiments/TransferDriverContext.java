@@ -8,6 +8,7 @@ import com.rasp.utils.autodiscovery.ServiceType;
 import com.rasp.utils.autodiscovery.impl.DiscovererHazelCastImpl;
 import com.rasp.utils.autodiscovery.impl.HazelCastServicePublisher;
 
+import java.io.FileNotFoundException;
 import java.net.InetAddress;
 import java.util.List;
 
@@ -24,7 +25,11 @@ public final class TransferDriverContext {
     private Discoverer discoverer;
 
     public TransferDriverContext(int portNo){
-        hz1 = HazelCastServicePublisher.publishService(ServiceFactory.createService(ServiceType.TASK_TRACKER, portNo));
+        try {
+            hz1 = HazelCastServicePublisher.publishService(ServiceFactory.createService(ServiceType.TASK_TRACKER, portNo));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         discoverer = new DiscovererHazelCastImpl(hz1);
     }
 

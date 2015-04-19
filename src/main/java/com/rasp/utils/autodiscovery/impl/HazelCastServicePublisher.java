@@ -15,11 +15,13 @@ import com.hazelcast.core.HazelcastInstance;
 import com.rasp.utils.autodiscovery.Service;
 import com.hazelcast.config.XmlConfigBuilder;
 
+import java.io.FileNotFoundException;
+
 public enum HazelCastServicePublisher {
     DUMMY;
 
-    public static HazelcastInstance publishService(Service service) {
-        Config config = new XmlConfigBuilder().build();
+    public static HazelcastInstance publishService(Service service) throws FileNotFoundException {
+        Config config = new XmlConfigBuilder(System.getProperty("hazelcast.config.path")).build();
         config.getMemberAttributeConfig().
                 setStringAttribute(
                         HazelCastServiceConstants.SERVICE_ATTRIBUTE, service.getServiceType().toString());
