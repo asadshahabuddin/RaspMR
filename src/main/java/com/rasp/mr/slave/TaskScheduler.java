@@ -19,8 +19,13 @@ import com.rasp.mr.ShuffleTask;
 import com.rasp.mr.Task;
 import com.rasp.mr.TaskTracker;
 import com.rasp.mr.ReducerTask;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TaskScheduler implements com.rasp.mr.TaskScheduler, Runnable{
+
+    static final Logger LOG = LoggerFactory.getLogger(TaskScheduler.class);
+
 	private TaskTracker taskTracker;
     private SlaveConfiguration configuration;
 
@@ -47,7 +52,7 @@ public class TaskScheduler implements com.rasp.mr.TaskScheduler, Runnable{
                         mapCompleted(task.getTaskId(),
                                 ((MapperTask) task).getMapContext().getKeyCountMap());
             } catch (ServiceException e) {
-                e.printStackTrace();
+                LOG.error("",e);
             }
 
         }else if(task instanceof ShuffleTask){
@@ -57,7 +62,7 @@ public class TaskScheduler implements com.rasp.mr.TaskScheduler, Runnable{
                         shuffleDataTransferCompleted(task.getTaskId());
 
             } catch (ServiceException e) {
-                e.printStackTrace();
+                LOG.error("",e);
             }
 
         }else if(task instanceof ReducerTask){
@@ -67,7 +72,7 @@ public class TaskScheduler implements com.rasp.mr.TaskScheduler, Runnable{
                         reduceCompleted(task.getTaskId());
 
             } catch (ServiceException e) {
-                e.printStackTrace();
+                LOG.error("",e);
             }
         }else{
             throw new RuntimeException("unknown task type given to task scheduler: "+task.getClass());
@@ -91,32 +96,32 @@ public class TaskScheduler implements com.rasp.mr.TaskScheduler, Runnable{
 					status = !status;
 					if(status)
 					{
-						System.out.println("   [echo] Task scheduler has resumed scheduling");
+						LOG.info("   [echo] Task scheduler has resumed scheduling");
 					}
 					else
 					{
-						System.out.println("   [echo] There are no tasks to schedule");
+                        LOG.info("   [echo] There are no tasks to schedule");
 					}
 				}
 			}
 		}
 		catch(IOException ioe)
 		{
-			ioe.printStackTrace();
+            LOG.error("",ioe);
 		}
 		catch(InterruptedException intre)
 		{
-			intre.printStackTrace();
+            LOG.error("",intre);
 		}
 		catch(InstantiationException inste)
 		{
-			inste.printStackTrace();
+            LOG.error("",inste);
 		}
 		catch(IllegalAccessException iae)
 		{
-			iae.printStackTrace();
+            LOG.error("",iae);
 		} catch (ServiceException e) {
-            e.printStackTrace();
+            LOG.error("",e);
         }
     }
 }

@@ -5,8 +5,13 @@ import java.io.IOException;
 import com.rasp.mr.MapContext;
 import com.rasp.mr.Mapper;
 import com.rasp.mr.slave.WritableImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AvgMapper implements Mapper{
+
+    static final Logger LOG = LoggerFactory.getLogger(AvgMapper.class);
+
 	public void cleanup() {
 		// TODO Auto-generated method stub
 		
@@ -22,10 +27,11 @@ public class AvgMapper implements Mapper{
 				paramMapContext.write(new WritableImpl(columns[3]), new WritableImpl(columns[4]));
 			}
 		}catch(IOException e){
-			e.printStackTrace();System.exit(1);
+            LOG.error("",e);
+			System.exit(1);
 		}
 		catch(NumberFormatException e){
-			e.printStackTrace();
+            LOG.error("",e);
 		}
 	}
 

@@ -2,6 +2,8 @@ package com.rasp.mr;
 
 import com.rasp.config.MasterConfiguration;
 import com.rasp.utils.autodiscovery.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,6 +18,8 @@ import java.util.Map;
  * Edited :
  */
 public class ReducerMasterImpl implements ReducerMaster{
+
+    static final Logger LOG = LoggerFactory.getLogger(ReducerMasterImpl.class);
 
     private MasterConfiguration configuration;
     private Map<String, ReducerTask> taskMap;
@@ -46,7 +50,7 @@ public class ReducerMasterImpl implements ReducerMaster{
         ReducerTask task = taskMap.get(taskId);
         Job job = task.getJob();
         task.complete();
-        System.out.println("Reduce Task Completed : " + taskId);
+        LOG.info("Reduce Task Completed : " + taskId);
         checkReduceComplete(job);
     }
 

@@ -17,12 +17,17 @@ import com.rasp.mr.master.JobImpl;
 import com.rasp.utils.autodiscovery.Service;
 import com.rasp.utils.autodiscovery.ServiceFactory;
 import com.rasp.utils.autodiscovery.ServiceType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class TaskBlockingService
     implements STaskProtos.TaskService.BlockingInterface {
+
+    static final Logger LOG = LoggerFactory.getLogger(TaskBlockingService.class);
+
     private TaskNode taskNode;
     private Service service;
 
@@ -42,7 +47,7 @@ public class TaskBlockingService
         try {
             taskNode.sendTask(sTaskToTask(sTask));
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error("",e);
         }
         return STaskProtos.STransferResponse.newBuilder().setStatus("OK").build();
     }
@@ -57,7 +62,7 @@ public class TaskBlockingService
                 String className = sTask.getClassName().split(" ")[1];
                 mTask.setMapperClass((Class<? extends Mapper>) Class.forName(className));
             } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+                LOG.error("",e);
             }
             task = mTask;
 
@@ -76,7 +81,7 @@ public class TaskBlockingService
                 String className = sTask.getClassName().split(" ")[1];
                 reducerTask.setReducerClass((Class<? extends Reducer>) Class.forName(className));
             } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+                LOG.error("",e);
             }
             task = reducerTask;
         }
@@ -93,7 +98,7 @@ public class TaskBlockingService
         try {
             taskNode.initiateDataTransferForKey(request.getKey(), request.getJobId(), service);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error("", e);
         }
         return STaskProtos.STransferResponse.newBuilder().setStatus("OK").build();
     }
@@ -107,7 +112,7 @@ public class TaskBlockingService
         try {
             taskNode.transferDataForKey(request.getData().toByteArray(), request.getKey(), request.getJobId(), service);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error("",e);
         }
         return STaskProtos.STransferResponse.newBuilder().setStatus("OK").build();
     }
@@ -121,7 +126,7 @@ public class TaskBlockingService
         try {
             taskNode.terminateTransferDataForKey(request.getKey(), request.getJobId(), service);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error("",e);
         }
         return STaskProtos.STransferResponse.newBuilder().setStatus("OK").build();
     }

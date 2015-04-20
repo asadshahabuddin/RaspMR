@@ -10,13 +10,18 @@ package com.rasp.mr.master;
 
 /* Import list */
 import java.io.IOException;
+
 import com.rasp.mr.Job;
 import com.rasp.mr.JobTracker;
 import com.rasp.mr.MapperTask;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JobScheduler
 	implements Runnable
 {
+    static final Logger LOG = LoggerFactory.getLogger(JobScheduler.class);
+
 	private JobTracker jobTracker;
 
     public JobScheduler(JobTracker jobTracker){
@@ -51,22 +56,22 @@ public class JobScheduler
 					status = !status;
 					if(status)
 					{
-						System.out.println("   [echo] Job scheduler has resumed scheduling");
+						LOG.info("   [echo] Job scheduler has resumed scheduling");
 					}
 					else
 					{
-						System.out.println("   [echo] Job are no tasks to schedule");
+                        LOG.info("   [echo] Job are no tasks to schedule");
 					}
 				}
 			}
 		}
 		catch(IOException ioe)
 		{
-			ioe.printStackTrace();
+            LOG.error("",ioe);
 		}
 		catch(InterruptedException intre)
 		{
-			intre.printStackTrace();
+            LOG.error("",intre);
 		}
 	}
 }

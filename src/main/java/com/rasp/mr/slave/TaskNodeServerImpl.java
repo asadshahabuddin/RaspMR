@@ -9,7 +9,7 @@
 package com.rasp.mr.slave;
 
 /* Import list */
-import java.io.FileNotFoundException;
+
 import java.io.IOException;
 
 import com.rasp.mr.*;
@@ -19,12 +19,16 @@ import com.rasp.utils.autodiscovery.Service;
 import com.rasp.utils.autodiscovery.ServiceType;
 import com.rasp.utils.autodiscovery.ServiceFactory;
 import com.rasp.utils.file.FSHelpers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
+
 
 public class TaskNodeServerImpl
     implements TaskNode {
+
+    static final Logger LOG = LoggerFactory.getLogger(TaskNodeServerImpl.class);
+
     private Service service;
     private SlaveConfiguration configuration;
 
@@ -43,7 +47,7 @@ public class TaskNodeServerImpl
 
     @Override
     public void sendTask(Task task) {
-        System.out.println("task " + task.getTaskId() + " : task Type : "+ task.getClass());
+        LOG.debug("task " + task.getTaskId() + " : task Type : "+ task.getClass());
         configuration.getTaskTracker().submit(task);
     }
 

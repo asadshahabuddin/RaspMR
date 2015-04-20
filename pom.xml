@@ -21,24 +21,7 @@
 	  <version>4.11</version>
     </dependency>
     
-    <dependency>
-      <groupId>org.apache.hadoop</groupId>
-      <artifactId>hadoop-hdfs</artifactId>
-      <version>2.2.0</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>org.apache.hadoop</groupId>
-      <artifactId>hadoop-common</artifactId>
-      <version>2.2.0</version>
-    </dependency>
-        
-    <dependency>
-      <groupId>org.apache.hadoop</groupId>
-      <artifactId>hadoop-mapreduce-client-jobclient</artifactId>
-      <version>2.2.0</version>
-    </dependency>
-    
+
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-all</artifactId>
@@ -58,7 +41,23 @@
           <version>3.4.2</version>
       </dependency>
 
-    <dependency>
+
+      <dependency>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-classic</artifactId>
+          <version>1.0.7</version>
+      </dependency>
+
+
+      <!-- had a dep in commons-configuration -->
+      <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>log4j-over-slf4j</artifactId>
+          <version>1.7.7</version>
+      </dependency>
+
+
+      <dependency>
       <groupId>com.googlecode.protobuf-rpc-pro</groupId>
       <artifactId>protobuf-rpc-pro-duplex</artifactId>
       <version>3.3</version>
@@ -75,6 +74,12 @@
           <groupId>org.apache.commons</groupId>
           <artifactId>commons-pool2</artifactId>
           <version>2.3</version>
+      </dependency>
+
+      <dependency>
+          <groupId>commons-io</groupId>
+          <artifactId>commons-io</artifactId>
+          <version>2.4</version>
       </dependency>
 
 

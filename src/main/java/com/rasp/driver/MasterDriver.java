@@ -29,9 +29,13 @@ import com.rasp.config.MasterConfiguration;
 import com.rasp.mr.slave.TestReducer;
 import com.rasp.utils.autodiscovery.ServiceType;
 import com.rasp.utils.protobuf.ProtoServer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MasterDriver {
     /* Constant(s) */
+
+    static final Logger LOG = LoggerFactory.getLogger(MasterDriver.class);
     
     public static void main(String[] args) throws IOException {
         MasterConfiguration configuration = new MasterConfiguration(9292, ServiceType.JOB_TRACKER);
@@ -56,7 +60,7 @@ public class MasterDriver {
         BlockingService js = STaskProtos.JobService.newReflectiveBlockingService(jobService);
         ProtoServer.startServer(configuration.getJobServer().getService(), js);
 
-        //JobFactoryRegistry.register(TestJobFactory.class);
+        JobFactoryRegistry.register(TestJobFactory.class);
         JobFactoryRegistry.register(AvgJobFactory.class);
 
         while(true) {
@@ -71,14 +75,15 @@ public class MasterDriver {
                         try {
                             long startTime = System.currentTimeMillis();
                             dataMaster.splitAndSend(inputWords[2]);
-                            System.out.println("Split Time: " +
+                            LOG.info("Split Time: " +
                                     (System.currentTimeMillis() - startTime) / 1000f);
                             startTime = System.currentTimeMillis();
-                            jobTracker.submit(JobFactoryRegistry.createJob(inputWords[1],inputWords[2]));
-                            System.out.println("Job Run Time: " +
+                            jobTracker.submit(JobFactoryRegistry.createJob(inputWords[1], inputWords[2]));
+                            LOG.info("Job Run Time: " +
                                     (System.currentTimeMillis() - startTime) / 1000f);
                         } catch (InterruptedException e) {
-                            e.printStackTrace();
+                            System.out.println("error - check logs");
+                            LOG.error("",e);
                         }
                     }else{
                         System.out.println("run JobType inputFile");

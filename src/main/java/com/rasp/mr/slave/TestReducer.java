@@ -4,6 +4,8 @@ import com.rasp.fs.*;
 import com.rasp.mr.ReduceContext;
 import com.rasp.mr.Reducer;
 import com.rasp.mr.Writable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
@@ -16,6 +18,8 @@ import java.io.IOException;
  */
 public class TestReducer implements Reducer{
 
+    static final Logger LOG = LoggerFactory.getLogger(TestReducer.class);
+
     @Override
     public void setup() {
 
@@ -27,7 +31,7 @@ public class TestReducer implements Reducer{
             try {
                 context.write(key,values.next());
             } catch (IOException e) {
-                e.printStackTrace();
+                LOG.error("", e);
             }
         }
 

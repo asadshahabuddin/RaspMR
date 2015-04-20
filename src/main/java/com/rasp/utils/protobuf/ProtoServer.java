@@ -23,8 +23,13 @@ import com.googlecode.protobuf.pro.duplex.execute.RpcServerCallExecutor;
 import com.googlecode.protobuf.pro.duplex.execute.ThreadPoolCallExecutor;
 import com.googlecode.protobuf.pro.duplex.util.RenamingThreadFactoryProxy;
 import com.googlecode.protobuf.pro.duplex.server.DuplexTcpServerPipelineFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ProtoServer {
+
+    static final Logger LOG = LoggerFactory.getLogger(ProtoServer.class);
+
     public static void startServer(Service serviceConfig,
                                    BlockingService blockingService)
         throws UnknownHostException {
@@ -62,7 +67,7 @@ public class ProtoServer {
         try {
             bootstrap.bind(inetSocketAddress);
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("",e);
         }
     }
 }

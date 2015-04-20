@@ -2,6 +2,8 @@ package com.rasp.mr.slave;
 
 import com.rasp.mr.MapContext;
 import com.rasp.mr.Mapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
@@ -14,6 +16,8 @@ import java.io.IOException;
  */
 public class TestMapper implements Mapper{
 
+    static final Logger LOG = LoggerFactory.getLogger(TestMapper.class);
+
     @Override
     public void setup() {
 
@@ -23,9 +27,9 @@ public class TestMapper implements Mapper{
     public void map(Long key, String value,MapContext mapContext) {
         try {
             mapContext.write(new WritableImpl(key),new WritableImpl(value));
-            System.out.println(key +"   :   " +value);
+            LOG.debug(key +"   :   " +value);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error("",e);
         }
 
     }

@@ -22,8 +22,13 @@ import com.rasp.fs.InputSplit;
 import com.rasp.utils.autodiscovery.Service;
 import com.rasp.utils.autodiscovery.ServiceType;
 import com.rasp.utils.autodiscovery.ServiceFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class MapperTaskImpl implements com.rasp.mr.MapperTask{
+
+    static final Logger LOG = LoggerFactory.getLogger(MapperTaskImpl.class);
+
 	private String taskId;
 	private Job job;
 	private InputSplit inputSplit;
@@ -93,7 +98,7 @@ public class MapperTaskImpl implements com.rasp.mr.MapperTask{
 	@Override
 	public boolean execute() throws IllegalAccessException, InstantiationException, InterruptedException, IOException{
 
-        System.out.println("executing for : "+taskId);
+        LOG.debug("executing for : "+taskId);
         Mapper mapper = mapperClass.newInstance();
 		
 		/*

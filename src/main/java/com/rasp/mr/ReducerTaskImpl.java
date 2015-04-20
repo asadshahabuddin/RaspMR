@@ -17,9 +17,14 @@ import com.rasp.config.SlaveConfiguration;
 import com.google.protobuf.ServiceException;
 import com.rasp.mr.slave.WritableImpl;
 import com.rasp.utils.autodiscovery.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ReducerTaskImpl
     implements ReducerTask {
+
+    static final Logger LOG = LoggerFactory.getLogger(ReducerTaskImpl.class);
+
     private String taskId;
     private ReduceContext reduceContext;
     private Class<? extends Reducer> reducerClass;
@@ -97,7 +102,7 @@ public class ReducerTaskImpl
             throws IllegalAccessException, InstantiationException,
             InterruptedException, IOException, ServiceException {
 
-        System.out.println("Reducer Class : " + reducerClass);
+        LOG.debug("Reducer Class : " + reducerClass);
         Reducer reducer = reducerClass.newInstance();
         if(reducer == null){
             return false;

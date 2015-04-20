@@ -1,6 +1,8 @@
 package com.rasp.driver;
 
 import com.rasp.mr.Job;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +16,8 @@ import java.util.Map;
  */
 public class JobFactoryRegistry {
 
+    static final Logger LOG = LoggerFactory.getLogger(JobFactoryRegistry.class);
+
     static Map<String,JobFactory> jobFactoryMap = new HashMap<>();
 
     public static Job createJob(String jobType,String inputFile){
@@ -25,9 +29,9 @@ public class JobFactoryRegistry {
             JobFactory jobFactory = jobFactoryClass.newInstance();
             jobFactoryMap.put(jobFactory.getName(),jobFactory);
         } catch (InstantiationException e) {
-            e.printStackTrace();
+            LOG.error("",e);
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            LOG.error("",e);
         }
     }
 

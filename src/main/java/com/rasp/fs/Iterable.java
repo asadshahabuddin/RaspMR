@@ -12,6 +12,8 @@ import com.rasp.mr.Job;
 import com.rasp.mr.Writable;
 import com.rasp.mr.slave.WritableImpl;
 import com.rasp.utils.file.FSHelpers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.Iterator;
@@ -21,6 +23,9 @@ import java.util.NoSuchElementException;
 
 public class Iterable
     implements Iterator<Writable> {
+
+    static final Logger LOG = LoggerFactory.getLogger(Iterable.class);
+
     private List<File> fileList;
     private BufferedReader reader;
     private int fileIdx;
@@ -35,7 +40,7 @@ public class Iterable
     public Iterable(String key, Job job)
         throws FileNotFoundException {
         String dirName = System.getProperty("user.dir");
-        System.out.println("dir - name : " + dirName);
+        LOG.debug("dir - name : " + dirName);
         fileList = FSHelpers.getFilesFor(key,job);
         if(fileList.size() == 0) {
             throw new IllegalArgumentException("  [error] No files detected for key '" + key + "'");

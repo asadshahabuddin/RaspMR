@@ -7,6 +7,9 @@ import com.googlecode.protobuf.pro.duplex.RpcClientChannel;
 import com.rasp.mr.*;
 import com.rasp.utils.protobuf.ProtoClient;
 import com.rasp.utils.autodiscovery.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * Author : rahulmadhavan, sourabhsuman
@@ -16,6 +19,9 @@ import com.rasp.utils.autodiscovery.Service;
  * Edited : 4/11/15
  */
 public class TaskNodeClientImpl implements TaskNode {
+
+    static final Logger LOG = LoggerFactory.getLogger(TaskNodeClientImpl.class);
+
     private ProtoClient protoClient;
     private Service service;
     STaskProtos.TaskService.BlockingInterface taskService;
@@ -53,7 +59,7 @@ public class TaskNodeClientImpl implements TaskNode {
         try {
             taskService.sendTask(controller,sTaskBuilder.build());
         } catch (ServiceException e) {
-            e.printStackTrace();
+            LOG.error("",e);
         }
     }
 
@@ -74,7 +80,7 @@ public class TaskNodeClientImpl implements TaskNode {
         try {
             taskService.initiateTransferDataForKey(controller, sTransferKeyData);
         } catch (ServiceException e) {
-            e.printStackTrace();
+            LOG.error("",e);
         }
 
     }
@@ -98,7 +104,7 @@ public class TaskNodeClientImpl implements TaskNode {
         try {
             taskService.transferDataForKey(controller, sTransferKeyData);
         } catch (ServiceException e) {
-            e.printStackTrace();
+            LOG.error("",e);
         }
 
     }
@@ -120,7 +126,7 @@ public class TaskNodeClientImpl implements TaskNode {
         try {
             taskService.terminateTransferDataForKey(controller, sTransferKeyData);
         } catch (ServiceException e) {
-            e.printStackTrace();
+            LOG.error("",e);
         }
     }
 
@@ -129,7 +135,7 @@ public class TaskNodeClientImpl implements TaskNode {
         try {
             taskService.cleanup(controller, STaskProtos.SJob.newBuilder().setJobId(job.getJobId()).build());
         } catch (ServiceException e) {
-            e.printStackTrace();
+            LOG.error("", e);
         }
     }
 

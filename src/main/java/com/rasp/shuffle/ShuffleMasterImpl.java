@@ -12,6 +12,8 @@ import com.rasp.mr.MapperTask;
 import com.rasp.mr.ShuffleTask;
 import com.rasp.mr.slave.ShuffleTaskImpl;
 import com.rasp.utils.autodiscovery.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Author : Sourabh Suman, Shivastuti Koul, Rahul Madhavan
@@ -21,6 +23,8 @@ import com.rasp.utils.autodiscovery.Service;
  * Edited : 4/11/15
  */
 public class ShuffleMasterImpl implements ShuffleMaster {
+
+    static final Logger LOG = LoggerFactory.getLogger(ShuffleMasterImpl.class);
 
     private MasterConfiguration config;
     private Map<String, Map<Service, Map<String, Long>>> jobServiceKeyFrequency;
@@ -47,7 +51,7 @@ public class ShuffleMasterImpl implements ShuffleMaster {
     	Map<String, Service> keyWithService = getServicesWithMaxKeyFreq(jobServiceKeyFrequency.get(job.getJobId()));
     	triggerMapDataTransferForAll(job,keyWithService);
         job.setReduceKeyServiceMap(keyWithService);
-        System.out.println("Shuffle tasks count : " + taskMap.values().size());
+        LOG.info("Shuffle tasks count : " + taskMap.values().size());
         job.setShuffleTasks(new ArrayList<>(taskMap.values()));
     }
     
@@ -161,7 +165,7 @@ public class ShuffleMasterImpl implements ShuffleMaster {
     public synchronized void shuffleDataTransferCompleted(String taskId) {
     	ShuffleTask task = taskMap.get(taskId);
     	task.complete();
-        System.out.println("Shuffle Task Completed : " + taskId);
+        LOG.info("Shuffle Task Completed : " + taskId);
         Job job = task.getJob();
         checkShuffleComplete(job);
     }

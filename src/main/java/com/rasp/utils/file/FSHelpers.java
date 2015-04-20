@@ -2,6 +2,8 @@ package com.rasp.utils.file;
 
 import com.rasp.mr.Job;
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.net.URL;
@@ -16,6 +18,8 @@ import java.util.List;
  * Edited :
  */
 public class FSHelpers {
+
+    static final Logger LOG = LoggerFactory.getLogger(FSHelpers.class);
 
     private static final String MR_DIRECTORY = "mr-job";
     private static final String FS_DIRECTORY = "fs-data";
@@ -53,7 +57,7 @@ public class FSHelpers {
 
     public static List<File> getFilesFor(String key, Job job){
         File[] files = new File(createMRFilePath(job)).listFiles();
-        System.out.println("no of files in dir : " + files.length);
+        LOG.debug("no of files in dir : " + files.length);
         List<File> fileList = new ArrayList<File>();
         for(File file : files) {
             if(file == null){
@@ -71,7 +75,7 @@ public class FSHelpers {
 
     public static void deleteFilesForJob(Job job){
         File[] files = new File(createMRFilePath(job)).listFiles();
-        System.out.println("no of files in dir : " + files.length);
+        LOG.info("no of files in dir : " + files.length);
         for(File file : files) {
             if(file == null){
                 System.out.println("file is null");

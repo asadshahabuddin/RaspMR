@@ -70,23 +70,6 @@ public class RecordReaderImpl
         }
     }
     
-    /* Main method for unit testing */
-    /*
-    public static void main(String[] args) {
-        try {
-            RecordReader reader = new RecordReader();
-            reader.initialize(new com.rasp.fs.InputSplit(0, 8192, "test.txt"), null);
-            while(reader.nextKeyValue()) {
-                System.out.println("Key  : " + reader.getCurrentKey());
-                System.out.println("Value: " + reader.getCurrentValue());
-            }
-            reader.close();
-        } catch(InterruptedException intre) {
-            intre.printStackTrace();
-        } catch(IOException ioe) {
-            ioe.printStackTrace();
-        }
-    }
-    */
+
 }
 /* End of RecordReader.java */

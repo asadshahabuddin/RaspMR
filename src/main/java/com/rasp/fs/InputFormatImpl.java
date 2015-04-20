@@ -9,6 +9,9 @@
 package com.rasp.fs;
 
 /* Import list */
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.util.List;
 import java.util.ArrayList;
@@ -18,6 +21,9 @@ import java.util.UUID;
 
 public class InputFormatImpl
     extends InputFormat {
+
+    static final Logger LOG = LoggerFactory.getLogger(InputFormatImpl.class);
+
     /* Constant(s) */
     private static final int BUFFER_SIZE = 8192;
 
@@ -201,16 +207,16 @@ public class InputFormatImpl
                 ((InputSplitImpl) nextSplit).setOffset(nextSplit.getOffset() + shift);
             }
         } catch (InterruptedException intre) {
-            intre.printStackTrace();
+            LOG.error("",intre);
         } catch (IOException ioe) {
-            ioe.printStackTrace();
+            LOG.error("",ioe);
         } finally {
             if (f != null) {
                 try {
                     f.close();
                     dataNode.closeInputSplit();
                 } catch (IOException ioe) {
-                    ioe.printStackTrace();
+                    LOG.error("",ioe);
                 }
             }
         }

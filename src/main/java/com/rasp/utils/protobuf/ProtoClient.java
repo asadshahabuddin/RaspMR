@@ -19,8 +19,13 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import com.googlecode.protobuf.pro.duplex.RpcClientChannel;
 import com.googlecode.protobuf.pro.duplex.client.DuplexTcpClientPipelineFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ProtoClient {
+
+    static final Logger LOG = LoggerFactory.getLogger(ProtoClient.class);
+
     private DuplexTcpClientPipelineFactory clientFactory;
     private Bootstrap bootstrap;
     private HashMap<String,RpcClientChannel> channelMap;
@@ -47,7 +52,7 @@ public class ProtoClient {
                         bootstrap);
                 channelMap.put(key, channel);
             } catch (IOException e) {
-                e.printStackTrace();
+                LOG.error("", e);
             }
         }
         return channelMap.get(key);

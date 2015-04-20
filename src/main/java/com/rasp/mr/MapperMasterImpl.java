@@ -5,6 +5,8 @@ import com.rasp.fs.InputFormatImpl;
 import com.rasp.fs.InputSplit;
 import com.rasp.mr.slave.MapperTaskImpl;
 import com.rasp.utils.autodiscovery.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.*;
@@ -17,6 +19,8 @@ import java.util.*;
  * Edited :
  */
 public class MapperMasterImpl  implements MapperMaster{
+
+    static final Logger LOG = LoggerFactory.getLogger(MapperMasterImpl.class);
 
     Map<String, MapperTask> taskMap;
     MasterConfiguration configuration;
@@ -32,7 +36,7 @@ public class MapperMasterImpl  implements MapperMaster{
     {
         List<MapperTask> taskList = new ArrayList<>();
         InputFormatImpl inputFormat = configuration.getDataMaster().getInputFormat(job.getInputPath());
-        System.out.println("Input Splits count  "+ inputFormat.getSplits().size());
+        LOG.info("Input Splits count  "+ inputFormat.getSplits().size());
 
         for(InputSplit inputSplit : inputFormat.getSplits()){
 
@@ -53,7 +57,7 @@ public class MapperMasterImpl  implements MapperMaster{
 
         task.complete();
         for (String key :keyCount.keySet()){
-            System.out.println("MAP ::    key   ::"+key+"::    Value   ::"+keyCount.get(key));
+            LOG.debug("MAP ::    key   ::"+key+"::    Value   ::"+keyCount.get(key));
         }
         task.getMapContext().setKeyCountMap(keyCount);
         checkMapComplete(job);
@@ -74,9 +78,9 @@ public class MapperMasterImpl  implements MapperMaster{
             try {
                 serviceMap.put(mapperTask.getService().getIp(),mapperTask.getService());
             } catch (IOException e) {
-                e.printStackTrace();
+                LOG.error("",e);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                LOG.error("",e);
             }
         }
         return serviceMap.values();

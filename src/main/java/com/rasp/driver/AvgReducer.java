@@ -5,8 +5,13 @@ import com.rasp.mr.ReduceContext;
 import com.rasp.mr.Reducer;
 import com.rasp.mr.Writable;
 import com.rasp.mr.slave.WritableImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AvgReducer implements Reducer{
+
+    static final Logger LOG = LoggerFactory.getLogger(AvgReducer.class);
+
 	public void cleanup() {
 		// TODO Auto-generated method stub
 		
@@ -20,7 +25,7 @@ public class AvgReducer implements Reducer{
 			int sum = 0;
 			while(paramIterable.hasNext()){
 				Object o = paramIterable.next().getObj();
-				System.out.println(o.toString());
+                LOG.debug(o.toString());
 				Double i = Double.parseDouble(o.toString());
 				count++;
 				sum+=i;
@@ -29,7 +34,7 @@ public class AvgReducer implements Reducer{
 			
 			paramReduceContext.write(paramWritable, new WritableImpl(sum/count));
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOG.error("",e);
 		}
 		
 	}

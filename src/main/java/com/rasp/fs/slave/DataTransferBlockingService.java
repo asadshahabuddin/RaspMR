@@ -17,11 +17,15 @@ import com.google.protobuf.RpcController;
 import com.rasp.config.SlaveConfiguration;
 import com.google.protobuf.ServiceException;
 import com.rasp.utils.file.FSHelpers;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DataTransferBlockingService
     implements SInputSplitProtos.DataTransferService.BlockingInterface {
-    private DataNode dataNode;
 
+    static final Logger LOG = LoggerFactory.getLogger(DataTransferBlockingService.class);
+
+    private DataNode dataNode;
     public DataTransferBlockingService(DataNode dataNode) {
         this.dataNode = dataNode;
     }
@@ -38,9 +42,9 @@ public class DataTransferBlockingService
                     request.getInputFormatId()));
 
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LOG.error("",e);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error("",e);
         }
         return SInputSplitProtos.TransferResponse.newBuilder().setStatus("200").build();
     }
@@ -51,9 +55,9 @@ public class DataTransferBlockingService
         try {
             dataNode.storeChunk(request.getChunk().toByteArray());
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LOG.error("",e);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error("",e);
         }
         return SInputSplitProtos.TransferResponse.newBuilder().setStatus("200").build();
 
@@ -66,7 +70,7 @@ public class DataTransferBlockingService
         try {
             dataNode.closeInputSplit();
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error("",e);
         }
         return SInputSplitProtos.Void.newBuilder().build();
     }

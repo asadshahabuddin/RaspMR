@@ -17,10 +17,14 @@ import com.rasp.mr.*;
 import com.rasp.config.MasterConfiguration;
 import com.rasp.shuffle.ShuffleMaster;
 import com.rasp.shuffle.ShuffleMasterImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class JobTrackerImpl implements JobTracker{
+
+    static final Logger LOG = LoggerFactory.getLogger(JobTrackerImpl.class);
 
     MasterConfiguration conf;
     Map<String, Job> jobMap;
@@ -82,16 +86,16 @@ public class JobTrackerImpl implements JobTracker{
     public void execute(Job job) throws IOException, InterruptedException {
 
         if(!job.isMapComplete()){
-            System.out.println("map is not complete");
+            LOG.info("map is not complete");
             this.map(job);
         }else if(!job.isShuffleComplete()){
-            System.out.println("shuffle is not complete");
+            LOG.info("shuffle is not complete");
             this.shuffle(job);
         }else if(!job.isReduceComplete()){
-            System.out.println("reduce is not complete");
+            LOG.info("reduce is not complete");
             this.reduce(job);
         }else{
-            System.out.println("about to begin cleanup");
+            LOG.info("about to begin cleanup");
             this.cleanup(job);
         }
     }
@@ -102,13 +106,6 @@ public class JobTrackerImpl implements JobTracker{
         shuffleMaster.cleanup(job);
         reducerMaster.cleanup(job);
         jobMap.remove(job.getJobId());
-
-        //TODO persist keyToServiceMap to fileSystem
-//        try {
-//            //completedJobMap.put(job.getJobId(),new FileInputStream(job.getJobId()));
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
         job.cleanup();
 
     }

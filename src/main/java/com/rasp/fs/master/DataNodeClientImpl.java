@@ -19,8 +19,13 @@ import com.rasp.utils.protobuf.ProtoClient;
 import com.rasp.utils.autodiscovery.Service;
 import com.google.protobuf.ServiceException;
 import com.googlecode.protobuf.pro.duplex.RpcClientChannel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DataNodeClientImpl implements DataNode {
+
+    static final Logger LOG = LoggerFactory.getLogger(DataNodeClientImpl.class);
+
     private ProtoClient protoClient;
     private Service service;
     private SInputSplitProtos.DataTransferService.BlockingInterface transferService;
@@ -48,7 +53,7 @@ public class DataNodeClientImpl implements DataNode {
         try {
             transferService.sendInputSplit(controller,sInputSplit);
         } catch (ServiceException e) {
-            e.printStackTrace();
+            LOG.error("",e);
         }
     }
 
@@ -62,7 +67,7 @@ public class DataNodeClientImpl implements DataNode {
         try {
             transferService.sendChunk(controller, sInputChunk);
         } catch (ServiceException e) {
-            e.printStackTrace();
+            LOG.error("",e);
         }
     }
 
@@ -77,7 +82,7 @@ public class DataNodeClientImpl implements DataNode {
         try {
             transferService.closeInputSplit(controller, sVoid);
         } catch (ServiceException e) {
-            e.printStackTrace();
+            LOG.error("",e);
         }
     }
 }
