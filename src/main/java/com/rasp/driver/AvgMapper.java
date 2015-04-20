@@ -15,11 +15,11 @@ public class AvgMapper implements Mapper{
 	public void map(Long paramLong, String paramString,
 			MapContext paramMapContext) {
 		
-		String[] columns = paramString.split(",");
+		String[] columns = paramString.split("\t");
 		try{
-			if (columns.length==2) {
+			if (columns.length>=5) {
 				//int num = Integer.parseInt(columns[1]);
-				paramMapContext.write(new WritableImpl(columns[0]), new WritableImpl(columns[1]));
+				paramMapContext.write(new WritableImpl(columns[3]), new WritableImpl(columns[4]));
 			}
 		}catch(IOException e){
 			e.printStackTrace();System.exit(1);

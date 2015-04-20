@@ -21,7 +21,7 @@ public class AvgReducer implements Reducer{
 			while(paramIterable.hasNext()){
 				Object o = paramIterable.next().getObj();
 				System.out.println(o.toString());
-				Integer i = Integer.parseInt(o.toString());
+				Double i = Double.parseDouble(o.toString());
 				count++;
 				sum+=i;
 			}
