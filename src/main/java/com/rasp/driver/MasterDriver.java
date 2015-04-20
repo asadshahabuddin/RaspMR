@@ -56,7 +56,8 @@ public class MasterDriver {
         BlockingService js = STaskProtos.JobService.newReflectiveBlockingService(jobService);
         ProtoServer.startServer(configuration.getJobServer().getService(), js);
 
-        JobFactoryRegistry.register(TestJobFactory.class);
+        //JobFactoryRegistry.register(TestJobFactory.class);
+        JobFactoryRegistry.register(AvgJobFactory.class);
 
         while(true) {
             Scanner scanner = new Scanner(System.in);
