@@ -69,8 +69,14 @@ public class MasterDriver {
                 if(firstWord.equalsIgnoreCase("run")) {
                     if(inputWords.length == 3){
                         try {
+                            long startTime = System.currentTimeMillis();
                             dataMaster.splitAndSend(inputWords[2]);
+                            System.out.println("Split Time: " +
+                                    (System.currentTimeMillis() - startTime) / 1000f);
+                            startTime = System.currentTimeMillis();
                             jobTracker.submit(JobFactoryRegistry.createJob(inputWords[1],inputWords[2]));
+                            System.out.println("Job Run Time: " +
+                                    (System.currentTimeMillis() - startTime) / 1000f);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
