@@ -35,7 +35,9 @@ public class JobScheduler implements Runnable{
      */
     public void schedule() throws InterruptedException, IOException{
         Job job = jobTracker.nextJob();
-        jobTracker.execute(job);
+        if(job != null){
+            jobTracker.execute(job);
+        }
     }
 
     @Override
