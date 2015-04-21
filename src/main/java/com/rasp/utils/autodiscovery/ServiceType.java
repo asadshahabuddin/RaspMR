@@ -1,7 +1,7 @@
 /**
- * Author : Rahul Madhavan
+ * Author : Pulkit Jain
  * File   : ServiceType.java
- * Email  : rahulk@ccs.neu.edu
+ * Email  : puljain@ccs.neu.edu
  * Created: Mar 30, 2015
  * Edited : Mar 30, 2015
  */

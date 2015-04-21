@@ -19,7 +19,7 @@ import com.rasp.utils.autodiscovery.Service;
 
 public class ShuffleTaskImpl implements ShuffleTask {
     /* Constant(s) */
-    public static final int BUFFER_SIZE = 8192;
+    public static final int BUFFER_SIZE = 1000 * 8192;
 
     private String taskId;
     private Job job;

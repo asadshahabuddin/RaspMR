@@ -24,7 +24,7 @@ public class InputFormatImpl
     extends InputFormat {
     static final Logger LOG = LoggerFactory.getLogger(InputFormatImpl.class);
     /* Constant(s) */
-    private static final int BUFFER_SIZE = 8192;
+    private static final int BUFFER_SIZE = 1000 * 8192;
 
     private int workerCount;
     private List<InputSplit> splits;

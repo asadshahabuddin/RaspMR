@@ -1,7 +1,7 @@
 /**
- * Author : Rahul Madhavan
+ * Author : Pulkit Jain
  * File   : ServiceFactory.java
- * Email  : rahulk@ccs.neu.edu
+ * Email  : puljain@ccs.neu.edu
  * Created: Mar 30, 2015
  * Edited : Apr 8, 2015
  */
@@ -12,7 +12,10 @@ package com.rasp.utils.autodiscovery;
 import java.net.InetAddress;
 import com.rasp.utils.autodiscovery.impl.ServiceImpl;
 
-
+/**
+ *
+ *  This class is a Factory for creating objects of type {@link com.rasp.utils.autodiscovery.Service}
+ */
 public class ServiceFactory {
     public static Service createService(ServiceType serviceType,
                                         String ip,
@@ -20,6 +23,14 @@ public class ServiceFactory {
         return new ServiceImpl(serviceType,ip,port);
     }
 
+    /**
+     * creates {@link com.rasp.utils.autodiscovery.Service} for given {@link com.rasp.utils.autodiscovery.ServiceType}
+     * and port
+     *
+     * @param serviceType
+     * @param port
+     * @return
+     */
     public static Service createService(ServiceType serviceType, int port) {
         String ip = null;
         try {

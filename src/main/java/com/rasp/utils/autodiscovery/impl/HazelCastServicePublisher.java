@@ -17,9 +17,18 @@ import com.hazelcast.config.XmlConfigBuilder;
 
 import java.io.FileNotFoundException;
 
+/**
+ * This class publishes the service using hazelcast
+ */
 public enum HazelCastServicePublisher {
     DUMMY;
 
+    /**
+     *
+     * @param service
+     * @return HazelcastInstance created for the given Service
+     * @throws FileNotFoundException
+     */
     public static HazelcastInstance publishService(Service service) throws FileNotFoundException {
         Config config = new XmlConfigBuilder(System.getProperty("hazelcast.config.path")).build();
         config.getMemberAttributeConfig().
