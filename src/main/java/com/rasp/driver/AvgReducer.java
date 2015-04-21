@@ -8,19 +8,28 @@ import com.rasp.mr.slave.WritableImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Custom reducer implementation for calculating averages
+ * Author : Sourabh Suman
+ * File   : AvgReducer.java
+ * Email  : sourabhs@ccs.neu.edu
+ * Created: 4/19/15
+ * Edited :
+ */
 public class AvgReducer implements Reducer{
 
     static final Logger LOG = LoggerFactory.getLogger(AvgReducer.class);
 
+    @Override
 	public void cleanup() {
-		// TODO Auto-generated method stub
 		
 	}
 
+    @Override
 	public void reduce(Writable paramWritable, Iterable paramIterable,
 			ReduceContext paramReduceContext) {
-		try {
-			
+		
+    	try {			
 			int count = 0;
 			int sum = 0;
 			while(paramIterable.hasNext()){
@@ -30,7 +39,6 @@ public class AvgReducer implements Reducer{
 				count++;
 				sum+=i;
 			}
-
 			
 			paramReduceContext.write(paramWritable, new WritableImpl(sum/count));
 		} catch (Exception e) {
@@ -39,8 +47,8 @@ public class AvgReducer implements Reducer{
 		
 	}
 
+    @Override
 	public void setup() {
-		// TODO Auto-generated method stub
 		
 	}
 }

@@ -21,7 +21,7 @@ message STask {
 }
 
 message SJob{
-    required string jobId        = 1;
+    required string jobId = 1;
 }
 
 message SMapResponse {
@@ -36,7 +36,7 @@ message SMapResponse {
 }
 
 message SDataTransferTask {
-    required string key                = 1;
+    required string key = 1;
     required SReducerLocation location = 2;
 
     message SReducerLocation {
@@ -53,12 +53,9 @@ message SShuffleResponse {
     optional string taskId = 1;
 }
 
-
 message SReduceResponse {
     optional string taskId = 1;
 }
-
-
 
 message STransferKeyData{
     required string key = 1;
@@ -66,22 +63,18 @@ message STransferKeyData{
     optional SDataHost dataHost = 3;
     optional string jobId = 4;
 
-
     message SDataHost {
-        required string ip         = 1;
-        required int32 port        = 2;
+        required string ip  = 1;
+        required int32 port = 2;
     }
 }
 
 service TaskService {
-
     rpc sendTask(STask) returns (STransferResponse);
-
     rpc initiateTransferDataForKey(STransferKeyData) returns (STransferResponse);
     rpc transferDataForKey(STransferKeyData) returns (STransferResponse);
     rpc terminateTransferDataForKey(STransferKeyData) returns (STransferResponse);
     rpc cleanup(SJob) returns (STransferResponse);
-
 }
 
 service JobService {

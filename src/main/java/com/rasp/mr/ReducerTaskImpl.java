@@ -1,28 +1,26 @@
 /**
- * Author : Asad Shahabuddin
+ * Author : Shivastuti Koul
  * File   : ReducerTaskImpl.java
- * Email  : asad808@ccs.neu.edu
+ * Email  : koul.sh@husky.neu.edu
  * Created: Apr 12, 2015
  * Edited : Apr 12, 2015
  */
 
 package com.rasp.mr;
 
-import java.io.FileNotFoundException;
 import java.util.UUID;
+import org.slf4j.Logger;
 import java.io.IOException;
 import com.rasp.fs.Iterable;
 import com.rasp.fs.InputSplit;
+import org.slf4j.LoggerFactory;
+import com.rasp.mr.slave.WritableImpl;
 import com.rasp.config.SlaveConfiguration;
 import com.google.protobuf.ServiceException;
-import com.rasp.mr.slave.WritableImpl;
 import com.rasp.utils.autodiscovery.Service;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class ReducerTaskImpl
     implements ReducerTask {
-
     static final Logger LOG = LoggerFactory.getLogger(ReducerTaskImpl.class);
 
     private String taskId;
@@ -34,17 +32,33 @@ public class ReducerTaskImpl
     private Service service;
     private SlaveConfiguration conf;
 
+    /**
+     * Constructor 1
+     *
+     * @param job     The job.
+     * @param service Wrapper object containing the IP and port of a node.
+     */
     public ReducerTaskImpl(Job job, Service service) {
         taskId = UUID.randomUUID().toString();
         this.service = service;
         this.job = job;
     }
 
+    /**
+     * Constructor 2
+     *
+     * @param taskId  Task identifier.
+     * @param job     The job.
+     * @param service Wrapper object containing the IP and port of a node.
+     * @param conf    The configuration object.
+     * @param key     The key.
+     * @throws IOException
+     */
     public ReducerTaskImpl(String taskId, Job job, Service service, SlaveConfiguration conf, String key) throws IOException {
         this.taskId = taskId;
         this.service = service;
         this.key = key;
-        reduceContext = new ReduceContextImpl(key,job);
+        reduceContext = new ReduceContextImpl(key, job);
         this.conf = conf;
         this.job = job;
     }
@@ -65,8 +79,7 @@ public class ReducerTaskImpl
     }
 
     @Override
-    public void setJob(Job job)
-    {
+    public void setJob(Job job) {
         this.job = job;
     }
 
@@ -104,7 +117,7 @@ public class ReducerTaskImpl
 
         LOG.debug("Reducer Class : " + reducerClass);
         Reducer reducer = reducerClass.newInstance();
-        if(reducer == null){
+        if (reducer == null) {
             return false;
         }
 
@@ -113,7 +126,7 @@ public class ReducerTaskImpl
 		(2) Call reduce function successively for each key-value pair.
 		(3) Perform cleanup.
 		*/
-        Iterable iterable = new Iterable(key,job);
+        Iterable iterable = new Iterable(key, job);
         reducer.setup();
         reducer.reduce(new WritableImpl(key), iterable, reduceContext);
         reduceContext.close();
@@ -132,10 +145,20 @@ public class ReducerTaskImpl
         return complete;
     }
 
+    /**
+     * Set the service object.
+     *
+     * @param service A service object.
+     */
     public void setService(Service service) {
         this.service = service;
     }
 
+    /**
+     * Get the service object.
+     *
+     * @return The service object.
+     */
     public Service getService() {
         return service;
     }

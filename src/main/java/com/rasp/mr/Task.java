@@ -1,7 +1,7 @@
 /**
- * Author : Rahul Madhavan
+ * Author : Shivastuti Koul
  * File   : Task.java
- * Email  : rahulk@ccs.neu.edu
+ * Email  : koul.sh@husky.neu.edu
  * Created: Mar 23, 2015
  * Edited : Apr 9, 2015
  */
@@ -9,41 +9,41 @@
 package com.rasp.mr;
 
 /* Import list */
-import com.google.protobuf.ServiceException;
-import com.rasp.fs.InputSplit;
-import com.rasp.utils.autodiscovery.Service;
-
 import java.io.IOException;
+import com.rasp.fs.InputSplit;
+import com.google.protobuf.ServiceException;
+import com.rasp.utils.autodiscovery.Service;
 
 /**
  * Task represents a {@link Mapper} or {@link Reducer}
- * running for a single input split
+ * running for a single input split.
  *
  */
 public interface Task {
     /**
-     * returns the Job to which the task belongs
+     * Returns the Job to which the task belongs.
      *
      * @return {@link com.rasp.mr.Job}
      */
     Job getJob();
 
     /**
-     * returns the {@link com.rasp.fs.InputSplit}which represents the input for the task
+     * Returns the {@link com.rasp.fs.InputSplit}which represents
+     * the input for the task.
      *
-     * @return
+     * @return The input split.
      */
     InputSplit getTaskInputSplit();
 
     /**
-     * sets the InputSplit for the Task
+     * Sets the InputSplit for the Task.
      *
-     * @param inputSplit
+     * @param inputSplit The input split.
      */
     void setTaskInputSplit(InputSplit inputSplit);
 
     /**
-     * executes the task with the {@link com.rasp.fs.InputSplit} given from {@link Task#getTaskInputSplit}
+     * Executes the task with the {@link com.rasp.fs.InputSplit} given from {@link Task#getTaskInputSplit}.
      *
      * @return true if the task runs appropriately
      */
@@ -51,14 +51,38 @@ public interface Task {
             throws IllegalAccessException, InstantiationException,
             InterruptedException, IOException, ServiceException;
 
+    /**
+     * Get the task identifier.
+     *
+     * @return The task ID.
+     */
     String getTaskId();
 
+    /**
+     * Set the completion status to true.
+     */
     void complete();
 
+    /**
+     * Return the task completion status.
+     *
+     * @return The completion status.
+     */
     boolean isCompleted();
 
+    /**
+     * Set the job.
+     *
+     * @param job The job.
+     */
     void setJob(Job job);
 
+    /**
+     * Get the service object.
+     *
+     * @return The service object.
+     * @throws IOException
+     * @throws InterruptedException
+     */
     Service getService() throws IOException, InterruptedException;
 }
-/* End of Task.java */

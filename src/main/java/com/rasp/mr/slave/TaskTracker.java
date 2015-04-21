@@ -1,7 +1,7 @@
 /**
- * Author : Pulkit Jain / Asad Shahabuddin
+ * Author : Shivastuti Koul
  * File   : TaskTracker.java
- * Email  : asad808@ccs.neu.edu
+ * Email  : koul.sh@husky.neu.edu
  * Created: Apr 4, 2015
  * Edited : Apr 5, 2015
  */
@@ -9,26 +9,20 @@
 package com.rasp.mr.slave;
 
 /* Import list */
-import java.util.Map;
 import java.util.Queue;
-
-import com.rasp.mr.MapContext;
 import com.rasp.mr.Task;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class TaskTracker implements com.rasp.mr.TaskTracker{
+public class TaskTracker implements com.rasp.mr.TaskTracker {
     private Queue<Task> taskQueue = new LinkedBlockingQueue<>();
 
     @Override
-    public void submit(Task task){
+    public void submit(Task task) {
         taskQueue.add(task);
     }
 
     @Override
-    public Task nextTask()
-    {
+    public Task nextTask() {
         return taskQueue.poll();
     }
-
 }
-/* End of TaskTracker.java */

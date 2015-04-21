@@ -1,7 +1,7 @@
 /**
- * Author : Rahul Madhavan
+ * Author : Shivastuti Koul
  * File   : TaskTracker.java
- * Email  : rahulk@ccs.neu.edu
+ * Email  : koul.sh@husky.neu.edu
  * Created: Mar 23, 2015
  * Edited : Mar 24, 2015
  */
@@ -18,14 +18,14 @@ package com.rasp.mr;
 public interface TaskTracker
 {
     /**
-     * Submits task for execution
+     * Submits task for execution.
      *
      * @param {@link Task}
      */
     public void submit(Task task);
 
     /**
-     * returns the next task to be executed
+     * Returns the next task to be executed.
      *
      * @return {@link Task}
      */
