@@ -12,10 +12,23 @@ import java.util.Map;
  * Edited :
  */
 
+/**
+ * this class represents a factory for a type of Job
+ */
 public interface JobFactory{
 
+    /**
+     *  creates a job and sets the input file for the job as the given input file
+     *
+     * @param inputFile
+     * @return
+     */
     public Job createJob(String inputFile);
 
+    /**
+     *
+     * @return the name of the job factory
+     */
     public String getName();
 
 }

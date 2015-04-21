@@ -26,6 +26,12 @@ import com.googlecode.protobuf.pro.duplex.server.DuplexTcpServerPipelineFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * This class holds the code to initialize the protocol buffer server
+ *
+ * reference : https://code.google.com/p/protobuf-rpc-pro/wiki/GettingStarted
+ *
+ */
 public class ProtoServer {
 
     static final Logger LOG = LoggerFactory.getLogger(ProtoServer.class);
@@ -33,20 +39,33 @@ public class ProtoServer {
     public static void startServer(Service serviceConfig,
                                    BlockingService blockingService)
         throws UnknownHostException {
+
+
         InetSocketAddress inetSocketAddress = new InetSocketAddress(
                                                 InetAddress.getByName(
                                                 serviceConfig.getIp()),
                                                 serviceConfig.getPort());
-
         PeerInfo serverInfo = new PeerInfo(inetSocketAddress);
+
+        /**
+         * initialize thread pool executor
+         */
         RpcServerCallExecutor executor = new ThreadPoolCallExecutor(3, 10);
         DuplexTcpServerPipelineFactory serverFactory = new DuplexTcpServerPipelineFactory(serverInfo);
         serverFactory.setRpcServerCallExecutor(executor);
 
         ServerBootstrap bootstrap = new ServerBootstrap();
+
+        /**
+         * set executors for master and worker threads
+         */
         bootstrap.group(new NioEventLoopGroup(0,new RenamingThreadFactoryProxy("boss", Executors.defaultThreadFactory())),
                 new NioEventLoopGroup(0,new RenamingThreadFactoryProxy("worker", Executors.defaultThreadFactory()))
         );
+
+        /**
+         * set socket channel options
+         */
         bootstrap.channel(NioServerSocketChannel.class);
         bootstrap.childHandler(serverFactory);
         bootstrap.localAddress(serverInfo.getPort());
@@ -56,12 +75,9 @@ public class ProtoServer {
         bootstrap.childOption(ChannelOption.SO_SNDBUF, 1048576);
         bootstrap.option(ChannelOption.TCP_NODELAY, true);
 
-        /*
-        We give the server a blocking and non blocking (pong capable) Ping Service
+        /**
+         * register the given blocking service
          */
-        // BlockingService bPingService = TransferDataProtos.
-        //                                TransferService.
-        //                                newReflectiveBlockingService(new TransferBlockingService());
         serverFactory.getRpcServiceRegistry().registerService(false, blockingService);
 
         try {

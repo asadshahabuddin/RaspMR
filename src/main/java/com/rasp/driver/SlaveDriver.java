@@ -42,26 +42,41 @@ public class SlaveDriver
         DataNode dataServer = new DataNodeServerImpl(configuration);
         TaskNode taskServer = new TaskNodeServerImpl(configuration);
         ShuffleSlave shuffleSlave = new ShuffleSlaveImpl(configuration);
-
         TaskTracker taskTracker = new com.rasp.mr.slave.TaskTracker();
         TaskScheduler taskScheduler = new TaskScheduler(taskTracker,configuration);
         Thread taskSchedulerThread = new Thread(taskScheduler);
 
+
+        /**
+         * set the implementations for the various classes
+         */
         configuration.setDataNode(dataServer);
         configuration.setTaskNode(taskServer);
         configuration.setTaskTracker(taskTracker);
         configuration.setShuffleSlave(shuffleSlave);
 
+        /**
+         * initialize the task node
+         */
         SInputSplitProtos.DataTransferService.BlockingInterface dataTransferService
                 = new DataTransferBlockingService(configuration.getDataNode());
         STaskProtos.TaskService.BlockingInterface taskTransferService
                 = new TaskBlockingService(configuration.getTaskNode(),configuration);
 
-        BlockingService bs = SInputSplitProtos.DataTransferService.newReflectiveBlockingService(dataTransferService);
+        BlockingService ds = SInputSplitProtos.DataTransferService.newReflectiveBlockingService(dataTransferService);
         BlockingService ts = STaskProtos.TaskService.newReflectiveBlockingService(taskTransferService);
 
+        /**
+         * start the task scheduler
+         */
         taskSchedulerThread.start();
-        ProtoServer.startServer(configuration.getDataNode().getService(),bs);
+        /**
+         * start the data node
+         */
+        ProtoServer.startServer(configuration.getDataNode().getService(),ds);
+        /**
+         * start the task node
+         */
         ProtoServer.startServer(configuration.getTaskNode().getService(),ts);
     }
 }

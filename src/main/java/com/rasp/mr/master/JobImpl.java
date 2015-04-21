@@ -60,15 +60,6 @@ public class JobImpl implements Job {
         this.reducerClass = reducerClass;
     }
 
-    @Override
-    public void setPartitioner(Partitioner partitioner) {
-
-    }
-
-    @Override
-    public boolean execute() {
-        return false;
-    }
 
     private boolean isTaskComplete(boolean taskComplete, List<? extends Task> tasks){
     	if(!taskComplete){

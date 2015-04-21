@@ -25,6 +25,9 @@ import com.rasp.utils.autodiscovery.impl.DiscovererHazelCastImpl;
 import com.rasp.utils.autodiscovery.impl.HazelCastServicePublisher;
 import com.rasp.utils.protobuf.ProtoClient;
 
+/**
+ * base class for configurations
+ */
 public class Configuration {
     /* Constants */
     public static final int TASK_NODE_PORT = 9797;
@@ -45,6 +48,11 @@ public class Configuration {
         service = ServiceFactory.createService(serviceType,getLocalServiceAddress().getHostAddress(),portNo);
     }
 
+    /**
+     *
+     * @param service
+     * @return the task node for the given service
+     */
     public TaskNode getTaskNode(Service service) {
         if(service.getServiceType() == ServiceType.TASK_TRACKER){
             String key = service.getIp()+ ":" + service.getPort();
@@ -57,14 +65,26 @@ public class Configuration {
         }
     }
 
+    /**
+     * returns the {@link com.rasp.utils.autodiscovery.Discoverer}
+     * @return
+     */
     public Discoverer getDiscoverer() {
         return discoverer;
     }
 
+    /**
+     *
+     * @return the {@link java.net.InetAddress} for the machine
+     */
     public InetAddress getLocalServiceAddress() {
         return hz1.getCluster().getLocalMember().getSocketAddress().getAddress();
     }
 
+    /**
+     *
+     * @return the service for which the configuration is made
+     */
     public Service getService() {
         return service;
     }

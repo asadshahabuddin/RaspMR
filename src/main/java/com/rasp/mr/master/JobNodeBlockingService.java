@@ -9,15 +9,10 @@
 package com.rasp.mr.master;
 
 /* Import list */
-import com.rasp.config.MasterConfiguration;
-import com.rasp.fs.GroupingKeyProtos;
 import com.rasp.mr.JobNode;
 import com.google.protobuf.RpcController;
 import com.google.protobuf.ServiceException;
 import com.rasp.mr.STaskProtos;
-import com.rasp.utils.autodiscovery.Service;
-import com.rasp.utils.autodiscovery.ServiceFactory;
-import com.rasp.utils.autodiscovery.ServiceType;
 
 import java.util.HashMap;
 import java.util.List;

@@ -3,10 +3,15 @@ package com.rasp.shuffle;
 import com.rasp.utils.autodiscovery.Service;
 
 /**
- * Created by Sourabh on 4/7/2015.
- * Class to hold intermediate data while processing shuffle.
+ * Author : Sourabh Suman
+ * File   : IntermediateServiceWithFrequency.java
+ * Email  : sourabhs@ccs.neu.edu
+ * Created: 4/9/15
+ * Edited : 
+ * Description: Class to hold intermediate data while processing shuffle.
  * It stores machine name and a frequency count.
  */
+
 public class IntermediateServiceWithFrequency {
 
     private Service service;

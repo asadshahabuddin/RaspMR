@@ -13,9 +13,6 @@ package com.rasp.mr;
 /**
  * Mapper is a simplified version of Hadoop Map Reduce Mapper
  *
- *
- *
- *
  */
 public interface Mapper
 {
