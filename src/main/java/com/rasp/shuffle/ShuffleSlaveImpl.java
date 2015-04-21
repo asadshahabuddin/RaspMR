@@ -1,7 +1,5 @@
 package com.rasp.shuffle;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
@@ -12,11 +10,11 @@ import com.rasp.utils.autodiscovery.Service;
 import com.rasp.utils.file.FSHelpers;
 
 /**
- * Author : Sourabh Suman, Rahul Madhavan
- * File   : ReducerTask.java
- * Email  : rahulk@ccs.neu.edu
+ * Author : Sourabh Suman
+ * File   : ShuffleSlaveImpl.java
+ * Email  : sourabhs@ccs.neu.edu
  * Created: Mar 23, 2015
- * Edited : Mar 24, 2015
+ * Edited : Mar 24, 2015, Apr 11, 2015
  */
 
 public class ShuffleSlaveImpl implements ShuffleSlave {
@@ -59,7 +57,12 @@ public class ShuffleSlaveImpl implements ShuffleSlave {
     		files.remove(filename);
     	}
     }
-    
+
+    /**
+     * @param key
+     * @param service
+     * @return new filename
+     */
     private String getFileNameFromKeyService(String key, Service service){
     	return key + "_" + service.getIp().replace(".", "");
     }

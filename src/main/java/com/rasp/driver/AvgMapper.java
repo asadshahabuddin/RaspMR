@@ -8,22 +8,30 @@ import com.rasp.mr.slave.WritableImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Custom mapper implementation for calculating averages program
+ * Author : Sourabh Suman
+ * File   : AvgMapper.java
+ * Email  : sourabhs@ccs.neu.edu
+ * Created: 4/19/15
+ * Edited :
+ */
 public class AvgMapper implements Mapper{
 
     static final Logger LOG = LoggerFactory.getLogger(AvgMapper.class);
 
-	public void cleanup() {
-		// TODO Auto-generated method stub
+    @Override
+	public void cleanup() {		
 		
 	}
 
+	@Override
 	public void map(Long paramLong, String paramString,
 			MapContext paramMapContext) {
 		
 		String[] columns = paramString.split("\t");
 		try{
 			if (columns.length>=5) {
-				//int num = Integer.parseInt(columns[1]);
 				paramMapContext.write(new WritableImpl(columns[3]), new WritableImpl(columns[4]));
 			}
 		}catch(IOException e){
@@ -35,8 +43,8 @@ public class AvgMapper implements Mapper{
 		}
 	}
 
+	@Override
 	public void setup() {
-		// TODO Auto-generated method stub
 		
 	}
 }
