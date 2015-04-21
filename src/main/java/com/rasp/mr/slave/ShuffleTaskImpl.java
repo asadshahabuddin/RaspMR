@@ -1,7 +1,7 @@
 /**
- * Author : RSA
+ * Author : Shivastuti Koul
  * File   : ShuffleTaskImpl.java
- * Email  : rahulk@ccs.neu.edu
+ * Email  : koul.sh@husky.neu.edu
  * Created: Apr 9, 2015
  * Edited : Apr 12, 2015
  */
@@ -14,8 +14,8 @@ import java.io.IOException;
 import com.rasp.fs.InputSplit;
 import java.io.RandomAccessFile;
 import com.rasp.config.Configuration;
-import com.rasp.utils.autodiscovery.Service;
 import com.rasp.utils.file.FSHelpers;
+import com.rasp.utils.autodiscovery.Service;
 
 public class ShuffleTaskImpl implements ShuffleTask {
     /* Constant(s) */
@@ -29,11 +29,27 @@ public class ShuffleTaskImpl implements ShuffleTask {
     private boolean complete;
     private Configuration conf;
 
+    /**
+     * Constructor 1
+     * @param job
+     *            The job.
+     */
     public ShuffleTaskImpl(Job job) {
         taskId = UUID.randomUUID().toString();
         this.job = job;
     }
 
+    /**
+     * Constructor 2
+     * @param taskId
+     *            Task identifier.
+     * @param job
+     *            The job.
+     * @param service
+     *            Wrapper object containing the IP and port of a node.
+     * @param conf
+     *            Configuration object.
+     */
     public ShuffleTaskImpl(String taskId, Job job, Service service, Configuration conf) {
         this.taskId = taskId;
         this.service = service;

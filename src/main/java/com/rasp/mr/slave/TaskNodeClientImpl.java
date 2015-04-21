@@ -1,33 +1,39 @@
-package com.rasp.mr.slave;
-
-import com.google.protobuf.ByteString;
-import com.google.protobuf.RpcController;
-import com.google.protobuf.ServiceException;
-import com.googlecode.protobuf.pro.duplex.RpcClientChannel;
-import com.rasp.mr.*;
-import com.rasp.utils.protobuf.ProtoClient;
-import com.rasp.utils.autodiscovery.Service;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-
 /**
- * Author : rahulmadhavan, sourabhsuman
- * File   :
- * Email  : rahulk@ccs.neu.edu
+ * Author : Shivastuti Koul
+ * File   : TaskNodeClientImpl.java
+ * Email  : koul.sh@husky.neu.edu
  * Created: 4/4/15
  * Edited : 4/11/15
  */
-public class TaskNodeClientImpl implements TaskNode {
 
+package com.rasp.mr.slave;
+
+import com.rasp.mr.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.google.protobuf.ByteString;
+import com.google.protobuf.RpcController;
+import com.rasp.utils.protobuf.ProtoClient;
+import com.rasp.utils.autodiscovery.Service;
+import com.google.protobuf.ServiceException;
+import com.googlecode.protobuf.pro.duplex.RpcClientChannel;
+
+public class TaskNodeClientImpl implements TaskNode {
     static final Logger LOG = LoggerFactory.getLogger(TaskNodeClientImpl.class);
 
     private ProtoClient protoClient;
     private Service service;
-    STaskProtos.TaskService.BlockingInterface taskService;
+    private STaskProtos.TaskService.BlockingInterface taskService;
     private RpcController controller;
 
-    public TaskNodeClientImpl(ProtoClient protoClient,Service service) {
+    /**
+     * Constructor 1
+     * @param protoClient
+     *            Protocol Buffers network client object.
+     * @param service
+     *            Wrapper object containing the IP and port of a node.
+     */
+    public TaskNodeClientImpl(ProtoClient protoClient, Service service) {
         this.protoClient = protoClient;
         this.service = service;
         RpcClientChannel channel = protoClient.getConnection(service.getIp(),service.getPort());
@@ -37,7 +43,6 @@ public class TaskNodeClientImpl implements TaskNode {
 
     @Override
     public void sendTask(Task task) {
-
         STaskProtos.STask.Builder sTaskBuilder = STaskProtos.STask.newBuilder()
                 .setId(task.getTaskId())
                 .setJobId(task.getJob().getJobId());
@@ -63,7 +68,15 @@ public class TaskNodeClientImpl implements TaskNode {
         }
     }
 
-
+    /**
+     * Setup objects for transfer of data between nodes.
+     * @param key
+     *            The key.
+     * @param jobId
+     *            Job identifier.
+     * @param service
+     *            Wrapper object containing the IP and port of a node.
+     */
     public void initiateDataTransferForKey(String key, String jobId, Service service) {
         STaskProtos.STransferKeyData.SDataHost sDataHost = STaskProtos.STransferKeyData
                 .SDataHost
@@ -144,4 +157,3 @@ public class TaskNodeClientImpl implements TaskNode {
         return service;
     }
 }
-/* End of TaskNodeClientImpl.java */
