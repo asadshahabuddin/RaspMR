@@ -9,10 +9,9 @@
 package com.rasp.fs;
 
 /* Import list */
-import com.rasp.utils.file.FSHelpers;
-
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import com.rasp.utils.file.FSHelpers;
 
 public class RecordReaderImpl
     extends RecordReader {
@@ -56,20 +55,10 @@ public class RecordReaderImpl
     }
 
     @Override
-    public float getProgress()
-        throws IOException, InterruptedException {
-        // TODO
-        return 0;
-    }
-
-    @Override
     public void close()
         throws IOException {
         if(f != null) {
             f.close();
         }
     }
-    
-
 }
-/* End of RecordReader.java */

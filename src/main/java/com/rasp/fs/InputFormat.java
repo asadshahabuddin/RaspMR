@@ -8,7 +8,6 @@
 
 package com.rasp.fs;
 
-/* Import list */
 import java.util.List;
 import java.io.IOException;
 
@@ -33,8 +32,7 @@ import java.io.IOException;
  * </ol>
  * 
  * <p>
- * The default behavior of file-based {@link InputFormat}s, typically
- * sub-classes of {@link FileInputFormat}, is to split the input into
+ * The default behavior of file-based {@link InputFormat}s is to split the input into
  * <i>logical</i> {@link com.rasp.fs.InputSplit}s based on the total size, in bytes, of the
  * input files.
  * </p>
@@ -43,21 +41,28 @@ public abstract class InputFormat {
     private String inputFile;
 
     /**
-     * Set input file
+     * Set input file.
      * @param inputFile
+     *            The input file.
      */
     public void setInputFile(String inputFile) {
         this.inputFile = inputFile;
     }
     
     /**
-     * Get input file
+     * Get input file.
      * @return
+     *            The input file.
      */
     public String getInputFile() {
         return inputFile;
     }
 
+    /**
+     * Get a list of all splits.
+     * @return
+     *            The list of all splits.
+     */
     public abstract List<InputSplit> getSplits();
 
     /**
@@ -76,19 +81,4 @@ public abstract class InputFormat {
      */
     public abstract void createSplits()
         throws IOException, InterruptedException;
-
-    /**
-     * Create a record reader for a given split. The framework will call
-     * {@link RecordReader#initialize(InputSplit, com.rasp.mr.MapContext)} before
-     * the split is used.
-     * 
-     * @param split
-     *            the split to be read
-     * @return a new record reader
-     * @throws IOException
-     * @throws InterruptedException
-     */
-    public abstract RecordReader createRecordReader(InputSplit split)
-        throws IOException, InterruptedException;
 }
-/* End of InputFormat.java */

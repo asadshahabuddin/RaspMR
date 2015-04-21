@@ -8,7 +8,6 @@
 
 package com.rasp.fs;
 
-/* Import list */
 import java.io.IOException;
 
 /**
@@ -30,7 +29,7 @@ public interface InputSplit {
      * @throws InterruptedException
      */
     public abstract long getOffset()
-        throws IOException, InterruptedException;
+            throws IOException, InterruptedException;
 
     /**
      * Get the size of the split, so that the input splits can be sorted by size.
@@ -40,7 +39,7 @@ public interface InputSplit {
      * @throws InterruptedException
      */
     public abstract long getLength()
-        throws IOException, InterruptedException;
+            throws IOException, InterruptedException;
 
     /**
      * Get the node by name where the data for the split would be local.
@@ -51,8 +50,12 @@ public interface InputSplit {
      * @throws InterruptedException
      */
     public abstract String getLocation()
-        throws IOException, InterruptedException;
+            throws IOException, InterruptedException;
 
+    /**
+     * Get the split index.
+     *
+     * @return The split index.
+     */
     public int getIdx();
 }
-/* End of InputSplit.java */

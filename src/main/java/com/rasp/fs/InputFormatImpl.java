@@ -8,22 +8,21 @@
 
 package com.rasp.fs;
 
-/* Import list */
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.File;
 import java.util.List;
+import java.util.UUID;
+import org.slf4j.Logger;
 import java.util.ArrayList;
 import java.io.IOException;
+import org.slf4j.LoggerFactory;
 import java.io.RandomAccessFile;
-import java.util.UUID;
 
+/**
+ * Format the input file and get the appropriate splits.
+ */
 public class InputFormatImpl
     extends InputFormat {
-
     static final Logger LOG = LoggerFactory.getLogger(InputFormatImpl.class);
-
     /* Constant(s) */
     private static final int BUFFER_SIZE = 8192;
 
@@ -33,8 +32,9 @@ public class InputFormatImpl
     private int totalBytesRead;
     private int shift = 0;
     private String id;
+
     /**
-     * Default constructor
+     * Constructor 1.
      */
     public InputFormatImpl() {
         workerCount = 0;
@@ -43,8 +43,16 @@ public class InputFormatImpl
         shift = 0;
     }
 
+    /**
+     * Constructor 2.
+     *
+     * @param inputFile   The input file.
+     * @param workerCount Number of slave nodes.
+     * @throws InterruptedException
+     * @throws IOException
+     */
     public InputFormatImpl(String inputFile, int workerCount)
-        throws InterruptedException, IOException {
+            throws InterruptedException, IOException {
         super.setInputFile(inputFile);
         id = UUID.randomUUID().toString();
         this.workerCount = workerCount;
@@ -64,6 +72,11 @@ public class InputFormatImpl
         this.workerCount = workerCount;
     }
 
+    /**
+     * Get the number of worker nodes.
+     *
+     * @return The number of worker nodes.
+     */
     public int getWorkerCount() {
         return workerCount;
     }
@@ -73,7 +86,7 @@ public class InputFormatImpl
      *
      * @param workerCount Number of worker nodes connected to the
      *                    server instance.
-     * @return
+     * @return The initial block size for each split.
      */
     public long blockSize(int workerCount) {
         File file = new File(getInputFile());
@@ -89,7 +102,7 @@ public class InputFormatImpl
      * @param blockSize Virtual block size based on input file's
      *                  size and the number of worker nodes.
      * @param workerIdx Worker node index.
-     * @return
+     * @return The starting offset for worker with the specified index.
      */
     public long offset(long blockSize, int workerIdx) {
         return (blockSize * workerIdx);
@@ -97,11 +110,11 @@ public class InputFormatImpl
 
     @Override
     public void createSplits()
-        throws IOException, InterruptedException {
+            throws IOException, InterruptedException {
         splits = new ArrayList<InputSplit>();
         long l = blockSize(workerCount);
         for (int i = 0; i < workerCount; i++) {
-            splits.add(new InputSplitImpl(i, offset(l, i), l, "",id));
+            splits.add(new InputSplitImpl(i, offset(l, i), l, "", id));
         }
     }
 
@@ -110,21 +123,14 @@ public class InputFormatImpl
         return splits;
     }
 
-    @Override
-    public RecordReader createRecordReader(InputSplit split)
-        throws IOException, InterruptedException {
-        // TODO
-        return null;
-    }
-
     /**
      * Write an input split to the specified location.
      *
      * @param dataNode The location to write the split at.
-     * @return
+     * @return true iff the split was successfully created and sent across.
      */
     public boolean split(int idx, DataNode dataNode)
-        throws InterruptedException, IOException {
+            throws InterruptedException, IOException {
         if (splitIdx >= workerCount) {
             return false;
         }
@@ -207,16 +213,16 @@ public class InputFormatImpl
                 ((InputSplitImpl) nextSplit).setOffset(nextSplit.getOffset() + shift);
             }
         } catch (InterruptedException intre) {
-            LOG.error("",intre);
+            LOG.error("", intre);
         } catch (IOException ioe) {
-            LOG.error("",ioe);
+            LOG.error("", ioe);
         } finally {
             if (f != null) {
                 try {
                     f.close();
                     dataNode.closeInputSplit();
                 } catch (IOException ioe) {
-                    LOG.error("",ioe);
+                    LOG.error("", ioe);
                 }
             }
         }
@@ -244,4 +250,3 @@ public class InputFormatImpl
     }
     */
 }
-/* End of InputFormatImpl.java */
