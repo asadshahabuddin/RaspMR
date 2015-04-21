@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+
+import com.googlecode.protobuf.pro.duplex.logging.NullLogger;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -40,6 +42,8 @@ public class ProtoClient {
 
     public ProtoClient() {
         clientFactory = new DuplexTcpClientPipelineFactory();
+        NullLogger logger = new NullLogger();
+        clientFactory.setRpcLogger(logger);
         bootstrap = new Bootstrap();
         bootstrap.group(new NioEventLoopGroup());
         bootstrap.handler(clientFactory);

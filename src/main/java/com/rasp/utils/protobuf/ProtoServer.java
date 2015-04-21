@@ -12,6 +12,8 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 import java.util.concurrent.Executors;
+
+import com.googlecode.protobuf.pro.duplex.logging.NullLogger;
 import io.netty.channel.ChannelOption;
 import io.netty.bootstrap.ServerBootstrap;
 import com.google.protobuf.BlockingService;
@@ -53,6 +55,9 @@ public class ProtoServer {
         RpcServerCallExecutor executor = new ThreadPoolCallExecutor(3, 10);
         DuplexTcpServerPipelineFactory serverFactory = new DuplexTcpServerPipelineFactory(serverInfo);
         serverFactory.setRpcServerCallExecutor(executor);
+
+        NullLogger logger = new NullLogger();
+        serverFactory.setLogger(logger);
 
         ServerBootstrap bootstrap = new ServerBootstrap();
 
