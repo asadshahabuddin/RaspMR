@@ -1,17 +1,15 @@
 /**
- * Author : Pulkit Jain
- * File   : TaskTracker.java
- * Email  : 
+ * Author : Shivastuti Koul
+ * File   : TaskScheduler.java
+ * Email  : koul.sh@husky.neu.edu
  * Created: Apr 4, 2015
  * Edited : Apr 5, 2015
  */
 
 package com.rasp.mr;
 
-/* Import list */
-import com.google.protobuf.ServiceException;
-
 import java.io.IOException;
+import com.google.protobuf.ServiceException;
 
 public interface TaskScheduler
 {

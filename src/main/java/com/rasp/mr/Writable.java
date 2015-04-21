@@ -1,16 +1,14 @@
 /**
- * Author : Pulkit Jain
+ * Author : Asad Shahabuddin
  * File   : Writable.java
- * Email  : jain.pul@husky.neu.edu
+ * Email  : asad808@husky.neu.edu
  * Created: Apr 6, 2015
  * Edited : Apr 6, 2015
  */
 
 package com.rasp.mr;
 
-
 public interface Writable {
-
     /**
      * Get the writable object.
      *
@@ -25,4 +23,3 @@ public interface Writable {
      */
     public int getType();
 }
-/* End of Writable.java */
