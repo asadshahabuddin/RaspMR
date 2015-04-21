@@ -31,8 +31,8 @@ public class ShuffleTaskImpl implements ShuffleTask {
 
     /**
      * Constructor 1
-     * @param job
-     *            The job.
+     *
+     * @param job The job.
      */
     public ShuffleTaskImpl(Job job) {
         taskId = UUID.randomUUID().toString();
@@ -41,14 +41,11 @@ public class ShuffleTaskImpl implements ShuffleTask {
 
     /**
      * Constructor 2
-     * @param taskId
-     *            Task identifier.
-     * @param job
-     *            The job.
-     * @param service
-     *            Wrapper object containing the IP and port of a node.
-     * @param conf
-     *            Configuration object.
+     *
+     * @param taskId  Task identifier.
+     * @param job     The job.
+     * @param service Wrapper object containing the IP and port of a node.
+     * @param conf    Configuration object.
      */
     public ShuffleTaskImpl(String taskId, Job job, Service service, Configuration conf) {
         this.taskId = taskId;
@@ -74,15 +71,15 @@ public class ShuffleTaskImpl implements ShuffleTask {
 
     @Override
     public boolean execute()
-        throws IllegalAccessException, InstantiationException,
-               InterruptedException, IOException {
+            throws IllegalAccessException, InstantiationException,
+            InterruptedException, IOException {
         TaskNode node = conf.getTaskNode(dataTargetService);
         /* Check if the node exists and is set */
-        if(node == null) {
+        if (node == null) {
             return false;
         }
 
-        RandomAccessFile f = FSHelpers.openFile(job,key + "_mout", "r");
+        RandomAccessFile f = FSHelpers.openFile(job, key + "_mout", "r");
         long flen = f.length();    /* Length of file */
         /* Check if the file has some content */
         if (flen == 0) {
@@ -96,7 +93,7 @@ public class ShuffleTaskImpl implements ShuffleTask {
         */
         int bytesRead = 0;
         byte[] b = null;
-        node.initiateDataTransferForKey(key, job.getJobId(),dataTargetService);
+        node.initiateDataTransferForKey(key, job.getJobId(), dataTargetService);
 
         while (bytesRead < flen) {
             int size = BUFFER_SIZE;

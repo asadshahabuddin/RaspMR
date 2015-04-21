@@ -1,7 +1,7 @@
 /**
- * Author : Pulkit Jain
+ * Author : Asad Shahabuddin
  * File   : WritableImpl.java
- * Email  : jain.pul@husky.neu.edu
+ * Email  : asad808@ccs.neu.edu
  * Created: Apr 6, 2015
  * Edited : Apr 6, 2015
  */
@@ -9,14 +9,10 @@
 package com.rasp.mr.slave;
 
 /* Import list */
-
 import com.rasp.mr.Writable;
-
 import java.io.Serializable;
 
-
 public class WritableImpl implements Serializable, Writable {
-
     /* Serial ID and constants */
     private static final long serialVersionUID = 1L;
     public static final int TYPE_NULL = 0;
@@ -30,34 +26,41 @@ public class WritableImpl implements Serializable, Writable {
     private Object obj;
     private Integer type;
 
-
     /**
-     * Constructor
+     * Constructor 1
      *
-     * @param obj
+     * @param obj The object.
      */
     public WritableImpl(Object obj) {
-
         this.obj = obj;
         type = TYPE_NULL;
     }
 
-
     /**
-     * TODO - Write a proper description.
+     * Constructor 2
      *
-     * @param obj
-     * @param type
+     * @param obj  The object.
+     * @param type The object type.
      */
     public WritableImpl(Object obj, Integer type) {
         this.obj = obj;
         this.type = type;
     }
 
+    /**
+     * Get the object.
+     *
+     * @return The object.
+     */
     public Object getObj() {
         return obj;
     }
 
+    /**
+     * Get the object type.
+     *
+     * @return The object type.
+     */
     public int getType() {
         if (obj == null) {
             return TYPE_NULL;
@@ -87,6 +90,4 @@ public class WritableImpl implements Serializable, Writable {
         }
         return type;
     }
-
 }
-/* End of WritableImpl.java */

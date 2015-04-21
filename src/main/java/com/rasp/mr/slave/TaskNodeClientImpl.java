@@ -28,15 +28,14 @@ public class TaskNodeClientImpl implements TaskNode {
 
     /**
      * Constructor 1
-     * @param protoClient
-     *            Protocol Buffers network client object.
-     * @param service
-     *            Wrapper object containing the IP and port of a node.
+     *
+     * @param protoClient Protocol Buffers network client object.
+     * @param service     Wrapper object containing the IP and port of a node.
      */
     public TaskNodeClientImpl(ProtoClient protoClient, Service service) {
         this.protoClient = protoClient;
         this.service = service;
-        RpcClientChannel channel = protoClient.getConnection(service.getIp(),service.getPort());
+        RpcClientChannel channel = protoClient.getConnection(service.getIp(), service.getPort());
         taskService = STaskProtos.TaskService.newBlockingStub(channel);
         controller = channel.newRpcController();
     }
@@ -47,11 +46,11 @@ public class TaskNodeClientImpl implements TaskNode {
                 .setId(task.getTaskId())
                 .setJobId(task.getJob().getJobId());
 
-        if(task instanceof MapperTask){
+        if (task instanceof MapperTask) {
             sTaskBuilder.setTaskType(STaskProtos.STask.STaskType.MAPPER);
             sTaskBuilder.setClassName(((MapperTask) task).getMapperClass().toString());
             sTaskBuilder.setInputSplitId(((MapperTask) task).getTaskInputSplit().getIdx());
-        } else if(task instanceof ShuffleTask){
+        } else if (task instanceof ShuffleTask) {
             sTaskBuilder.setTaskType(STaskProtos.STask.STaskType.SHUFFLE);
             sTaskBuilder.setKey(((ShuffleTask) task).getKey());
             sTaskBuilder.setIp(((ShuffleTask) task).getDataTargetService().getIp());
@@ -62,20 +61,18 @@ public class TaskNodeClientImpl implements TaskNode {
         }
 
         try {
-            taskService.sendTask(controller,sTaskBuilder.build());
+            taskService.sendTask(controller, sTaskBuilder.build());
         } catch (ServiceException e) {
-            LOG.error("",e);
+            LOG.error("", e);
         }
     }
 
     /**
      * Setup objects for transfer of data between nodes.
-     * @param key
-     *            The key.
-     * @param jobId
-     *            Job identifier.
-     * @param service
-     *            Wrapper object containing the IP and port of a node.
+     *
+     * @param key     The key.
+     * @param jobId   Job identifier.
+     * @param service Wrapper object containing the IP and port of a node.
      */
     public void initiateDataTransferForKey(String key, String jobId, Service service) {
         STaskProtos.STransferKeyData.SDataHost sDataHost = STaskProtos.STransferKeyData
@@ -93,13 +90,13 @@ public class TaskNodeClientImpl implements TaskNode {
         try {
             taskService.initiateTransferDataForKey(controller, sTransferKeyData);
         } catch (ServiceException e) {
-            LOG.error("",e);
+            LOG.error("", e);
         }
 
     }
 
     @Override
-    public void transferDataForKey(byte[] data, String jobId, String key,Service service) {
+    public void transferDataForKey(byte[] data, String jobId, String key, Service service) {
         STaskProtos.STransferKeyData.SDataHost sDataHost = STaskProtos.STransferKeyData
                 .SDataHost
                 .newBuilder()
@@ -117,7 +114,7 @@ public class TaskNodeClientImpl implements TaskNode {
         try {
             taskService.transferDataForKey(controller, sTransferKeyData);
         } catch (ServiceException e) {
-            LOG.error("",e);
+            LOG.error("", e);
         }
 
     }
@@ -139,7 +136,7 @@ public class TaskNodeClientImpl implements TaskNode {
         try {
             taskService.terminateTransferDataForKey(controller, sTransferKeyData);
         } catch (ServiceException e) {
-            LOG.error("",e);
+            LOG.error("", e);
         }
     }
 

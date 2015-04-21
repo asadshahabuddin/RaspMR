@@ -34,10 +34,9 @@ public class TaskBlockingService
 
     /**
      * Constructor 1
-     * @param taskNode
-     *            The node where a task is to be executed.
-     * @param slaveConfiguration
-     *            Configuration object.
+     *
+     * @param taskNode           The node where a task is to be executed.
+     * @param slaveConfiguration Configuration object.
      */
     public TaskBlockingService(TaskNode taskNode, SlaveConfiguration slaveConfiguration) {
         this.taskNode = taskNode;
@@ -60,10 +59,9 @@ public class TaskBlockingService
 
     /**
      * Converts a sTask object to a Task object.
-     * @param sTask
-     *            The source Protocol Buffers object.
-     * @return
-     *            The target Java object.
+     *
+     * @param sTask The source Protocol Buffers object.
+     * @return The target Java object.
      * @throws IOException
      */
     private Task sTaskToTask(STaskProtos.STask sTask) throws IOException {
