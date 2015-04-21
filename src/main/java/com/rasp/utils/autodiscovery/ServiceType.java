@@ -1,7 +1,7 @@
 /**
  * Author : Pulkit Jain
  * File   : ServiceType.java
- * Email  : puljain@ccs.neu.edu
+ * Email  : jain.pul@husky.neu.edu
  * Created: Mar 30, 2015
  * Edited : Mar 30, 2015
  */

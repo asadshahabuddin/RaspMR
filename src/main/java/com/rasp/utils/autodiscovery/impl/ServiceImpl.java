@@ -1,7 +1,7 @@
 /**
- * Author : Rahul Madhavan
+ * Author : Pulkit Jain
  * File   : ServiceImpl.java
- * Email  : rahulk@ccs.neu.edu
+ * Email  : jain.pul@husky.neu.edu
  * Created: Mar 30, 2015
  * Edited : Apr 8, 2015
  */

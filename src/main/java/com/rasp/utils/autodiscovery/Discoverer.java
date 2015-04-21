@@ -1,7 +1,7 @@
 /**
  * Author : Pulkit Jain
  * File   : Discoverer.java
- * Email  : pulj@ccs.neu.edu
+ * Email  : jain.pul@husky.neu.edu
  * Created: Mar 30, 2015
  * Edited : Apr 8, 2015
  */
