@@ -1,5 +1,6 @@
 <configuration>
 
+    <logger name="c.r" level="WARN"/>
     <logger name="io.netty" level="WARN"/>
 
 
@@ -11,6 +12,17 @@
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
+
+    <appender name="FILE-APP" class="ch.qos.logback.core.FileAppender">
+        <file>logs/app.log</file>
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
 
     <appender name="FILE-HZ" class="ch.qos.logback.core.FileAppender">
         <file>logs/rasp-discovery.log</file>
@@ -29,11 +41,16 @@
         </encoder>
     </appender>
 
+    <logger name="com.rasp" level="info">
+        <appender-ref ref="FILE-APP" />
+    </logger>
+
+
     <logger name="com.hazelcast" level="info">
         <appender-ref ref="FILE-HZ" />
     </logger>
 
-    <root level="info">
-        <appender-ref ref="FILE" />
+    <root level="warn">
+        <!--  <appender-ref ref="FILE" /> -->
     </root>
 </configuration>
