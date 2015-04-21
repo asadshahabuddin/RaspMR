@@ -29,7 +29,6 @@ public interface MapperTask extends Task
      */
     Class<? extends Mapper> getMapperClass();
 
-
     public MapContext getMapContext();
 
     public void setMapContext(MapContext mapContext);

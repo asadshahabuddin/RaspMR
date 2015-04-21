@@ -44,6 +44,10 @@ public class SlaveConfiguration extends Configuration {
     }
 
 
+    /**
+     *
+     * @return the job node on the network
+     */
     public JobNode getJobNode() {
         if(jobNode == null){
             List<Service> services=  this.getDiscoverer().getServices(ServiceType.JOB_TRACKER);
@@ -62,7 +66,6 @@ public class SlaveConfiguration extends Configuration {
     public void setDataNode(DataNode dataNode) {
         this.dataNode = dataNode;
     }
-
     public DataNode getDataNode() {
         return dataNode;
     }
@@ -70,7 +73,6 @@ public class SlaveConfiguration extends Configuration {
     public TaskNode getTaskNode() {
         return taskNode;
     }
-
     public void setTaskNode(TaskNode taskNode) {
         this.taskNode = taskNode;
     }
@@ -78,7 +80,6 @@ public class SlaveConfiguration extends Configuration {
     public void addInputSplit(InputSplitImpl inputSplit) {
         inputSplitMap.put(inputSplit.getIdx(),inputSplit);
     }
-
     public InputSplitImpl getInputSplit(int idx) {
         return inputSplitMap.get(idx);
     }
@@ -86,7 +87,6 @@ public class SlaveConfiguration extends Configuration {
     public TaskTracker getTaskTracker() {
         return taskTracker;
     }
-
     public void setTaskTracker(TaskTracker taskTracker) {
         this.taskTracker = taskTracker;
     }
@@ -94,7 +94,6 @@ public class SlaveConfiguration extends Configuration {
     public ShuffleSlave getShuffleSlave() {
         return shuffleSlave;
     }
-
     public void setShuffleSlave(ShuffleSlave shuffleSlave) {
         this.shuffleSlave = shuffleSlave;
     }

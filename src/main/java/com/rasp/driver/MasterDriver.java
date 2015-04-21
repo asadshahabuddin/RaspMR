@@ -10,6 +10,7 @@ package com.rasp.driver;
 
 /* Import list */
 import com.google.protobuf.BlockingService;
+import com.rasp.config.Configuration;
 import com.rasp.fs.DataNode;
 import com.rasp.fs.SInputSplitProtos;
 import com.rasp.fs.slave.DataNodeServerImpl;
@@ -32,37 +33,59 @@ import com.rasp.utils.protobuf.ProtoServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * represents the driver class (with the main method )for the master node
+ *
+ */
 public class MasterDriver {
     /* Constant(s) */
 
     static final Logger LOG = LoggerFactory.getLogger(MasterDriver.class);
     
     public static void main(String[] args) throws IOException {
-        MasterConfiguration configuration = new MasterConfiguration(9292, ServiceType.JOB_TRACKER);
+
+        
+        MasterConfiguration configuration = new MasterConfiguration(Configuration.JOB_NODE_PORT, ServiceType.JOB_TRACKER);
         DataMaster dataMaster = new DataMasterImpl(configuration);
         JobTracker jobTracker = new JobTrackerImpl(configuration);
         JobScheduler jobScheduler = new JobScheduler(jobTracker);
         JobNode jobServer = new JobNodeServerImpl(configuration);
 
 
+        /**
+         * set the implementations for the various classes
+         */
         configuration.setDataMaster(dataMaster);
         configuration.setJobTracker(jobTracker);
         configuration.setJobScheduler(jobScheduler);
         configuration.setJobServer(jobServer);
         configuration.setCleanup(false);
 
+
+        /**
+         * initialize and start the job scheduler
+         */
         Thread jobSchedulerThread = new Thread(jobScheduler);
         jobSchedulerThread.start();
 
-
+        /**
+         * initialize and start the job JobNode
+         */
         STaskProtos.JobService.BlockingInterface jobService
                 = new JobNodeBlockingService(configuration.getJobServer());
         BlockingService js = STaskProtos.JobService.newReflectiveBlockingService(jobService);
         ProtoServer.startServer(configuration.getJobServer().getService(), js);
 
+
+        /**
+         * register the job factories
+         */
         JobFactoryRegistry.register(TestJobFactory.class);
         JobFactoryRegistry.register(AvgJobFactory.class);
 
+        /**
+         * scan user input
+         */
         while(true) {
             Scanner scanner = new Scanner(System.in);
             String input = scanner.nextLine();

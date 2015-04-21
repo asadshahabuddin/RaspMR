@@ -22,6 +22,13 @@ import com.googlecode.protobuf.pro.duplex.client.DuplexTcpClientPipelineFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * This class holds the tcp client connections for different machines
+ * using protocol buffer on the network
+ *
+ * reference : https://code.google.com/p/protobuf-rpc-pro/wiki/GettingStarted
+ *
+ */
 public class ProtoClient {
 
     static final Logger LOG = LoggerFactory.getLogger(ProtoClient.class);
@@ -30,11 +37,15 @@ public class ProtoClient {
     private Bootstrap bootstrap;
     private HashMap<String,RpcClientChannel> channelMap;
 
+
     public ProtoClient() {
         clientFactory = new DuplexTcpClientPipelineFactory();
         bootstrap = new Bootstrap();
         bootstrap.group(new NioEventLoopGroup());
         bootstrap.handler(clientFactory);
+        /**
+         * set socket channel options
+         */
         bootstrap.channel(NioSocketChannel.class);
         bootstrap.option(ChannelOption.TCP_NODELAY, true);
         bootstrap.option(ChannelOption.CONNECT_TIMEOUT_MILLIS,10000);
@@ -43,6 +54,12 @@ public class ProtoClient {
         channelMap = new HashMap<>();
     }
 
+    /**
+     *
+     * @param ip
+     * @param port
+     * @return the rpc connection for the given string and port
+     */
     public RpcClientChannel getConnection(String ip, int port) {
         String key = ip + ":" + port;
         if (!channelMap.containsKey(key)) {
@@ -58,23 +75,6 @@ public class ProtoClient {
         return channelMap.get(key);
     }
 
-    /*
-    public void send(String ip, int port, String message) {
-        RpcClientChannel channel = null;
-        try {
-            channel = getConnection(ip,port);
-            SInputSplitProtos.DataTransferService.BlockingInterface transferService = SInputSplitProtos.DataTransferService.newBlockingStub(channel);
-            RpcController controller = channel.newRpcController();
-            SInputSplitProtos.TransferData request = SInputSplitProtos.TransferData.newBuilder().setData(message).build();
-            SInputSplitProtos.TransferResponse response = transferService.ping(controller, request);
-        } catch (ServiceException e) {
-            channelMap.remove(ip);
-        } finally{
-            if(null != channel)
-                channel.close();
-        }
-    }
-    */
 }
 /* End of ProtoClient.java */
 

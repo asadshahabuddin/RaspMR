@@ -16,12 +16,13 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * <code>JobTracker</code>  is responsible for maintaining queue of jobs
- * and executing jobs in specified order. Executing a job includes, splitting the job into
- * multiple tasks and submitting task to {@link TaskTracker}. The <code>JobTracker</code> is responsible for
- * creating and executing the tasks of a job in the required sequence and keeping
- * track of the progress of the job
- *
+ * <code>JobTracker</code>  is responsible for managing the
+ * lifecycle of the jobs that are submitted to it.
+ * the job tracker uses the
+ * {@link com.rasp.mr.MapperMaster},
+ * {@link com.rasp.shuffle.ShuffleMaster}
+ * {@link com.rasp.mr.ReducerMaster}
+ * to manage the life cycle of the job in its respective phases
  *
  */
 public interface JobTracker
@@ -33,13 +34,13 @@ public interface JobTracker
     void submit(Job job);
 
     /**
-     * Returns the next task to be executed.
+     * Returns the next job to be executed.
      * @return {@link Job}
      */
     Job nextJob();
 
     /**
-     * Send the task to a worker node for execution. 
+     * Send the task to a slave node for execution.
      * @param task
      *            The task to execute on a worker node.
      * @throws IOException
@@ -48,11 +49,27 @@ public interface JobTracker
     void sendTask(Task task) throws IOException, InterruptedException;
 
 
+    /**
+     * @return the {@link com.rasp.mr.MapperMaster} for the job tracker
+     */
     MapperMaster getMapperMaster();
 
+    /**
+     * @return the {@link com.rasp.shuffle.ShuffleMaster} for the job tracker
+     */
     ShuffleMaster getShuffleMaster();
 
+    /**
+     * @return the {@link com.rasp.mr.ReducerMaster} for the job tracker
+     */
     ReducerMaster getReducerMaster();
 
+    /**
+     * begins the execution of the given job
+     *
+     * @param job
+     * @throws IOException
+     * @throws InterruptedException
+     */
     void execute(Job job) throws IOException, InterruptedException;
 }

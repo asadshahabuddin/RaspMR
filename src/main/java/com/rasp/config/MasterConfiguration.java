@@ -39,6 +39,11 @@ public class MasterConfiguration extends Configuration {
         dataNodeMap = new HashMap<>();
     }
 
+    /**
+     *
+     * @param service
+     * @return the {@link com.rasp.fs.DataNode for the given service}
+     */
     public DataNode getDataNode(Service service) {
         if(service.getServiceType() == ServiceType.TASK_TRACKER){
             String key = service.getIp()+ ":" + service.getPort();
@@ -55,7 +60,6 @@ public class MasterConfiguration extends Configuration {
     public DataMaster getDataMaster() {
         return dataMaster;
     }
-
     public void setDataMaster(DataMaster dataMaster) {
         this.dataMaster = dataMaster;
     }
@@ -63,7 +67,6 @@ public class MasterConfiguration extends Configuration {
     public JobTracker getJobTracker() {
         return jobTracker;
     }
-
     public void setJobTracker(JobTracker jobTracker) {
         this.jobTracker = jobTracker;
     }
@@ -71,7 +74,6 @@ public class MasterConfiguration extends Configuration {
     public JobScheduler getJobScheduler() {
         return jobScheduler;
     }
-
     public void setJobScheduler(JobScheduler jobScheduler) {
         this.jobScheduler = jobScheduler;
     }
@@ -79,7 +81,6 @@ public class MasterConfiguration extends Configuration {
     public JobNode getJobServer() {
         return jobServer;
     }
-
     public void setJobServer(JobNode jobServer) {
         this.jobServer = jobServer;
     }
@@ -87,7 +88,6 @@ public class MasterConfiguration extends Configuration {
     public void setCleanup(boolean cleanup) {
         this.cleanup = cleanup;
     }
-
     public boolean isCleanup() {
         return cleanup;
     }

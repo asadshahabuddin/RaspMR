@@ -36,7 +36,7 @@ public class MapperMasterImpl  implements MapperMaster{
     {
         List<MapperTask> taskList = new ArrayList<>();
         InputFormatImpl inputFormat = configuration.getDataMaster().getInputFormat(job.getInputPath());
-        LOG.info("Input Splits count  "+ inputFormat.getSplits().size());
+        LOG.info("Input Splits count  " + inputFormat.getSplits().size());
 
         for(InputSplit inputSplit : inputFormat.getSplits()){
 
@@ -57,15 +57,15 @@ public class MapperMasterImpl  implements MapperMaster{
 
         task.complete();
         for (String key :keyCount.keySet()){
-            LOG.debug("MAP ::    key   ::"+key+"::    Value   ::"+keyCount.get(key));
+            LOG.debug("MAP ::    key   ::" + key + "::    Value   ::" + keyCount.get(key));
         }
         task.getMapContext().setKeyCountMap(keyCount);
-        checkMapComplete(job);
+        whenMapComplete(job);
 
 
     }
 
-    public void checkMapComplete(Job job) {
+    public void whenMapComplete(Job job) {
         if(job.isMapComplete()){
             configuration.getJobTracker().submit(job);
         }
@@ -80,7 +80,7 @@ public class MapperMasterImpl  implements MapperMaster{
             } catch (IOException e) {
                 LOG.error("",e);
             } catch (InterruptedException e) {
-                LOG.error("",e);
+                LOG.error("", e);
             }
         }
         return serviceMap.values();

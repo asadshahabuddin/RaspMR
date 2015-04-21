@@ -10,10 +10,8 @@
 
 package com.rasp.mr;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
-import com.google.protobuf.ServiceException;
+import java.io.IOException;
 import com.rasp.utils.autodiscovery.Service;
 
 public interface TaskNode {

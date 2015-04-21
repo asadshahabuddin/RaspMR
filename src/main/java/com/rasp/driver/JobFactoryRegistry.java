@@ -14,16 +14,35 @@ import java.util.Map;
  * Created: 4/16/15
  * Edited :
  */
+
+/**
+ * this class maintains the mapping of {@link com.rasp.driver.JobFactory names}
+ * to {@link com.rasp.driver.JobFactory}
+ *
+ */
 public class JobFactoryRegistry {
 
     static final Logger LOG = LoggerFactory.getLogger(JobFactoryRegistry.class);
 
     static Map<String,JobFactory> jobFactoryMap = new HashMap<>();
 
+    /**
+     *  creates a job of the given type with the given input file set in the job as input
+     *
+     * @param jobType
+     * @param inputFile
+     * @return
+     */
     public static Job createJob(String jobType,String inputFile){
         return jobFactoryMap.get(jobType).createJob(inputFile);
     }
 
+    /**
+     * registers a {@link com.rasp.driver.JobFactory} which is identified
+     * by its name {@link JobFactory#getName()}
+     *
+     * @param jobFactoryClass
+     */
     public static void register(Class<? extends JobFactory> jobFactoryClass){
         try {
             JobFactory jobFactory = jobFactoryClass.newInstance();

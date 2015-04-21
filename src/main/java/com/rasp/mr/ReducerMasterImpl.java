@@ -51,7 +51,7 @@ public class ReducerMasterImpl implements ReducerMaster{
         Job job = task.getJob();
         task.complete();
         LOG.info("Reduce Task Completed : " + taskId);
-        checkReduceComplete(job);
+        whenReduceComplete(job);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class ReducerMasterImpl implements ReducerMaster{
     }
 
     @Override
-    public void checkReduceComplete(Job job) {
+    public void whenReduceComplete(Job job) {
         if(job.isReduceComplete()){
             configuration.getJobTracker().submit(job);
         }
