@@ -1,14 +1,13 @@
 /**
- * Author : Rahul Madhavan / Asad Shahabuddin
+ * Author : Asad Shahabuddin
  * File   : DataMasterImpl.java
- * Email  : rahulk@ccs.neu.edu / asad808@ccs.neu.edu
+ * Email  : asad808@ccs.neu.edu
  * Created: Apr 2, 2015
  * Edited : Apr 2, 2015
  */
 
 package com.rasp.fs.master;
 
-/* Import list */
 import java.util.Map;
 import java.util.List;
 import java.util.HashMap;
@@ -26,6 +25,11 @@ public class DataMasterImpl implements DataMaster {
     MasterConfiguration configuration;
     Map<String, InputFormatMetaData> inputFileMap;
 
+    /**
+     * Constructor.
+     *
+     * @param configuration The configuration object.
+     */
     public DataMasterImpl(MasterConfiguration configuration) {
         this.configuration = configuration;
         this.inputFileMap = new HashMap<>();
@@ -33,25 +37,26 @@ public class DataMasterImpl implements DataMaster {
 
     @Override
     public InputFormatImpl createInputFormat(String inputFile, int workerCount)
-        throws InterruptedException, IOException {
+            throws InterruptedException, IOException {
         return new InputFormatImpl(inputFile, workerCount);
     }
 
     /**
      * Transmit a split to the target location.
+     *
      * @param formatMetaData The input format.
      * @param dataNode       Location to write the split at.z
      * @return Returns true iff the current split is written
      * successfully at the specified location.
      */
     private void transmit(InputFormatMetaData formatMetaData, DataNode dataNode)
-        throws IOException, InterruptedException {
+            throws IOException, InterruptedException {
         formatMetaData.getInputFormat().split(formatMetaData.nextIdx(), dataNode);
     }
 
     @Override
     public void splitAndSend(String inputFile)
-        throws IOException, InterruptedException {
+            throws IOException, InterruptedException {
         List<Service> services = configuration.getDiscoverer().getServices(ServiceType.TASK_TRACKER);
         if (!inputFileMap.containsKey(inputFile)) {
             InputFormatImpl inputFormat = createInputFormat(inputFile, services.size());
@@ -72,15 +77,28 @@ public class DataMasterImpl implements DataMaster {
         return inputFileMap.get(file).getInputFormat();
     }
 
+    /**
+     * Class representing input format meta data.
+     */
     private class InputFormatMetaData {
         private int idx;
         private InputFormatImpl inputFormat;
 
+        /**
+         * Constructor.
+         *
+         * @param inputFormat
+         */
         private InputFormatMetaData(InputFormatImpl inputFormat) {
             this.inputFormat = inputFormat;
             idx = 0;
         }
 
+        /**
+         * Get the next index.
+         *
+         * @return The next index.
+         */
         private int nextIdx() {
             int nextIdx = idx;
             if (nextIdx == inputFormat.getWorkerCount() - 1) {
@@ -91,13 +109,22 @@ public class DataMasterImpl implements DataMaster {
             return nextIdx;
         }
 
-        public InputFormatImpl getInputFormat() {
-            return inputFormat;
-        }
-
+        /**
+         * Set the input format.
+         *
+         * @param inputFormat The input format object.
+         */
         public void setInputFormat(InputFormatImpl inputFormat) {
             this.inputFormat = inputFormat;
         }
+
+        /**
+         * Get the input format.
+         *
+         * @return The input format object.
+         */
+        public InputFormatImpl getInputFormat() {
+            return inputFormat;
+        }
     }
 }
-/* End of DataMasterImpl.java */

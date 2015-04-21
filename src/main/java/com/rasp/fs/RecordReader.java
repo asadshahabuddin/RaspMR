@@ -17,9 +17,7 @@ public abstract class RecordReader
     /**
      * Called once at initialization.
      * @param inputSplit
-     *            the split that defines the range of records to read
-     * @param context
-     *            information about the task
+     *            The split that defines the range of records to read.
      * @throws IOException
      * @throws InterruptedException
      */
@@ -27,10 +25,10 @@ public abstract class RecordReader
         throws IOException, InterruptedException;
   
     /**
-     * Read the next key, value pair
+     * Read the next key, value pair.
      * 
      * @return
-     *            true if a key/value pair was read
+     *            true if a key/value pair was read.
      * @throws IOException
      * @throws InterruptedException
      */
@@ -38,9 +36,9 @@ public abstract class RecordReader
         throws IOException, InterruptedException;
   
     /**
-     * Get the current key
+     * Get the current key.
      * @return
-     *            the current key or null if there is no key
+     *            Rhe current key or null if there is no key.
      * @throws IOException
      * @throws InterruptedException
      */
@@ -48,9 +46,9 @@ public abstract class RecordReader
         throws IOException, InterruptedException;
   
     /**
-     * Get the current value
+     * Get the current value.
      * @return
-     *            the line that was read
+     *            The line that was read.
      * @throws IOException
      * @throws InterruptedException
      */
@@ -58,20 +56,8 @@ public abstract class RecordReader
         throws IOException, InterruptedException;
   
     /**
-     * The current progress of the record reader through its data.
-     * @return
-     *            a number between 0.0 and 1.0 that is the fraction of 
-     *            the data read
-     * @throws IOException
-     * @throws InterruptedException
-     */
-    public abstract float getProgress()
-        throws IOException, InterruptedException;
-  
-    /**
-     * Close the record reader
+     * Close the record reader.
      */
     public abstract void close()
         throws IOException;
 }
-/* End of RecordReader.java */

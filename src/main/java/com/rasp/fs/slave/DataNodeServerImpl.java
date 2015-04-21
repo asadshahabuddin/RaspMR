@@ -1,26 +1,24 @@
 /**
- * Author : Rahul Madhavan / Asad Shahabuddin
+ * Author : Asad Shahabuddin
  * File   : DataNodeServerImpl.java
- * Email  : rahulk@ccs.neu.edu
+ * Email  : asad808@ccs.neu.edu
  * Created: Apr 3, 2015
  * Edited : Apr 4, 2015
  */
 
 package com.rasp.fs.slave;
 
-/* Import list */
-import java.io.File;
 import java.io.IOException;
 import com.rasp.fs.DataNode;
 import java.io.FileOutputStream;
 import com.rasp.fs.InputSplitImpl;
 import com.rasp.config.Configuration;
 import java.io.FileNotFoundException;
+import com.rasp.utils.file.FSHelpers;
 import com.rasp.config.SlaveConfiguration;
 import com.rasp.utils.autodiscovery.Service;
 import com.rasp.utils.autodiscovery.ServiceType;
 import com.rasp.utils.autodiscovery.ServiceFactory;
-import com.rasp.utils.file.FSHelpers;
 
 public class DataNodeServerImpl
     implements DataNode {
@@ -28,10 +26,16 @@ public class DataNodeServerImpl
     private FileOutputStream f;
     private SlaveConfiguration configuration;
 
+    /**
+     * Constructor.
+     *
+     * @param configuration The configuration object.
+     * @throws FileNotFoundException
+     */
     public DataNodeServerImpl(SlaveConfiguration configuration) throws FileNotFoundException {
-        this.service  = ServiceFactory.createService(
-                        ServiceType.TASK_TRACKER,
-                        Configuration.DATA_NODE_PORT);
+        this.service = ServiceFactory.createService(
+                ServiceType.TASK_TRACKER,
+                Configuration.DATA_NODE_PORT);
         this.configuration = configuration;
     }
 
@@ -48,21 +52,25 @@ public class DataNodeServerImpl
     @Override
     public void storeInputSplit(InputSplitImpl inputSplit)
             throws IOException, InterruptedException {
-        f = FSHelpers.deleteAndCreateFile(inputSplit.getLocation(),true);
+        f = FSHelpers.deleteAndCreateFile(inputSplit.getLocation(), true);
         configuration.addInputSplit(inputSplit);
     }
 
     @Override
     public void storeChunk(byte[] b)
-        throws IOException {
-    	f.write(b);
+            throws IOException {
+        f.write(b);
     }
-    
+
+    /**
+     * Close open handles/streams.
+     *
+     * @throws IOException
+     */
     public void close()
-        throws IOException {
-    	if(f != null) {
-    		f.close();
-    	}
+            throws IOException {
+        if (f != null) {
+            f.close();
+        }
     }
 }
-/* End of DataNodeServerImpl.java */
